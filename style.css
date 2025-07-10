@@ -410,17 +410,20 @@ footer .social-icons img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 100px;       /* العرض */
+  height: 40px;       /* الارتفاع */
   border: 2px solid white;
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 14px;    /* حجم الخط */
   color: white;
   background-color: transparent;
   margin: 6px;
   text-decoration: none;
   transition: all 0.3s ease;
+  cursor: pointer;
+  user-select: none;
 }
+
 .unified-button:hover {
   background-color: white;
   color: #0f0f0f;
