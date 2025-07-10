@@ -356,7 +356,8 @@
     <div class="experience-badge">🌼 10+ سنوات خبرة</div>
     <h1>Atelier Electronique Médenine</h1>
     <div class="header-top">
-      <img class="header-logo" src="logo.png" alt="شعار الورشة" />
+      <img class="header-logo
+        <img class="header-logo" src="logo.png" alt="شعار الورشة" />
       <p id="slogan">ورشة إلكترونيك الرحماني - نخدمو تونس الكل</p>
     </div>
   </header>
@@ -368,6 +369,23 @@
     <a href="videos.html" class="videos">🎞️ شوف الفيديو</a>
     <button id="play-radio">📻 شغّل الراديو</button>
     <button onclick="toggleLanguage()">🌐 تغيير اللغة</button>
+    <!-- الزر الجديد -->
+    <a href="services.html" class="special-service-btn" style="
+      background-color: #28a745; 
+      color: white; 
+      border: none; 
+      padding: 12px 0; 
+      font-size: 16px; 
+      font-weight: 600; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      width: 260px; 
+      display: block; 
+      text-decoration: none;
+      box-shadow: 0 3px 8px rgba(40, 167, 69, 0.5);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      margin-top: 8px;
+    ">🛠️ خدمات الورشة</a>
   </div>
 
   <div id="map">
@@ -378,12 +396,13 @@
       style="border:0; border-radius:10px;"
       allowfullscreen=""
       loading="lazy"
-      referrerpolicy="no-ref
       referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
 
+  <!-- بقية الكود كما هو ... -->
+  <!-- المعرض، الأسئلة الشائعة، اللايتبوكس، الفوتر، السكريبتات ... -->
+
   <div class="gallery">
-    <!-- مثال على عنصر صورة مع تعليق وردود -->
     <div class="media-item" data-id="img1">
       <img src="Tech.jpg" alt="صورة من الورشة" onclick="openLightbox(this.src)" />
       <div class="reactions">
@@ -525,169 +544,183 @@
     window.toggleLanguage = function() {
       if (currentLang === 'ar') {
         document.documentElement.lang = 'fr';
-        document.documentElement.dir = 'ltr';
-        document.getElementById('slogan').textContent = "Atelier de réparation électronique - On couvre toute la Tunisie";
-        document.getElementById('qr-label').textContent = "📱 Scannez pour accéder rapidement";
-        document.getElementById('whatsapp-btn').textContent = "📞 Contact WhatsApp";
+        document.documentElement
+        document.documentElement.lang = 'fr';
+        currentLang = 'fr';
+        // ترجمة النصوص للعربية -> الفرنسية
+        document.querySelector('header h1').textContent = "Atelier Electronique Médenine";
+        document.getElementById('qr-label').textContent = "📱 Scannez pour accès rapide";
+        experienceBadge.textContent = "🌼 Plus de 10 ans d'expérience";
+        document.getElementById('slogan').textContent = "Atelier Electronique Médenine - Service dans toute la Tunisie";
+        document.getElementById('whatsapp-btn').textContent = "📞 Contactez-nous WhatsApp";
         document.getElementById('maps-btn').textContent = "🗺️ Voir sur Google Maps";
         document.querySelector('.photos').textContent = "📷 Voir les photos";
         document.querySelector('.videos').textContent = "🎞️ Voir les vidéos";
-        document.getElementById('play-radio').textContent = "📻 Écouter la radio";
-        document.getElementById('footer-text').innerHTML = "📍 Médenine – Service dans toute la Tunisie | 📲 WhatsApp:98192103<br>⏰ Du lundi au samedi, 08:00 - 18:00 | Dimanche fermé";
-        experienceBadge.textContent = "🌼 10+ ans d'expérience";
+        radioBtn.textContent = radio.paused ? "📻 Écouter la radio" : "⏸️ Arrêter la radio";
+        document.querySelector('.special-service-btn').textContent = "🛠️ Services de l'atelier";
 
-        const faqQuestionsFr = [
-          "Comment envoyer un appareil pour réparation ?",
-          "Quelle est la durée habituelle de réparation ?",
-          "Fournissez-vous des pièces d'origine ?",
-          "Comment suivre l'état de la réparation ?"
+        // الأسئلة الشائعة بالفرنسية
+        const faqs = [
+          {
+            q: "Comment puis-je envoyer un appareil pour réparation ?",
+            a: "Vous pouvez envoyer l'appareil par courrier à l'atelier ou nous contacter pour organiser la collecte."
+          },
+          {
+            q: "Quel est le délai moyen de réparation ?",
+            a: "Le délai dépend du type de panne, mais généralement pas plus de 3 jours ouvrables."
+          },
+          {
+            q: "Fournissez-vous des pièces d'origine ?",
+            a: "Oui, nous fournissons des pièces d'origine et de haute qualité pour tous les appareils."
+          },
+          {
+            q: "Comment suivre l'état de la réparation ?",
+            a: "Nous envoyons des photos et vidéos de l'état de l'appareil pendant la réparation via WhatsApp."
+          }
         ];
-        const faqAnswersFr = [
-          "Vous pouvez envoyer l'appareil par courrier à l'atelier ou nous contacter pour organiser la collecte.",
-          "La durée varie selon le type de panne, mais ne dépasse généralement pas 3 jours ouvrables.",
-          "Oui, nous fournissons des pièces originales et de haute qualité pour tous les appareils.",
-          "Nous envoyons des photos et vidéos de l'état de l'appareil pendant les phases de réparation via WhatsApp."
-        ];
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach((item, i) => {
-          item.querySelector('h3').textContent = faqQuestionsFr[i];
-          item.querySelector('.answer').textContent = faqAnswersFr[i];
-          item.classList.remove('open');
+        const faqContainer = document.querySelector('.faq');
+        faqContainer.innerHTML = '<h2>FAQ</h2>';
+        faqs.forEach(item => {
+          const faqItem = document.createElement('div');
+          faqItem.classList.add('faq-item');
+          faqItem.innerHTML = `<h3>${item.q}</h3><div class="answer">${item.a}</div>`;
+          faqContainer.appendChild(faqItem);
+        });
+        // إعادة تفعيل حدث الفتح/الإغلاق للأسئلة
+        document.querySelectorAll('.faq-item h3').forEach(h3 => {
+          h3.addEventListener('click', () => {
+            const parent = h3.parentElement;
+            parent.classList.toggle('open');
+          });
         });
 
-        currentLang = 'fr';
+        // ترجمة الفوتر
+        document.getElementById('footer-text').innerHTML = `
+          📍 Médenine – Service dans toute la Tunisie | 📲 WhatsApp: 98192103<br>
+          ⏰ Du lundi au samedi, 08:00 - 18:00 | Dimanche fermé
+          <div class="social-icons">
+            <a href="https://www.facebook.com/AEMednine" target="_blank" rel="noopener noreferrer" title="Facebook">
+              <img src="icons/facebook.svg" alt="Facebook" />
+            </a>
+            <a href="https://www.instagram.com/aemedenine/" target="_blank" rel="noopener noreferrer" title="Instagram">
+              <img src="icons/instagram.svg" alt="Instagram" />
+            </a>
+            <a href="https://wa.me/21698192103" target="_blank" rel="noopener noreferrer" title="WhatsApp">
+              <img src="icons/whatsapp.svg" alt="WhatsApp" />
+            </a>
+          </div>
+        `;
+
+        // ترجمة الـ QR label تحت الصورة (لو لم يتغير)
+        // هذا يتم فعله أعلاه عند تغيير النص
+
       } else {
+        // عربي
         document.documentElement.lang = 'ar';
-        document.documentElement.dir = 'rtl';
-        document.getElementById('slogan').textContent = "ورشة إلكترونيك الرحماني - نخدمو تونس الكل";
+        currentLang = 'ar';
+        document.querySelector('header h1').textContent = "Atelier Electronique Médenine";
         document.getElementById('qr-label').textContent = "📱 امسح للوصول السريع";
+        experienceBadge.textContent = "🌼 10+ سنوات خبرة";
+        document.getElementById('slogan').textContent = "ورشة إلكترونيك الرحماني - نخدمو تونس الكل";
         document.getElementById('whatsapp-btn').textContent = "📞 تواصل معنا واتساب";
         document.getElementById('maps-btn').textContent = "🗺️ شوفنا على Google Maps";
         document.querySelector('.photos').textContent = "📷 شوف الصور";
         document.querySelector('.videos').textContent = "🎞️ شوف الفيديو";
-        document.getElementById('play-radio').textContent = "📻 شغّل الراديو";
-        document.getElementById('footer-text').innerHTML = "📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp:98192103<br>⏰ من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة";
-        experienceBadge.textContent = "🌼 10+ سنوات خبرة";
+        radioBtn.textContent = radio.paused ? "📻 شغّل الراديو" : "⏸️ أوقف الراديو";
+        document.querySelector('.special-service-btn').textContent = "🛠️ خدمات الورشة";
 
-        const faqQuestionsAr = [
-          "كيف يمكنني إرسال جهاز للإصلاح؟",
-          "ما هي مدة التصليح المعتادة؟",
-          "هل توفرون قطع غيار أصلية؟",
-          "كيف أتابع حالة الإصلاح؟"
+        const faqsAr = [
+          {
+            q: "كيف يمكنني إرسال جهاز للإصلاح؟",
+            a: "يمكنك إرسال الجهاز عبر البريد إلى عنوان الورشة أو التواصل معنا لترتيب خدمة الاستلام."
+          },
+          {
+            q: "ما هي مدة التصليح المعتادة؟",
+            a: "مدة التصليح تختلف حسب نوع العطل، لكن غالباً لا تتجاوز 3 أيام عمل."
+          },
+          {
+            q: "هل توفرون قطع غيار أصلية؟",
+            a: "نعم، نوفر قطع غيار أصلية وذات جودة عالية لجميع الأجهزة."
+          },
+          {
+            q: "كيف أتابع حالة الإصلاح؟",
+            a: "نقوم بإرسال صور وفيديوهات لحالة الجهاز أثناء مراحل التصليح عبر واتساب."
+          }
         ];
-        const faqAnswersAr = [
-          "يمكنك إرسال الجهاز عبر البريد إلى عنوان الورشة أو التواصل معنا لترتيب خدمة الاستلام.",
-          "مدة التصليح تختلف حسب نوع العطل، لكن غالباً لا تتجاوز 3 أيام عمل.",
-          "نعم، نوفر قطع غيار أصلية وذات جودة عالية لجميع الأجهزة.",
-          "نقوم بإرسال صور وفيديوهات لحالة الجهاز أثناء مراحل التصليح عبر واتساب."
-        ];
-        faqItems.forEach((item, i) => {
-          item.querySelector('h3').textContent = faqQuestionsAr[i];
-          item.querySelector('.answer').textContent = faqAnswersAr[i];
-          item.classList.remove('open');
+        const faqContainer = document.querySelector('.faq');
+        faqContainer.innerHTML = '<h2>الأسئلة الشائعة</h2>';
+        faqsAr.forEach(item => {
+          const faqItem = document.createElement('div');
+          faqItem.classList.add('faq-item');
+          faqItem.innerHTML = `<h3>${item.q}</h3><div class="answer">${item.a}</div>`;
+          faqContainer.appendChild(faqItem);
+        });
+        // إعادة تفعيل حدث الفتح/الإغلاق للأسئلة
+        document.querySelectorAll('.faq-item h3').forEach(h3 => {
+          h3.addEventListener('click', () => {
+            const parent = h3.parentElement;
+            parent.classList.toggle('open');
+          });
         });
 
-        currentLang = 'ar';
+        // ترجمة الفوتر
+        document.getElementById('footer-text').innerHTML = `
+          📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp:98192103<br>
+          ⏰ من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة
+          <div class="social-icons">
+            <a href="https://www.facebook.com/AEMednine" target="_blank" rel="noopener noreferrer" title="Facebook">
+              <img src="icons/facebook.svg" alt="Facebook" />
+            </a>
+            <a href="https://www.instagram.com/aemedenine/" target="_blank" rel="noopener noreferrer" title="Instagram">
+              <img src="icons/instagram.svg" alt="Instagram" />
+            </a>
+            <a href="https://wa.me/21698192103" target="_blank" rel="noopener noreferrer" title="WhatsApp">
+              <img src="icons/whatsapp.svg" alt="WhatsApp" />
+            </a>
+          </div>
+        `;
       }
     };
 
-    // لايتبوكس
-    window.openLightbox = function(src) {
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightbox-img');
-      lightboxImg.src = src;
-      lightbox.style.display = 'flex';
-    };
-
-    window.closeLightbox = function() {
-      const lightbox = document.getElementById('lightbox');
-      lightbox.style.display = 'none';
-      document.getElementById('lightbox-img').src = '';
-    };
-
-    // تخزين التعليقات والردود في localStorage
-
-    function getComments(mediaId) {
-      const data = localStorage.getItem(`comments-${mediaId}`);
-      return data ? JSON.parse(data) : [];
-    }
-    function saveComments(mediaId, comments) {
-      localStorage.setItem(`comments-${mediaId}`, JSON.stringify(comments));
-    }
-    function getReactions(mediaId) {
-      const data = localStorage.getItem(`reactions-${mediaId}`);
-      return data ? JSON.parse(data) : {};
-    }
-    function saveReactions(mediaId, reactions) {
-      localStorage.setItem(`reactions-${mediaId}`, JSON.stringify(reactions));
-    }
-
-    // عرض التعليقات
-    function renderComments(mediaId) {
-      const comments = getComments(mediaId);
-      const container = document.getElementById(`comments-${mediaId}`);
-      container.innerHTML = '';
-      comments.forEach(c => {
-        const div = document.createElement('div');
-        div.className = 'comment';
-        div.textContent = c;
-        container.appendChild(div);
-      });
-    }
-
-    // إضافة تعليق
-    window.addComment = function(mediaId) {
-      const input = document.getElementById(`comment-input-${mediaId}`);
-      const text = input.value.trim();
-      if (!text) return alert('يرجى كتابة تعليق قبل الإرسال.');
-      const comments = getComments(mediaId);
-      comments.push(text);
-      saveComments(mediaId, comments);
-      input
-      input.value = '';
-      renderComments(mediaId);
-    };
-
-    // عرض الرياكشنز (عدد كل نوع)
-    function renderReactions(mediaId) {
-      const reactions = getReactions(mediaId);
-      const container = document.querySelector(`.media-item[data-id="${mediaId}"] .reactions`);
-      // إزالة أرقام الرياكشن السابقة
-      container.querySelectorAll('span.reaction-count').forEach(el => el.remove());
-
-      // حساب المجموع لكل نوع رياكشن
-      for (const [emoji, count] of Object.entries(reactions)) {
-        if (count > 0) {
-          const span = document.createElement('span');
-          span.className = 'reaction-count';
-          span.style.marginLeft = '8px';
-          span.textContent = `${emoji} ${count}`;
-          container.appendChild(span);
-        }
-      }
-    }
-
-    // إضافة رياكشن
-    window.addReaction = function(mediaId, emoji) {
-      const reactions = getReactions(mediaId);
-      if (!reactions[emoji]) reactions[emoji] = 0;
-      reactions[emoji]++;
-      saveReactions(mediaId, reactions);
-      renderReactions(mediaId);
-    };
-
-    // تهيئة الزيارات، الوقت، التعليقات والرياكشنز عند تحميل الصفحة
     updateTime();
     updateVisits();
-    setInterval(updateTime, 60000); // تحديث الوقت كل دقيقة
 
-    // تهيئة التعليقات والردود لكل media-item
-    document.querySelectorAll('.media-item').forEach(item => {
-      const id = item.getAttribute('data-id');
-      renderComments(id);
-      renderReactions(id);
-    });
+    setInterval(updateTime, 60000); // تحديث كل دقيقة
+
   });
+
+  // فتح اللايتبوكس للصور
+  function openLightbox(src) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.src = src;
+    lightbox.style.display = 'flex';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+  }
+
+  // تفاعل (لايك، حب، تصفيق)
+  function addReaction(mediaId, reaction) {
+    alert(`شكراً على تفاعلك ${reaction} للصورة/الفيديو رقم ${mediaId}`);
+  }
+
+  // إضافة تعليق
+  function addComment(mediaId) {
+    const textarea = document.getElementById(`comment-input-${mediaId}`);
+    const commentText = textarea.value.trim();
+    if (!commentText) {
+      alert('الرجاء كتابة تعليق قبل الإرسال');
+      return;
+    }
+    const commentsList = document.getElementById(`comments-${mediaId}`);
+    const newComment = document.createElement('div');
+    newComment.classList.add('comment');
+    newComment.textContent = commentText;
+    commentsList.appendChild(newComment);
+    textarea.value = '';
+  }
   </script>
 </body>
 </html>
