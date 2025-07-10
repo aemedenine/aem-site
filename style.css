@@ -403,3 +403,65 @@ footer .social-icons img {
     width: 90% !important;
   }
 }
+/* أزرار موحدة واحترافية */
+.unified-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 2px solid white;
+  border-radius: 10px;
+  font-size: 20px;
+  color: white;
+  background-color: transparent;
+  margin: 6px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.unified-button:hover {
+  background-color: white;
+  color: #0f0f0f;
+}
+
+/* ألوان مختلفة حسب النوع */
+.unified-button.whatsapp {
+  border-color: #25D366;
+  color: #25D366;
+}
+.unified-button.whatsapp:hover {
+  background-color: #25D366;
+  color: white;
+}
+.unified-button.map {
+  border-color: #FF4500;
+  color: #FF4500;
+}
+.unified-button.map:hover {
+  background-color: #FF4500;
+  color: white;
+}
+.unified-button.photos {
+  border-color: #6f42c1;
+  color: #6f42c1;
+}
+.unified-button.photos:hover {
+  background-color: #6f42c1;
+  color: white;
+}
+.unified-button.services {
+  border-color: #17a2b8;
+  color: #17a2b8;
+}
+.unified-button.services:hover {
+  background-color: #17a2b8;
+  color: white;
+}
+.unified-button.video {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+.unified-button.video:hover {
+  background-color: #dc3545;
+  color: white;
+}
