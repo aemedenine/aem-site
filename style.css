@@ -401,7 +401,7 @@ footer .social-icons img {
   }
   .cta-buttons a, .cta-buttons button {
     width: 90% !important;
-  }
+  
 }
 /* أزرار موحدة واحترافية */
 .unified-button {
@@ -464,4 +464,5 @@ footer .social-icons img {
 .unified-button.video:hover {
   background-color: #dc3545;
   color: white;
+}
 }
