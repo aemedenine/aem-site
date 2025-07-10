@@ -134,6 +134,7 @@ header {
   color: white;
   box-shadow: 0 5px 15px rgba(0, 95, 153, 0.5);
 }
+
 /* خريطة Google */
 #map {
   width: 90%;
@@ -401,8 +402,9 @@ footer .social-icons img {
   }
   .cta-buttons a, .cta-buttons button {
     width: 90% !important;
-  
+  }
 }
+
 /* أزرار موحدة واحترافية */
 .unified-button {
   display: inline-flex;
@@ -464,5 +466,4 @@ footer .social-icons img {
 .unified-button.video:hover {
   background-color: #dc3545;
   color: white;
-}
 }
