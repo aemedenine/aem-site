@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🎥 فيديوهات الورشة - Atelier Electronique Médenine</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      margin: 0;
+      direction: rtl;
+      text-align: center;
+    }
+    h1 {
+      padding: 20px 10px;
+      background: #005f99;
+      color: white;
+      margin: 0 0 20px 0;
+    }
+    .btn-bar {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-bar a, .btn-bar button {
+      background: #005f99;
+      color: white;
+      border-radius: 6px;
+      padding: 12px 20px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 3px 8px rgba(0,95,153,0.3);
+      transition: background-color 0.3s ease;
+    }
+    .btn-bar a:hover, .btn-bar button:hover {
+      background: #004070;
+    }
+    .videos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    @media (max-width: 600px) {
+      .videos {
+        grid-template-columns: 1fr;
+      }
+    }
+    .media-item {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 10px;
+      text-align: center;
+      position: relative;
+    }
+    video {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+    .reactions {
+      margin-top: 8px;
+      font-size: 20px;
+      user-select: none;
+    }
+    .reactions span {
+      cursor: pointer;
+      margin: 0 6px;
+      transition: transform 0.15s ease;
+      display: inline-block;
+    }
+    .reactions span:hover {
+      transform: scale(1.3);
+    }
+    .reaction-count {
+      font-size: 14px;
+      margin-left: 6px;
+      vertical-align: middle;
+      color: #555;
+    }
+    .comments-section {
+      margin-top: 10px;
+      text-align: right;
+      font-size: 14px;
+    }
+    .comments-list {
+      max-height: 100px;
+      overflow-y: auto;
+      border-top: 1px solid #ddd;
+      padding-top: 8px;
+      margin-bottom: 6px;
+    }
+    .comment-item {
+      margin-bottom: 5px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 3px;
+      word-wrap: break-word;
+    }
+    .comment-input {
+      width: 100%;
+      padding: 6px 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    .comment-submit {
+      margin-top: 6px;
+      background: #005f99;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 3px 6px rgba(0,95,153,0.3);
+      transition: background-color 0.3s ease;
+    }
+    .comment-submit:hover {
+      background: #004070;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="page-title">🎥 فيديوهات الورشة</h1>
+
+  <div class="btn-bar">
+    <a href="index.html">⬅️ الرجوع للصفحة الرئيسية</a>
+    <a href="https://github.com/aemedenine/atelier-electronique/upload/main" target="_blank" rel="noopener noreferrer">⬆️ أضف فيديو جديد من GitHub</a>
+    <button id="toggle-lang-btn">🌐 تغيير اللغة</button>
+  </div>
+
+  <div class="videos">
+    <div class="media-item" data-id="video1">
+      <video controls>
+        <source src="video1.mp4" type="video/mp4" />
+        المتصفح لا يدعم عرض الفيديو.
+      </video>
+      <div class="reactions" aria-label="تفاعلات">
+        <span onclick="addReaction('video1', '👍')" title="إعجاب">👍</span>
+        <span onclick="addReaction('video1', '❤️')" title="حب">❤️</span>
+        <span onclick="addReaction('video1', '😂')" title="ضحك">😂</span>
+      </div>
+      <div class="comments-section">
+        <div class="comments-list"></div>
+        <input type="text" placeholder="اكتب تعليقاً..." class="comment-input" />
+        <button class="comment-submit">أرسل</button>
+      </div>
+    </div>
+
+    <div class="media-item" data-id="video2">
+      <video controls>
+        <source src="video2.mp4" type="video/mp4" />
+        المتصفح لا يدعم عرض الفيديو.
+      </video>
+      <div class="reactions" aria-label="تفاعلات">
+        <span onclick="addReaction('video2', '👍')" title="إعجاب">👍</span>
+        <span onclick="addReaction('video2', '❤️')" title="حب">❤️</span>
+        <span onclick="addReaction('video2', '😂')" title="ضحك">😂</span>
+      </div>
+      <div class="comments-section">
+        <div class="comments-list"></div>
+        <input type="text" placeholder="اكتب تعليقاً..." class="comment-input" />
+        <button class="comment-submit">أرسل</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // تعليقات
+      function getComments(mediaId) {
+        const comments = localStorage.getItem('comments-' + mediaId);
+        return comments ? JSON.parse(comments) : [];
+      }
+      function saveComments(mediaId, comments) {
+        localStorage.setItem('comments-' + mediaId, JSON.stringify(comments));
+      }
+      // رياكشنز
+      function getReactions(mediaId) {
+        const reactions = localStorage.getItem('reactions-' + mediaId);
+        return reactions ? JSON.parse(reactions) : {};
+      }
+      function saveReactions(mediaId, reactions) {
+        localStorage.setItem('reactions-' + mediaId, JSON.stringify(reactions));
+      }
+      // عرض تعليقات
+      function renderComments(mediaId) {
+        const comments = getComments(mediaId);
+        const container = document.querySelector(`.media-item[data-id="${mediaId}"] .comments-list`);
+        container.innerHTML = '';
+        comments.forEach(c => {
+          const div = document.createElement('div');
+          div.className = 'comment-item';
+          div.textContent = c;
+          container.appendChild(div);
+        });
+      }
+      // عرض رياكشنز
+      function renderReactions(mediaId) {
+        const reactions = getReactions(mediaId);
+        const container = document.querySelector(`.media-item[data-id="${mediaId}"] .reactions`);
+        container.querySelectorAll('span.reaction-count').forEach(el => el.remove());
+        for (const [emoji, count] of Object.entries(reactions)) {
+          if (count > 0) {
+            const span = document.createElement('span');
+            span.className = 'reaction-count';
+            span.textContent = `${emoji} ${count}`;
+            container.appendChild(span);
+          }
+        }
+      }
+      // إضافة تعليق جديد
+      document.querySelectorAll('.media-item').forEach(item => {
+        const mediaId = item.getAttribute('data-id');
+        const input = item.querySelector('.comment-input');
+        const btn = item.querySelector('.comment-submit');
+        btn.addEventListener('click', () => {
+          const text = input.value.trim();
+          if (!text) return alert(currentLang === 'ar' ? 'الرجاء كتابة تعليق' : 'Veuillez écrire un commentaire');
+          const comments = getComments(mediaId);
+          comments.push(text);
+          saveComments(mediaId, comments);
+          input.value = '';
+          renderComments(mediaId);
+        });
+      });
+      // إضافة رياكشن
+      window.addReaction = function(mediaId, emoji) {
+        const reactions = getReactions(mediaId);
+        if (!reactions[emoji]) reactions[emoji] = 0;
+        reactions[emoji]++;
+        saveReactions(mediaId, reactions);
+        renderReactions(mediaId);
+      };
+      // تهيئة العرض عند تحميل الصفحة
+      document.querySelectorAll('.media-item').forEach(item => {
+        const id = item.getAttribute('data-id');
+        renderComments(id);
+        renderReactions(id);
+      });
+
+      // تبديل اللغة
+      let currentLang = 'ar';
+      const pageTitle = document.getElementById('page-title');
+      const toggleLangBtn = document.getElementById('toggle-lang-btn');
+
+      toggleLangBtn.addEventListener('click', () => {
+        if (currentLang === 'ar') {
+          currentLang = 'fr';
+          document.documentElement.lang = 'fr';
+          document.documentElement.dir = 'ltr';
+          pageTitle.textContent = "🎥 Vidéos de l'atelier";
+          toggleLangBtn.textContent = "🌐 Changer la langue";
+          document.querySelector('a[href="index.html"]').textContent = "⬅️ Retour à la page d'accueil";
+          document.querySelector('a[href="https://github.com/aemedenine/atelier-electronique/upload/main"]').textContent = "⬆️ Ajouter une nouvelle vidéo sur GitHub";
+          document.querySelectorAll('.comment-input').forEach(input => {
+            input.placeholder = "Écrire un commentaire...";
+          });
+          document.querySelectorAll('.comment-submit').forEach(btn => {
+            btn.textContent = "Envoyer";
+          });
+        } else {
+          currentLang = 'ar';
+          document.documentElement.lang = 'ar';
+          document.documentElement.dir = 'rtl';
+          pageTitle.textContent = "🎥 فيديوهات الورشة";
+          toggleLangBtn.textContent = "🌐 تغيير اللغة";
+          document.querySelector('a[href="index.html"]').textContent = "⬅️ الرجوع للصفحة الرئيسية";
+          document.querySelector('a[href="https://github.com/aemedenine/atelier-electronique/upload/main"]').textContent = "⬆️ أضف فيديو جديد من GitHub";
+          document.querySelectorAll('.comment-input').forEach(input => {
+            input.placeholder = "اكتب تعليقاً...";
+          });
+          document.querySelectorAll('.comment-submit').forEach(btn => {
+            btn.textContent = "أرسل";
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
