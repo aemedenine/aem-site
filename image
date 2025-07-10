@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>📸 معرض الصور - Atelier Electronique Médenine</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      margin: 0;
+      direction: rtl;
+      text-align: center;
+    }
+    h1 {
+      padding: 20px 10px;
+      background: #005f99;
+      color: white;
+      margin: 0 0 20px 0;
+    }
+    .btn-bar {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-bar a, .btn-bar button {
+      background: #005f99;
+      color: white;
+      border-radius: 6px;
+      padding: 12px 20px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 3px 8px rgba(0,95,153,0.3);
+      transition: background-color 0.3s ease;
+    }
+    .btn-bar a:hover, .btn-bar button:hover {
+      background: #004070;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    @media (max-width: 600px) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+    .media-item {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 10px;
+      text-align: center;
+      position: relative;
+    }
+    .media-item img {
+      width: 100%;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .reactions {
+      margin-top: 8px;
+      font-size: 20px;
+      user-select: none;
+    }
+    .reactions span {
+      cursor: pointer;
+      margin: 0 6px;
+      transition: transform 0.15s ease;
+      display: inline-block;
+    }
+    .reactions span:hover {
+      transform: scale(1.3);
+    }
+    .reaction-count {
+      font-size: 14px;
+      margin-left: 6px;
+      vertical-align: middle;
+      color: #555;
+    }
+    .comments-section {
+      margin-top: 10px;
+      text-align: right;
+      font-size: 14px;
+    }
+    .comments-list {
+      max-height: 100px;
+      overflow-y: auto;
+      border-top: 1px solid #ddd;
+      padding-top: 8px;
+      margin-bottom: 6px;
+    }
+    .comment-item {
+      margin-bottom: 5px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 3px;
+      word-wrap: break-word;
+    }
+    .comment-input {
+      width: 100%;
+      padding: 6px 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    .comment-submit {
+      margin-top: 6px;
+      background: #005f99;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 3px 6px rgba(0,95,153,0.3);
+      transition: background-color 0.3s ease;
+    }
+    .comment-submit:hover {
+      background: #004070;
+    }
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="page-title">📸 معرض الصور</h1>
+
+  <div class="btn-bar">
+    <a href="index.html">⬅️ الرجوع للصفحة الرئيسية</a>
+    <a href="https://github.com/aemedenine/atelier-electronique/upload/main" target="_blank" rel="noopener noreferrer">📷 أضف صورة جديدة من GitHub</a>
+    <button id="toggle-lang-btn">🌐 تغيير اللغة</button>
+  </div>
+
+  <div class="gallery">
+    <!-- كل صورة مع data-id فريد لتعليقات وردود الرياكشن -->
+    <div class="media-item" data-id="img1">
+      <img src="Rt.png" alt="تصليح كارت إلكترونية" onclick="openLightbox(this.src)" />
+      <div class="reactions" aria-label="تفاعلات">
+        <span onclick="addReaction('img1', '👍')" title="إعجاب">👍</span>
+        <span onclick="addReaction('img1', '❤️')" title="حب">❤️</span>
+        <span onclick="addReaction('img1', '😂')" title="ضحك">😂</span>
+      </div>
+      <div class="comments-section">
+        <div class="comments-list"></div>
+        <input type="text" placeholder="اكتب تعليقاً..." class="comment-input" />
+        <button class="comment-submit">أرسل</button>
+      </div>
+    </div>
+
+    <div class="media-item" data-id="img2">
+      <img src="Hh.png" alt="لحام مكونات دقيقة" onclick="openLightbox(this.src)" />
+      <div class="reactions" aria-label="تفاعلات">
+        <span onclick="addReaction('img2', '👍')" title="إعجاب">👍</span>
+        <span onclick="addReaction('img2', '❤️')" title="حب">❤️</span>
+        <span onclick="addReaction('img2', '😂')" title="ضحك">😂</span>
+      </div>
+      <div class="comments-section">
+        <div class="comments-list"></div>
+        <input type="text" placeholder="اكتب تعليقاً..." class="comment-input" />
+        <button class="comment-submit">أرسل</button>
+      </div>
+    </div>
+
+    <div class="media-item" data-id="img3">
+      <img src="file_00000000ce88622f8ccc6c6c88cee605.png" alt="كارت أم" onclick="openLightbox(this.src)" />
+      <div class="reactions" aria-label="تفاعلات">
+        <span onclick="addReaction('img3', '👍')" title="إعجاب">👍</span>
+        <span onclick="addReaction('img3', '❤️')" title="حب">❤️</span>
+        <span onclick="addReaction('img3', '😂')" title="ضحك">😂</span>
+      </div>
+      <div class="comments-section">
+        <div class="comments-list"></div>
+        <input type="text" placeholder="اكتب تعليقاً..." class="comment-input" />
+        <button class="comment-submit">أرسل</button>
+      </div>
+    </div>
+
+    <div class="media-item" data-id="img4">
+      <img src="Ce.jpg" alt="قطع إلكترونية" onclick="openLightbox(this.src)" />
+      <div class="reactions" aria-label="تفاعلات">
+        <span onclick="addReaction('img4', '👍')" title="إعجاب">👍</span>
+        <span onclick="addReaction('img4', '❤️')" title="حب">❤️</span>
+        <span onclick="addReaction('img4', '😂')" title="ضحك">😂</span>
+      </div>
+      <div class="comments-section">
+        <div class="comments-list"></div>
+        <input type="text" placeholder="اكتب تعليقاً..." class="comment-input" />
+        <button class="comment-submit">أرسل</button>
+      </div>
+    </div>
+
+    <div class="media-item" data-id="img5">
+      <img src="Tech.jpg" alt="في قلب العمل" onclick="openLightbox(this.src)" />
+      <div class="reactions" aria-label="تفاعلات">
+        <span onclick="addReaction('img5', '👍')" title="إعجاب">👍</span>
+        <span onclick="addReaction('img5', '❤️')" title="حب">❤️</span>
+        <span onclick="addReaction('img5', '😂')" title="ضحك">😂</span>
+      </div>
+      <div class="comments-section">
+        <div class="comments-list"></div>
+        <input type="text" placeholder="اكتب تعليقاً..." class="comment-input" />
+        <button class="comment-submit">أرسل</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+
+  <script>
+    // لايتبوكس
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+
+    // إدارة التعليقات والردود والتخزين المحلي
+    document.addEventListener('DOMContentLoaded', () => {
+      // دوال لجلب وتخزين التعليقات والردود
+      function getComments(mediaId) {
+        const comments = localStorage.getItem('comments-' + mediaId);
+        return comments ? JSON.parse(comments) : [];
+      }
+      function saveComments(mediaId, comments) {
+        localStorage.setItem('comments-' + mediaId, JSON.stringify(comments));
+      }
+
+      // دوال لجلب وتخزين الرياكشنز
+      function getReactions(mediaId) {
+        const reactions = localStorage.getItem('reactions-' + mediaId);
+        return reactions ? JSON.parse(reactions) : {};
+      }
+      function saveReactions(mediaId, reactions) {
+        localStorage.setItem('reactions-' + mediaId, JSON.stringify(reactions));
+      }
+
+      // عرض التعليقات على صفحة الصورة
+      function renderComments(mediaId) {
+        const comments = getComments(mediaId);
+        const container = document.querySelector(`.media-item[data-id="${mediaId}"] .comments-list`);
+        container.innerHTML = '';
+        comments.forEach(c => {
+          const div = document.createElement('div');
+          div.className = 'comment-item';
+          div.textContent = c;
+          container.appendChild(div);
+        });
+      }
+
+      // عرض الرياكشنز مع عداد
+      function renderReactions(mediaId) {
+        const reactions = getReactions(mediaId);
+        const container = document.querySelector(`.media-item[data-id="${mediaId}"] .reactions`);
+
+        // إزالة الأرقام السابقة
+        container.querySelectorAll('span.reaction-count').forEach(el => el.remove());
+
+        // عرض عدد كل رياكشن
+        for (const [emoji, count] of Object.entries(reactions)) {
+          if (count > 0) {
+            const span = document.createElement('span');
+            span.className = 'reaction-count';
+            span.textContent = `${emoji} ${count}`;
+            container.appendChild(span);
+          }
+        }
+      }
+
+      // إضافة تعليق جديد
+      document.querySelectorAll('.media-item').forEach(item => {
+        const mediaId = item.getAttribute('data-id');
+        const input = item.querySelector('.comment-input');
+        const btn = item.querySelector('.comment-submit');
+
+        btn.addEventListener('click', () => {
+          const text = input.value.trim();
+          if (!text) return alert('الرجاء كتابة تعليق');
+          const comments = getComments(mediaId);
+          comments.push(text);
+          saveComments(mediaId, comments);
+          input.value = '';
+          renderComments(mediaId);
+        });
+      });
+
+      // إضافة رياكشن (إعجاب، حب، ضحك ...)
+      window.addReaction = function(mediaId, emoji) {
+        const reactions = getReactions(mediaId);
+        if (!reactions[emoji]) reactions[emoji] = 0;
+        reactions[emoji]++;
+        saveReactions(mediaId, reactions);
+        renderReactions(mediaId);
+      };
+
+      // تهيئة كل التعليقات والرياكشنز عند تحميل الصفحة
+      document.querySelectorAll('.media-item').forEach(item => {
+        const id = item.getAttribute('data-id');
+        renderComments(id);
+        renderReactions(id);
+      });
+
+      // تغيير اللغة عربي / فرنسي (نسخة مبسطة)
+      let currentLang = 'ar';
+      const pageTitle = document.getElementById('page-title');
+      const toggleLangBtn = document.getElementById('toggle-lang-btn');
+
+      toggleLangBtn.addEventListener('click', () => {
+        if (currentLang === 'ar') {
+          currentLang = 'fr';
+          document.documentElement.lang = 'fr';
+          document.documentElement.dir = 'ltr';
+          pageTitle.textContent = "📸 Galerie photos";
+          toggleLangBtn.textContent = "🌐 Changer la langue";
+
+          // تعديل الأزرار
+          document.querySelector('a[href="index.html"]').textContent = "⬅️ Retour à la page d'accueil";
+          document.querySelector('a[href="https://github.com/aemedenine/atelier-electronique/upload/main"]').textContent = "📷 Ajouter une nouvelle photo sur GitHub";
+
+          // تعديل التعليقات placeholder
+          document.querySelectorAll('.comment-input').forEach(input => {
+            input.placeholder = "Écrire un commentaire...";
+          });
+
+          // تعديل زر إرسال
+          document.querySelectorAll('.comment-submit').forEach(btn => {
+            btn.textContent = "Envoyer";
+          });
+
+        } else {
+          currentLang = 'ar';
+          document.documentElement.lang = 'ar';
+          document.documentElement.dir = 'rtl';
+          pageTitle.textContent = "📸 معرض الصور";
+          toggleLangBtn.textContent = "🌐 تغيير اللغة";
+
+          // تعديل الأزرار
+          document.querySelector('a[href="index.html"]').textContent = "⬅️ الرجوع للصفحة الرئيسية";
+          document.querySelector('a[href="https://github.com/aemedenine/atelier-electronique/upload/main"]').textContent = "📷 أضف صورة جديدة من GitHub";
+
+          // تعديل التعليقات placeholder
+          document.querySelectorAll('.comment-input').forEach(input => {
+            input.placeholder = "اكتب تعليقاً...";
+          });
+
+          // تعديل زر إرسال
+          document.querySelectorAll('.comment-submit').forEach(btn => {
+            btn.textContent = "أرسل";
+          });
+        }
+      });
+
+    });
+  </script>
+</body>
+</html>
