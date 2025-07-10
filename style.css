@@ -1,42 +1,44 @@
-/* عام */
+/* style.css - النسخة المعدلة */
+
+/* سلوك التمرير */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
 }
 
+/* الجسم والخلفية */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
   margin: 0;
+  background-color: #0f0f0f;
+  background-image: url('https://www.transparenttextures.com/patterns/circles-noise.png');
+  color: #ddd;
   direction: rtl;
   text-align: center;
 }
 
-/* الهيدر */
+/* الرأس */
 header {
   background-color: #005f99;
   color: white;
   padding: 20px 10px;
-  box-shadow: 0 2px 6px rgba(0, 95, 153, 0.5);
 }
 
+/* منطقة الشعار واللوقو */
 .header-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
   max-width: 800px;
   margin: auto;
-  gap: 20px;
-  flex-wrap: wrap;
 }
 
 .header-logo {
   width: 140px;
   border-radius: 10px;
-  object-fit: contain;
 }
 
+/* صندوق QR */
 .qr-container {
   text-align: center;
   margin-bottom: 10px;
@@ -58,18 +60,17 @@ header {
 .experience-badge {
   background-color: gold;
   color: #333;
-  padding: 5px 15px;
+  padding: 5px 10px;
   border-radius: 20px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
   box-shadow: 0 1px 4px rgba(0,0,0,0.2);
   margin: 10px auto;
   display: inline-block;
-  max-width: 220px;
-  user-select: none;
+  max-width: 200px;
 }
 
-/* شريط المعلومات العلوي */
+/* شريط المعلومات - الوقت وعدد الزيارات */
 .info-bar {
   background: #fff;
   padding: 10px 0;
@@ -79,10 +80,10 @@ header {
   justify-content: center;
   gap: 20px;
   direction: ltr;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  color: #333;
 }
 
-/* شريط الأخبار */
+/* الأخبار المتحركة */
 .news-ticker {
   background-color: #c00000;
   color: white;
@@ -93,7 +94,6 @@ header {
   position: relative;
   font-size: 0.9em;
   direction: rtl;
-  box-shadow: inset 0 0 8px #800000;
 }
 
 .news-ticker span {
@@ -107,13 +107,13 @@ header {
   100% { transform: translateX(100%); }
 }
 
-/* أزرار الدعوة لاتخاذ إجراء */
+/* أزرار الدعوة للعمل (CTA) */
 .cta-buttons {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  width: 280px;
-  margin: 30px auto 40px auto;
+  gap: 12px;
+  width: 260px;
+  margin: 20px auto;
   align-items: center;
 }
 
@@ -121,84 +121,55 @@ header {
   background-color: white;
   color: #005f99;
   border: 2px solid #005f99;
-  padding: 14px 0;
-  font-size: 17px;
+  padding: 12px 0;
+  font-size: 16px;
   font-weight: 600;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 3px 10px rgba(0,95,153,0.2);
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-  width: 100%;
-  max-width: 280px;
+  box-shadow: 0 3px 8px rgba(0,95,153,0.2);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 260px !important; /* توحيد العرض */
+  height: 44px !important; /* توحيد الارتفاع */
+  box-sizing: border-box;
   text-align: center;
   display: block;
-  height: 48px;
-  user-select: none;
 }
 
 .cta-buttons a:hover, .cta-buttons button:hover {
   background-color: #005f99;
   color: white;
-  box-shadow: 0 5px 18px rgba(0,95,153,0.6);
+  box-shadow: 0 5px 15px rgba(0,95,153,0.5);
 }
 
-/* زر خدمات الورشة الخاص الجديد */
-.special-service-btn {
-  background-color: #e67e22;
-  color: white;
-  font-size: 18px;
-  padding: 12px 0;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(230,126,34,0.7);
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 100%;
-  max-width: 280px;
-}
-
-.special-service-btn:hover {
-  background-color: #d35400;
-}
-
-/* الخريطة */
+/* خريطة Google */
 #map {
   width: 90%;
   height: 250px;
   border-radius: 10px;
-  margin: 0 auto 40px auto;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  border: none;
-  overflow: hidden;
+  margin: 0 auto 30px auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
-/* معرض الصور والفيديوهات */
+/* معرض الصور والفيديو */
 .gallery {
   max-width: 800px;
-  margin: 60px auto 80px auto;
-  padding: 0 20px;
+  margin: 60px auto;
+  padding: 20px;
   text-align: center;
 }
 
 .media-item {
   border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 10px;
-  background: white;
-  margin-bottom: 25px;
+  padding: 8px;
+  border-radius: 8px;
+  background: #222;
+  margin-bottom: 20px;
   display: inline-block;
   width: 48%;
   margin-right: 1%;
   box-sizing: border-box;
   vertical-align: top;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  transition: box-shadow 0.3s ease;
-  user-select: none;
-}
-
-.media-item:hover {
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
 }
 
 .media-item:nth-child(2n) {
@@ -207,64 +178,58 @@ header {
 
 .media-item img {
   max-width: 100%;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: transform 0.3s ease;
 }
 
-.media-item img:hover {
-  transform: scale(1.05);
-}
-
-/* ردود الفعل */
+/* ردود الأفعال (رياكشنز) */
 .reactions {
-  margin-top: 12px;
+  margin-top: 10px;
 }
 
 .reactions button {
-  background: #eee;
+  background: #444;
   border: none;
-  padding: 8px 14px;
+  padding: 6px 12px;
   margin: 0 6px;
-  font-size: 17px;
+  font-size: 16px;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 6px;
   transition: background-color 0.3s ease;
-  user-select: none;
+  color: white;
 }
 
 .reactions button:hover {
-  background-color: #cce7ff;
+  background-color: #005f99;
 }
 
-/* صندوق التعليق */
+/* صندوق التعليقات */
 .comment-box {
-  margin-top: 15px;
-  text-align: right;
+  margin-top: 10px;
 }
 
 .comment-box textarea {
   width: 90%;
-  height: 70px;
-  padding: 8px;
-  font-size: 15px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  height: 60px;
+  padding: 6px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #666;
   resize: vertical;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #111;
+  color: #eee;
 }
 
 .comment-box button {
-  margin-top: 8px;
-  padding: 8px 20px;
-  font-size: 15px;
+  margin-top: 6px;
+  padding: 6px 16px;
+  font-size: 14px;
   cursor: pointer;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   background-color: #005f99;
   color: white;
   transition: background-color 0.3s ease;
-  user-select: none;
 }
 
 .comment-box button:hover {
@@ -273,71 +238,46 @@ header {
 
 /* قائمة التعليقات */
 .comments-list {
-  margin-top: 15px;
-  max-height: 160px;
+  margin-top: 10px;
+  max-height: 150px;
   overflow-y: auto;
-  border-top: 1px solid #ccc;
-  padding-top: 10px;
+  border-top: 1px solid #666;
+  padding-top: 8px;
   text-align: right;
   direction: rtl;
 }
 
 .comment {
-  background-color: #f1f1f1;
-  padding: 10px 14px;
-  margin-bottom: 8px;
-  border-radius: 8px;
-  font-size: 15px;
-  word-break: break-word;
-  user-select: text;
-}
-
-/* اللايتبوكس (نافذة عرض الصور الكبيرة) */
-.lightbox {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.85);
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.lightbox img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 12px;
-  box-shadow: 0 3px 18px rgba(0,0,0,0.7);
-  user-select: none;
+  background-color: #333;
+  padding: 6px 10px;
+  margin-bottom: 6px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #ddd;
 }
 
 /* الفوتر */
 footer {
-  background: #eee;
-  padding: 20px 10px;
+  background: #111;
+  padding: 15px;
   font-size: 0.9em;
   direction: rtl;
-  box-shadow: inset 0 1px 8px #ccc;
+  color: #bbb;
 }
 
 footer .social-icons {
-  margin-top: 15px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
-  gap: 28px;
+  gap: 20px;
 }
 
 footer .social-icons a {
   display: inline-block;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   opacity: 0.7;
   transition: opacity 0.3s ease;
-  user-select: none;
 }
 
 footer .social-icons a:hover {
@@ -348,13 +288,57 @@ footer .social-icons img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  pointer-events: none;
+}
+
+/* لايتبوكس للصور */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+/* زر تواصل خاص */
+.special-contact-btn {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  background-color: #e67e22;
+  color: white;
+  font-size: 28px;
+  padding: 15px 18px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  text-decoration: none;
+  z-index: 9999;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.special-contact-btn:hover {
+  background-color: #d35400;
 }
 
 /* أسئلة شائعة */
 .faq {
   max-width: 800px;
-  margin: 50px auto 80px auto;
+  margin: 40px auto;
   padding: 0 20px;
   text-align: right;
 }
@@ -362,29 +346,21 @@ footer .social-icons img {
 .faq h2 {
   text-align: center;
   color: #005f99;
-  margin-bottom: 25px;
-  user-select: none;
+  margin-bottom: 20px;
 }
 
 .faq-item {
-  margin-bottom: 25px;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 15px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #666;
+  padding-bottom: 10px;
 }
 
 .faq-item h3 {
   cursor: pointer;
   position: relative;
-  padding-right: 30px;
+  padding-right: 25px;
   color: #005f99;
   user-select: none;
-  font-weight: 600;
-  font-size: 18px;
-  transition: color 0.3s ease;
-}
-
-.faq-item h3:hover {
-  color: #003f66;
 }
 
 .faq-item h3::before {
@@ -392,9 +368,8 @@ footer .social-icons img {
   position: absolute;
   right: 0;
   top: 0;
-  font-size: 24px;
+  font-size: 20px;
   color: #005f99;
-  user-select: none;
   transition: transform 0.3s ease;
 }
 
@@ -403,55 +378,36 @@ footer .social-icons img {
   transform: rotate(180deg);
 }
 
+/* حركة انزلاق للأجوبة */
 .faq-item .answer {
-  display: none;
-  margin-top: 12px;
-  color: #444;
-  line-height: 1.6;
-  font-size: 15px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  color: #ddd;
+  line-height: 1.5;
 }
 
 .faq-item.open .answer {
-  display: block;
+  max-height: 500px; /* ارتفاع مناسب للعرض */
 }
 
-/* استجابة الجهاز */
+/* تجاوب */
 @media (max-width: 600px) {
   .gallery {
     max-width: 100%;
   }
   .media-item {
-    width: 100% !important;
+    width: 100%;
     margin-right: 0 !important;
   }
   .header-top {
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
   }
   .cta-buttons {
-    width: 90%;
-    max-width: none;
-  }
-  .comment-box textarea {
     width: 100%;
   }
-}
-
-/* Scrollbar for comments */
-.comments-list::-webkit-scrollbar {
-  width: 8px;
-}
-
-.comments-list::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 8px;
-}
-
-.comments-list::-webkit-scrollbar-thumb {
-  background: #005f99;
-  border-radius: 8px;
-}
-
-.comments-list::-webkit-scrollbar-thumb:hover {
-  background: #004a77;
+  .cta-buttons a, .cta-buttons button {
+    width: 90% !important;
+  }
 }
