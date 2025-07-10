@@ -1,4 +1,3 @@
-// Firebase config متاعك
 const firebaseConfig = {
   apiKey: "AIzaSyD5Hrfk6tU22ITquRR3xt957WmlnvPTw5M",
   authDomain: "aem-site-4e030.firebaseapp.com",
@@ -9,11 +8,9 @@ const firebaseConfig = {
   measurementId: "G-DTNBCK5H1F"
 };
 
-// Init Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// التفاعل
 document.querySelectorAll('.react-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const reaction = btn.dataset.reaction;
@@ -27,7 +24,6 @@ document.querySelectorAll('.react-btn').forEach(btn => {
   });
 });
 
-// التعليقات
 document.querySelectorAll('.comment-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const card = btn.closest('.media-card');

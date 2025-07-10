@@ -1,18 +1,17 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ورشة إلكترونيك مدنين</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style/style.css" />
 </head>
 <body>
   <h1 class="main-title">مرحبا بك في موقع ورشة إلكترونيك مدنين – النسخة التجريبية التفاعلية 🔧</h1>
 
   <div class="gallery">
-    <!-- مثال على عنصر فيه تفاعل -->
     <div class="media-card" data-id="media1">
-      <img src="images/comp1.jpg" alt="صورة إلكترونية" />
+      <img src="./images/comp1.jpg" alt="صورة إلكترونية" />
       <div class="reactions">
         <button class="react-btn" data-reaction="like">❤️</button>
         <button class="react-btn" data-reaction="love">😍</button>
@@ -24,3 +23,24 @@
         <ul class="comment-list"></ul>
       </div>
     </div>
+
+    <div class="media-card" data-id="media2">
+      <video controls src="./images/video1.mp4"></video>
+      <div class="reactions">
+        <button class="react-btn" data-reaction="like">❤️</button>
+        <button class="react-btn" data-reaction="love">😍</button>
+        <button class="react-btn" data-reaction="angry">😒</button>
+      </div>
+      <div class="comments">
+        <input type="text" placeholder="أضف تعليق..." class="comment-input" />
+        <button class="comment-btn">💬</button>
+        <ul class="comment-list"></ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
