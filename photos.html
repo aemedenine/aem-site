@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>صور - Atelier Electronique Médenine</title>
+  <title>الصور - Atelier Electronique Médenine</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* تنسيق اللوقو والهيدر */
     header {
       display: flex;
       justify-content: space-between;
@@ -45,6 +44,17 @@
       color: #00bfff;
     }
 
+    .lang-toggle {
+      background-color: #00bfff;
+      color: white;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
     @media (max-width: 600px) {
       .logo {
         flex-direction: column;
@@ -56,7 +66,6 @@
       }
     }
 
-    /* خاص بمعرض الصور واللايتبوكس */
     main {
       max-width: 1100px;
       margin: 30px auto 60px;
@@ -88,7 +97,6 @@
       transform: scale(1.05);
     }
 
-    /* نافذة اللايتبوكس */
     .lightbox {
       display: none;
       position: fixed;
@@ -107,7 +115,6 @@
       box-shadow: 0 0 20px #00bfff;
     }
 
-    /* زر إغلاق */
     .lightbox:before {
       content: "✕";
       position: absolute;
@@ -140,10 +147,11 @@
       <a href="videos.html">الفيديو</a>
       <a href="services.html">خدمات الورشة</a>
     </nav>
+    <button class="lang-toggle" onclick="toggleLang()">Français</button>
   </header>
 
   <main>
-    <h2>معرض الصور</h2>
+    <h2 id="galleryTitle">معرض الصور</h2>
     <div class="gallery-grid" id="gallery">
       <img src="photo1.jpg" alt="صورة 1" />
       <img src="photo2.jpg" alt="صورة 2" />
@@ -162,7 +170,7 @@
   </footer>
 
   <script>
-    // فتح نافذة اللايتبوكس عند الضغط على الصورة
+    // لايتبوكس
     const gallery = document.getElementById('gallery');
     const lightbox = document.getElementById('lightbox');
 
@@ -177,6 +185,28 @@
       lightbox.style.display = 'none';
       lightbox.innerHTML = '';
     });
+
+    // تغيير اللغة
+    function toggleLang() {
+      let currentLang = localStorage.getItem('lang') || 'ar';
+      let newLang = currentLang === 'ar' ? 'fr' : 'ar';
+      localStorage.setItem('lang', newLang);
+      applyLang();
+    }
+
+    function applyLang() {
+      let lang = localStorage.getItem('lang') || 'ar';
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      document.querySelector('.lang-toggle').textContent = lang === 'ar' ? 'Français' : 'العربية';
+
+      document.getElementById('galleryTitle').textContent =
+        lang === 'ar' ? 'معرض الصور' : 'Galerie de photos';
+
+      // تحديث عناوين الصور (alt) إذا حبيت
+    }
+
+    applyLang(); // عند تحميل الصفحة
   </script>
 
 </body>
