@@ -1,178 +1,95 @@
-/* style.css - تصميم موقع aem-site */
+document.addEventListener('DOMContentLoaded', function () { let currentLang = 'ar'; const radio = document.getElementById('quran-radio'); const radioBtn = document.getElementById('radio-btn');
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 100px;
+// تشغيل الراديو radioBtn.addEventListener('click', () => { if (radio.paused) { radio.play(); radioBtn.textContent = currentLang === 'ar' ? '⏸️ أوقف الراديو' : '⏸️ Arrêter la radio'; } else { radio.pause(); radioBtn.textContent = currentLang === 'ar' ? '📻 شغّل الراديو' : '📻 Écouter la radio'; } });
+
+// الأخبار الحية (داخلي) const news = [ "📢 ورشة إلكترونيك الرحماني تفتح أبوابها لجميع الولايات.", "🔧 خدمات تصليح الأجهزة الإلكترونية بجودة عالية وبأسعار منافسة.", "🌍 التوصيل عبر البريد متوفر لكل أنحاء تونس.", "📱 تواصل معنا عبر واتساب لأي استفسار." ]; const ticker = document.getElementById('live-news'); ticker.textContent = news.join('  •  ');
+
+// تحديث الوقت function updateTime() { const now = new Date(); const timeStr = now.toLocaleTimeString('fr-TN', { hour: '2-digit', minute: '2-digit' }); document.getElementById('time').textContent = timeStr; } updateTime(); setInterval(updateTime, 60000);
+
+// عدد الزيارات function updateVisits() { let visits = parseInt(localStorage.getItem('visits') || '0'); visits++; localStorage.setItem('visits', visits); document.getElementById('visits').textContent = visits; } updateVisits();
+
+// فتح اللايتبوكس window.openLightbox = function(src) { const lightbox = document.getElementById('lightbox'); const lightboxImg = document.getElementById('lightbox-img'); lightboxImg.src = src; lightbox.style.display = 'flex'; } window.closeLightbox = function() { document.getElementById('lightbox').style.display = 'none'; }
+
+// تفاعل مع الصور والفيديوهات window.addReaction = function(mediaId, reaction) { alert(شكراً على تفاعلك ${reaction} للصورة/الفيديو رقم ${mediaId}); }
+
+// إضافة تعليق window.addComment = function(mediaId) { const textarea = document.getElementById(comment-input-${mediaId}); const commentText = textarea.value.trim(); if (!commentText) { alert('الرجاء كتابة تعليق قبل الإرسال'); return; } const commentsList = document.getElementById(comments-${mediaId}); const newComment = document.createElement('div'); newComment.classList.add('comment'); newComment.textContent = commentText; commentsList.appendChild(newComment); textarea.value = ''; }
+
+// تبديل اللغة window.toggleLanguage = function() { const experienceBadge = document.querySelector('.experience-badge'); if (currentLang === 'ar') { currentLang = 'fr'; document.documentElement.lang = 'fr'; document.getElementById('qr-label').textContent = "📱 Scannez pour accès rapide"; experienceBadge.textContent = "🌼 Plus de 10 ans d'expérience"; document.getElementById('slogan').textContent = "Atelier Electronique Médenine - Service dans toute la Tunisie"; document.getElementById('whatsapp-btn').textContent = "📞 Contactez-nous WhatsApp"; document.getElementById('maps-btn').textContent = "🗺️ Voir sur Google Maps"; document.querySelector('.photos').textContent = "📷 Voir les photos"; document.querySelector('.videos').textContent = "🎞️ Voir les vidéos"; radioBtn.textContent = radio.paused ? "📻 Écouter la radio" : "⏸️ Arrêter la radio"; document.querySelector('.special-service-btn').textContent = "🛠️ Services de l'atelier";
+
+const faqs = [
+    {
+      q: "Comment puis-je envoyer un appareil pour réparation ?",
+      a: "Vous pouvez envoyer l'appareil par courrier à l'atelier ou nous contacter pour organiser la collecte."
+    },
+    {
+      q: "Quel est le délai moyen de réparation ?",
+      a: "Le délai dépend du type de panne, mais généralement pas plus de 3 jours ouvrables."
+    },
+    {
+      q: "Fournissez-vous des pièces d'origine ?",
+      a: "Oui, nous fournissons des pièces d'origine et de haute qualité pour tous les appareils."
+    },
+    {
+      q: "Comment suivre l'état de la réparation ?",
+      a: "Nous envoyons des photos et vidéos de l'état de l'appareil pendant la réparation via WhatsApp."
+    }
+  ];
+  const faqContainer = document.querySelector('.faq');
+  faqContainer.innerHTML = '<h2>FAQ</h2>';
+  faqs.forEach(item => {
+    const faqItem = document.createElement('div');
+    faqItem.classList.add('faq-item');
+    faqItem.innerHTML = `<h3>${item.q}</h3><div class="answer">${item.a}</div>`;
+    faqContainer.appendChild(faqItem);
+  });
+
+} else {
+  currentLang = 'ar';
+  document.documentElement.lang = 'ar';
+  document.getElementById('qr-label').textContent = "📱 امسح للوصول السريع";
+  experienceBadge.textContent = "🌼 10+ سنوات خبرة";
+  document.getElementById('slogan').textContent = "ورشة إلكترونيك الرحماني - نخدمو تونس الكل";
+  document.getElementById('whatsapp-btn').textContent = "📞 تواصل معنا واتساب";
+  document.getElementById('maps-btn').textContent = "🗺️ شوفنا على Google Maps";
+  document.querySelector('.photos').textContent = "📷 شوف الصور";
+  document.querySelector('.videos').textContent = "🎞️ شوف الفيديو";
+  radioBtn.textContent = radio.paused ? "📻 شغّل الراديو" : "⏸️ أوقف الراديو";
+  document.querySelector('.special-service-btn').textContent = "🛠️ خدمات الورشة";
+
+  const faqsAr = [
+    {
+      q: "كيف يمكنني إرسال جهاز للإصلاح؟",
+      a: "يمكنك إرسال الجهاز عبر البريد إلى عنوان الورشة أو التواصل معنا لترتيب خدمة الاستلام."
+    },
+    {
+      q: "ما هي مدة التصليح المعتادة؟",
+      a: "مدة التصليح تختلف حسب نوع العطل، لكن غالباً لا تتجاوز 3 أيام عمل."
+    },
+    {
+      q: "هل توفرون قطع غيار أصلية؟",
+      a: "نعم، نوفر قطع غيار أصلية وذات جودة عالية لجميع الأجهزة."
+    },
+    {
+      q: "كيف أتابع حالة الإصلاح؟",
+      a: "نقوم بإرسال صور وفيديوهات لحالة الجهاز أثناء مراحل التصليح عبر واتساب."
+    }
+  ];
+  const faqContainer = document.querySelector('.faq');
+  faqContainer.innerHTML = '<h2>الأسئلة الشائعة</h2>';
+  faqsAr.forEach(item => {
+    const faqItem = document.createElement('div');
+    faqItem.classList.add('faq-item');
+    faqItem.innerHTML = `<h3>${item.q}</h3><div class="answer">${item.a}</div>`;
+    faqContainer.appendChild(faqItem);
+  });
 }
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #0f0f0f;
-  background-image: url('https://www.transparenttextures.com/patterns/circles.png');
-  margin: 0;
-  color: #f1f1f1;
-  direction: rtl;
-  text-align: center;
-}
-/* العناوين */
-h1, h2, h3 {
-  color: #00bfff;
-}
-/* الشعار والترويسة */
-header {
-  background-color: #000000;
-  padding: 20px 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-}
-.header-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  max-width: 1000px;
-  margin: auto;
-}
-.header-logo {
-  width: 120px;
-  border-radius: 8px;
-}
-/* الشريط العلوي */
-.info-bar {
-  background: #1c1c1c;
-  padding: 10px 0;
-  font-weight: bold;
-  font-size: 14px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  direction: ltr;
-  color: #ccc;
-}
-/* شريط الأخبار */
-.news-ticker {
-  background-color: #c00000;
-  color: white;
-  padding: 8px 0;
-  overflow: hidden;
-  white-space: nowrap;
-  font-weight: bold;
-  font-size: 0.9em;
-}
-.news-ticker span {
-  display: inline-block;
-  padding-left: 100%;
-  animation: scroll-horizontal-left 20s linear infinite;
-}
-@keyframes scroll-horizontal-left {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-/* أزرار CTA */
-.cta-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 280px;
-  margin: 20px auto;
-  align-items: center;
-}
-.cta-buttons a, .cta-buttons button {
-  background-color: #1f1f1f;
-  color: #00bfff;
-  border: 2px solid #00bfff;
-  padding: 10px 0;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 8px;
-  width: 100%;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-}
-.cta-buttons a:hover, .cta-buttons button:hover {
-  background-color: #00bfff;
-  color: #000;
-}
-/* المعرض */
-.gallery {
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 0 15px;
-}
-.media-item {
-  background: #1e1e1e;
-  border-radius: 8px;
-  padding: 10px;
-  margin-bottom: 20px;
-}
-.media-item img {
-  width: 100%;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.reactions button {
-  background-color: #333;
-  border: none;
-  padding: 6px 12px;
-  margin: 0 6px;
-  font-size: 16px;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.comment-box textarea {
-  width: 90%;
-  padding: 8px;
-  font-size: 14px;
-  margin-top: 8px;
-  border-radius: 6px;
-  resize: vertical;
-  border: 1px solid #666;
-  background: #000;
-  color: #eee;
-}
-.comment-box button {
-  margin-top: 6px;
-  background-color: #00bfff;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 6px;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-}
-/* اللايتبوكس */
-.lightbox {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
-  justify-content: center;
-  align-items: center;
-}
-.lightbox img {
-  max-width: 90%;
-  max-height: 90%;
-}
-/* الفوتر */
-footer {
-  background: #1a1a1a;
-  padding: 20px;
-  font-size: 0.9em;
-  color: #ccc;
-}
-/* استجابة */
-@media (max-width: 600px) {
-  .header-top {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .cta-buttons {
-    width: 90%;
-  }
-  .media-item {
-    width: 100%;
-  }
-}
+
+document.querySelectorAll('.faq-item h3').forEach(h3 => {
+  h3.addEventListener('click', () => {
+    const parent = h3.parentElement;
+    parent.classList.toggle('open');
+  });
+});
+
+}; });
+
