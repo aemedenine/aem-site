@@ -1,390 +1,77 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Atelier Electronique Médenine</title>
-<style>
-  /* Reset */
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0; padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #121212;
-    color: #eee;
-    direction: rtl;
-  }
-  a {
-    text-decoration: none;
-    color: #00bfff;
-    transition: color 0.3s ease;
-  }
-  a:hover {
-    color: #0091ea;
-  }
-  header {
-    background: #000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.7);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .logo img {
-    height: 50px;
-    border-radius: 6px;
-    filter: drop-shadow(0 0 3px #00bfff);
-  }
-  .logo-text {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #00bfff;
-    user-select: none;
-  }
-  nav {
-    display: flex;
-    gap: 25px;
-    font-weight: 600;
-  }
-  nav a {
-    padding: 6px 12px;
-    border-radius: 5px;
-  }
-  nav a:hover, nav a.active {
-    background: #00bfff;
-    color: #121212;
-  }
-
-  /* Hero Section */
-  .hero {
-    text-align: center;
-    padding: 80px 20px 40px;
-    background: linear-gradient(135deg, #00bfff 0%, #004d7a 100%);
-    color: #fff;
-    user-select: none;
-  }
-  .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    text-shadow: 0 0 6px #004d7a;
-  }
-  .hero p {
-    font-size: 1.25rem;
-    max-width: 700px;
-    margin: 0 auto 30px;
-  }
-  .btn-primary {
-    background: #fff;
-    color: #004d7a;
-    font-weight: 700;
-    padding: 14px 30px;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 0 10px #00bfff88;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  .btn-primary:hover {
-    background: #00bfff;
-    color: #fff;
-  }
-
-  /* Info bar */
-  .info-bar {
-    background: #111;
-    padding: 15px 20px;
-    font-size: 1rem;
-    color: #ccc;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    user-select: none;
-  }
-
-  /* Content Sections */
-  main {
-    max-width: 1100px;
-    margin: 30px auto 60px;
-    padding: 0 15px;
-  }
-
-  section {
-    margin-bottom: 60px;
-  }
-  section h2 {
-    font-size: 2rem;
-    color: #00bfff;
-    margin-bottom: 20px;
-    border-bottom: 3px solid #00bfff;
-    padding-bottom: 6px;
-    user-select: none;
-  }
-
-  /* Gallery */
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
-    gap: 15px;
-  }
-  .gallery-grid img {
-    width: 100%;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 0 15px #00bfff88;
-    transition: transform 0.3s ease;
-  }
-  .gallery-grid img:hover {
-    transform: scale(1.05);
-  }
-
-  /* Videos */
-  .video-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-  }
-  .video-list video {
-    border-radius: 8px;
-    box-shadow: 0 0 15px #00bfff88;
-    max-width: 320px;
-    width: 100%;
-    cursor: pointer;
-  }
-
-  /* Buttons container */
-  .btn-group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-  }
-  .btn-group a, .btn-group button {
-    background: transparent;
-    border: 2px solid #00bfff;
-    color: #00bfff;
-    font-weight: 600;
-    padding: 10px 25px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  .btn-group a:hover, .btn-group button:hover {
-    background: #00bfff;
-    color: #121212;
-  }
-
-  /* FAQ */
-  .faq-item {
-    background: #222;
-    padding: 18px 20px;
-    border-radius: 8px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    user-select: none;
-  }
-  .faq-item h3 {
-    margin: 0;
-    color: #00bfff;
-    font-weight: 700;
-    position: relative;
-  }
-  .faq-item h3::after {
-    content: "+";
-    position: absolute;
-    left: 20px;
-    top: 0;
-    font-size: 1.5rem;
-    transition: transform 0.3s ease;
-    color: #00bfff;
-  }
-  .faq-item.open h3::after {
-    content: "-";
-    transform: rotate(180deg);
-  }
-  .faq-item .answer {
-    margin-top: 10px;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #ccc;
-    display: none;
-  }
-  .faq-item.open .answer {
-    display: block;
-  }
-
-  /* Footer */
-  footer {
-    background: #000;
-    text-align: center;
-    padding: 30px 15px;
-    font-size: 0.9rem;
-    color: #777;
-    user-select: none;
-  }
-  footer .social-icons {
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-  footer .social-icons a {
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-  }
-  footer .social-icons a:hover {
-    opacity: 1;
-  }
-  footer .social-icons img {
-    height: 30px;
-    width: 30px;
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    header {
-      flex-direction: column;
-      gap: 10px;
-    }
-    nav {
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .hero h1 {
-      font-size: 2.2rem;
-    }
-  }
-
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Atelier Electronique Médenine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header>
+    <div class="container header-inner">
+      <img src="images/logo.png" alt="Atelier Electronique Médenine Logo" class="logo" />
+      <h1>Atelier Electronique Médenine</h1>
+    </div>
+  </header>
 
-<header>
-  <div class="logo">
-    <img src="images/logo.png" alt="Atelier Electronique Médenine" />
-    <div class="logo-text">Atelier Electronique Médenine</div>
+  <div class="news-ticker">
+    <div class="news-text" id="live-news">تحميل الأخبار...</div>
   </div>
-  <nav>
-    <a href="#services" class="active">الخدمات</a>
-    <a href="#gallery">الصور</a>
-    <a href="#videos">الفيديو</a>
-    <a href="#faq">الأسئلة الشائعة</a>
-    <a href="#contact">تواصل معنا</a>
-  </nav>
-</header>
 
-<section class="hero">
-  <h1>خدمات إلكترونيك الرحماني</h1>
-  <p>تصليح وصيانة أجهزة إلكترونية، بيع قطع غيار أصلية، خدمة توصيل لباب الدار</p>
-  <button class="btn-primary" onclick="location.href='#contact'">اتصل بنا الآن</button>
-</section>
+  <main class="container main-content">
+    <section class="info-bar">
+      <div id="current-time">--:--:--</div>
+      <div id="visit-count">عدد زياراتك: 0</div>
+      <button id="toggle-lang-btn" class="btn-primary">تبديل اللغة</button>
+    </section>
 
-<div class="info-bar" id="live-news">
-  جاري تحميل الأخبار...
-</div>
+    <section class="cta-buttons">
+      <a href="https://wa.me/21698192103" target="_blank" class="btn-whatsapp">واتساب</a>
+      <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" class="btn-maps">موقعنا على Google Maps</a>
+      <a href="photos.html" class="btn-gallery">شاهد الصور</a>
+      <a href="videos.html" class="btn-video">شاهد الفيديو</a>
+      <button id="radio-btn" class="btn-radio">شغّل الراديو</button>
+      <audio id="radio-stream" src="https://stream.radiojar.com/8s5u5tpdtwzuv" preload="none"></audio>
+    </section>
 
-<main>
+    <section class="experience-badge">🌼 أكثر من 10 سنوات خبرة</section>
 
-  <section id="services">
-    <h2>خدمات الورشة</h2>
-    <ul style="list-style:none; padding:0; max-width:600px; margin:auto; text-align:right; color:#ccc; font-size:1.1rem;">
-      <li>🔧 تصليح وصيانة كمبيوتر وأجهزة منزلية</li>
-      <li>💻 تشخيص أعطال الكروت الإلكترونية</li>
-      <li>📦 بيع قطع غيار إلكترونية أصلية حسب الحاجة</li>
-      <li>📦 توصيل عبر البريد لكل أنحاء تونس</li>
-      <li>📱 دعم فني مستمر عبر واتساب</li>
-    </ul>
-  </section>
+    <section class="faq">
+      <h2>الأسئلة الشائعة</h2>
+      <div class="faq-item">
+        <h3>كيف يمكنني إرسال جهاز للإصلاح؟</h3>
+        <div class="answer">يمكنك إرسال الجهاز عبر البريد إلى عنوان الورشة أو التواصل معنا لترتيب خدمة الاستلام.</div>
+      </div>
+      <div class="faq-item">
+        <h3>ما هي مدة التصليح المعتادة؟</h3>
+        <div class="answer">مدة التصليح تختلف حسب نوع العطل، لكن غالباً لا تتجاوز 3 أيام عمل.</div>
+      </div>
+      <div class="faq-item">
+        <h3>هل توفرون قطع غيار أصلية؟</h3>
+        <div class="answer">نعم، نوفر قطع غيار أصلية وذات جودة عالية لجميع الأجهزة.</div>
+      </div>
+      <div class="faq-item">
+        <h3>كيف أتابع حالة الإصلاح؟</h3>
+        <div class="answer">نقوم بإرسال صور وفيديوهات لحالة الجهاز أثناء مراحل التصليح عبر واتساب.</div>
+      </div>
+    </section>
+  </main>
 
-  <section id="gallery">
-    <h2>معرض الصور</h2>
-    <div class="gallery-grid">
-      <img src="images/photo1.jpg" alt="صورة 1" />
-      <img src="images/photo2.jpg" alt="صورة 2" />
-      <img src="images/photo3.jpg" alt="صورة 3" />
-      <img src="images/photo4.jpg" alt="صورة 4" />
+  <footer>
+    <div class="container footer-inner">
+      <p>📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp: 98192103</p>
+      <p>⏰ من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/AEMednine" target="_blank" rel="noopener"><img src="icons/facebook.svg" alt="Facebook" /></a>
+        <a href="https://www.instagram.com/aemedenine/" target="_blank" rel="noopener"><img src="icons/instagram.svg" alt="Instagram" /></a>
+        <a href="https://wa.me/21698192103" target="_blank" rel="noopener"><img src="icons/whatsapp.svg" alt="WhatsApp" /></a>
+      </div>
     </div>
-  </section>
+  </footer>
 
-  <section id="videos">
-    <h2>الفيديوهات</h2>
-    <div class="video-list">
-      <video src="videos/video1.mp4" controls></video>
-      <video src="videos/video2.mp4" controls></video>
-    </div>
-  </section>
-
-  <section id="faq">
-    <h2>الأسئلة الشائعة</h2>
-    <div class="faq-item">
-      <h3>كيف يمكنني إرسال جهاز للإصلاح؟</h3>
-      <div class="answer">يمكنك إرسال الجهاز عبر البريد أو التوصيل للورشة مباشرة.</div>
-    </div>
-    <div class="faq-item">
-      <h3>ما هي مدة التصليح المعتادة؟</h3>
-      <div class="answer">عادةً لا تتجاوز 3 أيام عمل حسب نوع العطل.</div>
-    </div>
-    <div class="faq-item">
-      <h3>هل توفرون قطع غيار أصلية؟</h3>
-      <div class="answer">نعم، نوفر قطع غيار أصلية وبجودة عالية.</div>
-    </div>
-    <div class="faq-item">
-      <h3>كيف أتابع حالة الإصلاح؟</h3>
-      <div class="answer">نرسل لك صور وفيديوهات لحالة الجهاز عبر واتساب.</div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <h2>تواصل معنا</h2>
-    <p>📞 <a href="https://wa.me/21698192103" target="_blank" rel="noopener noreferrer">واتساب: +216 98 192 103</a></p>
-    <p>📍 <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" rel="noopener noreferrer">شوفنا على Google Maps</a></p>
-    <p>⏰ الإثنين - السبت: 08:00 - 18:00 | الأحد: راحة</p>
-  </section>
-
-</main>
-
-<footer>
-  © 2025 Atelier Electronique Médenine - مدنين، تونس
-  <div class="social-icons">
-    <a href="https://www.facebook.com/AEMednine" target="_blank" title="Facebook"><img src="icons/facebook.svg" alt="Facebook" /></a>
-    <a href="https://www.instagram.com/aemedenine/" target="_blank" title="Instagram"><img src="icons/instagram.svg" alt="Instagram" /></a>
-    <a href="https://wa.me/21698192103" target="_blank" title="WhatsApp"><img src="icons/whatsapp.svg" alt="WhatsApp" /></a>
-  </div>
-</footer>
-
-<script>
-  // FAQ toggle
-  document.querySelectorAll('.faq-item h3').forEach(h3 => {
-    h3.addEventListener('click', () => {
-      h3.parentElement.classList.toggle('open');
-    });
-  });
-
-  // Live news simulation
-  const newsEl = document.getElementById('live-news');
-  const newsItems = [
-    "ورشة إلكترونيك الرحماني تخدم كامل الجمهورية.",
-    "خدمات صيانة وتصليح متطورة لجميع الأجهزة الإلكترونية.",
-    "توصيل سريع وآمن عبر البريد في كل الولايات.",
-    "تواصل معنا على الواتساب لأي استفسار."
-  ];
-  let newsIndex = 0;
-  setInterval(() => {
-    newsEl.textContent = newsItems[newsIndex];
-    newsIndex = (newsIndex +1) % newsItems.length;
-  }, 6000);
-
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
