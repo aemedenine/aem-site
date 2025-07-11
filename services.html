@@ -1,93 +1,149 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>خدمات ورشة إلكترونيك الرحماني - Atelier Electronique Médenine</title>
-<style>
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #0f0f0f;
-    color: #e0e0e0;
-    margin: 0;
-    direction: rtl;
-    padding: 20px;
-  }
-  h1 {
-    color: #00ff99;
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  .service-list {
-    max-width: 900px;
-    margin: auto;
-  }
-  .service-item {
-    background: #111;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    padding: 15px 20px;
-    box-shadow: 0 0 10px #00ff99aa;
-    transition: transform 0.3s ease;
-  }
-  .service-item:hover {
-    transform: scale(1.02);
-  }
-  .service-item h2 {
-    margin-top: 0;
-    color: #00cc77;
-  }
-  .service-item p {
-    line-height: 1.5;
-    font-size: 1.1em;
-  }
-  .btn-back {
-    display: block;
-    width: 180px;
-    margin: 30px auto 0;
-    padding: 12px 0;
-    text-align: center;
-    background-color: #00ff99;
-    color: #0f0f0f;
-    font-weight: bold;
-    border-radius: 8px;
-    text-decoration: none;
-    box-shadow: 0 0 12px #00ff99;
-    transition: background-color 0.3s ease;
-  }
-  .btn-back:hover {
-    background-color: #00cc77;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>خدمات الورشة - Atelier Electronique Médenine</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      background-color: #0f0f0f;
+      padding: 10px 20px;
+      border-bottom: 2px solid #00bfff;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      max-width: 120px;
+      height: auto;
+    }
+
+    .logo-text {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #00bfff;
+    }
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+
+    nav a.active {
+      color: #00bfff;
+    }
+
+    @media (max-width: 600px) {
+      .logo {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .logo img {
+        max-width: 100px;
+      }
+    }
+
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      box-shadow: 0 0 15px #00bfff55;
+    }
+
+    h2 {
+      text-align: center;
+      color: #00bfff;
+      margin-bottom: 25px;
+    }
+
+    .services-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .service-box {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00bfff44;
+      transition: transform 0.3s ease;
+      color: white;
+    }
+
+    .service-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-box h3 {
+      color: #00bfff;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #ccc;
+      background: #0f0f0f;
+      border-top: 2px solid #00bfff;
+      margin-top: 50px;
+    }
+  </style>
 </head>
 <body>
 
-<h1>خدمات ورشة إلكترونيك الرحماني</h1>
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="Logo" />
+      <span class="logo-text">Atelier Electronique Médenine</span>
+    </div>
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="photos.html">الصور</a>
+      <a href="videos.html">الفيديو</a>
+      <a href="services.html" class="active">خدمات الورشة</a>
+    </nav>
+  </header>
 
-<div class="service-list">
-  <div class="service-item">
-    <h2>🔧 تصليح وصيانة الأجهزة الإلكترونية</h2>
-    <p>تشخيص الأعطال الإلكترونية الدقيقة وإصلاح أجهزة الكمبيوتر، الأجهزة المنزلية، كروت إلكترونية، وأكثر بجودة ومهنية عالية.</p>
-  </div>
-  <div class="service-item">
-    <h2>📦 بيع قطع غيار إلكترونية</h2>
-    <p>نوفر قطع غيار أصلية وموثوقة لمختلف الأجهزة مع ضمان الجودة وسعر منافس.</p>
-  </div>
-  <div class="service-item">
-    <h2>📮 خدمة إرسال واستلام الأجهزة بالبريد</h2>
-    <p>لا حاجة للحضور شخصياً، يمكنكم إرسال الأجهزة المعطلة بالبريد وسنقوم بالتشخيص والإصلاح وإرسالها إليكم مرة أخرى.</p>
-  </div>
-  <div class="service-item">
-    <h2>📱 متابعة حالة التصليح عبر واتساب</h2>
-    <p>نرسل صور وفيديوهات توضح حالة الجهاز أثناء مراحل التصليح لتكونوا على اطلاع دائم.</p>
-  </div>
-  <div class="service-item">
-    <h2>💡 استشارات فنية ودعم تقني</h2>
-    <p>نقدم نصائح ودعم فني لأي استفسار يتعلق بالأجهزة الإلكترونية وكيفية صيانتها أو استخدامها.</p>
-  </div>
-</div>
+  <main>
+    <h2>خدمات الورشة</h2>
+    <div class="services-list">
+      <div class="service-box">
+        <h3>تصليح الكروت الإلكترونية</h3>
+        <p>نقوم بتشخيص وإصلاح كروت إلكترونية لجميع الأجهزة المنزلية والصناعية بأحدث التقنيات.</p>
+      </div>
+      <div class="service-box">
+        <h3>صيانة الحواسيب واللابتوب</h3>
+        <p>حلول لمشاكل التشغيل، تغيير قطع، تنظيف حراري، تركيب SSD، استرجاع بيانات.</p>
+      </div>
+      <div class="service-box">
+        <h3>تشخيص عن بُعد</h3>
+        <p>بعث الجهاز بالبريد – تشخيص وتصليح مع إرسال فيديو وصور قبل وبعد، ثم نرجعو ليك.</p>
+      </div>
+      <div class="service-box">
+        <h3>خدمة عبر كامل الجمهورية</h3>
+        <p>نستقبل من جميع الولايات – نضمن السرعة، الاحتراف، والمتابعة المستمرة عبر WhatsApp.</p>
+      </div>
+    </div>
+  </main>
 
-<a href="index.html" class="btn-back">⬅️ العودة للصفحة الرئيسية</a>
+  <footer>
+    © 2025 Atelier Electronique Médenine - جميع الحقوق محفوظة
+  </footer>
 
 </body>
 </html>
