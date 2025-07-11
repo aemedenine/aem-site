@@ -1,4 +1,4 @@
-/* style.css - النسخة المعدلة */
+/* style.css - النسخة المحدثة والموحّدة للأزرار */
 
 /* سلوك التمرير */
 html {
@@ -107,40 +107,81 @@ header {
   100% { transform: translateX(100%); }
 }
 
-/* أزرار الدعوة للعمل (CTA) */
-/* ... باقي الكود كما هو ... */
-
-/* أزرار الدعوة للعمل (CTA) */
+/* توحيد الأزرار - كل الأزرار الرئيسية */
 .cta-buttons a,
-.cta-buttons button {
-  background-color: white;
-  color: #005f99;
-  border: 2px solid #005f99;
-  padding: 6px 0; /* قللت padding عمودي */
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: 10px;
-  cursor: pointer;
-  text-decoration: none;
-  box-shadow: 0 3px 8px rgba(0, 95, 153, 0.2);
-  transition: all 0.3s ease;
-  width: 140px;      /* عرض موحّد */
-  height: 40px;      /* ارتفاع موحّد */
-  line-height: 28px; /* وسط النص عمودي */
-  text-align: center;
-  display: inline-block; /* بدل block باش تصير جنب بعض */
-  box-sizing: border-box; /* يحسب الحواف ضمن العرض */
-  margin: 5px 8px;  /* مسافة بين الأزرار */
+.cta-buttons button,
+.unified-button {
+  width: 140px !important;
+  height: 40px !important;
+  box-sizing: border-box;
+  display: inline-flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 6px 0 !important;
+  border-radius: 10px !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  text-align: center !important;
+  margin: 5px 8px !important;
+  transition: all 0.3s ease !important;
 }
 
-.cta-buttons a:hover,
-.cta-buttons button:hover {
-  background-color: #005f99;
-  color: white;
-  box-shadow: 0 5px 15px rgba(0, 95, 153, 0.5);
+/* ألوان الأزرار حسب النوع */
+.unified-button.whatsapp {
+  border: 2px solid #25D366 !important;
+  color: #25D366 !important;
+  background-color: transparent !important;
+}
+.unified-button.whatsapp:hover {
+  background-color: #25D366 !important;
+  color: white !important;
+  box-shadow: 0 5px 15px rgba(37, 211, 102, 0.5) !important;
 }
 
-/* ... باقي الكود كما هو ... */
+.unified-button.map {
+  border: 2px solid #FF4500 !important;
+  color: #FF4500 !important;
+  background-color: transparent !important;
+}
+.unified-button.map:hover {
+  background-color: #FF4500 !important;
+  color: white !important;
+  box-shadow: 0 5px 15px rgba(255, 69, 0, 0.5) !important;
+}
+
+.unified-button.photos {
+  border: 2px solid #6f42c1 !important;
+  color: #6f42c1 !important;
+  background-color: transparent !important;
+}
+.unified-button.photos:hover {
+  background-color: #6f42c1 !important;
+  color: white !important;
+  box-shadow: 0 5px 15px rgba(111, 66, 193, 0.5) !important;
+}
+
+.unified-button.services {
+  border: 2px solid #17a2b8 !important;
+  color: #17a2b8 !important;
+  background-color: transparent !important;
+}
+.unified-button.services:hover {
+  background-color: #17a2b8 !important;
+  color: white !important;
+  box-shadow: 0 5px 15px rgba(23, 162, 184, 0.5) !important;
+}
+
+.unified-button.video {
+  border: 2px solid #dc3545 !important;
+  color: #dc3545 !important;
+  background-color: transparent !important;
+}
+.unified-button.video:hover {
+  background-color: #dc3545 !important;
+  color: white !important;
+  box-shadow: 0 5px 15px rgba(220, 53, 69, 0.5) !important;
+}
 
 /* خريطة Google */
 #map {
@@ -407,73 +448,7 @@ footer .social-icons img {
   .cta-buttons {
     width: 100%;
   }
-  .cta-buttons a, .cta-buttons button {
+  .cta-buttons a, .cta-buttons button, .unified-button {
     width: 90% !important;
   }
-}
-
-/* أزرار موحدة واحترافية */
-.unified-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100px;       /* العرض */
-  height: 40px;       /* الارتفاع */
-  border: 2px solid white;
-  border-radius: 10px;
-  font-size: 14px;    /* حجم الخط */
-  color: white;
-  background-color: transparent;
-  margin: 6px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  user-select: none;
-}
-
-.unified-button:hover {
-  background-color: white;
-  color: #0f0f0f;
-}
-
-/* ألوان مختلفة حسب النوع */
-.unified-button.whatsapp {
-  border-color: #25D366;
-  color: #25D366;
-}
-.unified-button.whatsapp:hover {
-  background-color: #25D366;
-  color: white;
-}
-.unified-button.map {
-  border-color: #FF4500;
-  color: #FF4500;
-}
-.unified-button.map:hover {
-  background-color: #FF4500;
-  color: white;
-}
-.unified-button.photos {
-  border-color: #6f42c1;
-  color: #6f42c1;
-}
-.unified-button.photos:hover {
-  background-color: #6f42c1;
-  color: white;
-}
-.unified-button.services {
-  border-color: #17a2b8;
-  color: #17a2b8;
-}
-.unified-button.services:hover {
-  background-color: #17a2b8;
-  color: white;
-}
-.unified-button.video {
-  border-color: #dc3545;
-  color: #dc3545;
-}
-.unified-button.video:hover {
-  background-color: #dc3545;
-  color: white;
 }
