@@ -1,60 +1,43 @@
-/* CSS كامل لتصميم الموقع */
+/* style.css - تصميم موقع aem-site */
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
 }
 body {
-  font-family: sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0f0f0f;
+  background-image: url('https://www.transparenttextures.com/patterns/circles.png');
   margin: 0;
+  color: #f1f1f1;
   direction: rtl;
   text-align: center;
 }
+/* العناوين */
+h1, h2, h3 {
+  color: #00bfff;
+}
+/* الشعار والترويسة */
 header {
-  background-color: #005f99;
-  color: white;
+  background-color: #000000;
   padding: 20px 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
 }
 .header-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 800px;
+  flex-wrap: wrap;
+  max-width: 1000px;
   margin: auto;
 }
 .header-logo {
-  width: 140px;
-  border-radius: 10px;
+  width: 120px;
+  border-radius: 8px;
 }
-.qr-container {
-  text-align: center;
-  margin-bottom: 10px;
-}
-.qr-container img {
-  width: 90px;
-  border-radius: 10px;
-}
-.qr-container p {
-  font-size: 0.9em;
-  margin-top: 5px;
-  color: white;
-  font-weight: bold;
-}
-.experience-badge {
-  background-color: gold;
-  color: #333;
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: bold;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-  margin: 10px auto;
-  display: inline-block;
-  max-width: 200px;
-}
+/* الشريط العلوي */
 .info-bar {
-  background: #fff;
+  background: #1c1c1c;
   padding: 10px 0;
   font-weight: bold;
   font-size: 14px;
@@ -62,272 +45,134 @@ header {
   justify-content: center;
   gap: 20px;
   direction: ltr;
+  color: #ccc;
 }
+/* شريط الأخبار */
 .news-ticker {
   background-color: #c00000;
   color: white;
-  padding: 10px 0;
+  padding: 8px 0;
   overflow: hidden;
   white-space: nowrap;
   font-weight: bold;
-  position: relative;
   font-size: 0.9em;
-  direction: rtl;
 }
 .news-ticker span {
   display: inline-block;
   padding-left: 100%;
-  animation: scroll-horizontal-left 25s linear infinite;
+  animation: scroll-horizontal-left 20s linear infinite;
 }
 @keyframes scroll-horizontal-left {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
 }
+/* أزرار CTA */
 .cta-buttons {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  width: 260px;
+  width: 280px;
   margin: 20px auto;
   align-items: center;
 }
 .cta-buttons a, .cta-buttons button {
-  background-color: white;
-  color: #005f99;
-  border: 2px solid #005f99;
-  padding: 12px 0;
-  font-size: 16px;
-  font-weight: 600;
-  border-radius: 6px;
-  cursor: pointer;
-  text-decoration: none;
-  box-shadow: 0 3px 8px rgba(0,95,153,0.2);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: #1f1f1f;
+  color: #00bfff;
+  border: 2px solid #00bfff;
+  padding: 10px 0;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 8px;
   width: 100%;
-  max-width: 260px;
-  text-align: center;
-  display: block;
-  height: 44px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
 }
 .cta-buttons a:hover, .cta-buttons button:hover {
-  background-color: #005f99;
-  color: white;
-  box-shadow: 0 5px 15px rgba(0,95,153,0.5);
+  background-color: #00bfff;
+  color: #000;
 }
-#map {
-  width: 90%;
-  height: 250px;
-  border-radius: 10px;
-  margin: 0 auto 30px auto;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
+/* المعرض */
 .gallery {
-  max-width: 800px;
-  margin: 60px auto;
-  padding: 20px;
-  text-align: center;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 15px;
 }
 .media-item {
-  border: 1px solid #ccc;
-  padding: 8px;
+  background: #1e1e1e;
   border-radius: 8px;
-  background: #fff;
+  padding: 10px;
   margin-bottom: 20px;
-  display: inline-block;
-  width: 48%;
-  margin-right: 1%;
-  box-sizing: border-box;
-  vertical-align: top;
-}
-.media-item:nth-child(2n) {
-  margin-right: 0;
 }
 .media-item img {
-  max-width: 100%;
+  width: 100%;
   border-radius: 6px;
   cursor: pointer;
 }
-.reactions {
-  margin-top: 10px;
-}
 .reactions button {
-  background: #eee;
+  background-color: #333;
   border: none;
   padding: 6px 12px;
   margin: 0 6px;
   font-size: 16px;
-  cursor: pointer;
+  color: white;
   border-radius: 6px;
-  transition: background-color 0.3s ease;
-}
-.reactions button:hover {
-  background-color: #cce7ff;
-}
-.comment-box {
-  margin-top: 10px;
+  cursor: pointer;
 }
 .comment-box textarea {
   width: 90%;
-  height: 60px;
-  padding: 6px;
+  padding: 8px;
   font-size: 14px;
+  margin-top: 8px;
   border-radius: 6px;
-  border: 1px solid #ccc;
   resize: vertical;
+  border: 1px solid #666;
+  background: #000;
+  color: #eee;
 }
 .comment-box button {
   margin-top: 6px;
-  padding: 6px 16px;
-  font-size: 14px;
-  cursor: pointer;
+  background-color: #00bfff;
   border: none;
+  padding: 6px 14px;
   border-radius: 6px;
-  background-color: #005f99;
-  color: white;
-  transition: background-color 0.3s ease;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
 }
-.comment-box button:hover {
-  background-color: #004a77;
-}
-.comments-list {
-  margin-top: 10px;
-  max-height: 150px;
-  overflow-y: auto;
-  border-top: 1px solid #ccc;
-  padding-top: 8px;
-  text-align: right;
-  direction: rtl;
-}
-.comment {
-  background-color: #f1f1f1;
-  padding: 6px 10px;
-  margin-bottom: 6px;
-  border-radius: 6px;
-  font-size: 14px;
-}
-footer {
-  background: #eee;
-  padding: 15px;
-  font-size: 0.9em;
-  direction: rtl;
-}
-footer .social-icons {
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-footer .social-icons a {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  opacity: 0.7;
-  transition: opacity 0.3s ease;
-}
-footer .social-icons a:hover {
-  opacity: 1;
-}
-footer .social-icons img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
+/* اللايتبوكس */
 .lightbox {
   display: none;
   position: fixed;
   z-index: 999;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   justify-content: center;
   align-items: center;
 }
 .lightbox img {
   max-width: 90%;
   max-height: 90%;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
-/* زر تواصل خاص */
-.special-contact-btn {
-  position: fixed;
-  bottom: 30px;
-  left: 30px;
-  background-color: #e67e22;
-  color: white;
-  font-size: 28px;
-  padding: 15px 18px;
-  border-radius: 50%;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  text-decoration: none;
-  z-index: 9999;
-  transition: background-color 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+/* الفوتر */
+footer {
+  background: #1a1a1a;
+  padding: 20px;
+  font-size: 0.9em;
+  color: #ccc;
 }
-.special-contact-btn:hover {
-  background-color: #d35400;
-}
-/* أسئلة شائعة */
-.faq {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 0 20px;
-  text-align: right;
-}
-.faq h2 {
-  text-align: center;
-  color: #005f99;
-  margin-bottom: 20px;
-}
-.faq-item {
-  margin-bottom: 20px;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 10px;
-}
-.faq-item h3 {
-  cursor: pointer;
-  position: relative;
-  padding-right: 25px;
-  color: #005f99;
-}
-.faq-item h3::before {
-  content: '+';
-  position: absolute;
-  right: 0;
-  top: 0;
-  font-size: 20px;
-  color: #005f99;
-  user-select: none;
-  transition: transform 0.3s ease;
-}
-.faq-item.open h3::before {
-  content: '-';
-  transform: rotate(180deg);
-}
-.faq-item .answer {
-  display: none;
-  margin-top: 10px;
-  color: #444;
-  line-height: 1.5;
-}
-.faq-item.open .answer {
-  display: block;
-}
+/* استجابة */
 @media (max-width: 600px) {
-  .gallery {
-    max-width: 100%;
-  }
-  .media-item {
-    width: 100%;
-    margin-right: 0 !important;
-  }
   .header-top {
     flex-direction: column;
     gap: 10px;
+  }
+  .cta-buttons {
+    width: 90%;
+  }
+  .media-item {
+    width: 100%;
   }
 }
