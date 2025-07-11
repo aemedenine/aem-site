@@ -1,18 +1,91 @@
-// script.js - كامل الميزات التفاعلية مع إصلاح المشاكل
+// ✅ شريط الأخبار من BBC عربي
+const newsContainer = document.getElementById('live-news');
+fetch("https://api.rss2json.com/v1/api.json?rss_url=https://feeds.bbci.co.uk/arabic/rss.xml")
+  .then(res => res.json())
+  .then(data => {
+    let headlines = data.items.slice(0, 5).map(item => item.title).join(" ⚡ ");
+    newsContainer.textContent = headlines;
+  })
+  .catch(() => {
+    newsContainer.textContent = "فشل في تحميل الأخبار.";
+  });
 
-// ✅ عرض الوقت والتاريخ والشهر function updateTime() { const now = new Date(); const time = now.toLocaleTimeString('ar-TN'); const date = now.toLocaleDateString('ar-TN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }); const currentTime = document.getElementById('current-time'); if (currentTime) { currentTime.textContent = ${time} - ${date}; } } setInterval(updateTime, 1000); updateTime();
+// ✅ الساعة والتاريخ والشهر
+function updateTime() {
+  const timeEl = document.getElementById('current-time');
+  const now = new Date();
+  const months = ["جانفي", "فيفري", "مارس", "أفريل", "ماي", "جوان", "جويلية", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
+  const day = now.getDate();
+  const month = months[now.getMonth()];
+  const year = now.getFullYear();
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const seconds = now.getSeconds().toString().padStart(2, '0');
+  timeEl.textContent = `${day} ${month} ${year} - ${hours}:${minutes}:${seconds}`;
+}
+setInterval(updateTime, 1000);
+updateTime();
 
-// ✅ عدد الزيارات باستخدام localStorage const visitCountEl = document.getElementById('visit-count'); if (visitCountEl) { const visitCount = localStorage.getItem('visitCount') || 0; localStorage.setItem('visitCount', parseInt(visitCount) + 1); visitCountEl.textContent = عدد زياراتك: ${parseInt(visitCount) + 1}; }
+// ✅ عدد الزيارات
+const visitCount = localStorage.getItem('visits') || 0;
+localStorage.setItem('visits', parseInt(visitCount) + 1);
+document.getElementById('visit-count').textContent = `عدد زياراتك: ${parseInt(visitCount) + 1}`;
 
-// ✅ زر تشغيل الراديو const radioBtn = document.getElementById('radio-btn'); const radio = document.getElementById('radio-stream'); if (radioBtn && radio) { radioBtn.addEventListener('click', () => { if (radio.paused) { radio.play(); radioBtn.textContent = '⏸️ إيقاف الراديو'; } else { radio.pause(); radioBtn.textContent = '▶️ شغّل الراديو'; } }); }
+// ✅ زر تشغيل الراديو
+document.getElementById('radio-btn').addEventListener('click', () => {
+  const radio = document.getElementById('radio-stream');
+  if (radio.paused) {
+    radio.play();
+    document.getElementById('radio-btn').textContent = '⏸️ أوقف الراديو';
+  } else {
+    radio.pause();
+    document.getElementById('radio-btn').textContent = '▶️ شغّل الراديو';
+  }
+});
 
-// ✅ شريط الأخبار من BBC عربي async function loadNews() { try { const response = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://feeds.bbci.co.uk/arabic/rss.xml"); const data = await response.json(); const titles = data.items.slice(0, 5).map(item => item.title).join(" ⚡ "); const news = document.getElementById("live-news"); if (news) news.textContent = titles; } catch (error) { const news = document.getElementById("live-news"); if (news) news.textContent = "تعذر تحميل الأخبار"; } } loadNews();
+// ✅ FAQ: فتح وغلق الأجوبة
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.addEventListener('click', () => {
+    item.classList.toggle('open');
+  });
+});
 
-// ✅ تغيير اللغة (عربي/فرنسي) للصفحة const toggleLangBtn = document.getElementById("toggle-lang-btn"); let currentLang = "ar"; if (toggleLangBtn) { toggleLangBtn.addEventListener("click", () => { currentLang = currentLang === "ar" ? "fr" : "ar"; document.documentElement.lang = currentLang; document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr"; toggleLanguageContent(); }); }
+// ✅ زر تغيير اللغة (عربي ⇄ فرنسي)
+const toggleBtn = document.getElementById("toggle-lang-btn");
+let currentLang = "ar";
 
-function toggleLanguageContent() { const isArabic = currentLang === "ar"; const translations = { ar: { title: "Atelier Electronique Médenine", langBtn: "تبديل اللغة", visitCount: عدد زياراتك: ${localStorage.getItem("visitCount")}, radioPlay: "▶️ شغّل الراديو", radioPause: "⏸️ إيقاف الراديو" }, fr: { title: "Atelier Électronique Médenine", langBtn: "Changer de langue", visitCount: Nombre de visites: ${localStorage.getItem("visitCount")}, radioPlay: "▶️ Lancer la radio", radioPause: "⏸️ Arrêter la radio" } };
+toggleBtn.addEventListener("click", () => {
+  currentLang = currentLang === "ar" ? "fr" : "ar";
+  applyLang(currentLang);
+});
 
-const t = translations[currentLang]; const titleEl = document.querySelector("h1"); if (titleEl) titleEl.textContent = t.title; if (toggleLangBtn) toggleLangBtn.textContent = t.langBtn; if (visitCountEl) visitCountEl.textContent = t.visitCount; if (radioBtn && radio) { radioBtn.textContent = radio.paused ? t.radioPlay : t.radioPause; } }
+function applyLang(lang) {
+  const translations = {
+    "ar": {
+      "toggle": "تبديل اللغة",
+      "visit": `عدد زياراتك: ${localStorage.getItem("visits")}`,
+      "radio": "▶️ شغّل الراديو",
+      "whatsapp": "واتساب",
+      "maps": "موقعنا على Google Maps",
+      "photos": "شاهد الصور",
+      "videos": "شاهد الفيديو",
+    },
+    "fr": {
+      "toggle": "Changer la langue",
+      "visit": `Nombre de visites: ${localStorage.getItem("visits")}`,
+      "radio": "▶️ Lancer la radio",
+      "whatsapp": "WhatsApp",
+      "maps": "Notre position sur Google Maps",
+      "photos": "Voir les photos",
+      "videos": "Voir les vidéos",
+    }
+  };
 
-// ✅ الأسئلة الشائعة تفتح وتغلق const faqItems = document.querySelectorAll(".faq-item"); faqItems.forEach(item => { item.addEventListener("click", () => { item.classList.toggle("open"); }); });
-
+  toggleBtn.textContent = translations[lang].toggle;
+  document.getElementById('visit-count').textContent = translations[lang].visit;
+  document.getElementById('radio-btn').textContent = translations[lang].radio;
+  document.querySelector('.btn-whatsapp').textContent = translations[lang].whatsapp;
+  document.querySelector('.btn-maps').textContent = translations[lang].maps;
+  document.querySelector('.btn-gallery').textContent = translations[lang].photos;
+  document.querySelector('.btn-video').textContent = translations[lang].videos;
+}
