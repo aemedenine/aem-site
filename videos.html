@@ -1,237 +1,287 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>🎥 فيديوهات الورشة - Atelier Electronique Médenine</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+  <title>فيديوهات - Atelier Electronique Médenine</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f0f2f5, #dbe4ed);
-      color: #333;
-      margin: 0;
-      direction: rtl;
+    main {
+      max-width: 1100px;
+      margin: 30px auto 60px;
+      padding: 0 15px;
       text-align: center;
     }
-    h1 {
-      padding: 20px 10px;
-      background: #003366;
-      color: white;
-      margin: 0 0 20px 0;
+    h2 {
+      color: #00bfff;
+      margin-bottom: 25px;
+      user-select: none;
     }
-    .btn-bar {
-      margin: 20px 0;
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .btn-bar a, .btn-bar button {
-      background: #005f99;
-      color: white;
-      border-radius: 6px;
-      padding: 12px 20px;
-      text-decoration: none;
-      font-weight: bold;
-      cursor: pointer;
-      border: none;
-      box-shadow: 0 3px 8px rgba(0,95,153,0.3);
-      transition: background-color 0.3s ease;
-    }
-    .btn-bar a:hover, .btn-bar button:hover {
-      background: #003f66;
-    }
-    .swiper {
-      width: 95%;
-      padding-bottom: 40px;
-    }
-    .swiper-slide {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      padding: 15px;
-      transition: transform 0.3s ease;
-    }
-    .swiper-slide:hover {
-      transform: translateY(-5px);
+    .video-player {
+      max-width: 720px;
+      margin: 0 auto 25px;
+      background: #111;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #00bfff88;
+      padding: 10px;
     }
     video {
       width: 100%;
+      border-radius: 6px;
+      background: black;
+    }
+    .video-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 15px;
+    }
+    .video-item {
+      background: #1e1e1e;
       border-radius: 8px;
+      padding: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 12px #00bfff88;
+      transition: transform 0.3s ease;
+      color: #eee;
+    }
+    .video-item:hover {
+      transform: scale(1.05);
+      background: #007acc;
+    }
+    .video-item.active {
+      border: 2px solid #00bfff;
+      background: #004d99;
+    }
+    .video-title {
+      margin: 8px 0 5px;
+      font-weight: bold;
     }
     .reactions {
       margin-top: 8px;
-      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
     }
-    .reactions span {
+    .reactions button {
+      background-color: #333;
+      border: none;
+      padding: 6px 14px;
+      font-size: 18px;
+      color: white;
+      border-radius: 6px;
       cursor: pointer;
-      margin: 0 6px;
-      transition: transform 0.15s ease;
+      user-select: none;
+      transition: background-color 0.3s ease;
     }
-    .reactions span:hover {
-      transform: scale(1.3);
+    .reactions button:hover {
+      background-color: #00bfff;
+      color: black;
     }
-    .reaction-count {
+    .comment-box {
+      margin-top: 15px;
+      text-align: left;
+    }
+    .comment-box textarea {
+      width: 100%;
+      height: 70px;
+      padding: 8px;
       font-size: 14px;
-      margin-left: 6px;
-      color: #555;
+      border-radius: 6px;
+      border: 1px solid #666;
+      background: #000;
+      color: #eee;
+      resize: vertical;
     }
-    .comments-section {
-      margin-top: 10px;
-      font-size: 14px;
-      text-align: right;
+    .comment-box button {
+      margin-top: 8px;
+      background-color: #00bfff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    .comment-box button:hover {
+      background-color: #008ecc;
     }
     .comments-list {
-      max-height: 100px;
+      margin-top: 15px;
+      max-height: 180px;
       overflow-y: auto;
-      border-top: 1px solid #ccc;
-      padding-top: 8px;
+      background: #111;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      color: #ddd;
     }
-    .comment-item {
-      margin-bottom: 5px;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 3px;
-    }
-    .comment-input {
-      width: 100%;
-      padding: 6px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    .comment-submit {
-      margin-top: 6px;
-      background: #005f99;
-      color: white;
-      border: none;
-      padding: 6px;
-      border-radius: 4px;
-      width: 100%;
-      cursor: pointer;
+    .comment {
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #333;
     }
   </style>
 </head>
 <body>
-  <h1 id="page-title">🎥 فيديوهات الورشة</h1>
-  <div class="btn-bar">
-    <a href="index.html">⬅️ الرجوع للصفحة الرئيسية</a>
-    <a href="https://github.com/aemedenine/atelier-electronique/upload/main" target="_blank">⬆️ أضف فيديو جديد من GitHub</a>
-    <button id="toggle-lang-btn">🌐 تغيير اللغة</button>
-  </div>  <div class="swiper mySwiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide media-item" data-id="video1">
-        <video controls>
-          <source src="video1.mp4" type="video/mp4">
-        </video>
-        <div class="reactions">
-          <span onclick="addReaction('video1','👍')">👍</span>
-          <span onclick="addReaction('video1','❤️')">❤️</span>
-          <span onclick="addReaction('video1','😂')">😂</span>
-        </div>
-        <div class="comments-section">
-          <div class="comments-list"></div>
-          <input type="text" placeholder="اكتب تعليقاً..." class="comment-input" />
-          <button class="comment-submit">أرسل</button>
-        </div>
-      </div>
-      <div class="swiper-slide media-item" data-id="video2">
-        <video controls>
-          <source src="video2.mp4" type="video/mp4">
-        </video>
-        <div class="reactions">
-          <span onclick="addReaction('video2','👍')">👍</span>
-          <span onclick="addReaction('video2','❤️')">❤️</span>
-          <span onclick="addReaction('video2','😂')">😂</span>
-        </div>
-        <div class="comments-section">
-          <div class="comments-list"></div>
-          <input type="text" placeholder="اكتب تعليقاً..." class="comment-input" />
-          <button class="comment-submit">أرسل</button>
-        </div>
-      </div>
+
+  <header>
+    <div class="logo">
+      <img src="images/logo.png" alt="Logo" />
+      <span class="logo-text">Atelier Electronique Médenine</span>
     </div>
-    <div class="swiper-pagination"></div>
-  </div>  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>  <script>
-    new Swiper(".mySwiper", {
-      slidesPerView: 1,
-      spaceBetween: 20,
-      loop: true,
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="photos.html">الصور</a>
+      <a href="videos.html" class="active">الفيديو</a>
+      <a href="services.html">خدمات الورشة</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>معرض الفيديوهات</h2>
+
+    <div class="video-player">
+      <video id="main-video" controls preload="metadata" src="videos/video1.mp4" poster="videos/thumb1.jpg"></video>
+      <div class="reactions">
+        <button data-reaction="like" title="جام ❤️">❤️</button>
+        <button data-reaction="love" title="جادور 😍">😍</button>
+        <button data-reaction="laugh" title="ضحك 😂">😂</button>
+      </div>
+      <div class="comment-box">
+        <textarea id="comment-input" placeholder="اكتب تعليقك هنا..."></textarea>
+        <button id="add-comment-btn">أضف تعليق</button>
+      </div>
+      <div class="comments-list" id="comments-list"></div>
+    </div>
+
+    <div class="video-list" id="video-list">
+      <div class="video-item active" data-src="videos/video1.mp4" data-poster="videos/thumb1.jpg" data-id="video1">
+        <div class="video-title">فيديو 1: إصلاح لوحة إلكترونية</div>
+      </div>
+      <div class="video-item" data-src="videos/video2.mp4" data-poster="videos/thumb2.jpg" data-id="video2">
+        <div class="video-title">فيديو 2: صيانة ثلاجة إنفرتر</div>
+      </div>
+      <div class="video-item" data-src="videos/video3.mp4" data-poster="videos/thumb3.jpg" data-id="video3">
+        <div class="video-title">فيديو 3: تشخيص الأعطال بدقة</div>
+      </div>
+      <!-- أضف المزيد حسب الحاجة -->
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Atelier Electronique Médenine - جميع الحقوق محفوظة
+  </footer>
+
+  <script>
+    const videoList = document.getElementById('video-list');
+    const mainVideo = document.getElementById('main-video');
+    const commentsList = document.getElementById('comments-list');
+    const commentInput = document.getElementById('comment-input');
+    const addCommentBtn = document.getElementById('add-comment-btn');
+    const reactionButtons = document.querySelectorAll('.reactions button');
+
+    let currentVideoId = 'video1';
+
+    // تحميل التفاعلات والتعليقات من localStorage
+    function loadData() {
+      const reactionsData = JSON.parse(localStorage.getItem('videoReactions')) || {};
+      const commentsData = JSON.parse(localStorage.getItem('videoComments')) || {};
+
+      // عرض التعليقات للفيديو الحالي
+      displayComments(commentsData[currentVideoId] || []);
+
+      // تهيئة أزرار التفاعل
+      reactionButtons.forEach(btn => {
+        const reaction = btn.getAttribute('data-reaction');
+        const count = reactionsData[currentVideoId]?.[reaction] || 0;
+        btn.textContent = reaction === 'like' ? `❤️ ${count}` : reaction === 'love' ? `😍 ${count}` : `😂 ${count}`;
+      });
+    }
+
+    // حفظ التفاعلات والتعليقات في localStorage
+    function saveData(reactionsData, commentsData) {
+      localStorage.setItem('videoReactions', JSON.stringify(reactionsData));
+      localStorage.setItem('videoComments', JSON.stringify(commentsData));
+    }
+
+    // عرض التعليقات
+    function displayComments(comments) {
+      commentsList.innerHTML = '';
+      if (comments.length === 0) {
+        commentsList.innerHTML = '<p>لا توجد تعليقات حتى الآن.</p>';
+        return;
+      }
+      comments.forEach(comment => {
+        const div = document.createElement('div');
+        div.className = 'comment';
+        div.textContent = comment;
+        commentsList.appendChild(div);
+      });
+    }
+
+    // تغيير الفيديو
+    videoList.addEventListener('click', e => {
+      let item = e.target;
+      while (item && !item.classList.contains('video-item')) {
+        item = item.parentElement;
+      }
+      if (!item) return;
+
+      if (item.classList.contains('active')) return; // نفس الفيديو
+
+      // تحديث الفيديو
+      const src = item.getAttribute('data-src');
+      const poster = item.getAttribute('data-poster');
+      const videoId = item.getAttribute('data-id');
+
+      mainVideo.src = src;
+      mainVideo.poster = poster;
+      mainVideo.play();
+
+      // تحديث التحديد
+      document.querySelectorAll('.video-item').forEach(v => v.classList.remove('active'));
+      item.classList.add('active');
+
+      currentVideoId = videoId;
+      loadData();
     });
-  </script>  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      function getComments(id) {
-        return JSON.parse(localStorage.getItem('comments-' + id) || '[]');
-      }
-      function saveComments(id, comments) {
-        localStorage.setItem('comments-' + id, JSON.stringify(comments));
-      }
-      function getReactions(id) {
-        return JSON.parse(localStorage.getItem('reactions-' + id) || '{}');
-      }
-      function saveReactions(id, reactions) {
-        localStorage.setItem('reactions-' + id, JSON.stringify(reactions));
-      }
-      function renderComments(id) {
-        const comments = getComments(id);
-        const container = document.querySelector(`.media-item[data-id="${id}"] .comments-list`);
-        container.innerHTML = '';
-        comments.forEach(txt => {
-          const div = document.createElement('div');
-          div.className = 'comment-item';
-          div.textContent = txt;
-          container.appendChild(div);
-        });
-      }
-      function renderReactions(id) {
-        const reactions = getReactions(id);
-        const container = document.querySelector(`.media-item[data-id="${id}"] .reactions`);
-        container.querySelectorAll('.reaction-count').forEach(e => e.remove());
-        for (const [emoji, count] of Object.entries(reactions)) {
-          if (count > 0) {
-            const span = document.createElement('span');
-            span.className = 'reaction-count';
-            span.textContent = `${emoji} ${count}`;
-            container.appendChild(span);
-          }
+
+    // إضافة تعليق
+    addCommentBtn.addEventListener('click', () => {
+      const text = commentInput.value.trim();
+      if (text === '') return alert('الرجاء كتابة تعليق.');
+
+      let commentsData = JSON.parse(localStorage.getItem('videoComments')) || {};
+      if (!commentsData[currentVideoId]) commentsData[currentVideoId] = [];
+      commentsData[currentVideoId].push(text);
+
+      saveData(JSON.parse(localStorage.getItem('videoReactions')) || {}, commentsData);
+      displayComments(commentsData[currentVideoId]);
+
+      commentInput.value = '';
+    });
+
+    // التفاعل (جام، جادور، ضحك)
+    reactionButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const reaction = btn.getAttribute('data-reaction');
+
+        let reactionsData = JSON.parse(localStorage.getItem('videoReactions')) || {};
+        if (!reactionsData[currentVideoId]) {
+          reactionsData[currentVideoId] = { like: 0, love: 0, laugh: 0 };
         }
-      }
-      document.querySelectorAll('.media-item').forEach(item => {
-        const id = item.getAttribute('data-id');
-        renderComments(id);
-        renderReactions(id);
-        item.querySelector('.comment-submit').addEventListener('click', () => {
-          const input = item.querySelector('.comment-input');
-          const text = input.value.trim();
-          if (!text) return;
-          const comments = getComments(id);
-          comments.push(text);
-          saveComments(id, comments);
-          input.value = '';
-          renderComments(id);
-        });
-      });
-      window.addReaction = function(id, emoji) {
-        const reactions = getReactions(id);
-        reactions[emoji] = (reactions[emoji] || 0) + 1;
-        saveReactions(id, reactions);
-        renderReactions(id);
-      };
-      let lang = 'ar';
-      document.getElementById('toggle-lang-btn').addEventListener('click', () => {
-        lang = lang === 'ar' ? 'fr' : 'ar';
-        document.documentElement.lang = lang;
-        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-        document.getElementById('page-title').textContent = lang === 'ar' ? '🎥 فيديوهات الورشة' : "🎥 Vidéos de l'atelier";
-        document.querySelector('.btn-bar a').textContent = lang === 'ar' ? '⬅️ الرجوع للصفحة الرئيسية' : "⬅️ Retour à la page d'accueil";
-        document.querySelectorAll('.comment-input').forEach(e => e.placeholder = lang === 'ar' ? 'اكتب تعليقاً...' : 'Écrire un commentaire...');
-        document.querySelectorAll('.comment-submit').forEach(e => e.textContent = lang === 'ar' ? 'أرسل' : 'Envoyer');
-        document.querySelectorAll('.btn-bar a')[1].textContent = lang === 'ar' ? '⬆️ أضف فيديو جديد من GitHub' : '⬆️ Ajouter une nouvelle vidéo sur GitHub';
-        document.getElementById('toggle-lang-btn').textContent = lang === 'ar' ? '🌐 تغيير اللغة' : '🌐 Changer la langue';
+        reactionsData[currentVideoId][reaction]++;
+
+        saveData(reactionsData, JSON.parse(localStorage.getItem('videoComments')) || {});
+        loadData();
       });
     });
-  </script></body>
+
+    // تحميل أول مرة
+    loadData();
+  </script>
+
+</body>
 </html>
