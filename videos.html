@@ -44,6 +44,17 @@
       color: #00bfff;
     }
 
+    .lang-toggle {
+      background-color: #00bfff;
+      color: white;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
     @media (max-width: 600px) {
       .logo {
         flex-direction: column;
@@ -81,6 +92,7 @@
       justify-content: center;
       gap: 15px;
       margin-bottom: 20px;
+      flex-wrap: wrap;
     }
 
     .reactions button {
@@ -132,6 +144,7 @@
       color: #ccc;
       background: #0f0f0f;
       border-top: 2px solid #00bfff;
+      margin-top: 50px;
     }
   </style>
 </head>
@@ -148,24 +161,25 @@
       <a href="videos.html" class="active">الفيديو</a>
       <a href="services.html">خدمات الورشة</a>
     </nav>
+    <button class="lang-toggle" onclick="toggleLang()">Français</button>
   </header>
 
   <main>
-    <h2>فيديو الورشة</h2>
+    <h2 id="videoTitle">فيديو الورشة</h2>
     <video controls>
       <source src="videos/video1.mp4" type="video/mp4">
       متصفحك لا يدعم تشغيل الفيديو.
     </video>
 
     <div class="reactions">
-      <button onclick="react('like')">👍 إعجاب (<span id="likeCount">0</span>)</button>
-      <button onclick="react('love')">❤️ جادور (<span id="loveCount">0</span>)</button>
-      <button onclick="react('funny')">😂 ضحكني (<span id="funnyCount">0</span>)</button>
+      <button onclick="react('like')" class="t" data-ar="👍 إعجاب" data-fr="👍 J'aime">👍 إعجاب (<span id="likeCount">0</span>)</button>
+      <button onclick="react('love')" class="t" data-ar="❤️ جادور" data-fr="❤️ J'adore">❤️ جادور (<span id="loveCount">0</span>)</button>
+      <button onclick="react('funny')" class="t" data-ar="😏" data-fr="😂 Drôle">😂 ضحكني (<span id="funnyCount">0</span>)</button>
     </div>
 
     <div class="comments">
-      <input type="text" id="commentInput" placeholder="اكتب تعليقك...">
-      <button onclick="addComment()">نشر</button>
+      <input type="text" id="commentInput" placeholder="اكتب تعليقك..." />
+      <button onclick="addComment()" id="commentBtn">نشر</button>
       <div class="comment-list" id="commentList"></div>
     </div>
   </main>
@@ -175,13 +189,13 @@
   </footer>
 
   <script>
-    // تحميل التفاعلات والتعليقات من localStorage
-    const reactions = ['like', 'love', 'funny'];
-    reactions.forEach(r => {
-      const count = localStorage.getItem(r + 'Count') || 0;
-      document.getElementById(r + 'Count').textContent = count;
+    // تحميل التفاعلات
+    ['like', 'love', 'funny'].forEach(type => {
+      let count = localStorage.getItem(type + 'Count') || 0;
+      document.getElementById(type + 'Count').textContent = count;
     });
 
+    // تحميل التعليقات
     const savedComments = JSON.parse(localStorage.getItem('videoComments') || '[]');
     const commentList = document.getElementById('commentList');
     savedComments.forEach(c => {
@@ -190,7 +204,6 @@
       commentList.appendChild(div);
     });
 
-    // وظائف التفاعل
     function react(type) {
       let count = Number(localStorage.getItem(type + 'Count') || 0);
       count++;
@@ -198,7 +211,6 @@
       document.getElementById(type + 'Count').textContent = count;
     }
 
-    // نشر تعليق
     function addComment() {
       const input = document.getElementById('commentInput');
       const text = input.value.trim();
@@ -213,6 +225,39 @@
         input.value = '';
       }
     }
+
+    // اللغة
+    function toggleLang() {
+      let currentLang = localStorage.getItem('lang') || 'ar';
+      let newLang = currentLang === 'ar' ? 'fr' : 'ar';
+      localStorage.setItem('lang', newLang);
+      applyLang();
+    }
+
+    function applyLang() {
+      let lang = localStorage.getItem('lang') || 'ar';
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      document.querySelector('.lang-toggle').textContent = lang === 'ar' ? 'Français' : 'العربية';
+
+      document.getElementById('videoTitle').textContent =
+        lang === 'ar' ? 'فيديو الورشة' : 'Vidéo de l\'atelier';
+
+      document.getElementById('commentInput').placeholder =
+        lang === 'ar' ? 'اكتب تعليقك...' : 'Écrivez un commentaire...';
+
+      document.getElementById('commentBtn').textContent =
+        lang === 'ar' ? 'نشر' : 'Publier';
+
+      document.querySelectorAll('.t').forEach(el => {
+        const label = el.dataset[lang];
+        const countSpan = el.querySelector('span');
+        const count = countSpan ? ` (${countSpan.textContent})` : '';
+        el.innerHTML = `${label}${count}`;
+      });
+    }
+
+    applyLang();
   </script>
 
 </body>
