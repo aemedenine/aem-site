@@ -44,6 +44,17 @@
       color: #00bfff;
     }
 
+    .lang-toggle {
+      background-color: #00bfff;
+      color: white;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
     @media (max-width: 600px) {
       .logo {
         flex-direction: column;
@@ -117,26 +128,27 @@
       <a href="videos.html">الفيديو</a>
       <a href="services.html" class="active">خدمات الورشة</a>
     </nav>
+    <button class="lang-toggle" onclick="toggleLang()">Français</button>
   </header>
 
   <main>
-    <h2>خدمات الورشة</h2>
+    <h2 id="title">خدمات الورشة</h2>
     <div class="services-list">
       <div class="service-box">
-        <h3>تصليح الكروت الإلكترونية</h3>
-        <p>نقوم بتشخيص وإصلاح كروت إلكترونية لجميع الأجهزة المنزلية والصناعية بأحدث التقنيات.</p>
+        <h3 class="t" data-ar="تصليح الكروت الإلكترونية" data-fr="Réparation des cartes électroniques"></h3>
+        <p class="t" data-ar="نقوم بتشخيص وإصلاح كروت إلكترونية لجميع الأجهزة المنزلية والصناعية بأحدث التقنيات." data-fr="Diagnostic et réparation de cartes électroniques pour appareils domestiques et industriels."></p>
       </div>
       <div class="service-box">
-        <h3>صيانة الحواسيب واللابتوب</h3>
-        <p>حلول لمشاكل التشغيل، تغيير قطع، تنظيف حراري، تركيب SSD، استرجاع بيانات.</p>
+        <h3 class="t" data-ar="صيانة الحواسيب واللابتوب" data-fr="Maintenance PC & Laptop"></h3>
+        <p class="t" data-ar="حلول لمشاكل التشغيل، تغيير قطع، تنظيف حراري، تركيب SSD، استرجاع بيانات." data-fr="Réparation système, remplacement pièces, nettoyage, ajout SSD, récupération de données."></p>
       </div>
       <div class="service-box">
-        <h3>تشخيص عن بُعد</h3>
-        <p>بعث الجهاز بالبريد – تشخيص وتصليح مع إرسال فيديو وصور قبل وبعد، ثم نرجعو ليك.</p>
+        <h3 class="t" data-ar="تشخيص عن بُعد" data-fr="Diagnostic à distance"></h3>
+        <p class="t" data-ar="بعث الجهاز بالبريد – تشخيص وتصليح مع إرسال فيديو وصور قبل وبعد، ثم نرجعو ليك." data-fr="Envoyez l'appareil par poste – diagnostic + réparation avec photos/vidéos avant/après."></p>
       </div>
       <div class="service-box">
-        <h3>خدمة عبر كامل الجمهورية</h3>
-        <p>نستقبل من جميع الولايات – نضمن السرعة، الاحتراف، والمتابعة المستمرة عبر WhatsApp.</p>
+        <h3 class="t" data-ar="خدمة عبر كامل الجمهورية" data-fr="Service dans toute la Tunisie"></h3>
+        <p class="t" data-ar="نستقبل من جميع الولايات – نضمن السرعة، الاحتراف، والمتابعة المستمرة عبر WhatsApp." data-fr="Réception depuis toutes les régions – rapidité, qualité, et suivi via WhatsApp."></p>
       </div>
     </div>
   </main>
@@ -144,6 +156,30 @@
   <footer>
     © 2025 Atelier Electronique Médenine - جميع الحقوق محفوظة
   </footer>
+
+  <script>
+    function toggleLang() {
+      let currentLang = localStorage.getItem('lang') || 'ar';
+      let newLang = currentLang === 'ar' ? 'fr' : 'ar';
+      localStorage.setItem('lang', newLang);
+      applyLang();
+    }
+
+    function applyLang() {
+      let lang = localStorage.getItem('lang') || 'ar';
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      document.querySelector('.lang-toggle').textContent = lang === 'ar' ? 'Français' : 'العربية';
+      document.getElementById('title').textContent = lang === 'ar' ? 'خدمات الورشة' : 'Nos Services';
+
+      document.querySelectorAll('.t').forEach(el => {
+        el.textContent = el.dataset[lang];
+      });
+    }
+
+    // تطبيق اللغة عند التحميل
+    applyLang();
+  </script>
 
 </body>
 </html>
