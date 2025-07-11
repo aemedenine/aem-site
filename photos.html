@@ -1,241 +1,118 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>📸 معرض الصور - Atelier Electronique Médenine</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <title>صور - Atelier Electronique Médenine</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      background: linear-gradient(to bottom, #ffffff, #f1f1f1);
-      color: #333;
+    /* خاص بمعرض الصور واللايتبوكس */
+    main {
+      max-width: 1100px;
+      margin: 30px auto 60px;
+      padding: 0 15px;
+    }
+    h2 {
+      color: #00bfff;
       text-align: center;
-      direction: rtl;
-    }
-    h1 {
-      background-color: #003366;
-      color: #fff;
-      padding: 20px 10px;
-      margin: 0;
-      font-size: 26px;
-    }
-    .btn-bar {
-      margin: 20px 0;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .btn-bar a, .btn-bar button {
-      background-color: #005f99;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    .btn-bar a:hover, .btn-bar button:hover {
-      background-color: #003f66;
-    }
-    .swiper {
-      padding: 20px 0;
-      width: 100%;
-      max-width: 960px;
-      margin: auto;
-    }
-    .swiper-slide {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      padding: 15px;
-    }
-    .media-item img {
-      width: 100%;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    .media-item img:hover {
-      transform: scale(1.03);
-    }
-    .reactions {
-      margin-top: 8px;
-      font-size: 20px;
+      margin-bottom: 25px;
       user-select: none;
     }
-    .reactions span {
-      cursor: pointer;
-      margin: 0 6px;
-      transition: transform 0.15s ease;
-      display: inline-block;
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 15px;
     }
-    .reactions span:hover {
-      transform: scale(1.3);
-    }
-    .reaction-count {
-      font-size: 14px;
-      margin-left: 6px;
-      color: #555;
-    }
-    .comments-section {
-      margin-top: 10px;
-      text-align: right;
-      font-size: 14px;
-    }
-    .comments-list {
-      max-height: 100px;
-      overflow-y: auto;
-      border-top: 1px solid #ddd;
-      padding-top: 8px;
-      margin-bottom: 6px;
-    }
-    .comment-item {
-      margin-bottom: 5px;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 3px;
-      word-wrap: break-word;
-    }
-    .comment-input {
+    .gallery-grid img {
       width: 100%;
-      padding: 6px 8px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-      box-sizing: border-box;
-    }
-    .comment-submit {
-      margin-top: 6px;
-      background: #005f99;
-      color: white;
-      border: none;
-      padding: 6px 12px;
-      font-weight: bold;
-      border-radius: 4px;
+      border-radius: 8px;
       cursor: pointer;
-      width: 100%;
-      box-shadow: 0 3px 6px rgba(0,95,153,0.3);
-      transition: background-color 0.3s ease;
+      box-shadow: 0 0 15px #00bfff88;
+      transition: transform 0.3s ease;
     }
-    .comment-submit:hover {
-      background: #004070;
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+    }
+    /* نافذة اللايتبوكس */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      cursor: pointer;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+      box-shadow: 0 0 20px #00bfff;
+    }
+    /* زر إغلاق */
+    .lightbox:before {
+      content: "✕";
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2rem;
+      color: #00bfff;
+      user-select: none;
     }
   </style>
 </head>
 <body>
-  <h1 id="page-title">📸 معرض الصور</h1>
-  <div class="btn-bar">
-    <a href="index.html">⬅️ الرجوع للصفحة الرئيسية</a>
-    <a href="https://github.com/aemedenine/atelier-electronique/upload/main" target="_blank">📷 أضف صورة جديدة من GitHub</a>
-    <button id="toggle-lang-btn">🌐 تغيير اللغة</button>
-  </div>  <div class="swiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide media-item" data-id="img1">
-        <img src="Rt.png" alt="تصليح كارت إلكترونية" />
-        <div class="reactions"></div>
-        <div class="comments-section">
-          <div class="comments-list"></div>
-          <input type="text" class="comment-input" placeholder="اكتب تعليقاً...">
-          <button class="comment-submit">أرسل</button>
-        </div>
-      </div>
-      <div class="swiper-slide media-item" data-id="img2">
-        <img src="Hh.png" alt="لحام مكونات دقيقة" />
-        <div class="reactions"></div>
-        <div class="comments-section">
-          <div class="comments-list"></div>
-          <input type="text" class="comment-input" placeholder="اكتب تعليقاً...">
-          <button class="comment-submit">أرسل</button>
-        </div>
-      </div>
-      <div class="swiper-slide media-item" data-id="img3">
-        <img src="file_00000000ce88622f8ccc6c6c88cee605.png" alt="كارت أم" />
-        <div class="reactions"></div>
-        <div class="comments-section">
-          <div class="comments-list"></div>
-          <input type="text" class="comment-input" placeholder="اكتب تعليقاً...">
-          <button class="comment-submit">أرسل</button>
-        </div>
-      </div>
+
+  <header>
+    <div class="logo">
+      <img src="images/logo.png" alt="Logo" />
+      <span class="logo-text">Atelier Electronique Médenine</span>
     </div>
-    <div class="swiper-pagination"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-  </div>  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>  <script>
-    const swiper = new Swiper('.swiper', {
-      loop: true,
-      pagination: { el: '.swiper-pagination', clickable: true },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-      },
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="photos.html" class="active">الصور</a>
+      <a href="videos.html">الفيديو</a>
+      <a href="services.html">خدمات الورشة</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>معرض الصور</h2>
+    <div class="gallery-grid" id="gallery">
+      <img src="images/photo1.jpg" alt="صورة 1" />
+      <img src="images/photo2.jpg" alt="صورة 2" />
+      <img src="images/photo3.jpg" alt="صورة 3" />
+      <img src="images/photo4.jpg" alt="صورة 4" />
+      <img src="images/photo5.jpg" alt="صورة 5" />
+      <img src="images/photo6.jpg" alt="صورة 6" />
+      <!-- أضف المزيد حسب الحاجة -->
+    </div>
+  </main>
+
+  <div class="lightbox" id="lightbox"></div>
+
+  <footer>
+    © 2025 Atelier Electronique Médenine - جميع الحقوق محفوظة
+  </footer>
+
+  <script>
+    // جافاسكريبت لفتح وإغلاق نافذة اللايتبوكس
+    const gallery = document.getElementById('gallery');
+    const lightbox = document.getElementById('lightbox');
+
+    gallery.addEventListener('click', e => {
+      if (e.target.tagName === 'IMG') {
+        lightbox.style.display = 'flex';
+        lightbox.innerHTML = `<img src="${e.target.src}" alt="${e.target.alt}" />`;
+      }
     });
 
-    document.querySelectorAll('.media-item').forEach(item => {
-      const mediaId = item.dataset.id;
-      const input = item.querySelector('.comment-input');
-      const submit = item.querySelector('.comment-submit');
-      const commentList = item.querySelector('.comments-list');
-      const reactionsDiv = item.querySelector('.reactions');
-
-      function getComments() {
-        return JSON.parse(localStorage.getItem('comments-' + mediaId) || '[]');
-      }
-      function saveComments(comments) {
-        localStorage.setItem('comments-' + mediaId, JSON.stringify(comments));
-      }
-      function renderComments() {
-        commentList.innerHTML = '';
-        getComments().forEach(c => {
-          const div = document.createElement('div');
-          div.className = 'comment-item';
-          div.textContent = c;
-          commentList.appendChild(div);
-        });
-      }
-      submit.addEventListener('click', () => {
-        const val = input.value.trim();
-        if (!val) return alert('الرجاء كتابة تعليق');
-        const comments = getComments();
-        comments.push(val);
-        saveComments(comments);
-        input.value = '';
-        renderComments();
-      });
-
-      function getReactions() {
-        return JSON.parse(localStorage.getItem('reactions-' + mediaId) || '{}');
-      }
-      function saveReactions(reactions) {
-        localStorage.setItem('reactions-' + mediaId, JSON.stringify(reactions));
-      }
-      function renderReactions() {
-        const reactions = getReactions();
-        reactionsDiv.innerHTML = '';
-        ['👍','❤️','😂'].forEach(emoji => {
-          const span = document.createElement('span');
-          span.textContent = emoji;
-          span.onclick = () => {
-            reactions[emoji] = (reactions[emoji] || 0) + 1;
-            saveReactions(reactions);
-            renderReactions();
-          };
-          reactionsDiv.appendChild(span);
-        });
-        for (let [emoji, count] of Object.entries(reactions)) {
-          if (count > 0) {
-            const c = document.createElement('span');
-            c.className = 'reaction-count';
-            c.textContent = `${emoji} ${count}`;
-            reactionsDiv.appendChild(c);
-          }
-        }
-      }
-      renderComments();
-      renderReactions();
+    lightbox.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+      lightbox.innerHTML = '';
     });
-  </script></body>
+  </script>
+
+</body>
 </html>
