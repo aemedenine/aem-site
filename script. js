@@ -1,86 +1,106 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // الوقت
-  function updateTime() {
-    const now = new Date();
-    const days = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-    const months = ['جانفي','فيفري','مارس','أفريل','ماي','جوان','جويلية','أوت','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-    const day = days[now.getDay()];
-    const date = now.getDate();
-    const month = months[now.getMonth()];
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    document.getElementById('current-time').textContent = `${day} ${date} ${month} - ${hours}:${minutes}`;
-  }
+const videoList = document.getElementById('video-list');
+const mainVideo = document.getElementById('main-video');
+const commentsList = document.getElementById('comments-list');
+const commentInput = document.getElementById('comment-input');
+const addCommentBtn = document.getElementById('add-comment-btn');
+const reactionButtons = document.querySelectorAll('.reactions button');
 
-  // زيارات
-  function updateVisits() {
-    let visits = localStorage.getItem('visit-count');
-    visits = visits ? parseInt(visits) + 1 : 1;
-    localStorage.setItem('visit-count', visits);
-    document.getElementById('visit-count').textContent = `عدد الزيارات: ${visits}`;
-  }
+let currentVideoId = 'video1';
 
-  // أخبار حية
-  function fetchNews() {
-    const news = [
-      "📢 ورشة إلكترونيك الرحماني تفتح أبوابها لجميع الولايات.",
-      "🔧 خدمات تصليح الأجهزة الإلكترونية بجودة عالية وبأسعار منافسة.",
-      "🌍 التوصيل عبر البريد متوفر لكل أنحاء تونس.",
-      "📱 تواصل معنا عبر واتساب لأي استفسار."
-    ];
-    document.getElementById('live-news').textContent = news.join(' • ');
-  }
+// تحميل التفاعلات والتعليقات من localStorage
+function loadData() {
+  const reactionsData = JSON.parse(localStorage.getItem('videoReactions')) || {};
+  const commentsData = JSON.parse(localStorage.getItem('videoComments')) || {};
 
-  // FAQ
-  document.querySelectorAll('.faq-item h3').forEach(h3 => {
-    h3.addEventListener('click', () => {
-      const parent = h3.parentElement;
-      parent.classList.toggle('open');
-    });
+  // عرض التعليقات للفيديو الحالي
+  displayComments(commentsData[currentVideoId] || []);
+
+  // تهيئة أزرار التفاعل مع عدد الأصوات
+  reactionButtons.forEach(btn => {
+    const reaction = btn.getAttribute('data-reaction');
+    const count = reactionsData[currentVideoId]?.[reaction] || 0;
+    if (reaction === 'like') btn.textContent = `❤️ ${count}`;
+    else if (reaction === 'love') btn.textContent = `😍 ${count}`;
+    else if (reaction === 'laugh') btn.textContent = `😂 ${count}`;
   });
+}
 
-  // الراديو
-  const radio = document.getElementById('radio-stream');
-  const radioBtn = document.getElementById('play-radio');
-  radioBtn.addEventListener('click', () => {
-    if (radio.paused) {
-      radio.play();
-      radioBtn.textContent = '⏸️ أوقف الراديو';
-    } else {
-      radio.pause();
-      radioBtn.textContent = '📻 شغّل الراديو';
-    }
+// حفظ التفاعلات والتعليقات في localStorage
+function saveData(reactionsData, commentsData) {
+  localStorage.setItem('videoReactions', JSON.stringify(reactionsData));
+  localStorage.setItem('videoComments', JSON.stringify(commentsData));
+}
+
+// عرض التعليقات في القائمة
+function displayComments(comments) {
+  commentsList.innerHTML = '';
+  if (comments.length === 0) {
+    commentsList.innerHTML = '<p>لا توجد تعليقات حتى الآن.</p>';
+    return;
+  }
+  comments.forEach(comment => {
+    const div = document.createElement('div');
+    div.className = 'comment';
+    div.textContent = comment;
+    commentsList.appendChild(div);
   });
+}
 
-  // لايتبوكس
-  window.openLightbox = function(src) {
-    document.getElementById('lightbox-img').src = src;
-    document.getElementById('lightbox').style.display = 'flex';
+// تغيير الفيديو عند النقر على عنصر في القائمة
+videoList.addEventListener('click', e => {
+  let item = e.target;
+  while (item && !item.classList.contains('video-item')) {
+    item = item.parentElement;
   }
-  window.closeLightbox = function() {
-    document.getElementById('lightbox').style.display = 'none';
-  }
+  if (!item) return;
+  if (item.classList.contains('active')) return; // نفس الفيديو
 
-  // تعليق
-  window.addComment = function(mediaId) {
-    const textarea = document.getElementById(`comment-input-${mediaId}`);
-    const commentText = textarea.value.trim();
-    if (!commentText) return alert('اكتب تعليق أولاً');
-    const commentDiv = document.createElement('div');
-    commentDiv.className = 'comment';
-    commentDiv.textContent = commentText;
-    document.getElementById(`comments-${mediaId}`).appendChild(commentDiv);
-    textarea.value = '';
-  }
+  const src = item.getAttribute('data-src');
+  const poster = item.getAttribute('data-poster');
+  const videoId = item.getAttribute('data-id');
 
-  // تفاعل
-  window.addReaction = function(mediaId, reaction) {
-    alert(`شكراً على تفاعلك ${reaction} لـ ${mediaId}`);
-  }
+  mainVideo.src = src;
+  mainVideo.poster = poster;
+  mainVideo.play();
 
-  // تشغيل
-  updateTime();
-  updateVisits();
-  fetchNews();
-  setInterval(updateTime, 60000);
+  // تحديث التحديد في القائمة
+  document.querySelectorAll('.video-item').forEach(v => v.classList.remove('active'));
+  item.classList.add('active');
+
+  currentVideoId = videoId;
+  loadData();
 });
+
+// إضافة تعليق جديد
+addCommentBtn.addEventListener('click', () => {
+  const text = commentInput.value.trim();
+  if (text === '') return alert('الرجاء كتابة تعليق.');
+
+  let commentsData = JSON.parse(localStorage.getItem('videoComments')) || {};
+  if (!commentsData[currentVideoId]) commentsData[currentVideoId] = [];
+  commentsData[currentVideoId].push(text);
+
+  saveData(JSON.parse(localStorage.getItem('videoReactions')) || {}, commentsData);
+  displayComments(commentsData[currentVideoId]);
+
+  commentInput.value = '';
+});
+
+// التعامل مع أزرار التفاعل (جام، جادور، ضحك)
+reactionButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const reaction = btn.getAttribute('data-reaction');
+
+    let reactionsData = JSON.parse(localStorage.getItem('videoReactions')) || {};
+    if (!reactionsData[currentVideoId]) {
+      reactionsData[currentVideoId] = { like: 0, love: 0, laugh: 0 };
+    }
+    reactionsData[currentVideoId][reaction]++;
+
+    saveData(reactionsData, JSON.parse(localStorage.getItem('videoComments')) || {});
+    loadData();
+  });
+});
+
+// تحميل البيانات أول مرة عند تحميل الصفحة
+loadData();
