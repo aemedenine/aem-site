@@ -1,55 +1,43 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Atelier Electronique Médenine</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
-  <style>
-    .fade-in {
-      animation: fadeIn 1s ease-in;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    iframe {
-      width: 100%;
-      height: 300px;
-      border: none;
-      margin-top: 20px;
-      border-radius: 10px;
-    }
-    .qr-code {
-      margin: 10px 0;
-    }
-    .qr-code img {
-      width: 150px;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="fade-in">  <header>
-    <div class="header-top">
-      <img src="logo.png" alt="Logo" class="header-logo">
-      <h1>Atelier Electronique Médenine</h1>
-    </div>
+<body>
+
+  <header>
+    <img src="icons/logo.png" alt="Atelier Electronique Médenine" class="logo" />
+    <h1>Atelier Electronique Médenine</h1>
     <div class="experience-badge">🌼 10+ سنوات خبرة</div>
-  </header>  <div id="live-news">تحميل الأخبار...</div>
-  <span id="current-time">--:--:--</span>
-  <span id="visit-count">عدد زياراتك: 0</span>  <div>
+  </header>
+
+  <div id="live-news">تحميل الأخبار...</div>
+
+  <div id="time-visit-container">
+    <span id="current-time">--:--:--</span>
+    <span id="visit-count">عدد زياراتك: 0</span>
+  </div>
+
+  <div id="buttons-top">
     <button id="toggle-lang-btn">تبديل اللغة</button>
-  </div>  <div id="qr-label">📱 امسح للوصول السريع</div>
-  <div class="qr-code">
-    <img src="qr-code.png" alt="QR Code">
-  </div>  <div class="cta-buttons">
-    <a href="https://wa.me/21698192103" target="_blank" id="whatsapp-btn">📞 تواصل معنا واتساب</a>
-    <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" id="maps-btn">🗺️ شوفنا على Google Maps</a>
-    <a href="photos.html" class="photos">📷 شوف الصور</a>
-    <a href="videos.html" class="videos">🎞️ شوف الفيديو</a>
+    <a href="https://wa.me/21698192103" target="_blank" rel="noopener" class="button-link" id="whatsapp-btn">📞 تواصل معنا واتساب</a>
+    <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" rel="noopener" class="button-link" id="maps-btn">🗺️ شوفنا على Google Maps</a>
+  </div>
+
+  <div id="media-links">
+    <a href="photos.html" class="button-link photos">📷 شوف الصور</a>
+    <a href="videos.html" class="button-link videos">🎞️ شوف الفيديو</a>
+  </div>
+
+  <div id="radio-container">
     <button id="radio-btn">📻 شغّل الراديو</button>
     <audio id="radio-stream" src="https://stream.radiojar.com/8s5u5tpdtwzuv" preload="none"></audio>
-    <a href="services.html" class="special-service-btn">🛠️ خدمات الورشة</a>
-  </div>  <iframe src="https://maps.google.com/maps?q=Atelier%20Electronique%20M%C3%A9denine&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>  <section class="faq">
+  </div>
+
+  <section class="faq">
     <h2>الأسئلة الشائعة</h2>
     <div class="faq-item">
       <h3>كيف يمكنني إرسال جهاز للإصلاح؟</h3>
@@ -67,19 +55,228 @@
       <h3>كيف أتابع حالة الإصلاح؟</h3>
       <div class="answer">نقوم بإرسال صور وفيديوهات لحالة الجهاز أثناء مراحل التصليح عبر واتساب.</div>
     </div>
-  </section>  <footer id="footer-text">
+  </section>
+
+  <footer id="footer-text">
     📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp:98192103<br>
     ⏰ من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة
     <div class="social-icons">
-      <a href="https://www.facebook.com/AEMednine" target="_blank" title="Facebook">
+      <a href="https://www.facebook.com/AEMednine" target="_blank" rel="noopener" title="Facebook">
         <img src="icons/facebook.svg" alt="Facebook" />
       </a>
-      <a href="https://www.instagram.com/aemedenine/" target="_blank" title="Instagram">
+      <a href="https://www.instagram.com/aemedenine/" target="_blank" rel="noopener" title="Instagram">
         <img src="icons/instagram.svg" alt="Instagram" />
       </a>
-      <a href="https://wa.me/21698192103" target="_blank" title="WhatsApp">
+      <a href="https://wa.me/21698192103" target="_blank" rel="noopener" title="WhatsApp">
         <img src="icons/whatsapp.svg" alt="WhatsApp" />
       </a>
     </div>
-  </footer></body>
+  </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  let currentLang = document.documentElement.lang.startsWith('ar') ? 'ar' : 'fr';
+
+  // تحديث الوقت والتاريخ
+  function updateTime() {
+    const now = new Date();
+    const daysAr = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+    const monthsAr = ['جانفي','فيفري','مارس','أفريل','ماي','جوان','جويلية','أوت','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+    const daysFr = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+    const monthsFr = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+
+    let day, month;
+    if(currentLang === 'ar'){
+      day = daysAr[now.getDay()];
+      month = monthsAr[now.getMonth()];
+    } else {
+      day = daysFr[now.getDay()];
+      month = monthsFr[now.getMonth()];
+    }
+
+    const date = now.getDate();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+
+    const timeStr = `${hours}:${minutes}:${seconds}`;
+    const dateStr = currentLang === 'ar' 
+      ? `${day}، ${date} ${month}` 
+      : `${day}, ${date} ${month}`;
+
+    document.getElementById('current-time').textContent = `${dateStr} - ${timeStr}`;
+  }
+
+  // تحديث عداد الزيارات (محلي)
+  function updateVisits() {
+    const visitKey = 'aem-visit-count';
+    let visits = parseInt(localStorage.getItem(visitKey)) || 0;
+    visits++;
+    localStorage.setItem(visitKey, visits);
+    document.getElementById('visit-count').textContent = 
+      currentLang === 'ar' 
+      ? `عدد زياراتك: ${visits}` 
+      : `Nombre de visites: ${visits}`;
+  }
+
+  // الأخبار الحية (وهمية)
+  function fetchNews() {
+    const newsAr = [
+      "📢 ورشة إلكترونيك الرحماني تفتح أبوابها لجميع الولايات.",
+      "🔧 خدمات تصليح الأجهزة الإلكترونية بجودة عالية وبأسعار منافسة.",
+      "🌍 التوصيل عبر البريد متوفر لكل أنحاء تونس.",
+      "📱 تواصل معنا عبر واتساب لأي استفسار."
+    ];
+    const newsFr = [
+      "📢 Atelier Electronique Médenine ouvre ses portes pour toutes les régions.",
+      "🔧 Services de réparation électronique de haute qualité à prix compétitifs.",
+      "🌍 Livraison par courrier disponible dans toute la Tunisie.",
+      "📱 Contactez-nous via WhatsApp pour toute question."
+    ];
+
+    const news = currentLang === 'ar' ? newsAr : newsFr;
+    document.getElementById('live-news').textContent = news.join('  •  ');
+  }
+
+  // تبديل اللغة عربي/فرنسي
+  function toggleLanguage() {
+    if (currentLang === 'ar') {
+      document.documentElement.lang = 'fr';
+      document.documentElement.dir = 'ltr';
+      currentLang = 'fr';
+
+      document.querySelector('header h1').textContent = "Atelier Electronique Médenine";
+      document.querySelector('.experience-badge').textContent = "🌼 Plus de 10 ans d'expérience";
+      document.getElementById('qr-label')?.textContent = "📱 Scannez pour accès rapide";
+      document.getElementById('whatsapp-btn').textContent = "📞 Contactez-nous WhatsApp";
+      document.getElementById('maps-btn').textContent = "🗺️ Voir sur Google Maps";
+      document.querySelector('.photos').textContent = "📷 Voir les photos";
+      document.querySelector('.videos').textContent = "🎞️ Voir les vidéos";
+      document.getElementById('radio-btn').textContent = radio.paused ? "📻 Écouter la radio" : "⏸️ Arrêter la radio";
+      document.querySelector('.special-service-btn')?.textContent = "🛠️ Services de l'atelier";
+
+      // FAQ بالفرنسي
+      const faqs = [
+        { q: "Comment puis-je envoyer un appareil pour réparation ?", a: "Vous pouvez envoyer l'appareil par courrier à l'atelier ou nous contacter pour organiser la collecte." },
+        { q: "Quel est le délai moyen de réparation ?", a: "Le délai dépend du type de panne, mais généralement pas plus de 3 jours ouvrables." },
+        { q: "Fournissez-vous des pièces d'origine ?", a: "Oui, nous fournissons des pièces d'origine et de haute qualité pour tous les appareils." },
+        { q: "Comment suivre l'état de la réparation ?", a: "Nous envoyons des photos et vidéos de l'état de l'appareil pendant la réparation via WhatsApp." }
+      ];
+      const faqContainer = document.querySelector('.faq');
+      faqContainer.innerHTML = '<h2>FAQ</h2>';
+      faqs.forEach(item => {
+        const faqItem = document.createElement('div');
+        faqItem.classList.add('faq-item');
+        faqItem.innerHTML = `<h3>${item.q}</h3><div class="answer">${item.a}</div>`;
+        faqContainer.appendChild(faqItem);
+      });
+      document.querySelectorAll('.faq-item h3').forEach(h3 => {
+        h3.addEventListener('click', () => {
+          h3.parentElement.classList.toggle('open');
+        });
+      });
+
+      document.getElementById('footer-text').innerHTML = `
+        📍 Médenine – Service dans toute la Tunisie | 📲 WhatsApp: 98192103<br>
+        ⏰ Du lundi au samedi, 08:00 - 18:00 | Dimanche fermé
+        <div class="social-icons">
+          <a href="https://www.facebook.com/AEMednine" target="_blank" rel="noopener" title="Facebook">
+            <img src="icons/facebook.svg" alt="Facebook" />
+          </a>
+          <a href="https://www.instagram.com/aemedenine/" target="_blank" rel="noopener" title="Instagram">
+            <img src="icons/instagram.svg" alt="Instagram" />
+          </a>
+          <a href="https://wa.me/21698192103" target="_blank" rel="noopener" title="WhatsApp">
+            <img src="icons/whatsapp.svg" alt="WhatsApp" />
+          </a>
+        </div>
+      `;
+
+    } else {
+      document.documentElement.lang = 'ar';
+      document.documentElement.dir = 'rtl';
+      currentLang = 'ar';
+
+      document.querySelector('header h1').textContent = "Atelier Electronique Médenine";
+      document.querySelector('.experience-badge').textContent = "🌼 10+ سنوات خبرة";
+      document.getElementById('qr-label')?.textContent = "📱 امسح للوصول السريع";
+      document.getElementById('whatsapp-btn').textContent = "📞 تواصل معنا واتساب";
+      document.getElementById('maps-btn').textContent = "🗺️ شوفنا على Google Maps";
+      document.querySelector('.photos').textContent = "📷 شوف الصور";
+      document.querySelector('.videos').textContent = "🎞️ شوف الفيديو";
+      document.getElementById('radio-btn').textContent = radio.paused ? "📻 شغّل الراديو" : "⏸️ أوقف الراديو";
+      document.querySelector('.special-service-btn')?.textContent = "🛠️ خدمات الورشة";
+
+      const faqsAr = [
+        { q: "كيف يمكنني إرسال جهاز للإصلاح؟", a: "يمكنك إرسال الجهاز عبر البريد إلى عنوان الورشة أو التواصل معنا لترتيب خدمة الاستلام." },
+        { q: "ما هي مدة التصليح المعتادة؟", a: "مدة التصليح تختلف حسب نوع العطل، لكن غالباً لا تتجاوز 3 أيام عمل." },
+        { q: "هل توفرون قطع غيار أصلية؟", a: "نعم، نوفر قطع غيار أصلية وذات جودة عالية لجميع الأجهزة." },
+        { q: "كيف أتابع حالة الإصلاح؟", a: "نقوم بإرسال صور وفيديوهات لحالة الجهاز أثناء مراحل التصليح عبر واتساب." }
+      ];
+      const faqContainer = document.querySelector('.faq');
+      faqContainer.innerHTML = '<h2>الأسئلة الشائعة</h2>';
+      faqsAr.forEach(item => {
+        const faqItem = document.createElement('div');
+        faqItem.classList.add('faq-item');
+        faqItem.innerHTML = `<h3>${item.q}</h3><div class="answer">${item.a}</div>`;
+        faqContainer.appendChild(faqItem);
+      });
+      document.querySelectorAll('.faq-item h3').forEach(h3 => {
+        h3.addEventListener('click', () => {
+          h3.parentElement.classList.toggle('open');
+        });
+      });
+
+      document.getElementById('footer-text').innerHTML = `
+        📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp:98192103<br>
+        ⏰ من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة
+        <div class="social-icons">
+          <a href="https://www.facebook.com/AEMednine" target="_blank" rel="noopener" title="Facebook">
+            <img src="icons/facebook.svg" alt="Facebook" />
+          </a>
+          <a href="https://www.instagram.com/aemedenine/" target="_blank" rel="noopener" title="Instagram">
+            <img src="icons/instagram.svg" alt="Instagram" />
+          </a>
+          <a href="https://wa.me/21698192103" target="_blank" rel="noopener" title="WhatsApp">
+            <img src="icons/whatsapp.svg" alt="WhatsApp" />
+          </a>
+        </div>
+      `;
+    }
+
+    updateTime();
+    fetchNews();
+    updateVisits();
+  }
+
+  document.getElementById('toggle-lang-btn').addEventListener('click', toggleLanguage);
+
+  updateTime();
+  setInterval(updateTime, 1000);
+
+  fetchNews();
+
+  updateVisits();
+
+  const radio = document.getElementById('radio-stream');
+  const radioBtn = document.getElementById('radio-btn');
+  radioBtn.addEventListener('click', () => {
+    if (radio.paused) {
+      radio.play();
+      radioBtn.textContent = currentLang === 'ar' ? "⏸️ أوقف الراديو" : "⏸️ Arrêter la radio";
+    } else {
+      radio.pause();
+      radioBtn.textContent = currentLang === 'ar' ? "📻 شغّل الراديو" : "📻 Écouter la radio";
+    }
+  });
+
+  document.querySelectorAll('.faq-item h3').forEach(h3 => {
+    h3.addEventListener('click', () => {
+      h3.parentElement.classList.toggle('open');
+    });
+  });
+});
+</script>
+
+</body>
 </html>
