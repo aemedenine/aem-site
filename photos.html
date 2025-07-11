@@ -6,23 +6,76 @@
   <title>صور - Atelier Electronique Médenine</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+    /* تنسيق اللوقو والهيدر */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      background-color: #0f0f0f;
+      padding: 10px 20px;
+      border-bottom: 2px solid #00bfff;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      max-width: 120px;
+      height: auto;
+    }
+
+    .logo-text {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #00bfff;
+    }
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+
+    nav a.active {
+      color: #00bfff;
+    }
+
+    @media (max-width: 600px) {
+      .logo {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .logo img {
+        max-width: 100px;
+      }
+    }
+
     /* خاص بمعرض الصور واللايتبوكس */
     main {
       max-width: 1100px;
       margin: 30px auto 60px;
       padding: 0 15px;
     }
+
     h2 {
       color: #00bfff;
       text-align: center;
       margin-bottom: 25px;
       user-select: none;
     }
+
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 15px;
     }
+
     .gallery-grid img {
       width: 100%;
       border-radius: 8px;
@@ -30,9 +83,11 @@
       box-shadow: 0 0 15px #00bfff88;
       transition: transform 0.3s ease;
     }
+
     .gallery-grid img:hover {
       transform: scale(1.05);
     }
+
     /* نافذة اللايتبوكس */
     .lightbox {
       display: none;
@@ -44,12 +99,14 @@
       z-index: 9999;
       cursor: pointer;
     }
+
     .lightbox img {
       max-width: 90%;
       max-height: 90%;
       border-radius: 8px;
       box-shadow: 0 0 20px #00bfff;
     }
+
     /* زر إغلاق */
     .lightbox:before {
       content: "✕";
@@ -59,6 +116,14 @@
       font-size: 2rem;
       color: #00bfff;
       user-select: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #ccc;
+      background: #0f0f0f;
+      border-top: 2px solid #00bfff;
     }
   </style>
 </head>
@@ -97,7 +162,7 @@
   </footer>
 
   <script>
-    // جافاسكريبت لفتح وإغلاق نافذة اللايتبوكس
+    // فتح نافذة اللايتبوكس عند الضغط على الصورة
     const gallery = document.getElementById('gallery');
     const lightbox = document.getElementById('lightbox');
 
