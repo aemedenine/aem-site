@@ -1,91 +1,26 @@
-// ✅ شريط الأخبار من BBC عربي
-const newsContainer = document.getElementById('live-news');
-fetch("https://api.rss2json.com/v1/api.json?rss_url=https://feeds.bbci.co.uk/arabic/rss.xml")
-  .then(res => res.json())
-  .then(data => {
-    let headlines = data.items.slice(0, 5).map(item => item.title).join(" ⚡ ");
-    newsContainer.textContent = headlines;
-  })
-  .catch(() => {
-    newsContainer.textContent = "فشل في تحميل الأخبار.";
-  });
+// script.js - النسخة المحدثة لـ aem-site
 
-// ✅ الساعة والتاريخ والشهر
-function updateTime() {
-  const timeEl = document.getElementById('current-time');
-  const now = new Date();
-  const months = ["جانفي", "فيفري", "مارس", "أفريل", "ماي", "جوان", "جويلية", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
-  const day = now.getDate();
-  const month = months[now.getMonth()];
-  const year = now.getFullYear();
-  const hours = now.getHours().toString().padStart(2, '0');
-  const minutes = now.getMinutes().toString().padStart(2, '0');
-  const seconds = now.getSeconds().toString().padStart(2, '0');
-  timeEl.textContent = `${day} ${month} ${year} - ${hours}:${minutes}:${seconds}`;
-}
-setInterval(updateTime, 1000);
-updateTime();
+// تغيير اللغة let isArabic = true; const toggleLangBtn = document.getElementById("toggle-lang-btn"); toggleLangBtn.addEventListener("click", () => { isArabic = !isArabic; document.documentElement.lang = isArabic ? "ar" : "fr"; document.documentElement.dir = isArabic ? "rtl" : "ltr"; toggleLangBtn.textContent = isArabic ? "تبديل اللغة" : "Changer la langue";
 
-// ✅ عدد الزيارات
-const visitCount = localStorage.getItem('visits') || 0;
-localStorage.setItem('visits', parseInt(visitCount) + 1);
-document.getElementById('visit-count').textContent = `عدد زياراتك: ${parseInt(visitCount) + 1}`;
+// ترجمة العناصر النصية document.querySelector("header h1").textContent = isArabic ? "Atelier Electronique Médenine" : "Atelier Électronique Médenine";
 
-// ✅ زر تشغيل الراديو
-document.getElementById('radio-btn').addEventListener('click', () => {
-  const radio = document.getElementById('radio-stream');
-  if (radio.paused) {
-    radio.play();
-    document.getElementById('radio-btn').textContent = '⏸️ أوقف الراديو';
-  } else {
-    radio.pause();
-    document.getElementById('radio-btn').textContent = '▶️ شغّل الراديو';
-  }
-});
+document.getElementById("live-news").textContent = isArabic ? "تحميل الأخبار..." : "Chargement des nouvelles..."; document.getElementById("visit-count").textContent = ${isArabic ? 'عدد زياراتك' : 'Nombre de visites'}: ${visitCount}; document.getElementById("radio-btn").textContent = isArabic ? "شغّل الراديو" : "Lancer la radio";
 
-// ✅ FAQ: فتح وغلق الأجوبة
-document.querySelectorAll('.faq-item').forEach(item => {
-  item.addEventListener('click', () => {
-    item.classList.toggle('open');
-  });
-});
+document.querySelectorAll(".cta-buttons a")[0].textContent = isArabic ? "واتساب" : "WhatsApp"; document.querySelectorAll(".cta-buttons a")[1].textContent = isArabic ? "موقعنا على Google Maps" : "Notre emplacement sur Google Maps"; document.querySelectorAll(".cta-buttons a")[2].textContent = isArabic ? "شاهد الصور" : "Voir les photos"; document.querySelectorAll(".cta-buttons a")[3].textContent = isArabic ? "شاهد الفيديو" : "Voir les vidéos";
 
-// ✅ زر تغيير اللغة (عربي ⇄ فرنسي)
-const toggleBtn = document.getElementById("toggle-lang-btn");
-let currentLang = "ar";
+document.querySelector(".experience-badge").textContent = isArabic ? "🌼 أكثر من 10 سنوات خبرة" : "🌼 Plus de 10 ans d'expérience";
 
-toggleBtn.addEventListener("click", () => {
-  currentLang = currentLang === "ar" ? "fr" : "ar";
-  applyLang(currentLang);
-});
+document.querySelector(".faq h2").textContent = isArabic ? "الأسئلة الشائعة" : "FAQ";
 
-function applyLang(lang) {
-  const translations = {
-    "ar": {
-      "toggle": "تبديل اللغة",
-      "visit": `عدد زياراتك: ${localStorage.getItem("visits")}`,
-      "radio": "▶️ شغّل الراديو",
-      "whatsapp": "واتساب",
-      "maps": "موقعنا على Google Maps",
-      "photos": "شاهد الصور",
-      "videos": "شاهد الفيديو",
-    },
-    "fr": {
-      "toggle": "Changer la langue",
-      "visit": `Nombre de visites: ${localStorage.getItem("visits")}`,
-      "radio": "▶️ Lancer la radio",
-      "whatsapp": "WhatsApp",
-      "maps": "Notre position sur Google Maps",
-      "photos": "Voir les photos",
-      "videos": "Voir les vidéos",
-    }
-  };
+const questions = document.querySelectorAll(".faq-item h3"); const answers = document.querySelectorAll(".faq-item .answer"); const qText = [ ["كيف يمكنني إرسال جهاز للإصلاح؟", "يمكنك إرسال الجهاز عبر البريد إلى عنوان الورشة أو التواصل معنا لترتيب خدمة الاستلام."], ["ما هي مدة التصليح المعتادة؟", "مدة التصليح تختلف حسب نوع العطل، لكن غالباً لا تتجاوز 3 أيام عمل."], ["هل توفرون قطع غيار أصلية؟", "نعم، نوفر قطع غيار أصلية وذات جودة عالية لجميع الأجهزة."], ["كيف أتابع حالة الإصلاح؟", "نقوم بإرسال صور وفيديوهات لحالة الجهاز أثناء مراحل التصليح عبر واتساب."] ]; const qTextFr = [ ["Comment envoyer un appareil à réparer ?", "Vous pouvez l'envoyer par courrier à notre atelier ou nous contacter pour organiser une collecte."], ["Quel est le délai habituel de réparation ?", "Le délai varie selon la panne, généralement pas plus de 3 jours ouvrables."], ["Fournissez-vous des pièces d'origine ?", "Oui, nous fournissons des pièces d'origine de haute qualité pour tous les appareils."], ["Comment suivre l'état de la réparation ?", "Nous envoyons des photos et vidéos de l'appareil pendant les étapes de réparation via WhatsApp."] ]; const data = isArabic ? qText : qTextFr; questions.forEach((q, i) => q.textContent = data[i][0]); answers.forEach((a, i) => a.textContent = data[i][1]); });
 
-  toggleBtn.textContent = translations[lang].toggle;
-  document.getElementById('visit-count').textContent = translations[lang].visit;
-  document.getElementById('radio-btn').textContent = translations[lang].radio;
-  document.querySelector('.btn-whatsapp').textContent = translations[lang].whatsapp;
-  document.querySelector('.btn-maps').textContent = translations[lang].maps;
-  document.querySelector('.btn-gallery').textContent = translations[lang].photos;
-  document.querySelector('.btn-video').textContent = translations[lang].videos;
-}
+// الراديو const radioBtn = document.getElementById("radio-btn"); const radioStream = document.getElementById("radio-stream"); radioBtn.addEventListener("click", () => { if (radioStream.paused) { radioStream.play(); radioBtn.textContent = isArabic ? "أوقف الراديو" : "Arrêter la radio"; } else { radioStream.pause(); radioBtn.textContent = isArabic ? "شغّل الراديو" : "Lancer la radio"; } });
+
+// الوقت والتاريخ const timeDiv = document.getElementById("current-time"); function updateTime() { const now = new Date(); const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' }; const time = now.toLocaleTimeString('fr-FR', options); const month = now.toLocaleDateString('fr-FR', { month: 'long' }); timeDiv.textContent = ${month} - ${time}; } setInterval(updateTime, 1000); updateTime();
+
+// عدد الزيارات let visitCount = parseInt(localStorage.getItem("visits") || "0"); visitCount++; localStorage.setItem("visits", visitCount); document.getElementById("visit-count").textContent = عدد زياراتك: ${visitCount};
+
+// الأخبار المباشرة من BBC fetch("https://feeds.bbci.co.uk/arabic/rss.xml") .then(response => response.text()) .then(str => (new window.DOMParser()).parseFromString(str, "text/xml")) .then(data => { const items = data.querySelectorAll("item"); const headlines = Array.from(items).slice(0, 5).map(item => item.querySelector("title").textContent).join(" ⚡ "); document.getElementById("live-news").textContent = headlines; }) .catch(err => { document.getElementById("live-news").textContent = isArabic ? "فشل في تحميل الأخبار" : "Échec du chargement des nouvelles"; });
+
+// الأسئلة الشائعة toggle document.querySelectorAll(".faq-item").forEach(item => { item.addEventListener("click", () => { item.classList.toggle("open"); }); });
+
