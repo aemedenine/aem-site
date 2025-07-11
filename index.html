@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,70 +7,138 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .faq .answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq .faq-item.active .answer {
+      max-height: 500px;
+    }
+    .logo {
+      max-width: 130px;
+      height: auto;
+    }
+  </style>
 </head>
 <body>
   <header>
     <div class="container header-inner">
       <img src="images/logo.png" alt="Atelier Electronique Médenine Logo" class="logo" />
-      <h1>Atelier Electronique Médenine</h1>
+      <h1 id="main-title">Atelier Electronique Médenine</h1>
     </div>
-  </header>
-
-  <div class="news-ticker">
+  </header>  <div class="news-ticker">
     <div class="news-text" id="live-news">تحميل الأخبار...</div>
-  </div>
-
-  <main class="container main-content">
+  </div>  <main class="container main-content">
     <section class="info-bar">
       <div id="current-time">--:--:--</div>
       <div id="visit-count">عدد زياراتك: 0</div>
-      <button id="toggle-lang-btn" class="btn-primary">تبديل اللغة</button>
-    </section>
+      <button id="toggle-lang-btn" class="btn-primary">Français</button>
+    </section><section class="cta-buttons">
+  <a href="https://wa.me/21698192103" target="_blank" class="btn-whatsapp" id="btn-whatsapp">واتساب</a>
+  <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" class="btn-maps" id="btn-maps">موقعنا على Google Maps</a>
+  <a href="photos.html" class="btn-gallery" id="btn-photos">شاهد الصور</a>
+  <a href="videos.html" class="btn-video" id="btn-videos">شاهد الفيديو</a>
+  <button id="radio-btn" class="btn-radio">شغّل الراديو</button>
+  <audio id="radio-stream" src="https://stream.radiojar.com/8s5u5tpdtwzuv" preload="none"></audio>
+</section>
 
-    <section class="cta-buttons">
-      <a href="https://wa.me/21698192103" target="_blank" class="btn-whatsapp">واتساب</a>
-      <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" class="btn-maps">موقعنا على Google Maps</a>
-      <a href="photos.html" class="btn-gallery">شاهد الصور</a>
-      <a href="videos.html" class="btn-video">شاهد الفيديو</a>
-      <button id="radio-btn" class="btn-radio">شغّل الراديو</button>
-      <audio id="radio-stream" src="https://stream.radiojar.com/8s5u5tpdtwzuv" preload="none"></audio>
-    </section>
+<section class="experience-badge" id="badge">🌼 أكثر من 10 سنوات خبرة</section>
 
-    <section class="experience-badge">🌼 أكثر من 10 سنوات خبرة</section>
+<section class="faq">
+  <h2 id="faq-title">الأسئلة الشائعة</h2>
+  <div class="faq-item">
+    <h3 class="faq-question">كيف يمكنني إرسال جهاز للإصلاح؟</h3>
+    <div class="answer">يمكنك إرسال الجهاز عبر البريد إلى عنوان الورشة أو التواصل معنا لترتيب خدمة الاستلام.</div>
+  </div>
+  <div class="faq-item">
+    <h3 class="faq-question">ما هي مدة التصليح المعتادة؟</h3>
+    <div class="answer">مدة التصليح تختلف حسب نوع العطل، لكن غالباً لا تتجاوز 3 أيام عمل.</div>
+  </div>
+  <div class="faq-item">
+    <h3 class="faq-question">هل توفرون قطع غيار أصلية؟</h3>
+    <div class="answer">نعم، نوفر قطع غيار أصلية وذات جودة عالية لجميع الأجهزة.</div>
+  </div>
+  <div class="faq-item">
+    <h3 class="faq-question">كيف أتابع حالة الإصلاح؟</h3>
+    <div class="answer">نقوم بإرسال صور وفيديوهات لحالة الجهاز أثناء مراحل التصليح عبر واتساب.</div>
+  </div>
+</section>
 
-    <section class="faq">
-      <h2>الأسئلة الشائعة</h2>
-      <div class="faq-item">
-        <h3>كيف يمكنني إرسال جهاز للإصلاح؟</h3>
-        <div class="answer">يمكنك إرسال الجهاز عبر البريد إلى عنوان الورشة أو التواصل معنا لترتيب خدمة الاستلام.</div>
-      </div>
-      <div class="faq-item">
-        <h3>ما هي مدة التصليح المعتادة؟</h3>
-        <div class="answer">مدة التصليح تختلف حسب نوع العطل، لكن غالباً لا تتجاوز 3 أيام عمل.</div>
-      </div>
-      <div class="faq-item">
-        <h3>هل توفرون قطع غيار أصلية؟</h3>
-        <div class="answer">نعم، نوفر قطع غيار أصلية وذات جودة عالية لجميع الأجهزة.</div>
-      </div>
-      <div class="faq-item">
-        <h3>كيف أتابع حالة الإصلاح؟</h3>
-        <div class="answer">نقوم بإرسال صور وفيديوهات لحالة الجهاز أثناء مراحل التصليح عبر واتساب.</div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
+  </main>  <footer>
     <div class="container footer-inner">
-      <p>📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp: 98192103</p>
-      <p>⏰ من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
+      <p id="footer-address">📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp: 98192103</p>
+      <p id="footer-hours">⏰ من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
       <div class="social-icons">
         <a href="https://www.facebook.com/AEMednine" target="_blank" rel="noopener"><img src="icons/facebook.svg" alt="Facebook" /></a>
         <a href="https://www.instagram.com/aemedenine/" target="_blank" rel="noopener"><img src="icons/instagram.svg" alt="Instagram" /></a>
         <a href="https://wa.me/21698192103" target="_blank" rel="noopener"><img src="icons/whatsapp.svg" alt="WhatsApp" /></a>
       </div>
     </div>
-  </footer>
+  </footer>  <script>
+    // تحديث الوقت
+    setInterval(() => {
+      const now = new Date().toLocaleTimeString();
+      document.getElementById("current-time").textContent = now;
+    }, 1000);
 
-  <script src="script.js"></script>
-</body>
+    // عدد الزيارات
+    let visits = localStorage.getItem("visits") || 0;
+    visits++;
+    localStorage.setItem("visits", visits);
+    document.getElementById("visit-count").textContent = `عدد زياراتك: ${visits}`;
+
+    // زر الراديو
+    document.getElementById("radio-btn").addEventListener("click", () => {
+      const radio = document.getElementById("radio-stream");
+      if (radio.paused) {
+        radio.play();
+      } else {
+        radio.pause();
+      }
+    });
+
+    // FAQ
+    document.querySelectorAll(".faq-question").forEach(q => {
+      q.addEventListener("click", () => {
+        q.parentElement.classList.toggle("active");
+      });
+    });
+
+    // RSS أخبار مباشر
+    fetch("https://api.rss2json.com/v1/api.json?rss_url=https://feeds.bbci.co.uk/arabic/rss.xml")
+      .then(res => res.json())
+      .then(data => {
+        const news = data.items.slice(0, 5).map(item => `<a href="${item.link}" target="_blank">${item.title}</a>`).join(" • ");
+        document.getElementById("live-news").innerHTML = news;
+      });
+
+    // اللغة
+    const langBtn = document.getElementById("toggle-lang-btn");
+    langBtn.addEventListener("click", () => {
+      const lang = localStorage.getItem("lang") === "fr" ? "ar" : "fr";
+      localStorage.setItem("lang", lang);
+      applyLang();
+    });
+
+    function applyLang() {
+      const lang = localStorage.getItem("lang") || "ar";
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
+      langBtn.textContent = lang === "ar" ? "Français" : "العربية";
+      document.getElementById("main-title").textContent = lang === "ar" ? "Atelier Electronique Médenine" : "Atelier Électronique Médenine";
+      document.getElementById("btn-whatsapp").textContent = lang === "ar" ? "واتساب" : "WhatsApp";
+      document.getElementById("btn-maps").textContent = lang === "ar" ? "موقعنا على Google Maps" : "Google Maps";
+      document.getElementById("btn-photos").textContent = lang === "ar" ? "شاهد الصور" : "Photos";
+      document.getElementById("btn-videos").textContent = lang === "ar" ? "شاهد الفيديو" : "Vidéos";
+      document.getElementById("badge").textContent = lang === "ar" ? "🌼 أكثر من 10 سنوات خبرة" : "🌼 Plus de 10 ans d'expérience";
+      document.getElementById("faq-title").textContent = lang === "ar" ? "الأسئلة الشائعة" : "Questions fréquentes";
+      document.getElementById("footer-address").textContent = lang === "ar" ? "📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp: 98192103" : "📍 Médenine – Service partout en Tunisie | 📲 WhatsApp: 98192103";
+      document.getElementById("footer-hours").textContent = lang === "ar" ? "⏰ من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة" : "⏰ Lundi au Samedi, 08:00 - 18:00 | Dimanche fermé";
+    }
+
+    applyLang();
+  </script></body>
 </html>
