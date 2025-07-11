@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>🎥 فيديوهات الورشة - Atelier Electronique Médenine</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
   <style>
     body {
-      font-family: sans-serif;
-      background-color: #f9f9f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0f2f5, #dbe4ed);
       color: #333;
       margin: 0;
       direction: rtl;
@@ -15,7 +15,7 @@
     }
     h1 {
       padding: 20px 10px;
-      background: #005f99;
+      background: #003366;
       color: white;
       margin: 0 0 20px 0;
     }
@@ -39,44 +39,34 @@
       transition: background-color 0.3s ease;
     }
     .btn-bar a:hover, .btn-bar button:hover {
-      background: #004070;
+      background: #003f66;
     }
-    .videos {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      padding: 20px;
-      max-width: 800px;
-      margin: auto;
+    .swiper {
+      width: 95%;
+      padding-bottom: 40px;
     }
-    @media (max-width: 600px) {
-      .videos {
-        grid-template-columns: 1fr;
-      }
-    }
-    .media-item {
+    .swiper-slide {
       background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 10px;
-      text-align: center;
-      position: relative;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 15px;
+      transition: transform 0.3s ease;
+    }
+    .swiper-slide:hover {
+      transform: translateY(-5px);
     }
     video {
       width: 100%;
       border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     }
     .reactions {
       margin-top: 8px;
       font-size: 20px;
-      user-select: none;
     }
     .reactions span {
       cursor: pointer;
       margin: 0 6px;
       transition: transform 0.15s ease;
-      display: inline-block;
     }
     .reactions span:hover {
       transform: scale(1.3);
@@ -84,33 +74,29 @@
     .reaction-count {
       font-size: 14px;
       margin-left: 6px;
-      vertical-align: middle;
       color: #555;
     }
     .comments-section {
       margin-top: 10px;
-      text-align: right;
       font-size: 14px;
+      text-align: right;
     }
     .comments-list {
       max-height: 100px;
       overflow-y: auto;
-      border-top: 1px solid #ddd;
+      border-top: 1px solid #ccc;
       padding-top: 8px;
-      margin-bottom: 6px;
     }
     .comment-item {
       margin-bottom: 5px;
       border-bottom: 1px solid #eee;
       padding-bottom: 3px;
-      word-wrap: break-word;
     }
     .comment-input {
       width: 100%;
-      padding: 6px 8px;
-      border-radius: 4px;
+      padding: 6px;
       border: 1px solid #ccc;
-      font-size: 14px;
+      border-radius: 4px;
       box-sizing: border-box;
     }
     .comment-submit {
@@ -118,100 +104,92 @@
       background: #005f99;
       color: white;
       border: none;
-      padding: 6px 12px;
-      font-weight: bold;
+      padding: 6px;
       border-radius: 4px;
-      cursor: pointer;
       width: 100%;
-      box-shadow: 0 3px 6px rgba(0,95,153,0.3);
-      transition: background-color 0.3s ease;
-    }
-    .comment-submit:hover {
-      background: #004070;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-
   <h1 id="page-title">🎥 فيديوهات الورشة</h1>
-
   <div class="btn-bar">
     <a href="index.html">⬅️ الرجوع للصفحة الرئيسية</a>
-    <a href="https://github.com/aemedenine/atelier-electronique/upload/main" target="_blank" rel="noopener noreferrer">⬆️ أضف فيديو جديد من GitHub</a>
+    <a href="https://github.com/aemedenine/atelier-electronique/upload/main" target="_blank">⬆️ أضف فيديو جديد من GitHub</a>
     <button id="toggle-lang-btn">🌐 تغيير اللغة</button>
-  </div>
-
-  <div class="videos">
-    <div class="media-item" data-id="video1">
-      <video controls>
-        <source src="video1.mp4" type="video/mp4" />
-        المتصفح لا يدعم عرض الفيديو.
-      </video>
-      <div class="reactions" aria-label="تفاعلات">
-        <span onclick="addReaction('video1', '👍')" title="إعجاب">👍</span>
-        <span onclick="addReaction('video1', '❤️')" title="حب">❤️</span>
-        <span onclick="addReaction('video1', '😂')" title="ضحك">😂</span>
+  </div>  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide media-item" data-id="video1">
+        <video controls>
+          <source src="video1.mp4" type="video/mp4">
+        </video>
+        <div class="reactions">
+          <span onclick="addReaction('video1','👍')">👍</span>
+          <span onclick="addReaction('video1','❤️')">❤️</span>
+          <span onclick="addReaction('video1','😂')">😂</span>
+        </div>
+        <div class="comments-section">
+          <div class="comments-list"></div>
+          <input type="text" placeholder="اكتب تعليقاً..." class="comment-input" />
+          <button class="comment-submit">أرسل</button>
+        </div>
       </div>
-      <div class="comments-section">
-        <div class="comments-list"></div>
-        <input type="text" placeholder="اكتب تعليقاً..." class="comment-input" />
-        <button class="comment-submit">أرسل</button>
-      </div>
-    </div>
-
-    <div class="media-item" data-id="video2">
-      <video controls>
-        <source src="video2.mp4" type="video/mp4" />
-        المتصفح لا يدعم عرض الفيديو.
-      </video>
-      <div class="reactions" aria-label="تفاعلات">
-        <span onclick="addReaction('video2', '👍')" title="إعجاب">👍</span>
-        <span onclick="addReaction('video2', '❤️')" title="حب">❤️</span>
-        <span onclick="addReaction('video2', '😂')" title="ضحك">😂</span>
-      </div>
-      <div class="comments-section">
-        <div class="comments-list"></div>
-        <input type="text" placeholder="اكتب تعليقاً..." class="comment-input" />
-        <button class="comment-submit">أرسل</button>
+      <div class="swiper-slide media-item" data-id="video2">
+        <video controls>
+          <source src="video2.mp4" type="video/mp4">
+        </video>
+        <div class="reactions">
+          <span onclick="addReaction('video2','👍')">👍</span>
+          <span onclick="addReaction('video2','❤️')">❤️</span>
+          <span onclick="addReaction('video2','😂')">😂</span>
+        </div>
+        <div class="comments-section">
+          <div class="comments-list"></div>
+          <input type="text" placeholder="اكتب تعليقاً..." class="comment-input" />
+          <button class="comment-submit">أرسل</button>
+        </div>
       </div>
     </div>
-  </div>
-
-  <script>
+    <div class="swiper-pagination"></div>
+  </div>  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>  <script>
+    new Swiper(".mySwiper", {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+    });
+  </script>  <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // تعليقات
-      function getComments(mediaId) {
-        const comments = localStorage.getItem('comments-' + mediaId);
-        return comments ? JSON.parse(comments) : [];
+      function getComments(id) {
+        return JSON.parse(localStorage.getItem('comments-' + id) || '[]');
       }
-      function saveComments(mediaId, comments) {
-        localStorage.setItem('comments-' + mediaId, JSON.stringify(comments));
+      function saveComments(id, comments) {
+        localStorage.setItem('comments-' + id, JSON.stringify(comments));
       }
-      // رياكشنز
-      function getReactions(mediaId) {
-        const reactions = localStorage.getItem('reactions-' + mediaId);
-        return reactions ? JSON.parse(reactions) : {};
+      function getReactions(id) {
+        return JSON.parse(localStorage.getItem('reactions-' + id) || '{}');
       }
-      function saveReactions(mediaId, reactions) {
-        localStorage.setItem('reactions-' + mediaId, JSON.stringify(reactions));
+      function saveReactions(id, reactions) {
+        localStorage.setItem('reactions-' + id, JSON.stringify(reactions));
       }
-      // عرض تعليقات
-      function renderComments(mediaId) {
-        const comments = getComments(mediaId);
-        const container = document.querySelector(`.media-item[data-id="${mediaId}"] .comments-list`);
+      function renderComments(id) {
+        const comments = getComments(id);
+        const container = document.querySelector(`.media-item[data-id="${id}"] .comments-list`);
         container.innerHTML = '';
-        comments.forEach(c => {
+        comments.forEach(txt => {
           const div = document.createElement('div');
           div.className = 'comment-item';
-          div.textContent = c;
+          div.textContent = txt;
           container.appendChild(div);
         });
       }
-      // عرض رياكشنز
-      function renderReactions(mediaId) {
-        const reactions = getReactions(mediaId);
-        const container = document.querySelector(`.media-item[data-id="${mediaId}"] .reactions`);
-        container.querySelectorAll('span.reaction-count').forEach(el => el.remove());
+      function renderReactions(id) {
+        const reactions = getReactions(id);
+        const container = document.querySelector(`.media-item[data-id="${id}"] .reactions`);
+        container.querySelectorAll('.reaction-count').forEach(e => e.remove());
         for (const [emoji, count] of Object.entries(reactions)) {
           if (count > 0) {
             const span = document.createElement('span');
@@ -221,74 +199,39 @@
           }
         }
       }
-      // إضافة تعليق جديد
-      document.querySelectorAll('.media-item').forEach(item => {
-        const mediaId = item.getAttribute('data-id');
-        const input = item.querySelector('.comment-input');
-        const btn = item.querySelector('.comment-submit');
-        btn.addEventListener('click', () => {
-          const text = input.value.trim();
-          if (!text) return alert(currentLang === 'ar' ? 'الرجاء كتابة تعليق' : 'Veuillez écrire un commentaire');
-          const comments = getComments(mediaId);
-          comments.push(text);
-          saveComments(mediaId, comments);
-          input.value = '';
-          renderComments(mediaId);
-        });
-      });
-      // إضافة رياكشن
-      window.addReaction = function(mediaId, emoji) {
-        const reactions = getReactions(mediaId);
-        if (!reactions[emoji]) reactions[emoji] = 0;
-        reactions[emoji]++;
-        saveReactions(mediaId, reactions);
-        renderReactions(mediaId);
-      };
-      // تهيئة العرض عند تحميل الصفحة
       document.querySelectorAll('.media-item').forEach(item => {
         const id = item.getAttribute('data-id');
         renderComments(id);
         renderReactions(id);
+        item.querySelector('.comment-submit').addEventListener('click', () => {
+          const input = item.querySelector('.comment-input');
+          const text = input.value.trim();
+          if (!text) return;
+          const comments = getComments(id);
+          comments.push(text);
+          saveComments(id, comments);
+          input.value = '';
+          renderComments(id);
+        });
       });
-
-      // تبديل اللغة
-      let currentLang = 'ar';
-      const pageTitle = document.getElementById('page-title');
-      const toggleLangBtn = document.getElementById('toggle-lang-btn');
-
-      toggleLangBtn.addEventListener('click', () => {
-        if (currentLang === 'ar') {
-          currentLang = 'fr';
-          document.documentElement.lang = 'fr';
-          document.documentElement.dir = 'ltr';
-          pageTitle.textContent = "🎥 Vidéos de l'atelier";
-          toggleLangBtn.textContent = "🌐 Changer la langue";
-          document.querySelector('a[href="index.html"]').textContent = "⬅️ Retour à la page d'accueil";
-          document.querySelector('a[href="https://github.com/aemedenine/atelier-electronique/upload/main"]').textContent = "⬆️ Ajouter une nouvelle vidéo sur GitHub";
-          document.querySelectorAll('.comment-input').forEach(input => {
-            input.placeholder = "Écrire un commentaire...";
-          });
-          document.querySelectorAll('.comment-submit').forEach(btn => {
-            btn.textContent = "Envoyer";
-          });
-        } else {
-          currentLang = 'ar';
-          document.documentElement.lang = 'ar';
-          document.documentElement.dir = 'rtl';
-          pageTitle.textContent = "🎥 فيديوهات الورشة";
-          toggleLangBtn.textContent = "🌐 تغيير اللغة";
-          document.querySelector('a[href="index.html"]').textContent = "⬅️ الرجوع للصفحة الرئيسية";
-          document.querySelector('a[href="https://github.com/aemedenine/atelier-electronique/upload/main"]').textContent = "⬆️ أضف فيديو جديد من GitHub";
-          document.querySelectorAll('.comment-input').forEach(input => {
-            input.placeholder = "اكتب تعليقاً...";
-          });
-          document.querySelectorAll('.comment-submit').forEach(btn => {
-            btn.textContent = "أرسل";
-          });
-        }
+      window.addReaction = function(id, emoji) {
+        const reactions = getReactions(id);
+        reactions[emoji] = (reactions[emoji] || 0) + 1;
+        saveReactions(id, reactions);
+        renderReactions(id);
+      };
+      let lang = 'ar';
+      document.getElementById('toggle-lang-btn').addEventListener('click', () => {
+        lang = lang === 'ar' ? 'fr' : 'ar';
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        document.getElementById('page-title').textContent = lang === 'ar' ? '🎥 فيديوهات الورشة' : "🎥 Vidéos de l'atelier";
+        document.querySelector('.btn-bar a').textContent = lang === 'ar' ? '⬅️ الرجوع للصفحة الرئيسية' : "⬅️ Retour à la page d'accueil";
+        document.querySelectorAll('.comment-input').forEach(e => e.placeholder = lang === 'ar' ? 'اكتب تعليقاً...' : 'Écrire un commentaire...');
+        document.querySelectorAll('.comment-submit').forEach(e => e.textContent = lang === 'ar' ? 'أرسل' : 'Envoyer');
+        document.querySelectorAll('.btn-bar a')[1].textContent = lang === 'ar' ? '⬆️ أضف فيديو جديد من GitHub' : '⬆️ Ajouter une nouvelle vidéo sur GitHub';
+        document.getElementById('toggle-lang-btn').textContent = lang === 'ar' ? '🌐 تغيير اللغة' : '🌐 Changer la langue';
       });
     });
-  </script>
-
-</body>
+  </script></body>
 </html>
