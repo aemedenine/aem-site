@@ -263,4 +263,26 @@ footer {
   .faq {
     width: 90%;
   }
+  /* ==== شريط الأخبار المباشر من BBC ==== */
+.news-ticker {
+  background-color: #222;
+  padding: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.news-text {
+  color: white;
+  animation: scroll-left 20s linear infinite;
+}
+
+.news-item {
+  margin: 0 15px;
+  display: inline-block;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
 }
