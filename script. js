@@ -1,4 +1,90 @@
-const translations = { /* ...نفس الكائن كما عندك... */ };
+const translations = {
+  ar: {
+    visits: "عدد زياراتك: ",
+    toggle: "تبديل اللغة",
+    whatsapp: "واتساب",
+    maps: "موقعنا على Google Maps",
+    gallery: "شاهد الصور",
+    video: "شاهد الفيديو",
+    radioPlay: "شغّل الراديو",
+    radioStop: "أوقف الراديو",
+    badge: "🌼 أكثر من 10 سنوات خبرة",
+    faqTitle: "الأسئلة الشائعة",
+    q1: "كيف يمكنني إرسال جهاز للإصلاح؟",
+    a1: "يمكنك إرسال الجهاز عبر البريد إلى عنوان الورشة أو التواصل معنا لترتيب خدمة الاستلام.",
+    q2: "ما هي مدة التصليح المعتادة؟",
+    a2: "مدة التصليح تختلف حسب نوع العطل، لكن غالباً لا تتجاوز 3 أيام عمل.",
+    q3: "هل توفرون قطع غيار أصلية؟",
+    a3: "نعم، نوفر قطع غيار أصلية وذات جودة عالية لجميع الأجهزة.",
+    q4: "كيف أتابع حالة الإصلاح؟",
+    a4: "نقوم بإرسال صور وفيديوهات لحالة الجهاز أثناء مراحل التصليح عبر واتساب.",
+    footer1: "📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp: 98192103",
+    footer2: "⏰ من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة",
+    news: [
+      "📢 ورشة إلكترونيك الرحماني تفتح أبوابها لجميع الولايات.",
+      "🔧 خدمات تصليح الأجهزة الإلكترونية بجودة عالية وبأسعار منافسة.",
+      "🌍 التوصيل عبر البريد متوفر لكل أنحاء تونس.",
+      "📱 تواصل معنا عبر واتساب لأي استفسار."
+    ]
+  },
+  fr: {
+    visits: "Nombre de visites : ",
+    toggle: "Changer la langue",
+    whatsapp: "WhatsApp",
+    maps: "Voir sur Google Maps",
+    gallery: "Voir les photos",
+    video: "Voir les vidéos",
+    radioPlay: "Lancer la radio",
+    radioStop: "Arrêter la radio",
+    badge: "🌼 Plus de 10 ans d'expérience",
+    faqTitle: "Questions fréquentes",
+    q1: "Comment puis-je envoyer un appareil pour réparation ?",
+    a1: "Vous pouvez envoyer l'appareil par courrier à l'atelier ou nous contacter pour organiser la collecte.",
+    q2: "Quel est le délai moyen de réparation ?",
+    a2: "Le délai dépend du type de panne, mais généralement pas plus de 3 jours ouvrables.",
+    q3: "Fournissez-vous des pièces d'origine ?",
+    a3: "Oui, nous fournissons des pièces d'origine et de haute qualité pour tous les appareils.",
+    q4: "Comment suivre l'état de la réparation ?",
+    a4: "Nous envoyons des photos et vidéos de l'état de l'appareil pendant la réparation via WhatsApp.",
+    footer1: "📍 Médenine – Service dans toute la Tunisie | 📲 WhatsApp: 98192103",
+    footer2: "⏰ Du lundi au samedi, 08:00 - 18:00 | Dimanche fermé",
+    news: [
+      "📢 Atelier Electronique Médenine ouvre ses portes pour toutes les régions.",
+      "🔧 Services de réparation électronique de haute qualité à prix compétitifs.",
+      "🌍 Livraison par courrier disponible dans toute la Tunisie.",
+      "📱 Contactez-nous via WhatsApp pour toute question."
+    ]
+  },
+  en: {
+    visits: "Your visits: ",
+    toggle: "Switch Language",
+    whatsapp: "WhatsApp",
+    maps: "Our location on Google Maps",
+    gallery: "View Photos",
+    video: "Watch Video",
+    radioPlay: "Play Radio",
+    radioStop: "Stop Radio",
+    badge: "🌼 Over 10 Years of Experience",
+    faqTitle: "Frequently Asked Questions",
+    q1: "How can I send a device for repair?",
+    a1: "You can send it by post or contact us to arrange pickup.",
+    q2: "What is the usual repair time?",
+    a2: "Depends on the issue, usually within 3 working days.",
+    q3: "Do you provide original spare parts?",
+    a3: "Yes, we provide high-quality original parts.",
+    q4: "How can I track the repair?",
+    a4: "We send you photos and videos via WhatsApp during repair.",
+    footer1: "📍 Médenine – We serve all of Tunisia | 📲 WhatsApp: 98192103",
+    footer2: "⏰ Monday to Saturday, 08:00 - 18:00 | Sunday closed",
+    news: [
+      "📢 Atelier Electronique Médenine opens its doors for all regions.",
+      "🔧 High-quality electronic repair services at competitive prices.",
+      "🌍 Delivery by mail available throughout Tunisia.",
+      "📱 Contact us via WhatsApp for any inquiry."
+    ]
+  }
+};
+
 let currentLang = "ar";
 
 function getVisitCount() {
@@ -12,7 +98,6 @@ function incrementVisitCount() {
 }
 
 function updateLanguage() {
-  console.log("تحديث اللغة إلى:", currentLang);
   const t = translations[currentLang];
   document.documentElement.lang = currentLang;
   document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
@@ -50,6 +135,7 @@ function updateLanguage() {
 
 function updateTime() {
   const now = new Date();
+
   const days = {
     ar: ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],
     fr: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
@@ -96,8 +182,10 @@ document.addEventListener('DOMContentLoaded', () => {
   updateTime();
   initFAQ();
 
+  // تحديث الوقت كل ثانية
   setInterval(updateTime, 1000);
 
+  // زر تبديل اللغة (تبديل بين 3 لغات: ar -> fr -> en -> ar ...)
   document.getElementById("toggle-lang-btn").addEventListener("click", () => {
     if(currentLang === "ar") currentLang = "fr";
     else if(currentLang === "fr") currentLang = "en";
@@ -105,6 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateLanguage();
   });
 
+  // التحكم في الراديو
   const radio = document.getElementById("radio-stream");
   const radioBtn = document.getElementById("radio-btn");
   radioBtn.addEventListener("click", () => {
