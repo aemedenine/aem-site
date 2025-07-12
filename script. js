@@ -85,7 +85,8 @@ const translations = {
   }
 };
 
-let currentLang = "ar";
+// ✅ اللغة المحفوظة
+let currentLang = localStorage.getItem("lang") || "ar";
 
 function getVisitCount() {
   return parseInt(localStorage.getItem("aem-visit-count")) || 0;
@@ -185,11 +186,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // تحديث الوقت كل ثانية
   setInterval(updateTime, 1000);
 
-  // زر تبديل اللغة (تبديل بين 3 لغات: ar -> fr -> en -> ar ...)
+  // زر تبديل اللغة
   document.getElementById("toggle-lang-btn").addEventListener("click", () => {
     if(currentLang === "ar") currentLang = "fr";
     else if(currentLang === "fr") currentLang = "en";
     else currentLang = "ar";
+    localStorage.setItem("lang", currentLang); // ✅ حفظ اللغة
     updateLanguage();
   });
 
