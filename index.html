@@ -9,6 +9,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
+  <script>
+  function loadNews() {
+    fetch('https://api.rss2json.com/v1/api.json?rss_url=https://feeds.bbci.co.uk/arabic/rss.xml')
+      .then(response => response.json())
+      .then(data => {
+        const newsItems = data.items.slice(0, 5);
+        const newsText = newsItems.map(item => `<span class="news-item">🗞️ ${item.title}</span>`).join(' | ');
+        document.getElementById('live-news').innerHTML = newsText;
+      })
+      .catch(error => {
+        document.getElementById('live-news').innerText = "⚠️ لم يتم تحميل الأخبار.";
+        console.error('Error loading news:', error);
+      });
+  }
+
+  loadNews(); // تحميل أول مرة عند الفتح
+  setInterval(loadNews, 600000); // إعادة كل 10 دقائق (600000ms)
+  </script>
 <body>
   <header>
     <div class="container header-inner">
