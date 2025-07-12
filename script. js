@@ -1,16 +1,14 @@
-// --- تحديث الوقت الحالي ---
+// تحديث الوقت الحالي
 function updateTime() {
   const now = new Date();
   const timeString = now.toLocaleTimeString('ar-TN', { hour12: false });
   const timeElem = document.getElementById('current-time');
-  if (timeElem) {
-    timeElem.textContent = timeString;
-  }
+  if (timeElem) timeElem.textContent = timeString;
 }
 setInterval(updateTime, 1000);
 updateTime();
 
-// --- عداد زيارات المستخدم في localStorage ---
+// عداد زيارات المستخدم
 const visitCountElem = document.getElementById('visit-count');
 if (visitCountElem) {
   let visits = localStorage.getItem('visitCount');
@@ -19,24 +17,23 @@ if (visitCountElem) {
   visitCountElem.textContent = `عدد زياراتك: ${visits}`;
 }
 
-// --- تبديل اللغة (مثال بسيط) ---
+// تبديل اللغة (تغيير بسيط للنص فقط، تحتاج تعديل المحتوى حسب اللغات)
 const toggleLangBtn = document.getElementById('toggle-lang-btn');
 if (toggleLangBtn) {
   toggleLangBtn.addEventListener('click', () => {
-    // مثال تغيير نص فقط، تحتاج تكملة حسب دعم لغات موقعك
     if (document.documentElement.lang === 'ar') {
       document.documentElement.lang = 'fr';
       toggleLangBtn.textContent = 'Changer la langue';
-      // هنا ضف تحديثات نصوص الموقع للفرنسية
+      // هنا تضيف تحديث نصوص الفرنسية لو عندك
     } else {
       document.documentElement.lang = 'ar';
       toggleLangBtn.textContent = 'تبديل اللغة';
-      // هنا ضف تحديثات نصوص الموقع للعربية
+      // هنا تضيف تحديث نصوص العربية
     }
   });
 }
 
-// --- تحميل الأخبار من BBC عربي ---
+// تحميل الأخبار
 function loadNews() {
   fetch('https://api.rss2json.com/v1/api.json?rss_url=https://feeds.bbci.co.uk/arabic/rss.xml')
     .then(response => response.json())
@@ -44,7 +41,7 @@ function loadNews() {
       const newsItems = data.items.slice(0, 5);
       const newsText = newsItems.map(item => `<span class="news-item">🗞️ ${item.title}</span>`).join(' | ');
       const newsElem = document.getElementById('live-news');
-      if (newsElem) newsElem.innerHTML = newsText;
+   if (newsElem) newsElem.innerHTML = newsText;
     })
     .catch(() => {
       const newsElem = document.getElementById('live-news');
@@ -54,7 +51,7 @@ function loadNews() {
 loadNews();
 setInterval(loadNews, 600000); // تحديث كل 10 دقائق
 
-// --- تشغيل وإيقاف الراديو ---
+// تشغيل وإيقاف الراديو
 const radioBtn = document.getElementById('radio-btn');
 const radioStream = document.getElementById('radio-stream');
 if (radioBtn && radioStream) {
@@ -69,24 +66,24 @@ if (radioBtn && radioStream) {
   });
 }
 
-// --- تفعيل الأسئلة الشائعة ---
+// تفعيل الأسئلة الشائعة
 document.querySelectorAll('.faq-item h3').forEach((question) => {
   question.style.cursor = 'pointer';
 
   question.addEventListener('click', () => {
     const answer = question.nextElementSibling;
 
-    // إغلاق كل الأجوبة الأخرى + إزالة active من كل الأسئلة
+    // إغلاق كل الأجوبة الأخرى
     document.querySelectorAll('.faq .answer').forEach((ans) => {
-      if (ans !== answer) {
-        ans.style.display = 'none';
-      }
+      if (ans !== answer) ans.style.display = 'none';
     });
+
+    // إزالة active من بقية الأسئلة
     document.querySelectorAll('.faq-item h3').forEach((q) => {
       if (q !== question) q.classList.remove('active');
     });
 
-    // تبديل حالة الجواب الحالي والـ active
+    // تبديل العرض للسؤال الحالي
     if (answer.style.display === 'block') {
       answer.style.display = 'none';
       question.classList.remove('active');
@@ -95,4 +92,4 @@ document.querySelectorAll('.faq-item h3').forEach((question) => {
       question.classList.add('active');
     }
   });
-});
+});   if (newsElem)
