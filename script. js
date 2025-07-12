@@ -54,34 +54,6 @@ const translations = {
       "🌍 Livraison par courrier disponible dans toute la Tunisie.",
       "📱 Contactez-nous via WhatsApp pour toute question."
     ]
-  },
-  en: {
-    visits: "Your visits: ",
-    toggle: "Switch Language",
-    whatsapp: "WhatsApp",
-    maps: "Our location on Google Maps",
-    gallery: "View Photos",
-    video: "Watch Video",
-    radioPlay: "Play Radio",
-    radioStop: "Stop Radio",
-    badge: "🌼 Over 10 Years of Experience",
-    faqTitle: "Frequently Asked Questions",
-    q1: "How can I send a device for repair?",
-    a1: "You can send it by post or contact us to arrange pickup.",
-    q2: "What is the usual repair time?",
-    a2: "Depends on the issue, usually within 3 working days.",
-    q3: "Do you provide original spare parts?",
-    a3: "Yes, we provide high-quality original parts.",
-    q4: "How can I track the repair?",
-    a4: "We send you photos and videos via WhatsApp during repair.",
-    footer1: "📍 Médenine – We serve all of Tunisia | 📲 WhatsApp: 98192103",
-    footer2: "⏰ Monday to Saturday, 08:00 - 18:00 | Sunday closed",
-    news: [
-      "📢 Atelier Electronique Médenine opens its doors for all regions.",
-      "🔧 High-quality electronic repair services at competitive prices.",
-      "🌍 Delivery by mail available throughout Tunisia.",
-      "📱 Contact us via WhatsApp for any inquiry."
-    ]
   }
 };
 
@@ -90,11 +62,16 @@ let currentLang = "ar";
 function getVisitCount() {
   return parseInt(localStorage.getItem("aem-visit-count")) || 0;
 }
-
 function incrementVisitCount() {
   let count = getVisitCount();
   count++;
   localStorage.setItem("aem-visit-count", count);
+}
+
+function initFAQ() {
+  document.querySelectorAll(".faq-item").forEach(item => {
+    item.onclick = () => item.classList.toggle("open");
+  });
 }
 
 function updateLanguage() {
@@ -115,90 +92,71 @@ function updateLanguage() {
 
   document.querySelector(".experience-badge").textContent = t.badge;
 
+  const q = document.querySelectorAll(".faq-item h3");
+  const a = document.querySelectorAll(".faq-item .answer");
+
   document.querySelector(".faq h2").textContent = t.faqTitle;
-  const questions = document.querySelectorAll(".faq-item h3");
-  const answers = document.querySelectorAll(".faq-item .answer");
-  questions[0].textContent = t.q1;
-  answers[0].textContent = t.a1;
-  questions[1].textContent = t.q2;
-  answers[1].textContent = t.a2;
-  questions[2].textContent = t.q3;
-  answers[2].textContent = t.a3;
-  questions[3].textContent = t.q4;
-  answers[3].textContent = t.a4;
+  q[0].textContent = t.q1;
+  a[0].textContent = t.a1;
+  q[1].textContent = t.q2;
+  a[1].textContent = t.a2;
+  q[2].textContent = t.q3;
+  a[2].textContent = t.a3;
+  q[3].textContent = t.q4;
+  a[3].textContent = t.a4;
 
   document.querySelector("footer p:nth-of-type(1)").textContent = t.footer1;
   document.querySelector("footer p:nth-of-type(2)").textContent = t.footer2;
 
   updateNews();
-  initFAQ(); // مهم جداً هنا
+  initFAQ(); // ← ضروري لإعادة تفعيل الكليك بعد الترجمة
+}
+
+function updateNews() {
+  const t = translations[currentLang].news;
+  document.getElementById("live-news").textContent = t.join(" • ");
 }
 
 function updateTime() {
   const now = new Date();
-
   const days = {
     ar: ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],
-    fr: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
-    en: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+    fr: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi']
   };
   const months = {
     ar: ['جانفي','فيفري','مارس','أفريل','ماي','جوان','جويلية','أوت','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],
-    fr: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
-    en: ['January','February','March','April','May','June','July','August','September','October','November','December']
+    fr: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre']
   };
-
-  const dayName = days[currentLang][now.getDay()];
-  const monthName = months[currentLang][now.getMonth()];
-  const dateNum = now.getDate();
-
-  const hours = now.getHours().toString().padStart(2,'0');
-  const minutes = now.getMinutes().toString().padStart(2,'0');
-  const seconds = now.getSeconds().toString().padStart(2,'0');
-
-  const dateStr = currentLang === "ar" ? `${dayName}، ${dateNum} ${monthName}` : `${dayName}, ${dateNum} ${monthName}`;
-  const timeStr = `${hours}:${minutes}:${seconds}`;
-
-  document.getElementById("current-time").textContent = `${dateStr} - ${timeStr}`;
+  const day = days[currentLang][now.getDay()];
+  const month = months[currentLang][now.getMonth()];
+  const date = now.getDate();
+  const time = now.toTimeString().slice(0, 8);
+  const full = `${day}، ${date} ${month} - ${time}`;
+  document.getElementById("current-time").textContent = full;
 }
 
-function updateNews() {
-  const newsArea = document.getElementById("live-news");
-  const newsItems = translations[currentLang].news;
-  newsArea.textContent = newsItems.join(" • ");
-}
-
-function initFAQ() {
-  const items = document.querySelectorAll('.faq-item');
-  items.forEach(item => {
-    item.onclick = () => {
-      item.classList.toggle('open');
-    };
-  });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   incrementVisitCount();
   updateLanguage();
   updateTime();
   setInterval(updateTime, 1000);
 
-  document.getElementById("toggle-lang-btn").addEventListener("click", () => {
-    if(currentLang === "ar") currentLang = "fr";
-    else if(currentLang === "fr") currentLang = "en";
-    else currentLang = "ar";
+  document.getElementById("toggle-lang-btn").onclick = () => {
+    currentLang = currentLang === "ar" ? "fr" : "ar";
     updateLanguage();
-  });
+  };
 
-  const radio = document.getElementById("radio-stream");
-  const radioBtn = document.getElementById("radio-btn");
-  radioBtn.addEventListener("click", () => {
-    if(radio.paused) {
+  document.getElementById("radio-btn").onclick = () => {
+    const radio = document.getElementById("radio-stream");
+    const btn = document.getElementById("radio-btn");
+    if (radio.paused) {
       radio.play();
-      radioBtn.textContent = translations[currentLang].radioStop;
+      btn.textContent = translations[currentLang].radioStop;
     } else {
       radio.pause();
-      radioBtn.textContent = translations[currentLang].radioPlay;
+      btn.textContent = translations[currentLang].radioPlay;
     }
-  });
+  };
+
+  initFAQ(); // ← أول مرة عند التحميل
 });
