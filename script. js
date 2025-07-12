@@ -85,8 +85,7 @@ const translations = {
   }
 };
 
-// ✅ اللغة المحفوظة
-let currentLang = localStorage.getItem("lang") || "ar";
+let currentLang = "ar";
 
 function getVisitCount() {
   return parseInt(localStorage.getItem("aem-visit-count")) || 0;
@@ -132,6 +131,7 @@ function updateLanguage() {
   document.querySelector("footer p:nth-of-type(2)").textContent = t.footer2;
 
   updateNews();
+  initFAQ(); // مهم جداً هنا
 }
 
 function updateTime() {
@@ -181,21 +181,15 @@ document.addEventListener('DOMContentLoaded', () => {
   incrementVisitCount();
   updateLanguage();
   updateTime();
-  initFAQ();
-
-  // تحديث الوقت كل ثانية
   setInterval(updateTime, 1000);
 
-  // زر تبديل اللغة
   document.getElementById("toggle-lang-btn").addEventListener("click", () => {
     if(currentLang === "ar") currentLang = "fr";
     else if(currentLang === "fr") currentLang = "en";
     else currentLang = "ar";
-    localStorage.setItem("lang", currentLang); // ✅ حفظ اللغة
     updateLanguage();
   });
 
-  // التحكم في الراديو
   const radio = document.getElementById("radio-stream");
   const radioBtn = document.getElementById("radio-btn");
   radioBtn.addEventListener("click", () => {
