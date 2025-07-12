@@ -1,67 +1,55 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Atelier Electronique Médenine</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ورشة إلكترونيك مدنين</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- الشعار -->
   <header>
-    <div class="container header-inner">
-      <img src="images/logo.png" alt="Atelier Electronique Médenine Logo" class="logo" style="border-radius: 12px; width: 100px; height: auto;" />
-      <h1>Atelier Electronique Médenine</h1>
+    <h1>🔧 ورشة إلكترونيك مدنين</h1>
+    <button id="lang-switcher">🌐</button>
+  </header>
+
+  <!-- الوقت والتاريخ -->
+  <section>
+    <div id="clock"></div>
+  </section>
+
+  <!-- شريط الأخبار -->
+  <section>
+    <div id="news-ticker" class="news-ticker">جاري تحميل الأخبار...</div>
+  </section>
+
+  <!-- روابط التواصل -->
+  <section>
+    <button id="whatsapp-btn">راسلنا على واتساب</button>
+    <button id="maps-btn">موقع الورشة على الخريطة</button>
+    <p id="qr-text">📱 امسح للوصول السريع</p>
+  </section>
+
+  <!-- الموقع والتوقيت -->
+  <footer>
+    <p id="location-text">مدنين – نخدمو في كامل أنحاء تونس</p>
+    <p id="hours-text">من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
+  </footer>
+
+  <!-- الأسئلة الشائعة -->
+  <section class="faq-section">
+    <h2>❓ الأسئلة الشائعة</h2>
+    <div class="faq-item">
+      <div class="faq-question">كيف نرسل الجهاز للورشة؟</div>
+      <div class="faq-answer" style="display: none;">تبعت الجهاز عبر البريد، نشخصوه ونصلحوه ونرجعوه ليك.</div>
     </div>
-  </header>  <div class="news-ticker">
-    <div class="news-text" id="live-news">تحميل الأخبار...</div>
-  </div>  <main class="container main-content">
-    <section class="info-bar">
-      <div id="current-time">--:--:--</div>
-      <div id="current-month">--/--</div>
-      <div id="visit-count">عدد زياراتك: 0</div>
-      <button id="toggle-lang-btn" class="btn-primary">تبديل اللغة</button>
-    </section><section class="cta-buttons">
-  <a href="https://wa.me/21698192103" target="_blank" class="btn-whatsapp">واتساب</a>
-  <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" class="btn-maps">موقعنا على Google Maps</a>
-  <a href="photos.html" class="btn-gallery">شاهد الصور</a>
-  <a href="videos.html" class="btn-video">شاهد الفيديو</a>
-  <button id="radio-btn" class="btn-radio">شغّل الراديو</button>
-  <audio id="radio-stream" src="https://stream.radiojar.com/8s5u5tpdtwzuv" preload="none"></audio>
-</section>
-
-<section class="experience-badge">🌼 أكثر من 10 سنوات خبرة</section>
-
-<section class="faq">
-  <h2 id="faq-title">الأسئلة الشائعة</h2>
-  <div class="faq-item">
-    <h3>كيف يمكنني إرسال جهاز للإصلاح؟</h3>
-    <div class="answer">يمكنك إرسال الجهاز عبر البريد إلى عنوان الورشة أو التواصل معنا لترتيب خدمة الاستلام.</div>
-  </div>
-  <div class="faq-item">
-    <h3>ما هي مدة التصليح المعتادة؟</h3>
-    <div class="answer">مدة التصليح تختلف حسب نوع العطل، لكن غالباً لا تتجاوز 3 أيام عمل.</div>
-  </div>
-  <div class="faq-item">
-    <h3>هل توفرون قطع غيار أصلية؟</h3>
-    <div class="answer">نعم، نوفر قطع غيار أصلية وذات جودة عالية لجميع الأجهزة.</div>
-  </div>
-  <div class="faq-item">
-    <h3>كيف أتابع حالة الإصلاح؟</h3>
-    <div class="answer">نقوم بإرسال صور وفيديوهات لحالة الجهاز أثناء مراحل التصليح عبر واتساب.</div>
-  </div>
-</section>
-
-  </main>  <footer>
-    <div class="container footer-inner">
-      <p id="footer-location">📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp: 98192103</p>
-      <p id="footer-hours">⏰ من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
-      <div class="social-icons">
-        <a href="https://www.facebook.com/AEMednine" target="_blank" rel="noopener"><img src="icons/facebook.svg" alt="Facebook" /></a>
-        <a href="https://www.instagram.com/aemedenine/" target="_blank" rel="noopener"><img src="icons/instagram.svg" alt="Instagram" /></a>
-        <a href="https://wa.me/21698192103" target="_blank" rel="noopener"><img src="icons/whatsapp.svg" alt="WhatsApp" /></a>
-      </div>
+    <div class="faq-item">
+      <div class="faq-question">هل نخدمو كامل الجمهورية؟</div>
+      <div class="faq-answer" style="display: none;">نعم، نخدمو كامل ولايات تونس ونوصلك بالبريد.</div>
     </div>
-  </footer>  <script src="script.js"></script></body>
+  </section>
+
+  <!-- سكريبت -->
+  <script src="script.js"></script>
+</body>
 </html>
