@@ -1,14 +1,10 @@
-// عرض الوقت والتاريخ
+// ⏰ عرض الساعة والتاريخ حسب اللغة
 function updateClock() {
   const now = new Date();
   const lang = document.documentElement.lang || 'ar';
   const options = {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
+    weekday: 'long', year: 'numeric', month: 'long',
+    day: 'numeric', hour: '2-digit', minute: '2-digit'
   };
   const formatter = new Intl.DateTimeFormat(lang === 'ar' ? 'ar-TN' : 'fr-FR', options);
   document.getElementById('clock').textContent = formatter.format(now);
@@ -16,66 +12,77 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// شريط الأخبار (RSS من BBC عربي)
+// 📢 شريط الأخبار من BBC عربي
 async function fetchNews() {
   try {
-    const response = await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://feeds.bbci.co.uk/arabic/rss.xml"));
+    const rssUrl = "https://feeds.bbci.co.uk/arabic/rss.xml";
+    const response = await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent(rssUrl));
     const data = await response.json();
     const parser = new DOMParser();
     const xml = parser.parseFromString(data.contents, "text/xml");
     const items = xml.querySelectorAll("item");
     const ticker = document.getElementById("news-ticker");
-    let html = "";
-    items.forEach((item, index) => {
-      if (index < 5) {
-        html += `📢 <a href="${item.querySelector("link").textContent}" target="_blank">${item.querySelector("title").textContent}</a> &nbsp;&nbsp;&nbsp;`;
+    ticker.innerHTML = "";
+    items.forEach((item, i) => {
+      if (i < 5) {
+        const title = item.querySelector("title").textContent;
+        const link = item.querySelector("link").textContent;
+        ticker.innerHTML += `📢 <a href="${link}" target="_blank">${title}</a> &nbsp;&nbsp;&nbsp; `;
       }
     });
-    ticker.innerHTML = html;
   } catch (error) {
-    document.getElementById("news-ticker").textContent = "⚠️ فشل في جلب الأخبار.";
+    document.getElementById("news-ticker").textContent = "⚠️ تعذر تحميل الأخبار.";
   }
 }
 fetchNews();
 
-// تبديل اللغة
+// 🌐 تغيير اللغة وترجمة العناصر
 document.getElementById("lang-switcher").addEventListener("click", () => {
   const html = document.documentElement;
   html.lang = html.lang === "ar" ? "fr" : "ar";
   updateClock();
-  translateContent();
+  translateStatic();
 });
 
-function translateContent() {
+function translateStatic() {
   const lang = document.documentElement.lang;
-  const translations = {
+  const tr = {
     ar: {
       whatsapp: "راسلنا على واتساب",
       maps: "موقع الورشة على الخريطة",
       qr: "📱 امسح للوصول السريع",
       location: "مدنين – نخدمو في كامل أنحاء تونس",
-      hours: "من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة",
+      hours: "من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة"
     },
     fr: {
       whatsapp: "Contactez-nous sur WhatsApp",
       maps: "Localisation de l'atelier",
       qr: "📱 Scannez pour un accès rapide",
       location: "Medenine – Service dans toute la Tunisie",
-      hours: "Du lundi au samedi, 08:00 - 18:00 | Dimanche fermé",
+      hours: "Du lundi au samedi, 08:00 - 18:00 | Dimanche fermé"
     }
   };
-  document.getElementById("whatsapp-btn").textContent = translations[lang].whatsapp;
-  document.getElementById("maps-btn").textContent = translations[lang].maps;
-  document.getElementById("qr-text").textContent = translations[lang].qr;
-  document.getElementById("location-text").textContent = translations[lang].location;
-  document.getElementById("hours-text").textContent = translations[lang].hours;
+  document.getElementById("whatsapp-btn").textContent = tr[lang].whatsapp;
+  document.getElementById("maps-btn").textContent = tr[lang].maps;
+  document.getElementById("qr-text").textContent = tr[lang].qr;
+  document.getElementById("location-text").textContent = tr[lang].location;
+  document.getElementById("hours-text").textContent = tr[lang].hours;
 }
-translateContent();
+translateStatic();
 
-// الأسئلة الشائعة (FAQ toggle)
-document.querySelectorAll(".faq-question").forEach((question) => {
-  question.addEventListener("click", () => {
-    const answer = question.nextElementSibling;
-    answer.style.display = answer.style.display === "block" ? "none" : "block";
+// ❓ فتح/غلق الأسئلة الشائعة
+document.querySelectorAll(".faq-question").forEach((q) => {
+  q.addEventListener("click", () => {
+    const a = q.nextElementSibling;
+    a.style.display = (a.style.display === "block") ? "none" : "block";
   });
 });
+
+// 👁️ عدد الزوار (اختياري حسب إذا موجود الكاونتر)
+if (localStorage.visitCount) {
+  localStorage.visitCount = Number(localStorage.visitCount) + 1;
+} else {
+  localStorage.visitCount = 1;
+}
+const visitDisplay = document.getElementById("visit-count");
+if (visitDisplay) visitDisplay.textContent = localStorage.visitCount;
