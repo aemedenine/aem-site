@@ -11,7 +11,7 @@
 <body>
   <header>
     <div class="container header-inner">
-      <img src="logo.png" alt="Atelier Electronique Médenine Logo" class="logo" />
+      <img src="images/logo.png" alt="Atelier Electronique Médenine Logo" class="logo" style="border-radius: 12px; width: 100px; height: auto;" />
       <h1>Atelier Electronique Médenine</h1>
     </div>
   </header>  <div class="news-ticker">
@@ -19,7 +19,7 @@
   </div>  <main class="container main-content">
     <section class="info-bar">
       <div id="current-time">--:--:--</div>
-      <div id="current-date">-- / -- / ----</div>
+      <div id="current-month">--/--</div>
       <div id="visit-count">عدد زياراتك: 0</div>
       <button id="toggle-lang-btn" class="btn-primary">تبديل اللغة</button>
     </section><section class="cta-buttons">
@@ -34,7 +34,7 @@
 <section class="experience-badge">🌼 أكثر من 10 سنوات خبرة</section>
 
 <section class="faq">
-  <h2>الأسئلة الشائعة</h2>
+  <h2 id="faq-title">الأسئلة الشائعة</h2>
   <div class="faq-item">
     <h3>كيف يمكنني إرسال جهاز للإصلاح؟</h3>
     <div class="answer">يمكنك إرسال الجهاز عبر البريد إلى عنوان الورشة أو التواصل معنا لترتيب خدمة الاستلام.</div>
@@ -55,8 +55,8 @@
 
   </main>  <footer>
     <div class="container footer-inner">
-      <p>📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp: 98192103</p>
-      <p>⏰ من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
+      <p id="footer-location">📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp: 98192103</p>
+      <p id="footer-hours">⏰ من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
       <div class="social-icons">
         <a href="https://www.facebook.com/AEMednine" target="_blank" rel="noopener"><img src="icons/facebook.svg" alt="Facebook" /></a>
         <a href="https://www.instagram.com/aemedenine/" target="_blank" rel="noopener"><img src="icons/instagram.svg" alt="Instagram" /></a>
