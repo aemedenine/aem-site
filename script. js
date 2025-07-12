@@ -152,3 +152,113 @@ document.querySelector('.btn-video').textContent = 'شاهد الفيديو';
   updateNews();
   initFAQ();
 });
+const translations = {
+  ar: {
+    visits: "عدد زياراتك: ",
+    toggle: "تبديل اللغة",
+    whatsapp: "واتساب",
+    maps: "موقعنا على Google Maps",
+    gallery: "شاهد الصور",
+    video: "شاهد الفيديو",
+    radio: "شغّل الراديو",
+    badge: "🌼 أكثر من 10 سنوات خبرة",
+    faqTitle: "الأسئلة الشائعة",
+    q1: "كيف يمكنني إرسال جهاز للإصلاح؟",
+    a1: "يمكنك إرسال الجهاز عبر البريد إلى عنوان الورشة أو التواصل معنا لترتيب خدمة الاستلام.",
+    q2: "ما هي مدة التصليح المعتادة؟",
+    a2: "مدة التصليح تختلف حسب نوع العطل، لكن غالباً لا تتجاوز 3 أيام عمل.",
+    q3: "هل توفرون قطع غيار أصلية؟",
+    a3: "نعم، نوفر قطع غيار أصلية وذات جودة عالية لجميع الأجهزة.",
+    q4: "كيف أتابع حالة الإصلاح؟",
+    a4: "نقوم بإرسال صور وفيديوهات لحالة الجهاز أثناء مراحل التصليح عبر واتساب.",
+    footer1: "📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp: 98192103",
+    footer2: "⏰ من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة"
+  },
+  fr: {
+    visits: "Nombre de visites : ",
+    toggle: "Changer la langue",
+    whatsapp: "WhatsApp",
+    maps: "Notre position sur Google Maps",
+    gallery: "Voir les photos",
+    video: "Voir les vidéos",
+    radio: "Lancer la radio",
+    badge: "🌼 Plus de 10 ans d'expérience",
+    faqTitle: "Questions fréquentes",
+    q1: "Comment envoyer un appareil pour réparation ?",
+    a1: "Vous pouvez envoyer l'appareil par poste ou nous contacter pour une collecte.",
+    q2: "Quel est le délai habituel de réparation ?",
+    a2: "Cela dépend du problème, mais généralement sous 3 jours ouvrables.",
+    q3: "Fournissez-vous des pièces d'origine ?",
+    a3: "Oui, nous fournissons des pièces d’origine de haute qualité.",
+    q4: "Comment suivre l’état de la réparation ?",
+    a4: "Nous envoyons des photos et vidéos pendant la réparation via WhatsApp.",
+    footer1: "📍 Médenine – Service dans toute la Tunisie | 📲 WhatsApp: 98192103",
+    footer2: "⏰ Du lundi au samedi, 08:00 - 18:00 | Dimanche fermé"
+  },
+  en: {
+    visits: "Your visits: ",
+    toggle: "Switch Language",
+    whatsapp: "WhatsApp",
+    maps: "Our location on Google Maps",
+    gallery: "View Photos",
+    video: "Watch Video",
+    radio: "Play Radio",
+    badge: "🌼 Over 10 Years of Experience",
+    faqTitle: "Frequently Asked Questions",
+    q1: "How can I send a device for repair?",
+    a1: "You can send it by post or contact us to arrange pickup.",
+    q2: "What is the usual repair time?",
+    a2: "Depends on the issue, usually within 3 working days.",
+    q3: "Do you provide original spare parts?",
+    a3: "Yes, we provide high-quality original parts.",
+    q4: "How can I track the repair?",
+    a4: "We send you photos and videos via WhatsApp during repair.",
+    footer1: "📍 Médenine – We serve all of Tunisia | 📲 WhatsApp: 98192103",
+    footer2: "⏰ Monday to Saturday, 08:00 - 18:00 | Sunday closed"
+  }
+};
+
+let currentLang = "ar";
+
+document.getElementById("toggle-lang-btn").addEventListener("click", () => {
+  currentLang = currentLang === "ar" ? "fr" : currentLang === "fr" ? "en" : "ar";
+  updateLanguage();
+});
+
+function updateLanguage() {
+  const t = translations[currentLang];
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
+
+  document.getElementById("visit-count").textContent = t.visits + getVisitCount();
+  document.getElementById("toggle-lang-btn").textContent = t.toggle;
+  document.querySelector(".btn-whatsapp").textContent = t.whatsapp;
+  document.querySelector(".btn-maps").textContent = t.maps;
+  document.querySelector(".btn-gallery").textContent = t.gallery;
+  document.querySelector(".btn-video").textContent = t.video;
+  document.querySelector(".btn-radio").textContent = t.radio;
+  document.querySelector(".experience-badge").textContent = t.badge;
+
+  document.querySelector(".faq h2").textContent = t.faqTitle;
+  const questions = document.querySelectorAll(".faq-item h3");
+  const answers = document.querySelectorAll(".faq-item .answer");
+  questions[0].textContent = t.q1;
+  answers[0].textContent = t.a1;
+  questions[1].textContent = t.q2;
+  answers[1].textContent = t.a2;
+  questions[2].textContent = t.q3;
+  answers[2].textContent = t.a3;
+  questions[3].textContent = t.q4;
+  answers[3].textContent = t.a4;
+
+  document.querySelector("footer p:nth-of-type(1)").textContent = t.footer1;
+  document.querySelector("footer p:nth-of-type(2)").textContent = t.footer2;
+}
+
+// زيارة مزيفة للعرض (أو عوّضها بواحدة حقيقية)
+function getVisitCount() {
+  return localStorage.getItem("visitCount") || "0";
+}
+
+// تفعيل اللغة الحالية عند فتح الصفحة
+document.addEventListener("DOMContentLoaded", updateLanguage);
