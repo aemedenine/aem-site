@@ -1,162 +1,98 @@
-const translations = {
-  ar: {
-    visits: "عدد زياراتك: ",
-    toggle: "تبديل اللغة",
-    whatsapp: "واتساب",
-    maps: "موقعنا على Google Maps",
-    gallery: "شاهد الصور",
-    video: "شاهد الفيديو",
-    radioPlay: "شغّل الراديو",
-    radioStop: "أوقف الراديو",
-    badge: "🌼 أكثر من 10 سنوات خبرة",
-    faqTitle: "الأسئلة الشائعة",
-    q1: "كيف يمكنني إرسال جهاز للإصلاح؟",
-    a1: "يمكنك إرسال الجهاز عبر البريد إلى عنوان الورشة أو التواصل معنا لترتيب خدمة الاستلام.",
-    q2: "ما هي مدة التصليح المعتادة؟",
-    a2: "مدة التصليح تختلف حسب نوع العطل، لكن غالباً لا تتجاوز 3 أيام عمل.",
-    q3: "هل توفرون قطع غيار أصلية؟",
-    a3: "نعم، نوفر قطع غيار أصلية وذات جودة عالية لجميع الأجهزة.",
-    q4: "كيف أتابع حالة الإصلاح؟",
-    a4: "نقوم بإرسال صور وفيديوهات لحالة الجهاز أثناء مراحل التصليح عبر واتساب.",
-    footer1: "📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp: 98192103",
-    footer2: "⏰ من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة",
-    news: [
-      "📢 ورشة إلكترونيك الرحماني تفتح أبوابها لجميع الولايات.",
-      "🔧 خدمات تصليح الأجهزة الإلكترونية بجودة عالية وبأسعار منافسة.",
-      "🌍 التوصيل عبر البريد متوفر لكل أنحاء تونس.",
-      "📱 تواصل معنا عبر واتساب لأي استفسار."
-    ]
-  },
-  fr: {
-    visits: "Nombre de visites : ",
-    toggle: "Changer la langue",
-    whatsapp: "WhatsApp",
-    maps: "Voir sur Google Maps",
-    gallery: "Voir les photos",
-    video: "Voir les vidéos",
-    radioPlay: "Lancer la radio",
-    radioStop: "Arrêter la radio",
-    badge: "🌼 Plus de 10 ans d'expérience",
-    faqTitle: "Questions fréquentes",
-    q1: "Comment puis-je envoyer un appareil pour réparation ?",
-    a1: "Vous pouvez envoyer l'appareil par courrier à l'atelier ou nous contacter pour organiser la collecte.",
-    q2: "Quel est le délai moyen de réparation ?",
-    a2: "Le délai dépend du type de panne, mais généralement pas plus de 3 jours ouvrables.",
-    q3: "Fournissez-vous des pièces d'origine ?",
-    a3: "Oui, nous fournissons des pièces d'origine et de haute qualité pour tous les appareils.",
-    q4: "Comment suivre l'état de la réparation ?",
-    a4: "Nous envoyons des photos et vidéos de l'état de l'appareil pendant la réparation via WhatsApp.",
-    footer1: "📍 Médenine – Service dans toute la Tunisie | 📲 WhatsApp: 98192103",
-    footer2: "⏰ Du lundi au samedi, 08:00 - 18:00 | Dimanche fermé",
-    news: [
-      "📢 Atelier Electronique Médenine ouvre ses portes pour toutes les régions.",
-      "🔧 Services de réparation électronique de haute qualité à prix compétitifs.",
-      "🌍 Livraison par courrier disponible dans toute la Tunisie.",
-      "📱 Contactez-nous via WhatsApp pour toute question."
-    ]
+// --- تحديث الوقت الحالي ---
+function updateTime() {
+  const now = new Date();
+  const timeString = now.toLocaleTimeString('ar-TN', { hour12: false });
+  const timeElem = document.getElementById('current-time');
+  if (timeElem) {
+    timeElem.textContent = timeString;
   }
-};
-
-let currentLang = "ar";
-
-function getVisitCount() {
-  return parseInt(localStorage.getItem("aem-visit-count")) || 0;
 }
-function incrementVisitCount() {
-  let count = getVisitCount();
-  count++;
-  localStorage.setItem("aem-visit-count", count);
+setInterval(updateTime, 1000);
+updateTime();
+
+// --- عداد زيارات المستخدم في localStorage ---
+const visitCountElem = document.getElementById('visit-count');
+if (visitCountElem) {
+  let visits = localStorage.getItem('visitCount');
+  visits = visits ? parseInt(visits) + 1 : 1;
+  localStorage.setItem('visitCount', visits);
+  visitCountElem.textContent = `عدد زياراتك: ${visits}`;
 }
 
-function initFAQ() {
-  document.querySelectorAll(".faq-item").forEach(item => {
-    item.onclick = () => item.classList.toggle("open");
+// --- تبديل اللغة (مثال بسيط) ---
+const toggleLangBtn = document.getElementById('toggle-lang-btn');
+if (toggleLangBtn) {
+  toggleLangBtn.addEventListener('click', () => {
+    // مثال تغيير نص فقط، تحتاج تكملة حسب دعم لغات موقعك
+    if (document.documentElement.lang === 'ar') {
+      document.documentElement.lang = 'fr';
+      toggleLangBtn.textContent = 'Changer la langue';
+      // هنا ضف تحديثات نصوص الموقع للفرنسية
+    } else {
+      document.documentElement.lang = 'ar';
+      toggleLangBtn.textContent = 'تبديل اللغة';
+      // هنا ضف تحديثات نصوص الموقع للعربية
+    }
   });
 }
 
-function updateLanguage() {
-  const t = translations[currentLang];
-  document.documentElement.lang = currentLang;
-  document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
-
-  document.getElementById("visit-count").textContent = t.visits + getVisitCount();
-  document.getElementById("toggle-lang-btn").textContent = t.toggle;
-  document.querySelector(".btn-whatsapp").textContent = t.whatsapp;
-  document.querySelector(".btn-maps").textContent = t.maps;
-  document.querySelector(".btn-gallery").textContent = t.gallery;
-  document.querySelector(".btn-video").textContent = t.video;
-
-  const radioBtn = document.getElementById("radio-btn");
-  const radio = document.getElementById("radio-stream");
-  radioBtn.textContent = radio.paused ? t.radioPlay : t.radioStop;
-
-  document.querySelector(".experience-badge").textContent = t.badge;
-
-  const q = document.querySelectorAll(".faq-item h3");
-  const a = document.querySelectorAll(".faq-item .answer");
-
-  document.querySelector(".faq h2").textContent = t.faqTitle;
-  q[0].textContent = t.q1;
-  a[0].textContent = t.a1;
-  q[1].textContent = t.q2;
-  a[1].textContent = t.a2;
-  q[2].textContent = t.q3;
-  a[2].textContent = t.a3;
-  q[3].textContent = t.q4;
-  a[3].textContent = t.a4;
-
-  document.querySelector("footer p:nth-of-type(1)").textContent = t.footer1;
-  document.querySelector("footer p:nth-of-type(2)").textContent = t.footer2;
-
-  updateNews();
-  initFAQ(); // ← ضروري لإعادة تفعيل الكليك بعد الترجمة
+// --- تحميل الأخبار من BBC عربي ---
+function loadNews() {
+  fetch('https://api.rss2json.com/v1/api.json?rss_url=https://feeds.bbci.co.uk/arabic/rss.xml')
+    .then(response => response.json())
+    .then(data => {
+      const newsItems = data.items.slice(0, 5);
+      const newsText = newsItems.map(item => `<span class="news-item">🗞️ ${item.title}</span>`).join(' | ');
+      const newsElem = document.getElementById('live-news');
+      if (newsElem) newsElem.innerHTML = newsText;
+    })
+    .catch(() => {
+      const newsElem = document.getElementById('live-news');
+      if (newsElem) newsElem.textContent = "⚠️ لم يتم تحميل الأخبار.";
+    });
 }
+loadNews();
+setInterval(loadNews, 600000); // تحديث كل 10 دقائق
 
-function updateNews() {
-  const t = translations[currentLang].news;
-  document.getElementById("live-news").textContent = t.join(" • ");
-}
-
-function updateTime() {
-  const now = new Date();
-  const days = {
-    ar: ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],
-    fr: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi']
-  };
-  const months = {
-    ar: ['جانفي','فيفري','مارس','أفريل','ماي','جوان','جويلية','أوت','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],
-    fr: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre']
-  };
-  const day = days[currentLang][now.getDay()];
-  const month = months[currentLang][now.getMonth()];
-  const date = now.getDate();
-  const time = now.toTimeString().slice(0, 8);
-  const full = `${day}، ${date} ${month} - ${time}`;
-  document.getElementById("current-time").textContent = full;
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  incrementVisitCount();
-  updateLanguage();
-  updateTime();
-  setInterval(updateTime, 1000);
-
-  document.getElementById("toggle-lang-btn").onclick = () => {
-    currentLang = currentLang === "ar" ? "fr" : "ar";
-    updateLanguage();
-  };
-
-  document.getElementById("radio-btn").onclick = () => {
-    const radio = document.getElementById("radio-stream");
-    const btn = document.getElementById("radio-btn");
-    if (radio.paused) {
-      radio.play();
-      btn.textContent = translations[currentLang].radioStop;
+// --- تشغيل وإيقاف الراديو ---
+const radioBtn = document.getElementById('radio-btn');
+const radioStream = document.getElementById('radio-stream');
+if (radioBtn && radioStream) {
+  radioBtn.addEventListener('click', () => {
+    if (radioStream.paused) {
+      radioStream.play();
+      radioBtn.textContent = 'أوقف الراديو';
     } else {
-      radio.pause();
-      btn.textContent = translations[currentLang].radioPlay;
+      radioStream.pause();
+      radioBtn.textContent = 'شغّل الراديو';
     }
-  };
+  });
+}
 
-  initFAQ(); // ← أول مرة عند التحميل
+// --- تفعيل الأسئلة الشائعة ---
+document.querySelectorAll('.faq-item h3').forEach((question) => {
+  question.style.cursor = 'pointer';
+
+  question.addEventListener('click', () => {
+    const answer = question.nextElementSibling;
+
+    // إغلاق كل الأجوبة الأخرى + إزالة active من كل الأسئلة
+    document.querySelectorAll('.faq .answer').forEach((ans) => {
+      if (ans !== answer) {
+        ans.style.display = 'none';
+      }
+    });
+    document.querySelectorAll('.faq-item h3').forEach((q) => {
+      if (q !== question) q.classList.remove('active');
+    });
+
+    // تبديل حالة الجواب الحالي والـ active
+    if (answer.style.display === 'block') {
+      answer.style.display = 'none';
+      question.classList.remove('active');
+    } else {
+      answer.style.display = 'block';
+      question.classList.add('active');
+    }
+  });
 });
