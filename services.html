@@ -5,49 +5,120 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>خدمات الورشة - Atelier Electronique Médenine</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      direction: rtl;
+      margin: 0;
+      padding: 20px 10px 60px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #00bfff;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px #00bfff99;
+    }
+    .services-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 24px;
+    }
+    .service-box {
+      background: #111;
+      padding: 18px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #00bfff44;
+      transition: transform 0.3s ease;
+      cursor: default;
+    }
+    .service-box:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 25px #00bfff88;
+    }
+    .service-box h3 {
+      color: #00bfff;
+      margin-bottom: 12px;
+    }
+    .service-box p {
+      line-height: 1.5;
+      color: #ccc;
+      font-size: 1rem;
+    }
+    .lang-toggle {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background: #00bfff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: bold;
+      color: #0f0f0f;
+      cursor: pointer;
+      box-shadow: 0 0 8px #00bfffaa;
+      z-index: 1000;
+      transition: background 0.3s ease;
+    }
+    .lang-toggle:hover {
+      background: #0077aa;
+      color: white;
+    }
+  </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">
-      <img src="logo.png" alt="Logo" />
-      <span class="logo-text">Atelier Electronique Médenine</span>
+  <button class="lang-toggle" onclick="toggleLang()">Français</button>
+
+  <h1 id="page-title">خدمات الورشة</h1>
+
+  <div class="services-list">
+    <div class="service-box">
+      <h3 class="t" data-ar="تصليح الكروت الإلكترونية" data-fr="Réparation des cartes électroniques"></h3>
+      <p class="t" data-ar="نقوم بتشخيص وإصلاح كروت إلكترونية لجميع الأجهزة المنزلية والصناعية بأحدث التقنيات." data-fr="Diagnostic et réparation de cartes électroniques pour appareils domestiques et industriels."></p>
     </div>
-    <nav>
-      <a href="index.html">الرئيسية</a>
-      <a href="photos.html">الصور</a>
-      <a href="videos.html">الفيديو</a>
-      <a href="services.html" class="active">خدمات الورشة</a>
-    </nav>
-    <button class="lang-toggle" onclick="toggleLang()">Français</button>
-  </header>
-
-  <main>
-    <h2 id="title">خدمات الورشة</h2>
-    <div class="services-list">
-      <div class="service-box">
-        <h3 class="t" data-ar="تصليح الكروت الإلكترونية" data-fr="Réparation des cartes électroniques"></h3>
-        <p class="t" data-ar="نقوم بتشخيص وإصلاح كروت إلكترونية لجميع الأجهزة المنزلية والصناعية بأحدث التقنيات." data-fr="Diagnostic et réparation de cartes électroniques pour appareils domestiques et industriels."></p>
-      </div>
-      <div class="service-box">
-        <h3 class="t" data-ar="صيانة الحواسيب واللابتوب" data-fr="Maintenance PC & Laptop"></h3>
-        <p class="t" data-ar="حلول لمشاكل التشغيل، تغيير قطع، تنظيف حراري، تركيب SSD، استرجاع بيانات." data-fr="Réparation système, remplacement pièces, nettoyage, ajout SSD, récupération de données."></p>
-      </div>
-      <div class="service-box">
-        <h3 class="t" data-ar="تشخيص عن بُعد" data-fr="Diagnostic à distance"></h3>
-        <p class="t" data-ar="بعث الجهاز بالبريد – تشخيص وتصليح مع إرسال فيديو وصور قبل وبعد، ثم نرجعو ليك." data-fr="Envoyez l'appareil par poste – diagnostic + réparation avec photos/vidéos avant/après."></p>
-      </div>
-      <div class="service-box">
-        <h3 class="t" data-ar="خدمة عبر كامل الجمهورية" data-fr="Service dans toute la Tunisie"></h3>
-        <p class="t" data-ar="نستقبل من جميع الولايات – نضمن السرعة، الاحتراف، والمتابعة المستمرة عبر WhatsApp." data-fr="Réception depuis toutes les régions – rapidité, qualité, et suivi via WhatsApp."></p>
-      </div>
+    <div class="service-box">
+      <h3 class="t" data-ar="صيانة الحواسيب واللابتوب" data-fr="Maintenance PC & Laptop"></h3>
+      <p class="t" data-ar="حلول لمشاكل التشغيل، تغيير قطع، تنظيف حراري، تركيب SSD، استرجاع بيانات." data-fr="Réparation système, remplacement pièces, nettoyage, ajout SSD, récupération de données."></p>
     </div>
-  </main>
+    <div class="service-box">
+      <h3 class="t" data-ar="تشخيص عن بُعد" data-fr="Diagnostic à distance"></h3>
+      <p class="t" data-ar="بعث الجهاز بالبريد – تشخيص وتصليح مع إرسال فيديو وصور قبل وبعد، ثم نرجعو ليك." data-fr="Envoyez l'appareil par poste – diagnostic + réparation avec photos/vidéos avant/après."></p>
+    </div>
+    <div class="service-box">
+      <h3 class="t" data-ar="خدمة عبر كامل الجمهورية" data-fr="Service dans toute la Tunisie"></h3>
+      <p class="t" data-ar="نستقبل من جميع الولايات – نضمن السرعة، الاحتراف، والمتابعة المستمرة عبر WhatsApp." data-fr="Réception depuis toutes les régions – rapidité, qualité, et suivi via WhatsApp."></p>
+    </div>
+  </div>
 
-  <footer>
-    © 2025 Atelier Electronique Médenine - جميع الحقوق محفوظة
-  </footer>
+  <script>
+    function toggleLang() {
+      let currentLang = localStorage.getItem('lang') || 'ar';
+      let newLang = currentLang === 'ar' ? 'fr' : 'ar';
+      localStorage.setItem('lang', newLang);
+      applyLang();
+    }
 
-  <script src="script.js"></script>
+    function applyLang() {
+      let lang = localStorage.getItem('lang') || 'ar';
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+      document.querySelector('.lang-toggle').textContent = lang === 'ar' ? 'Français' : 'العربية';
+      document.getElementById('page-title').textContent = lang === 'ar' ? 'خدمات الورشة' : 'Nos Services';
+
+      document.querySelectorAll('.t').forEach(el => {
+        el.textContent = el.dataset[lang];
+      });
+    }
+
+    // عند تحميل الصفحة
+    applyLang();
+  </script>
+
 </body>
 </html>
