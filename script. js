@@ -86,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('.btn-maps').textContent = 'Voir sur Google Maps';
       document.querySelector('.btn-gallery').textContent = 'Voir les photos';
       document.querySelector('.btn-video').textContent = 'Voir les vidéos';
+document.querySelector('.btn-services').textContent = currentLang === 'ar' ? 'خدمات الورشة' : 'Services de l\'atelier';
       document.getElementById('radio-btn').textContent = radio.paused ? 'Écouter la radio' : 'Arrêter la radio';
 
       // FAQ - محتوى فرنسي
