@@ -1,78 +1,57 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Atelier Electronique Médenine</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.ico" />
 </head>
-  <script src="script.js"></script>
 <body>
   <header>
-    <div class="container header-inner">
-      <img src="logo.png" alt="Atelier Electronique Médenine Logo" class="logo" />
-      <h1>Atelier Electronique Médenine</h1>
+    <img src="logo.png" class="logo" alt="Logo" />
+    <div class="qr-container">
+      <img src="qr-code.png" alt="QR Code" width="100" />
+      <p class="t" data-ar="📱 امسح للوصول السريع" data-fr="📱 Scannez pour accéder rapidement"></p>
     </div>
-  </header>
-
-  <div class="news-ticker">
-    <div class="news-text" id="live-news">تحميل الأخبار...</div>
-  </div>
-
-  <main class="container main-content">
-    <section class="info-bar">
-      <div id="current-time">--:--:--</div>
-      <div id="visit-count">عدد زياراتك: 0</div>
-      <button id="toggle-lang-btn" class="btn-primary">تبديل اللغة</button>
-    </section>
-
-    <section class="cta-buttons">
-      <a href="https://wa.me/21698192103" target="_blank" class="btn-whatsapp">واتساب</a>
-      <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" class="btn-maps">موقعنا على Google Maps</a>
-      <a href="photos.html" class="btn-gallery">شاهد الصور</a>
-      <a href="videos.html" class="btn-video">شاهد الفيديو</a>
-      <button id="radio-btn" class="btn-radio">شغّل الراديو</button>
-      <audio id="radio-stream" src="https://stream.radiojar.com/8s5u5tpdtwzuv" preload="none"></audio>
-    </section>
-
-    <section class="experience-badge">🌼 أكثر من 10 سنوات خبرة</section>
-
-    <section class="faq">
-      <h2>الأسئلة الشائعة</h2>
-      <div class="faq-item">
-        <h3>كيف يمكنني إرسال جهاز للإصلاح؟</h3>
-        <div class="answer">يمكنك إرسال الجهاز عبر البريد إلى عنوان الورشة أو التواصل معنا لترتيب خدمة الاستلام.</div>
-      </div>
-      <div class="faq-item">
-        <h3>ما هي مدة التصليح المعتادة؟</h3>
-        <div class="answer">مدة التصليح تختلف حسب نوع العطل، لكن غالباً لا تتجاوز 3 أيام عمل.</div>
-      </div>
-      <div class="faq-item">
-        <h3>هل توفرون قطع غيار أصلية؟</h3>
-        <div class="answer">نعم، نوفر قطع غيار أصلية وذات جودة عالية لجميع الأجهزة.</div>
-      </div>
-      <div class="faq-item">
-        <h3>كيف أتابع حالة الإصلاح؟</h3>
-        <div class="answer">نقوم بإرسال صور وفيديوهات لحالة الجهاز أثناء مراحل التصليح عبر واتساب.</div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <p>📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp: 98192103</p>
-      <p>⏰ من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
-      <div class="social-icons">
-        <a href="https://www.facebook.com/AEMednine" target="_blank" rel="noopener"><img src="icons/facebook.svg" alt="Facebook" /></a>
-        <a href="https://www.instagram.com/aemedenine/" target="_blank" rel="noopener"><img src="icons/instagram.svg" alt="Instagram" /></a>
-        <a href="https://wa.me/21698192103" target="_blank" rel="noopener"><img src="icons/whatsapp.svg" alt="WhatsApp" /></a>
-      </div>
+    <div class="cta-buttons">
+      <a href="https://wa.me/21698192103" target="_blank">واتساب</a>
+      <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" class="maps t" data-ar="خرائط Google" data-fr="Google Maps"></a>
+      <a href="photos.html" class="photos t" data-ar="صور الورشة" data-fr="Photos"></a>
+      <a href="videos.html" class="videos t" data-ar="فيديوهات الورشة" data-fr="Vidéos"></a>
+      <a href="services.html" class="t" data-ar="خدمات الورشة" data-fr="Nos Services"></a>
+      <a href="#faq" class="t" data-ar="الأسئلة الشائعة" data-fr="FAQ"></a>
+      <button onclick="toggleLang()" class="lang">Français</button>
     </div>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
+  </header>  <div class="info-bar">
+    <span id="current-time"></span> | <span id="visit-count"></span>
+  </div>  <div class="news-ticker">
+    <span id="live-news">تحميل الأخبار...</span>
+  </div>  <section class="status">
+    🚪 من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة
+    <br />
+    🌐 مدنين - نخدمو في كامل أنحاء تونس
+  </section>  <div class="cta-buttons">
+    <button onclick="document.getElementById('radio-player').play()">🎵 تشغيل راديو القرآن</button>
+    <audio id="radio-player" src="https://qurango.net/radio/mishari" type="audio/mpeg"></audio>
+  </div>  <section class="gallery">
+    <img src="Rt.png" alt="تصليح كارت إلكترونية" />
+    <img src="Hh.png" alt="لحام مكونات دقيقة" />
+    <img src="Ce.jpg" alt="قطع إلكترونية" />
+  </section>  <section class="faq" id="faq">
+    <h2 class="t" data-ar="الأسئلة الشائعة" data-fr="Questions Fréquentes"></h2>
+    <div class="faq-item">
+      <h3>هل يمكن إرسال الجهاز من ولاية أخرى؟</h3>
+      <div class="answer">نعم، نخدمو عبر البريد ونرجعو الجهاز بعد الإصلاح.</div>
+    </div>
+    <div class="faq-item">
+      <h3>هل يوجد ضمان على التصليح؟</h3>
+      <div class="answer">أكيد، نقدم ضمان حسب نوع الخدمة.</div>
+    </div>
+    <div class="faq-item">
+      <h3>هل يتم إرسال صور وفيديو بعد التصليح؟</h3>
+      <div class="answer">نعم، نرسل صور وفيديو قبل وبعد التصليح عبر واتساب.</div>
+    </div>
+  </section>  <footer>
+    © 2025 Atelier Electronique Médenine - جميع الحقوق محفوظة
+  </footer>  <script src="script.js"></script></body>
 </html>
