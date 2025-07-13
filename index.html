@@ -1,57 +1,70 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Atelier Electronique Médenine</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="favicon.ico" />
 </head>
 <body>
-  <header>
-    <img src="logo.png" class="logo" alt="Logo" />
-    <div class="qr-container">
-      <img src="qr-code.png" alt="QR Code" width="100" />
-      <p class="t" data-ar="📱 امسح للوصول السريع" data-fr="📱 Scannez pour accéder rapidement"></p>
-    </div>
-    <div class="cta-buttons">
-      <a href="https://wa.me/21698192103" target="_blank">واتساب</a>
-      <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" class="maps t" data-ar="خرائط Google" data-fr="Google Maps"></a>
-      <a href="photos.html" class="photos t" data-ar="صور الورشة" data-fr="Photos"></a>
-      <a href="videos.html" class="videos t" data-ar="فيديوهات الورشة" data-fr="Vidéos"></a>
-      <a href="services.html" class="t" data-ar="خدمات الورشة" data-fr="Nos Services"></a>
-      <a href="#faq" class="t" data-ar="الأسئلة الشائعة" data-fr="FAQ"></a>
-      <button onclick="toggleLang()" class="lang">Français</button>
-    </div>
-  </header>  <div class="info-bar">
+
+  <!-- الشريط العلوي: الوقت والزيارات -->
+  <div class="info-bar">
     <span id="current-time"></span> | <span id="visit-count"></span>
-  </div>  <div class="news-ticker">
-    <span id="live-news">تحميل الأخبار...</span>
-  </div>  <section class="status">
-    🚪 من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة
-    <br />
-    🌐 مدنين - نخدمو في كامل أنحاء تونس
-  </section>  <div class="cta-buttons">
-    <button onclick="document.getElementById('radio-player').play()">🎵 تشغيل راديو القرآن</button>
-    <audio id="radio-player" src="https://qurango.net/radio/mishari" type="audio/mpeg"></audio>
-  </div>  <section class="gallery">
-    <img src="Rt.png" alt="تصليح كارت إلكترونية" />
-    <img src="Hh.png" alt="لحام مكونات دقيقة" />
-    <img src="Ce.jpg" alt="قطع إلكترونية" />
-  </section>  <section class="faq" id="faq">
-    <h2 class="t" data-ar="الأسئلة الشائعة" data-fr="Questions Fréquentes"></h2>
-    <div class="faq-item">
-      <h3>هل يمكن إرسال الجهاز من ولاية أخرى؟</h3>
-      <div class="answer">نعم، نخدمو عبر البريد ونرجعو الجهاز بعد الإصلاح.</div>
+  </div>
+
+  <!-- رأس الموقع -->
+  <header>
+    <img src="logo.png" alt="Logo" class="logo" />
+    <nav>
+      <a href="index.html" class="active">الرئيسية</a>
+      <a href="photos.html">الصور</a>
+      <a href="videos.html">الفيديو</a>
+      <a href="services.html">خدمات الورشة</a>
+    </nav>
+    <button class="lang-toggle" onclick="toggleLang()">Français</button>
+  </header>
+
+  <!-- شريط الأخبار -->
+  <div class="news-ticker">
+    <span id="live-news">جاري تحميل الأخبار...</span>
+  </div>
+
+  <!-- محتوى رئيسي -->
+  <main>
+    <h1 id="title">خدمات الورشة</h1>
+    <div class="services-list">
+      <div class="service-box">
+        <h3 class="t" data-ar="تصليح الكروت الإلكترونية" data-fr="Réparation des cartes électroniques"></h3>
+        <p class="t" data-ar="نقوم بتشخيص وإصلاح كروت إلكترونية لجميع الأجهزة المنزلية والصناعية بأحدث التقنيات." data-fr="Diagnostic et réparation de cartes électroniques pour appareils domestiques et industriels."></p>
+      </div>
+      <div class="service-box">
+        <h3 class="t" data-ar="صيانة الحواسيب واللابتوب" data-fr="Maintenance PC & Laptop"></h3>
+        <p class="t" data-ar="حلول لمشاكل التشغيل، تغيير قطع، تنظيف حراري، تركيب SSD، استرجاع بيانات." data-fr="Réparation système, remplacement pièces, nettoyage, ajout SSD, récupération de données."></p>
+      </div>
+      <div class="service-box">
+        <h3 class="t" data-ar="تشخيص عن بُعد" data-fr="Diagnostic à distance"></h3>
+        <p class="t" data-ar="بعث الجهاز بالبريد – تشخيص وتصليح مع إرسال فيديو وصور قبل وبعد، ثم نرجعو ليك." data-fr="Envoyez l'appareil par poste – diagnostic + réparation avec photos/vidéos avant/après."></p>
+      </div>
+      <div class="service-box">
+        <h3 class="t" data-ar="خدمة عبر كامل الجمهورية" data-fr="Service dans toute la Tunisie"></h3>
+        <p class="t" data-ar="نستقبل من جميع الولايات – نضمن السرعة، الاحتراف، والمتابعة المستمرة عبر WhatsApp." data-fr="Réception depuis toutes les régions – rapidité, qualité, et suivi via WhatsApp."></p>
+      </div>
     </div>
-    <div class="faq-item">
-      <h3>هل يوجد ضمان على التصليح؟</h3>
-      <div class="answer">أكيد، نقدم ضمان حسب نوع الخدمة.</div>
-    </div>
-    <div class="faq-item">
-      <h3>هل يتم إرسال صور وفيديو بعد التصليح؟</h3>
-      <div class="answer">نعم، نرسل صور وفيديو قبل وبعد التصليح عبر واتساب.</div>
-    </div>
-  </section>  <footer>
+  </main>
+
+  <!-- راديو قرآن -->
+  <div style="text-align:center; margin: 20px;">
+    <button onclick="document.getElementById('quran-radio').play()">▶️ تشغيل راديو القرآن الكريم</button>
+    <audio id="quran-radio" src="https://server8.mp3quran.net/thubti/001.mp3" controls style="margin-top:10px;"></audio>
+  </div>
+
+  <!-- الفوتر -->
+  <footer>
     © 2025 Atelier Electronique Médenine - جميع الحقوق محفوظة
-  </footer>  <script src="script.js"></script></body>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
 </html>
