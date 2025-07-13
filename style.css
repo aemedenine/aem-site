@@ -31,6 +31,7 @@ header {
   align-items: center;
   gap: 15px;
   justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .logo {
@@ -44,6 +45,7 @@ header h1 {
   font-weight: 700;
   font-size: 1.8rem;
   color: #1e90ff;
+  flex-grow: 1;
 }
 
 /* News ticker */
@@ -82,6 +84,8 @@ header h1 {
   margin-bottom: 25px;
   font-weight: 600;
   font-size: 1rem;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 #toggle-lang-btn {
@@ -128,7 +132,10 @@ header h1 {
 .cta-buttons button:hover {
   background: #0c5ea8;
   box-shadow: 0 4px 12px rgba(12,94,168,0.9);
-}.btn-return {
+}
+
+/* زر رجوع للقائمة الرئيسية */
+.btn-return {
   display: inline-block;
   background: #1e90ff;
   color: white;
@@ -149,7 +156,6 @@ header h1 {
   text-align: center;
   margin: 40px 0;
 }
-
 
 /* Experience Badge */
 .experience-badge {
