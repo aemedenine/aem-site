@@ -3,80 +3,106 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>خدمات الورشة - Atelier Electronique Médenine</title>
+  <title>خدمات الورشة | Atelier Electronique Médenine</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: #0b1a27;
+      color: #eee;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 0;
+      margin: 0;
+    }
+
+    header {
+      background-color: #061222;
+      padding: 20px;
+      text-align: center;
+      color: #1e90ff;
+      font-size: 1.6rem;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .service-box {
+      background: #0a1e3d;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+    }
+
+    .service-box:hover {
+      transform: scale(1.02);
+    }
+
+    .service-title {
+      color: #1e90ff;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .service-desc {
+      color: #ccc;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    footer {
+      background-color: #061222;
+      color: #888;
+      padding: 20px 0;
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 40px;
+      box-shadow: inset 0 1px 3px rgba(255,255,255,0.05);
+    }
+  </style>
 </head>
 <body>
-
   <header>
-    <div class="container header-inner">
-      <img src="images/logo.png" alt="Logo" class="logo" />
-      <h1>Atelier Electronique Médenine</h1>
-    </div>
+    خدمات الورشة
   </header>
 
-  <main class="container main-content">
-    <h2 class="title">خدمات الورشة</h2>
-    <div class="services-list">
-      <div class="service-box">
-        <h3 class="t" data-ar="تصليح الكروت الإلكترونية" data-fr="Réparation des cartes électroniques"></h3>
-        <p class="t" data-ar="نقوم بتشخيص وإصلاح كروت إلكترونية لجميع الأجهزة المنزلية والصناعية بأحدث التقنيات."
-           data-fr="Diagnostic et réparation de cartes électroniques pour appareils domestiques et industriels."></p>
-      </div>
-      <div class="service-box">
-        <h3 class="t" data-ar="صيانة الحواسيب واللابتوب" data-fr="Maintenance PC & Laptop"></h3>
-        <p class="t" data-ar="حلول لمشاكل التشغيل، تغيير قطع، تنظيف حراري، تركيب SSD، استرجاع بيانات."
-           data-fr="Réparation système, remplacement pièces, nettoyage, ajout SSD, récupération de données."></p>
-      </div>
-      <div class="service-box">
-        <h3 class="t" data-ar="تشخيص عن بُعد" data-fr="Diagnostic à distance"></h3>
-        <p class="t" data-ar="بعث الجهاز بالبريد – تشخيص وتصليح مع إرسال فيديو وصور قبل وبعد، ثم نرجعو ليك."
-           data-fr="Envoyez l'appareil par poste – diagnostic + réparation avec photos/vidéos avant/après."></p>
-      </div>
-      <div class="service-box">
-        <h3 class="t" data-ar="خدمة عبر كامل الجمهورية" data-fr="Service dans toute la Tunisie"></h3>
-        <p class="t" data-ar="نستقبل من جميع الولايات – نضمن السرعة، الاحتراف، والمتابعة المستمرة عبر WhatsApp."
-           data-fr="Réception depuis toutes les régions – rapidité, qualité, et suivi via WhatsApp."></p>
-      </div>
+  <div class="container">
+
+    <div class="service-box">
+      <div class="service-title">🔍 تشخيص أعطال إلكترونية دقيقة</div>
+      <div class="service-desc">نستخدم معدات متطورة وتقنيات تحليل احترافية لتحديد الأعطال بدقة عالية قبل أي عملية تصليح.</div>
     </div>
-  </main>
+
+    <div class="service-box">
+      <div class="service-title">🛠️ تصليح كروت إلكترونية معقدة</div>
+      <div class="service-desc">نصلّح اللوحات الإلكترونية المعقدة والمكونات الدقيقة، بما في ذلك كروت الغسالات، الثلاجات، والحواسيب.</div>
+    </div>
+
+    <div class="service-box">
+      <div class="service-title">❄️ دعم أجهزة الإنفرتر والتبريد</div>
+      <div class="service-desc">خبرة في صيانة ثلاجات الإنفرتر، مكيفات الهواء، والمضخات، مع ضمان الأداء الأمثل بعد الإصلاح.</div>
+    </div>
+
+    <div class="service-box">
+      <div class="service-title">📦 خدمة عن بُعد وتوصيل بالبريد</div>
+      <div class="service-desc">نستقبل أجهزتك عبر البريد من جميع أنحاء الجمهورية، ونُرجعها لك بعد الإصلاح في أسرع وقت ممكن.</div>
+    </div>
+
+    <div class="service-box">
+      <div class="service-title">📷 صور وفيديو أثناء الإصلاح</div>
+      <div class="service-desc">نشاركك حالة جهازك أولاً بأول، بصور وفيديوهات عبر واتساب لشفافية كاملة وراحة بالك.</div>
+    </div>
+
+  </div>
 
   <footer>
-    <div class="container footer-inner">
-      <p>📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp: 98192103</p>
-      <p>⏰ من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
-    </div>
+    📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 98192103 | ⏰ 08:00 - 18:00
   </footer>
-
-  <script>
-    // تفعيل تبديل اللغة على الصفحة
-    document.addEventListener('DOMContentLoaded', () => {
-      let currentLang = document.documentElement.lang.startsWith('ar') ? 'ar' : 'fr';
-
-      function applyLang() {
-        document.documentElement.lang = currentLang;
-        document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-
-        document.querySelector('.title').textContent = currentLang === 'ar' ? 'خدمات الورشة' : 'Nos Services';
-
-        document.querySelectorAll('.t').forEach(el => {
-          el.textContent = el.dataset[currentLang];
-        });
-      }
-
-      // بدل اللغة مع تحديث النصوص
-      function toggleLang() {
-        currentLang = currentLang === 'ar' ? 'fr' : 'ar';
-        applyLang();
-      }
-
-      // زر تبديل اللغة (ممكن تضيف زر في الصفحة لو تحب)
-      // هنا نفعل التبديل مباشرة لو حبيت تضيف زر
-      // toggleLang();
-
-      applyLang();
-    });
-  </script>
-
 </body>
 </html>
