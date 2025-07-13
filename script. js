@@ -1,94 +1,94 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // ✅ الوقت وعدد الزيارات
-  function updateTime() {
-    const now = new Date();
-    const days = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-    const months = ['جانفي','فيفري','مارس','أفريل','ماي','جوان','جويلية','أوت','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-    const day = days[now.getDay()];
-    const date = now.getDate();
-    const month = months[now.getMonth()];
-    const h = now.getHours().toString().padStart(2, '0');
-    const m = now.getMinutes().toString().padStart(2, '0');
-    const s = now.getSeconds().toString().padStart(2, '0');
-    document.getElementById('current-time').textContent = `${day} ${date} ${month} - ${h}:${m}:${s}`;
-  }
-  setInterval(updateTime, 1000);
-  updateTime();
+// تحديث الوقت والتاريخ باللغة العربية والفرنسية
+function updateTime() {
+  const now = new Date();
+  const daysAr = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+  const daysFr = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
+  const monthsAr = ['جانفي', 'فيفري', 'مارس', 'أفريل', 'ماي', 'جوان', 'جويلية', 'أوت', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+  const monthsFr = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
 
+  const lang = localStorage.getItem('lang') || 'ar';
+
+  const dayName = lang === 'ar' ? daysAr[now.getDay()] : daysFr[now.getDay()];
+  const monthName = lang === 'ar' ? monthsAr[now.getMonth()] : monthsFr[now.getMonth()];
+  const date = now.getDate();
+  const hours = now.getHours().toString().padStart(2,'0');
+  const minutes = now.getMinutes().toString().padStart(2,'0');
+
+  const timeString = lang === 'ar' ?
+    `${dayName} ${date} ${monthName} - ${hours}:${minutes}` :
+    `${dayName} ${date} ${monthName} - ${hours}h${minutes}`;
+
+  document.getElementById('current-time').textContent = timeString;
+}
+
+// عداد الزيارات
+function updateVisits() {
   let visits = localStorage.getItem('visit-count');
   visits = visits ? parseInt(visits) + 1 : 1;
   localStorage.setItem('visit-count', visits);
-  document.getElementById('visit-count').textContent = `عدد زياراتك: ${visits}`;
+  const lang = localStorage.getItem('lang') || 'ar';
+  const text = lang === 'ar' ? `عدد الزيارات: ${visits}` : `Visites: ${visits}`;
+  document.getElementById('visit-count').textContent = text;
+}
 
-  // ✅ FAQ
-  document.querySelectorAll('.faq-item h3').forEach(h3 => {
-    h3.addEventListener('click', () => {
-      h3.parentElement.classList.toggle('open');
+// جلب أخبار BBC عربية مع دعم اللغة
+function fetchNews() {
+  fetch('https://api.rss2json.com/v1/api.json?rss_url=http://feeds.bbci.co.uk/arabic/rss.xml')
+    .then(res => res.json())
+    .then(data => {
+      const items = data.items.slice(0, 4);
+      const lang = localStorage.getItem('lang') || 'ar';
+      const newsText = items.map(item => `📰 ${item.title}`).join(' ⚡ ');
+      document.getElementById('live-news').textContent = newsText;
+    })
+    .catch(() => {
+      const lang = localStorage.getItem('lang') || 'ar';
+      document.getElementById('live-news').textContent = lang === 'ar' ? '❌ فشل تحميل الأخبار.' : '❌ Échec du chargement des actualités.';
     });
+}
+
+// تبديل اللغة (عربي / فرنسي)
+function toggleLang() {
+  let currentLang = localStorage.getItem('lang') || 'ar';
+  let newLang = currentLang === 'ar' ? 'fr' : 'ar';
+  localStorage.setItem('lang', newLang);
+  applyLang();
+}
+
+function applyLang() {
+  let lang = localStorage.getItem('lang') || 'ar';
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelector('.lang-toggle').textContent = lang === 'ar' ? 'Français' : 'العربية';
+
+  // تعيين النصوص الديناميكية حسب اللغة
+  document.querySelectorAll('.t').forEach(el => {
+    el.textContent = el.dataset[lang];
   });
 
-  // ✅ راديو
-  const radio = document.getElementById('radio-stream');
-  const radioBtn = document.getElementById('radio-btn');
-  let currentLang = document.documentElement.lang.startsWith('ar') ? 'ar' : 'fr';
+  // العناوين الرئيسية
+  const titles = {
+    'title-services': {'ar': 'خدمات الورشة', 'fr': 'Nos Services'},
+    'title-photos': {'ar': '📸 معرض الصور', 'fr': '📸 Galerie photos'},
+    'title-videos': {'ar': '🎥 فيديوهات الورشة', 'fr': '🎥 Vidéos de l\'atelier'},
+    'title-home': {'ar': 'Atelier Electronique Médenine', 'fr': 'Atelier Electronique Médenine'}
+  };
 
-  radioBtn.addEventListener('click', () => {
-    if (radio.paused) {
-      radio.play();
-      radioBtn.textContent = currentLang === 'ar' ? '⏸️ أوقف الراديو' : '⏸️ Arrêter la radio';
-    } else {
-      radio.pause();
-      radioBtn.textContent = currentLang === 'ar' ? '📻 شغّل الراديو' : '📻 Écouter la radio';
-    }
+  Object.keys(titles).forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.textContent = titles[id][lang];
   });
 
-  // ✅ تغيير اللغة
-  const toggleBtn = document.getElementById('toggle-lang-btn');
-  toggleBtn.addEventListener('click', () => {
-    const isArabic = currentLang === 'ar';
-    document.documentElement.lang = isArabic ? 'fr' : 'ar';
-    document.documentElement.dir = isArabic ? 'ltr' : 'rtl';
-    currentLang = isArabic ? 'fr' : 'ar';
+  // شريط الأخبار
+  fetchNews();
 
-    // نصوص حسب اللغة
-    document.querySelector('h1').textContent = isArabic ? "Atelier Électronique Médenine" : "ورشة إلكترونيك مدنين";
-    toggleBtn.textContent = isArabic ? "Changer la langue" : "تبديل اللغة";
-    document.querySelector('.btn-whatsapp').textContent = isArabic ? "WhatsApp" : "واتساب";
-    document.querySelector('.btn-maps').textContent = isArabic ? "Voir sur Google Maps" : "موقعنا على Google Maps";
-    document.querySelector('.btn-gallery').textContent = isArabic ? "Voir les photos" : "شاهد الصور";
-    document.querySelector('.btn-video').textContent = isArabic ? "Voir les vidéos" : "شاهد الفيديو";
-    document.querySelector('.btn-radio').textContent = radio.paused
-      ? (isArabic ? "📻 Écouter la radio" : "📻 شغّل الراديو")
-      : (isArabic ? "⏸️ Arrêter la radio" : "⏸️ أوقف الراديو");
-    document.querySelector('.experience-badge').textContent = isArabic
-      ? "🌼 Plus de 10 ans d'expérience"
-      : "🌼 أكثر من 10 سنوات خبرة";
+  // تحديث الوقت والزيارات
+  updateTime();
+  updateVisits();
+}
 
-    document.querySelector('footer p:nth-child(1)').textContent = isArabic
-      ? "📍 Médenine – Service dans toute la Tunisie | 📲 WhatsApp: 98192103"
-      : "📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp: 98192103";
-
-    document.querySelector('footer p:nth-child(2)').textContent = isArabic
-      ? "⏰ Du lundi au samedi, 08:00 - 18:00 | Dimanche fermé"
-      : "⏰ من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة";
-
-    // FAQ بالعربية أو الفرنسية
-    const faqQuestions = isArabic
-      ? ["Comment envoyer un appareil pour réparation ?","Quelle est la durée habituelle de réparation ?","Fournissez-vous des pièces d'origine ?","Comment suivre l'état de la réparation ?"]
-      : ["كيف يمكنني إرسال جهاز للإصلاح؟","ما هي مدة التصليح المعتادة؟","هل توفرون قطع غيار أصلية؟","كيف أتابع حالة الإصلاح؟"];
-
-    const faqAnswers = isArabic
-      ? ["Vous pouvez envoyer l'appareil par courrier ou nous contacter.","La durée dépend de la panne, généralement moins de 3 jours.","Oui, pièces d'origine de haute qualité.","Nous envoyons photos/vidéos via WhatsApp."]
-      : ["يمكنك إرسال الجهاز عبر البريد أو التنسيق معنا.","مدة التصليح غالبًا لا تتجاوز 3 أيام.","نعم، نوفر قطع أصلية عالية الجودة.","نرسل صور وفيديو عبر واتساب."];
-
-    document.querySelectorAll('.faq-item').forEach((item, i) => {
-      item.querySelector('h3').textContent = faqQuestions[i];
-      item.querySelector('.answer').textContent = faqAnswers[i];
-      item.classList.remove('open');
-    });
-  });
-
-  // ✅ الأخبار الوهمية (تبدلها لاحقاً بـ RSS)
-  const newsText = document.getElementById('live-news');
-  newsText.textContent = "📢 ورشة إلكترونيك الرحماني في خدمة كل تونس • 🔧 تصليح احترافي وسريع • 📬 نرجعولك جهازك للدار • 📞 تواصل معنا على واتساب الآن";
-});
+// تنفيذ التهيئة عند تحميل الصفحة
+window.onload = () => {
+  applyLang();
+  setInterval(updateTime, 60000);
+};
