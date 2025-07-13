@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>صور الورشة - Atelier Electronique Médenine</title>
+  <title>صور الورشة | Atelier Electronique Médenine</title>
   <style>
     body {
       font-family: 'Montserrat', 'Open Sans', sans-serif;
@@ -14,20 +14,18 @@
       margin: 20px;
     }
     .container {
-      width: 90%;
-      max-width: 1100px;
+      max-width: 900px;
       margin: auto;
     }
     h1 {
-      margin-bottom: 25px;
       color: #1e90ff;
+      margin-bottom: 25px;
     }
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 15px;
-      max-width: 900px;
-      margin: auto 0 40px 0;
+      margin-bottom: 40px;
     }
     .gallery img {
       width: 100%;
@@ -40,49 +38,26 @@
       transform: scale(1.05);
     }
 
-    /* الأزرار عمودياً: زر اللغة فوق وزر الرجوع تحت */
-    .buttons-wrapper {
-      max-width: 900px;
-      margin: 30px auto 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      align-items: center;
-    }
-
-    #toggle-lang-btn {
-      background-color: #1e90ff;
-      color: white;
+    /* الأزرار (زر اللغة وزر الرجوع) */
+    button, a.btn-return {
+      max-width: 220px;
+      margin: 10px auto;
+      display: block;
+      background-color: #ff6b35;
       border: none;
       padding: 12px 25px;
       border-radius: 8px;
-      cursor: pointer;
-      font-weight: 700;
-      box-shadow: 0 2px 6px rgba(30,144,255,0.7);
-      transition: background-color 0.3s ease;
-      min-width: 200px;
-    }
-    #toggle-lang-btn:hover {
-      background-color: #0c5ea8;
-    }
-
-    .btn-return {
-      background: transparent;
-      color: #ff6b35;
-      border: 3px solid #ff6b35;
-      padding: 12px 25px;
-      border-radius: 50px;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-block;
-      text-align: center;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      min-width: 200px;
-    }
-    .btn-return:hover {
-      background-color: #ff6b35;
       color: white;
-      box-shadow: 0 0 20px #ff6b35;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(255,107,53,0.7);
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+    }
+    button:hover, a.btn-return:hover {
+      background-color: #d9533f;
+      box-shadow: 0 4px 12px rgba(217,83,63,0.9);
     }
   </style>
 </head>
@@ -97,10 +72,8 @@
       <img src="photo4.jpg" alt="صورة الورشة 4" />
     </div>
 
-    <div class="buttons-wrapper">
-      <button id="toggle-lang-btn">تبديل اللغة</button>
-      <a href="index.html" class="btn-return">⬅️ الرجوع إلى الرئيسية</a>
-    </div>
+    <button id="toggle-lang-btn">تبديل اللغة</button>
+    <a href="index.html" class="btn-return">⬅️ الرجوع إلى الصفحة الرئيسية</a>
   </div>
 
   <script>
