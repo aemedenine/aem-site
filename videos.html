@@ -48,6 +48,28 @@
       box-shadow: 0 0 10px #1e90ff;
       background: black;
     }
+    /* زر الرجوع */
+    .back-to-home {
+      margin: 30px auto;
+      max-width: 900px;
+      text-align: left;
+      direction: ltr;
+    }
+    .btn-return {
+      display: inline-block;
+      background-color: #ff6b35;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(255,107,53,0.8);
+      transition: background-color 0.3s ease;
+    }
+    .btn-return:hover {
+      background-color: #d9533f;
+      box-shadow: 0 4px 12px rgba(217,83,63,0.9);
+    }
   </style>
 </head>
 <body>
@@ -65,6 +87,10 @@
         المتصفح لا يدعم عرض الفيديو.
       </video>
     </div>
+  </div>
+
+  <div class="back-to-home">
+    <a href="index.html" class="btn-return">⬅️ الرجوع إلى الرئيسية</a>
   </div>
 
   <script>
@@ -91,7 +117,4 @@
     });
   </script>
 </body>
-  <div class="back-to-home">
-  <a href="index.html" class="btn-return">⬅️ الرجوع إلى الرئيسية</a>
-</div>
 </html>
