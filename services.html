@@ -5,119 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>خدمات الورشة - Atelier Electronique Médenine</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      background-color: #0f0f0f;
-      color: #e0e0e0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      direction: rtl;
-      margin: 0;
-      padding: 20px 10px 60px;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    h1 {
-      text-align: center;
-      color: #00bfff;
-      margin-bottom: 30px;
-      text-shadow: 0 0 10px #00bfff99;
-    }
-    .services-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 24px;
-    }
-    .service-box {
-      background: #111;
-      padding: 18px 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px #00bfff44;
-      transition: transform 0.3s ease;
-      cursor: default;
-    }
-    .service-box:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 0 25px #00bfff88;
-    }
-    .service-box h3 {
-      color: #00bfff;
-      margin-bottom: 12px;
-    }
-    .service-box p {
-      line-height: 1.5;
-      color: #ccc;
-      font-size: 1rem;
-    }
-    .lang-toggle {
-      position: fixed;
-      top: 15px;
-      left: 15px;
-      background: #00bfff;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-weight: bold;
-      color: #0f0f0f;
-      cursor: pointer;
-      box-shadow: 0 0 8px #00bfffaa;
-      z-index: 1000;
-      transition: background 0.3s ease;
-    }
-    .lang-toggle:hover {
-      background: #0077aa;
-      color: white;
-    }
-  </style>
 </head>
 <body>
 
-  <button class="lang-toggle" onclick="toggleLang()">Français</button>
+  <header>
+    <div class="container header-inner">
+      <img src="images/logo.png" alt="Logo" class="logo" />
+      <h1>Atelier Electronique Médenine</h1>
+    </div>
+  </header>
 
-  <h1 id="page-title">خدمات الورشة</h1>
+  <main class="container main-content">
+    <h2 class="title">خدمات الورشة</h2>
+    <div class="services-list">
+      <div class="service-box">
+        <h3 class="t" data-ar="تصليح الكروت الإلكترونية" data-fr="Réparation des cartes électroniques"></h3>
+        <p class="t" data-ar="نقوم بتشخيص وإصلاح كروت إلكترونية لجميع الأجهزة المنزلية والصناعية بأحدث التقنيات."
+           data-fr="Diagnostic et réparation de cartes électroniques pour appareils domestiques et industriels."></p>
+      </div>
+      <div class="service-box">
+        <h3 class="t" data-ar="صيانة الحواسيب واللابتوب" data-fr="Maintenance PC & Laptop"></h3>
+        <p class="t" data-ar="حلول لمشاكل التشغيل، تغيير قطع، تنظيف حراري، تركيب SSD، استرجاع بيانات."
+           data-fr="Réparation système, remplacement pièces, nettoyage, ajout SSD, récupération de données."></p>
+      </div>
+      <div class="service-box">
+        <h3 class="t" data-ar="تشخيص عن بُعد" data-fr="Diagnostic à distance"></h3>
+        <p class="t" data-ar="بعث الجهاز بالبريد – تشخيص وتصليح مع إرسال فيديو وصور قبل وبعد، ثم نرجعو ليك."
+           data-fr="Envoyez l'appareil par poste – diagnostic + réparation avec photos/vidéos avant/après."></p>
+      </div>
+      <div class="service-box">
+        <h3 class="t" data-ar="خدمة عبر كامل الجمهورية" data-fr="Service dans toute la Tunisie"></h3>
+        <p class="t" data-ar="نستقبل من جميع الولايات – نضمن السرعة، الاحتراف، والمتابعة المستمرة عبر WhatsApp."
+           data-fr="Réception depuis toutes les régions – rapidité, qualité, et suivi via WhatsApp."></p>
+      </div>
+    </div>
+  </main>
 
-  <div class="services-list">
-    <div class="service-box">
-      <h3 class="t" data-ar="تصليح الكروت الإلكترونية" data-fr="Réparation des cartes électroniques"></h3>
-      <p class="t" data-ar="نقوم بتشخيص وإصلاح كروت إلكترونية لجميع الأجهزة المنزلية والصناعية بأحدث التقنيات." data-fr="Diagnostic et réparation de cartes électroniques pour appareils domestiques et industriels."></p>
+  <footer>
+    <div class="container footer-inner">
+      <p>📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp: 98192103</p>
+      <p>⏰ من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
     </div>
-    <div class="service-box">
-      <h3 class="t" data-ar="صيانة الحواسيب واللابتوب" data-fr="Maintenance PC & Laptop"></h3>
-      <p class="t" data-ar="حلول لمشاكل التشغيل، تغيير قطع، تنظيف حراري، تركيب SSD، استرجاع بيانات." data-fr="Réparation système, remplacement pièces, nettoyage, ajout SSD, récupération de données."></p>
-    </div>
-    <div class="service-box">
-      <h3 class="t" data-ar="تشخيص عن بُعد" data-fr="Diagnostic à distance"></h3>
-      <p class="t" data-ar="بعث الجهاز بالبريد – تشخيص وتصليح مع إرسال فيديو وصور قبل وبعد، ثم نرجعو ليك." data-fr="Envoyez l'appareil par poste – diagnostic + réparation avec photos/vidéos avant/après."></p>
-    </div>
-    <div class="service-box">
-      <h3 class="t" data-ar="خدمة عبر كامل الجمهورية" data-fr="Service dans toute la Tunisie"></h3>
-      <p class="t" data-ar="نستقبل من جميع الولايات – نضمن السرعة، الاحتراف، والمتابعة المستمرة عبر WhatsApp." data-fr="Réception depuis toutes les régions – rapidité, qualité, et suivi via WhatsApp."></p>
-    </div>
-  </div>
+  </footer>
 
   <script>
-    function toggleLang() {
-      let currentLang = localStorage.getItem('lang') || 'ar';
-      let newLang = currentLang === 'ar' ? 'fr' : 'ar';
-      localStorage.setItem('lang', newLang);
+    // تفعيل تبديل اللغة على الصفحة
+    document.addEventListener('DOMContentLoaded', () => {
+      let currentLang = document.documentElement.lang.startsWith('ar') ? 'ar' : 'fr';
+
+      function applyLang() {
+        document.documentElement.lang = currentLang;
+        document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+
+        document.querySelector('.title').textContent = currentLang === 'ar' ? 'خدمات الورشة' : 'Nos Services';
+
+        document.querySelectorAll('.t').forEach(el => {
+          el.textContent = el.dataset[currentLang];
+        });
+      }
+
+      // بدل اللغة مع تحديث النصوص
+      function toggleLang() {
+        currentLang = currentLang === 'ar' ? 'fr' : 'ar';
+        applyLang();
+      }
+
+      // زر تبديل اللغة (ممكن تضيف زر في الصفحة لو تحب)
+      // هنا نفعل التبديل مباشرة لو حبيت تضيف زر
+      // toggleLang();
+
       applyLang();
-    }
-
-    function applyLang() {
-      let lang = localStorage.getItem('lang') || 'ar';
-      document.documentElement.lang = lang;
-      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-
-      document.querySelector('.lang-toggle').textContent = lang === 'ar' ? 'Français' : 'العربية';
-      document.getElementById('page-title').textContent = lang === 'ar' ? 'خدمات الورشة' : 'Nos Services';
-
-      document.querySelectorAll('.t').forEach(el => {
-        el.textContent = el.dataset[lang];
-      });
-    }
-
-    // عند تحميل الصفحة
-    applyLang();
+    });
   </script>
 
 </body>
