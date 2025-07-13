@@ -3,162 +3,126 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>خدمات الورشة - Atelier Electronique Médenine</title>
+  <title>خدمات الورشة | Atelier Electronique Médenine</title>
   <style>
     body {
       font-family: 'Montserrat', 'Open Sans', sans-serif;
       background: linear-gradient(135deg, #0b1a27, #122f4a);
       color: #eee;
       direction: rtl;
-      text-align: center;
-      margin: 20px;
+      text-align: right;
+      line-height: 1.6;
+      padding: 20px;
+      margin: 0;
     }
     .container {
-      width: 90%;
-      max-width: 1100px;
-      margin: auto;
-    }
-    h1 {
-      margin-bottom: 25px;
-      color: #1e90ff;
-    }
-    .services-list {
       max-width: 900px;
       margin: auto;
-      text-align: right;
-      direction: rtl;
+    }
+    header {
+      background-color: #061222;
+      padding: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+      margin-bottom: 25px;
+      color: #1e90ff;
+      font-size: 1.6rem;
+      font-weight: bold;
+      text-align: center;
+      border-radius: 8px;
+    }
+    .services-list {
+      background: #0a1e3d;
+      border-radius: 12px;
+      padding: 20px 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
       font-size: 1.1rem;
-      line-height: 1.6;
-      background-color: #0a1e3d;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px #1e90ff;
+      margin-bottom: 25px;
     }
     .services-list ul {
       list-style: none;
-      padding-left: 0;
+      padding: 0;
     }
-    .services-list li {
+    .services-list ul li {
       margin-bottom: 15px;
-      position: relative;
-      padding-left: 25px;
-    }
-    .services-list li::before {
-      content: "✔️";
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-    /* زر الرجوع */
-    .back-to-home {
-      margin: 30px auto 10px auto;
-      max-width: 900px;
-      text-align: left;
-      direction: ltr;
-    }
-    .btn-return {
-      background-color: #ff6b35;
-      color: white;
-      padding: 12px 25px;
-      border-radius: 8px;
-      font-weight: 700;
-      text-decoration: none;
-      box-shadow: 0 2px 6px rgba(255,107,53,0.8);
-      transition: background-color 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 150px;
-    }
-    .btn-return:hover {
-      background-color: #d9533f;
-      box-shadow: 0 4px 12px rgba(217,83,63,0.9);
-    }
-    /* زر تبديل اللغة في الأسفل */
-    .lang-toggle-container {
-      max-width: 900px;
-      margin: 20px auto 40px auto;
-      text-align: center;
     }
     #toggle-lang-btn {
-      background-color: #1e90ff;
-      color: white;
+      display: block;
+      margin: 30px auto 0 auto;
+      background-color: #ff6b35;
       border: none;
-      padding: 14px 25px;
-      border-radius: 6px;
-      cursor: pointer;
+      padding: 12px 25px;
+      border-radius: 8px;
+      color: white;
       font-weight: 700;
-      box-shadow: 0 2px 6px rgba(30,144,255,0.7);
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(255,107,53,0.7);
       transition: background-color 0.3s ease;
-      min-width: 150px;
+      max-width: 200px;
       text-align: center;
     }
     #toggle-lang-btn:hover {
-      background-color: #0c5ea8;
+      background-color: #d9533f;
+      box-shadow: 0 4px 12px rgba(217,83,63,0.9);
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1 id="page-title">خدمات الورشة</h1>
+  <header>خدمات الورشة</header>
 
-    <div class="services-list" aria-label="قائمة الخدمات">
+  <div class="container">
+    <div class="services-list" id="services-list" aria-label="قائمة خدمات الورشة">
       <ul>
-        <li>تصليح وصيانة أجهزة الكمبيوتر واللابتوب.</li>
-        <li>تشخيص وإصلاح الأعطال الإلكترونية للبطاقات الإلكترونية.</li>
-        <li>خدمة إصلاح الأجهزة المنزلية الإلكترونية (ثلاجات، غسالات، ...).</li>
+        <li>📢 ورشة إلكترونيك الرحماني تفتح أبوابها لجميع الولايات.</li>
+        <li>🔧 خدمات تصليح الأجهزة الإلكترونية بجودة عالية وبأسعار منافسة.</li>
+        <li>📱 تواصل معنا عبر واتساب لأي استفسار.</li>
         <li>بيع و استبدال قطع الغيار الأصلية وذات الجودة العالية.</li>
       </ul>
     </div>
-  </div>
 
-  <div class="back-to-home">
-    <a href="index.html" class="btn-return">⬅️ الرجوع إلى الرئيسية</a>
-  </div>
-
-  <div class="lang-toggle-container">
     <button id="toggle-lang-btn">تبديل اللغة</button>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      let currentLang = localStorage.getItem('lang') || 'ar';
+      let currentLang = 'ar';
 
-      function applyLang() {
+      const servicesText = {
+        ar: [
+          "📢 ورشة إلكترونيك الرحماني تفتح أبوابها لجميع الولايات.",
+          "🔧 خدمات تصليح الأجهزة الإلكترونية بجودة عالية وبأسعار منافسة.",
+          "📱 تواصل معنا عبر واتساب لأي استفسار.",
+          "بيع و استبدال قطع الغيار الأصلية وذات الجودة العالية."
+        ],
+        fr: [
+          "📢 Atelier Electronique Médenine ouvre ses portes pour toutes les régions.",
+          "🔧 Services de réparation électronique de haute qualité à prix compétitifs.",
+          "📱 Contactez-nous via WhatsApp pour toute question.",
+          "Vente et remplacement de pièces d'origine et de haute qualité."
+        ]
+      };
+
+      const servicesList = document.getElementById('services-list').querySelector('ul');
+      const toggleBtn = document.getElementById('toggle-lang-btn');
+
+      function renderServices(lang) {
+        servicesList.innerHTML = '';
+        servicesText[lang].forEach(text => {
+          const li = document.createElement('li');
+          li.textContent = text;
+          servicesList.appendChild(li);
+        });
+      }
+
+      toggleBtn.addEventListener('click', () => {
+        currentLang = currentLang === 'ar' ? 'fr' : 'ar';
         document.documentElement.lang = currentLang;
         document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+        renderServices(currentLang);
+        toggleBtn.textContent = currentLang === 'ar' ? 'تبديل اللغة' : 'Changer la langue';
+      });
 
-        document.getElementById('toggle-lang-btn').textContent = currentLang === 'ar' ? 'تبديل اللغة' : 'Changer la langue';
-        document.getElementById('page-title').textContent = currentLang === 'ar' ? 'خدمات الورشة' : 'Services de l\'atelier';
-
-        // تحديث محتوى الخدمات
-        const servicesList = document.querySelector('.services-list ul');
-        if(currentLang === 'ar'){
-          servicesList.innerHTML = `
-            <li>تصليح وصيانة أجهزة الكمبيوتر واللابتوب.</li>
-            <li>تشخيص وإصلاح الأعطال الإلكترونية للبطاقات الإلكترونية.</li>
-            <li>خدمة إصلاح الأجهزة المنزلية الإلكترونية (ثلاجات، غسالات، ...).</li>
-            <li>بيع و استبدال قطع الغيار الأصلية وذات الجودة العالية.</li>
-          `;
-        } else {
-          servicesList.innerHTML = `
-            <li>Réparation et maintenance des ordinateurs et portables.</li>
-            <li>Diagnostic et réparation des pannes électroniques des cartes électroniques.</li>
-            <li>Service de réparation des appareils électroménagers (réfrigérateurs, lave-linge, etc.).</li>
-            <li>Vente et remplacement de pièces d'origine et de haute qualité.</li>
-          `;
-        }
-      }
-
-      function toggleLang() {
-        currentLang = currentLang === 'ar' ? 'fr' : 'ar';
-        localStorage.setItem('lang', currentLang);
-        applyLang();
-      }
-
-      document.getElementById('toggle-lang-btn').addEventListener('click', toggleLang);
-
-      applyLang();
+      // Initial render
+      renderServices(currentLang);
     });
   </script>
 </body>
