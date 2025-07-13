@@ -1,213 +1,171 @@
-/* style.css - تصميم النسخة الإلكترونية لموقع Atelier Electronique Médenine */
+/* style.css - تصميم داكن عصري متناسق للمعرض، الفيديو، والخدمات */
 
-/* سلوك التمرير */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
 }
 
-/* الجسم والخلفية */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
   background-color: #0f0f0f;
-  background-image: url('https://www.transparenttextures.com/patterns/circuit-board.png');
-  background-repeat: repeat;
-  background-size: contain;
   color: #e0e0e0;
   direction: rtl;
+  margin: 0;
+  padding-bottom: 60px;
 }
 
-/* رأس الموقع */
-header {
-  background-color: #1a1a1a;
-  color: white;
+/* العناوين */
+h1, h2 {
   text-align: center;
-  padding: 20px;
-  border-bottom: 2px solid #00ff99;
-  box-shadow: 0 0 10px #00ff99;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  color: #00bfff;
+  text-shadow: 0 0 10px #00bfff88;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
-header img.logo {
-  width: 120px;
-  border-radius: 10px;
-  margin: 10px;
-}
-
-/* QR Code داخل إطار إلكتروني */
-.qr-container {
-  text-align: center;
-  background-color: #111;
-  border: 2px solid #00ff99;
-  padding: 6px;
-  border-radius: 10px;
-  box-shadow: 0 0 8px #00ff99;
-  margin: 10px;
-}
-
-.qr-container p {
-  font-size: 12px;
-  margin-top: 5px;
-  color: #00ff99;
-}
-
-/* أزرار CTA */
-.cta-buttons {
-  text-align: center;
-  padding: 20px;
-}
-
-.cta-buttons a,
-.cta-buttons button {
-  display: inline-block;
-  margin: 8px;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 6px;
-  background-color: #00a86b;
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 0 8px #00ff99;
-}
-
-.cta-buttons a.maps { background: #e54b4b; }
-.cta-buttons a.photos { background: #5c6bc0; }
-.cta-buttons a.videos { background: #f57c00; }
-.cta-buttons a.lang { background: #0077cc; }
-
-.cta-buttons a:hover,
-.cta-buttons button:hover {
-  background-color: #00cc77;
-  box-shadow: 0 0 12px #00ff99;
-}
-
-/* شريط الأخبار */
-.news-ticker {
-  background-color: #c00000;
-  color: white;
-  padding: 10px;
-  overflow: hidden;
-  white-space: nowrap;
-  font-weight: bold;
-}
-
-.news-ticker span {
-  display: inline-block;
-  padding-right: 100%;
-  animation: scroll-horizontal 25s linear infinite;
-}
-
-@keyframes scroll-horizontal {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-
-/* المعرض */
+/* معرض الصور */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px;
-  padding: 20px;
-  max-width: 1000px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  max-width: 900px;
   margin: auto;
+  padding: 0 10px;
 }
 
 .gallery img {
   width: 100%;
-  border-radius: 6px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  box-shadow: 0 0 15px #00bfff66;
+  cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .gallery img:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(0,255,153,0.4);
+  box-shadow: 0 0 25px #00bfffcc;
 }
 
-/* الأسئلة الشائعة */
-.faq {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
-
-.faq h2 {
-  text-align: center;
-  color: #00ff99;
-  text-shadow: 0 0 5px #00ff99;
-}
-
-.faq-item {
-  margin-bottom: 20px;
-  border-bottom: 1px solid #555;
-  padding-bottom: 10px;
-}
-
-.faq-item h3 {
-  cursor: pointer;
-  position: relative;
-  padding-right: 25px;
-  color: #00ff99;
-}
-
-.faq-item h3::before {
-  content: '+';
-  position: absolute;
-  right: 0;
-  top: 0;
-  font-size: 20px;
-  color: #00ff99;
-}
-
-.faq-item.open h3::before { content: '-'; }
-
-.faq-item .answer {
+/* نافذة الضوء (Lightbox) */
+.lightbox {
   display: none;
-  margin-top: 10px;
-  color: #ccc;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 
-.faq-item.open .answer { display: block; }
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 0 25px #00bfffcc;
+}
 
-/* الفوتر */
-footer {
+/* الفيديو */
+.videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: auto;
+  padding: 0 10px 30px;
+}
+
+video {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #00bfff66;
+  background-color: #000;
+}
+
+/* الخدمات */
+.services-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+  gap: 24px;
+  max-width: 900px;
+  margin: auto;
+  padding: 0 10px;
+}
+
+.service-box {
   background: #111;
-  text-align: center;
   padding: 20px;
-  font-size: 0.9em;
-  color: #aaa;
-  border-top: 2px solid #00ff99;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #00bfff44;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
 }
 
-/* الشريط العلوي */
-.info-bar {
-  background: #1a1a1a;
-  padding: 10px 0;
+.service-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 30px #00bfffaa;
+}
+
+.service-box h3 {
+  color: #00bfff;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.service-box p {
+  color: #ccc;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+/* أزرار الرجوع والإضافة */
+.btn-bar {
   text-align: center;
-  font-weight: bold;
-  font-size: 14px;
-  color: #00ff99;
-  box-shadow: 0 0 5px #00ff99;
+  margin: 30px 0 50px;
 }
 
-/* حالة الورشة */
-.status {
-  text-align: center;
-  font-size: 16px;
-  padding: 10px;
-  font-weight: bold;
-  color: #00ff99;
+.btn-bar a {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 12px 24px;
+  background: #00bfff;
+  color: #0f0f0f;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 0 15px #00bfffaa;
+  transition: background 0.3s ease;
 }
 
-/* وسائط */
+.btn-bar a:hover {
+  background: #0077aa;
+  color: white;
+}
+
+/* زر تبديل اللغة */
+.lang-toggle {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: #00bfff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  color: #0f0f0f;
+  cursor: pointer;
+  box-shadow: 0 0 15px #00bfffaa;
+  z-index: 1000;
+  transition: background 0.3s ease;
+}
+
+.lang-toggle:hover {
+  background: #0077aa;
+  color: white;
+}
+
+/* استجابة الهواتف */
 @media (max-width: 600px) {
-  .gallery { grid-template-columns: 1fr; }
-  header { flex-direction: column; text-align: center; }
+  .gallery, .videos, .services-list {
+    grid-template-columns: 1fr;
+  }
 }
