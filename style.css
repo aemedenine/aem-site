@@ -1,4 +1,4 @@
-/* style.css - النسخة الإلكترونية المتكاملة لموقع Atelier Electronique Médenine */
+/* style.css - تصميم النسخة الإلكترونية لموقع Atelier Electronique Médenine */
 
 /* سلوك التمرير */
 html {
@@ -33,62 +33,26 @@ header {
 }
 
 header img.logo {
-  width: 100px;
+  width: 120px;
   border-radius: 10px;
   margin: 10px;
 }
 
-/* الشريط العلوي */
-.info-bar {
-  background: #1a1a1a;
-  padding: 10px 0;
+/* QR Code داخل إطار إلكتروني */
+.qr-container {
   text-align: center;
-  font-weight: bold;
-  font-size: 14px;
-  color: #00ff99;
-  box-shadow: 0 0 5px #00ff99;
-}
-
-/* حالة الورشة */
-.status {
-  text-align: center;
-  font-size: 16px;
-  padding: 10px;
-  font-weight: bold;
-  color: #00ff99;
-}
-
-/* شريط الأخبار */
-.news-ticker {
-  background-color: #c00000;
-  color: white;
-  padding: 10px;
-  overflow: hidden;
-  white-space: nowrap;
-  font-weight: bold;
-}
-
-.news-ticker span {
-  display: inline-block;
-  padding-right: 100%;
-  animation: scroll-horizontal 25s linear infinite;
-}
-
-@keyframes scroll-horizontal {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-
-/* زر تغيير اللغة */
-.lang-toggle {
-  background-color: #00bfff;
-  color: white;
-  border: none;
-  padding: 5px 12px;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
+  background-color: #111;
+  border: 2px solid #00ff99;
+  padding: 6px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px #00ff99;
   margin: 10px;
+}
+
+.qr-container p {
+  font-size: 12px;
+  margin-top: 5px;
+  color: #00ff99;
 }
 
 /* أزرار CTA */
@@ -124,21 +88,25 @@ header img.logo {
   box-shadow: 0 0 12px #00ff99;
 }
 
-/* QR Code داخل إطار إلكتروني */
-.qr-container {
-  text-align: center;
-  background-color: #111;
-  border: 2px solid #00ff99;
-  padding: 6px;
-  border-radius: 10px;
-  box-shadow: 0 0 8px #00ff99;
-  margin: 10px;
+/* شريط الأخبار */
+.news-ticker {
+  background-color: #c00000;
+  color: white;
+  padding: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: bold;
 }
 
-.qr-container p {
-  font-size: 12px;
-  margin-top: 5px;
-  color: #00ff99;
+.news-ticker span {
+  display: inline-block;
+  padding-right: 100%;
+  animation: scroll-horizontal 25s linear infinite;
+}
+
+@keyframes scroll-horizontal {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
 }
 
 /* المعرض */
@@ -216,13 +184,30 @@ footer {
   font-size: 0.9em;
   color: #aaa;
   border-top: 2px solid #00ff99;
-  margin-top: 40px;
+}
+
+/* الشريط العلوي */
+.info-bar {
+  background: #1a1a1a;
+  padding: 10px 0;
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+  color: #00ff99;
+  box-shadow: 0 0 5px #00ff99;
+}
+
+/* حالة الورشة */
+.status {
+  text-align: center;
+  font-size: 16px;
+  padding: 10px;
+  font-weight: bold;
+  color: #00ff99;
 }
 
 /* وسائط */
 @media (max-width: 600px) {
   .gallery { grid-template-columns: 1fr; }
   header { flex-direction: column; text-align: center; }
-  .cta-buttons a { width: 90%; }
-  header img.logo { width: 80px; }
 }
