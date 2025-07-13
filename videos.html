@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>فيديوهات الورشة - Atelier Electronique Médenine</title>
+  <title>فيديوهات الورشة | Atelier Electronique Médenine</title>
   <style>
     body {
       font-family: 'Montserrat', 'Open Sans', sans-serif;
@@ -14,73 +14,45 @@
       margin: 20px;
     }
     .container {
-      width: 90%;
-      max-width: 1100px;
-      margin: auto;
-    }
-    h1 {
-      margin-bottom: 25px;
-      color: #1e90ff;
-    }
-    .video-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
       max-width: 900px;
       margin: auto;
     }
-    video {
+    h1 {
+      color: #1e90ff;
+      margin-bottom: 25px;
+    }
+    .video-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+    .video-gallery video {
       width: 100%;
       border-radius: 8px;
       box-shadow: 0 0 8px #1e90ff;
-      cursor: pointer;
-      transition: transform 0.3s ease;
     }
-    video:hover {
-      transform: scale(1.03);
-    }
-    /* أزرار تحت بعضهم ومتوسطين */
-    .buttons-container {
-      max-width: 250px;
-      margin: 40px auto 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-    #toggle-lang-btn {
+
+    /* الأزرار (زر اللغة وزر الرجوع) */
+    button, a.btn-return {
+      max-width: 220px;
+      margin: 10px auto;
+      display: block;
       background-color: #ff6b35;
       border: none;
       padding: 12px 25px;
-      border-radius: 50px;
+      border-radius: 8px;
       color: white;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 0 15px #ff6b35;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(255,107,53,0.7);
       transition: background-color 0.3s ease;
-      text-align: center;
-      min-width: 200px;
-    }
-    #toggle-lang-btn:hover {
-      background-color: #d9533f;
-      box-shadow: 0 0 20px #d9533f;
-    }
-    .btn-return {
-      background: transparent;
-      color: #ff6b35;
-      border: 3px solid #ff6b35;
-      padding: 12px 25px;
-      border-radius: 50px;
-      font-weight: 700;
       text-decoration: none;
-      display: inline-block;
-      text-align: center;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      min-width: 200px;
     }
-    .btn-return:hover {
-      background-color: #ff6b35;
-      color: white;
-      box-shadow: 0 0 20px #ff6b35;
+    button:hover, a.btn-return:hover {
+      background-color: #d9533f;
+      box-shadow: 0 4px 12px rgba(217,83,63,0.9);
     }
   </style>
 </head>
@@ -91,22 +63,17 @@
     <div class="video-gallery" aria-label="معرض الفيديوهات">
       <video controls>
         <source src="video1.mp4" type="video/mp4" />
-        متصفحك لا يدعم عرض الفيديو.
+        متصفحك لا يدعم تشغيل الفيديو.
       </video>
       <video controls>
         <source src="video2.mp4" type="video/mp4" />
-        متصفحك لا يدعم عرض الفيديو.
+        متصفحك لا يدعم تشغيل الفيديو.
       </video>
-      <video controls>
-        <source src="video3.mp4" type="video/mp4" />
-        متصفحك لا يدعم عرض الفيديو.
-      </video>
+      <!-- أضف المزيد حسب الحاجة -->
     </div>
 
-    <div class="buttons-container">
-      <button id="toggle-lang-btn">تبديل اللغة</button>
-      <a href="index.html" class="btn-return">⬅️ الرجوع إلى الصفحة الرئيسية</a>
-    </div>
+    <button id="toggle-lang-btn">تبديل اللغة</button>
+    <a href="index.html" class="btn-return">⬅️ الرجوع إلى الصفحة الرئيسية</a>
   </div>
 
   <script>
