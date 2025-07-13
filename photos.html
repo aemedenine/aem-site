@@ -3,69 +3,107 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title id="title-photos">📸 معرض الصور</title>
+  <title>📸 معرض الصور - Atelier Electronique Médenine</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      text-align: center;
+      background-color: #0f0f0f;
+      color: #e0e0e0;
+      direction: rtl;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    h1 {
+      background-color: #00bfff;
+      padding: 20px;
+      margin: 0 0 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #00bfffaa;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+      gap: 12px;
+      max-width: 1000px;
+      margin: auto;
+      padding: 0 20px 40px;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,191,255,0.5);
+      transition: transform 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px #00bfffcc;
+    }
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background-color: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+    }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #00bfff;
+    }
+    .btn-bar {
+      margin: 20px 0 40px;
+      text-align: center;
+    }
+    .btn-bar a {
+      display: inline-block;
+      margin: 8px 12px;
+      padding: 12px 20px;
+      background: #00bfff;
+      color: #0f0f0f;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .btn-bar a:hover {
+      background: #0077aa;
+      color: white;
+    }
+  </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">
-      <img src="logo.png" alt="Logo" class="logo" />
-      <span class="logo-text" id="title-home">Atelier Electronique Médenine</span>
-    </div>
+  <h1>📸 معرض الصور</h1>
 
-    <nav>
-      <a href="index.html" class="t" data-ar="الرئيسية" data-fr="Accueil">الرئيسية</a>
-      <a href="photos.html" class="active t" data-ar="الصور" data-fr="Photos">الصور</a>
-      <a href="videos.html" class="t" data-ar="الفيديو" data-fr="Vidéos">الفيديو</a>
-      <a href="services.html" class="t" data-ar="خدمات الورشة" data-fr="Services">خدمات الورشة</a>
-    </nav>
-
-    <button class="lang-toggle" onclick="toggleLang()">Français</button>
-  </header>
-
-  <div class="info-bar">
-    <span id="current-time">...</span> | <span id="visit-count">...</span>
+  <div class="gallery">
+    <img src="Rt.png" alt="تصليح كارت إلكترونية" onclick="openLightbox(this.src)" />
+    <img src="Hh.png" alt="لحام مكونات دقيقة" onclick="openLightbox(this.src)" />
+    <img src="file_00000000ce88622f8ccc6c6c88cee605.png" alt="كارت أم" onclick="openLightbox(this.src)" />
+    <img src="Ce.jpg" alt="قطع إلكترونية" onclick="openLightbox(this.src)" />
+    <img src="Tech.jpg" alt="في قلب العمل" onclick="openLightbox(this.src)" />
   </div>
-
-  <div class="news-ticker">
-    <span id="live-news">جاري تحميل الأخبار ...</span>
-  </div>
-
-  <main>
-    <h1 id="title-photos">📸 معرض الصور</h1>
-
-    <div class="gallery">
-      <img src="Rt.png" alt="تصليح كارت إلكترونية" onclick="openLightbox(this.src)" />
-      <img src="Hh.png" alt="لحام مكونات دقيقة" onclick="openLightbox(this.src)" />
-      <img src="file_00000000ce88622f8ccc6c6c88cee605.png" alt="كارت أم" onclick="openLightbox(this.src)" />
-      <img src="Ce.jpg" alt="قطع إلكترونية" onclick="openLightbox(this.src)" />
-      <img src="Tech.jpg" alt="في قلب العمل" onclick="openLightbox(this.src)" />
-    </div>
-  </main>
 
   <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <img id="lightbox-img" src="" alt="">
+    <img id="lightbox-img" src="" alt="تكبير الصورة" />
   </div>
 
   <div class="btn-bar">
-    <a href="index.html" class="t" data-ar="⬅️ الرجوع للصفحة الرئيسية" data-fr="⬅️ Retour à l'accueil">⬅️ الرجوع للصفحة الرئيسية</a>
-    <a href="
-      <a href="https://github.com/aemedenine/atelier-electronique/upload/main" target="_blank" class="t" data-ar="📷 أضف صورة جديدة من GitHub" data-fr="📷 Ajouter une nouvelle photo via GitHub">📷 أضف صورة جديدة من GitHub</a>
+    <a href="index.html">⬅️ الرجوع للرئيسية</a>
+    <a href="https://github.com/aemedenine/atelier-electronique/upload/main" target="_blank">📷 أضف صورة جديدة من GitHub</a>
   </div>
 
-  <footer>
-    © 2025 Atelier Electronique Médenine - جميع الحقوق محفوظة
-  </footer>
-
-  <script src="script.js"></script>
   <script>
-    // فتح نافذة العرض الكبيرة للصور
     function openLightbox(src) {
-      document.getElementById('lightbox-img').src = src;
-      document.getElementById('lightbox').style.display = 'flex';
+      const lightbox = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      img.src = src;
+      lightbox.style.display = 'flex';
     }
-    // إغلاق النافذة عند الضغط على الخلفية أو الصورة
     function closeLightbox() {
       document.getElementById('lightbox').style.display = 'none';
     }
