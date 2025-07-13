@@ -1,53 +1,71 @@
-// تحديث الوقت والتاريخ باللغة العربية والفرنسية
+// تحديث الوقت والتاريخ
 function updateTime() {
   const now = new Date();
   const daysAr = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
-  const daysFr = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
+  const daysFr = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
   const monthsAr = ['جانفي', 'فيفري', 'مارس', 'أفريل', 'ماي', 'جوان', 'جويلية', 'أوت', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
-  const monthsFr = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+  const monthsFr = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
 
-  const lang = localStorage.getItem('lang') || 'ar';
+  let lang = localStorage.getItem('lang') || 'ar';
 
   const dayName = lang === 'ar' ? daysAr[now.getDay()] : daysFr[now.getDay()];
   const monthName = lang === 'ar' ? monthsAr[now.getMonth()] : monthsFr[now.getMonth()];
+
   const date = now.getDate();
-  const hours = now.getHours().toString().padStart(2,'0');
-  const minutes = now.getMinutes().toString().padStart(2,'0');
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
 
-  const timeString = lang === 'ar' ?
-    `${dayName} ${date} ${monthName} - ${hours}:${minutes}` :
-    `${dayName} ${date} ${monthName} - ${hours}h${minutes}`;
+  const timeString = lang === 'ar'
+    ? `${dayName} ${date} ${monthName} - ${hours}:${minutes}`
+    : `${dayName} ${date} ${monthName} - ${hours}h${minutes}`;
 
-  document.getElementById('current-time').textContent = timeString;
+  const timeElem = document.getElementById('current-time');
+  if (timeElem) {
+    timeElem.textContent = timeString;
+  }
 }
 
-// عداد الزيارات
+// عداد الزيارات مع تخزين محلي
 function updateVisits() {
   let visits = localStorage.getItem('visit-count');
   visits = visits ? parseInt(visits) + 1 : 1;
   localStorage.setItem('visit-count', visits);
-  const lang = localStorage.getItem('lang') || 'ar';
-  const text = lang === 'ar' ? `عدد الزيارات: ${visits}` : `Visites: ${visits}`;
-  document.getElementById('visit-count').textContent = text;
+  const visitElem = document.getElementById('visit-count');
+  if (visitElem) {
+    visitElem.textContent = (localStorage.getItem('lang') === 'fr') 
+      ? `Nombre de visites: ${visits}` 
+      : `عدد الزيارات: ${visits}`;
+  }
 }
 
-// جلب أخبار BBC عربية مع دعم اللغة
-function fetchNews() {
-  fetch('https://api.rss2json.com/v1/api.json?rss_url=http://feeds.bbci.co.uk/arabic/rss.xml')
-    .then(res => res.json())
+// تحميل أخبار BBC عربي (أو فرنسي حسب اللغة)
+function loadNews() {
+  const rssUrl = 'http://feeds.bbci.co.uk/arabic/rss.xml';
+  const newsElem = document.getElementById('live-news');
+  fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`)
+    .then(response => response.json())
     .then(data => {
-      const items = data.items.slice(0, 4);
-      const lang = localStorage.getItem('lang') || 'ar';
-      const newsText = items.map(item => `📰 ${item.title}`).join(' ⚡ ');
-      document.getElementById('live-news').textContent = newsText;
+      if (!data.items) throw new Error('No news items');
+      let newsItems = data.items.slice(0, 4);
+      let lang = localStorage.getItem('lang') || 'ar';
+
+      if (lang === 'fr') {
+        // بدل رابط RSS لفرنسية BBC لو تحب (مثلاً)
+        // لكن هنا نخلي نفس الأخبار بالعربية عشان البساطة
+        newsItems = data.items.slice(0, 4);
+      }
+
+      const newsText = newsItems.map(item => `📰 ${item.title}`).join(' ⚡ ');
+      if (newsElem) newsElem.textContent = newsText;
     })
-    .catch(() => {
-      const lang = localStorage.getItem('lang') || 'ar';
-      document.getElementById('live-news').textContent = lang === 'ar' ? '❌ فشل تحميل الأخبار.' : '❌ Échec du chargement des actualités.';
+    .catch(err => {
+      if (newsElem) newsElem.textContent = (localStorage.getItem('lang') === 'fr')
+        ? '❌ Échec du chargement des actualités.'
+        : '❌ فشل تحميل الأخبار.';
     });
 }
 
-// تبديل اللغة (عربي / فرنسي)
+// تغيير اللغة وتطبيق النصوص
 function toggleLang() {
   let currentLang = localStorage.getItem('lang') || 'ar';
   let newLang = currentLang === 'ar' ? 'fr' : 'ar';
@@ -59,36 +77,96 @@ function applyLang() {
   let lang = localStorage.getItem('lang') || 'ar';
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-  document.querySelector('.lang-toggle').textContent = lang === 'ar' ? 'Français' : 'العربية';
 
-  // تعيين النصوص الديناميكية حسب اللغة
+  // زر تغيير اللغة
+  const langToggleBtn = document.querySelector('.lang-toggle');
+  if (langToggleBtn) {
+    langToggleBtn.textContent = lang === 'ar' ? 'Français' : 'العربية';
+  }
+
+  // تغيير نص العنوان العام مثلاً
+  const titleElem = document.getElementById('title');
+  if (titleElem) {
+    titleElem.textContent = (lang === 'ar') ? titleElem.dataset.ar : titleElem.dataset.fr;
+  }
+
+  // كل العناصر التي تحتوي على نصوص متعددة اللغات
   document.querySelectorAll('.t').forEach(el => {
-    el.textContent = el.dataset[lang];
+    if (el.dataset && el.dataset.ar && el.dataset.fr) {
+      el.textContent = lang === 'ar' ? el.dataset.ar : el.dataset.fr;
+    }
   });
 
-  // العناوين الرئيسية
-  const titles = {
-    'title-services': {'ar': 'خدمات الورشة', 'fr': 'Nos Services'},
-    'title-photos': {'ar': '📸 معرض الصور', 'fr': '📸 Galerie photos'},
-    'title-videos': {'ar': '🎥 فيديوهات الورشة', 'fr': '🎥 Vidéos de l\'atelier'},
-    'title-home': {'ar': 'Atelier Electronique Médenine', 'fr': 'Atelier Electronique Médenine'}
-  };
-
-  Object.keys(titles).forEach(id => {
-    const el = document.getElementById(id);
-    if(el) el.textContent = titles[id][lang];
-  });
-
-  // شريط الأخبار
-  fetchNews();
-
-  // تحديث الوقت والزيارات
+  // تحديث الوقت والزيارات والأخبار بعد تغيير اللغة
   updateTime();
   updateVisits();
+  loadNews();
 }
 
-// تنفيذ التهيئة عند تحميل الصفحة
-window.onload = () => {
+// التحكم في عرض الصور (Lightbox)
+function openLightbox(src) {
+  const lightbox = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  if (lightbox && img) {
+    img.src = src;
+    lightbox.style.display = 'flex';
+  }
+}
+
+function closeLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  if (lightbox) {
+    lightbox.style.display = 'none';
+  }
+}
+
+// تفعيل الأسئلة الشائعة (فتح وغلق)
+function setupFAQ() {
+  document.querySelectorAll('.faq-item h3').forEach(header => {
+    header.addEventListener('click', () => {
+      header.parentElement.classList.toggle('open');
+    });
+  });
+}
+
+// راديو القرآن (تشغيل/إيقاف)
+let radioPlaying = false;
+let radioAudio = null;
+
+function toggleRadio() {
+  if (!radioAudio) {
+    radioAudio = new Audio('https://server7.mp3quran.net/maqri/002.mp3');
+    radioAudio.loop = true;
+  }
+  if (radioPlaying) {
+    radioAudio.pause();
+    radioPlaying = false;
+    document.getElementById('radio-btn').textContent = (localStorage.getItem('lang') === 'fr') ? '▶️ Radio' : '▶️ راديو القرآن';
+  } else {
+    radioAudio.play();
+    radioPlaying = true;
+    document.getElementById('radio-btn').textContent = (localStorage.getItem('lang') === 'fr') ? '⏸️ Pause' : '⏸️ إيقاف';
+  }
+}
+
+// تهيئة كل الوظائف عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', () => {
   applyLang();
+  setupFAQ();
+  updateTime();
+  updateVisits();
+  loadNews();
   setInterval(updateTime, 60000);
-};
+
+  // ربط زر الراديو لو موجود
+  const radioBtn = document.getElementById('radio-btn');
+  if (radioBtn) {
+    radioBtn.addEventListener('click', toggleRadio);
+  }
+
+  // ربط إغلاق الـ lightbox عند الضغط خارجه
+  const lightbox = document.getElementById('lightbox');
+  if (lightbox) {
+    lightbox.addEventListener('click', closeLightbox);
+  }
+});
