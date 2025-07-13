@@ -18,48 +18,22 @@
       max-width: 1100px;
       margin: auto;
     }
-    /* أزرار تبديل اللغة والرجوع مع بعض في الأسفل */
-    .actions {
-      max-width: 900px;
-      margin: 40px auto 20px auto;
-      display: flex;
-      justify-content: flex-start; /* تحكم حسب رغبتك */
-      gap: 15px;
-      direction: ltr; /* خليهم بالاتجاه اللاتيني */
-    }
     #toggle-lang-btn {
       background-color: #1e90ff;
       color: white;
       border: none;
-      padding: 10px 15px;
+      padding: 8px 16px;  /* قلصت البادينغ */
       border-radius: 6px;
       cursor: pointer;
       font-weight: 700;
       box-shadow: 0 2px 6px rgba(30,144,255,0.7);
       transition: background-color 0.3s ease;
-      min-width: 130px;
+      min-width: 110px;   /* قلصت العرض الأدنى */
       text-align: center;
+      margin-bottom: 20px;
     }
     #toggle-lang-btn:hover {
       background-color: #0c5ea8;
-    }
-    .btn-return {
-      background-color: #ff6b35;
-      color: white;
-      padding: 12px 25px;
-      border-radius: 8px;
-      font-weight: 700;
-      text-decoration: none;
-      box-shadow: 0 2px 6px rgba(255,107,53,0.8);
-      transition: background-color 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 130px;
-    }
-    .btn-return:hover {
-      background-color: #d9533f;
-      box-shadow: 0 4px 12px rgba(217,83,63,0.9);
     }
     h1 {
       margin-bottom: 25px;
@@ -82,11 +56,36 @@
     .gallery img:hover {
       transform: scale(1.05);
     }
+    /* زر الرجوع */
+    .back-to-home {
+      margin: 30px auto;
+      max-width: 900px;
+      text-align: left;
+      direction: ltr;
+    }
+    .btn-return {
+      background-color: #ff6b35;
+      color: white;
+      padding: 10px 20px;  /* قلصت البادينغ */
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(255,107,53,0.8);
+      transition: background-color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 110px;   /* قلصت العرض الأدنى */
+    }
+    .btn-return:hover {
+      background-color: #d9533f;
+      box-shadow: 0 4px 12px rgba(217,83,63,0.9);
+    }
   </style>
 </head>
 <body>
   <div class="container">
-
+    <button id="toggle-lang-btn">تبديل اللغة</button>
     <h1 id="page-title">صور الورشة</h1>
 
     <div class="gallery" aria-label="معرض الصور">
@@ -95,12 +94,10 @@
       <img src="photo3.jpg" alt="صورة الورشة 3" />
       <img src="photo4.jpg" alt="صورة الورشة 4" />
     </div>
+  </div>
 
-    <div class="actions">
-      <a href="index.html" class="btn-return">⬅️ الرجوع إلى الرئيسية</a>
-      <button id="toggle-lang-btn">تبديل اللغة</button>
-    </div>
-
+  <div class="back-to-home">
+    <a href="index.html" class="btn-return">⬅️ الرجوع إلى الرئيسية</a>
   </div>
 
   <script>
