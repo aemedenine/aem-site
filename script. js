@@ -1,89 +1,97 @@
-// تحديث الوقت والتاريخ
+// تحديث الوقت والتاريخ حسب اللغة
 function updateTime() {
   const now = new Date();
-  const days = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
-  const months = ['جانفي', 'فيفري', 'مارس', 'أفريل', 'ماي', 'جوان', 'جويلية', 'أوت', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
-  const day = days[now.getDay()];
+  const lang = localStorage.getItem("lang") || "ar";
+
+  const days = {
+    ar: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
+    fr: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
+  };
+
+  const months = {
+    ar: ['جانفي', 'فيفري', 'مارس', 'أفريل', 'ماي', 'جوان', 'جويلية', 'أوت', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+    fr: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+  };
+
+  const day = days[lang][now.getDay()];
   const date = now.getDate();
-  const month = months[now.getMonth()];
+  const month = months[lang][now.getMonth()];
   const hours = now.getHours().toString().padStart(2, '0');
   const minutes = now.getMinutes().toString().padStart(2, '0');
-  const timeText = `${day} ${date} ${month} - ${hours}:${minutes}`;
-  const timeEl = document.getElementById('current-time');
-  if (timeEl) timeEl.textContent = timeText;
+
+  document.getElementById('current-time').textContent =
+    lang === 'ar'
+      ? `${day} ${date} ${month} - ${hours}:${minutes}`
+      : `${day} ${date} ${month} - ${hours}h${minutes}`;
 }
-setInterval(updateTime, 60000);
-updateTime();
 
 // عداد الزيارات
 function updateVisits() {
   let visits = localStorage.getItem('visit-count');
   visits = visits ? parseInt(visits) + 1 : 1;
   localStorage.setItem('visit-count', visits);
-  const visitEl = document.getElementById('visit-count');
-  if (visitEl) visitEl.textContent = `عدد الزيارات: ${visits}`;
+  const lang = localStorage.getItem("lang") || "ar";
+  const text = lang === "ar" ? `عدد الزيارات: ${visits}` : `Nombre de visites : ${visits}`;
+  document.getElementById('visit-count').textContent = text;
 }
-updateVisits();
 
-// شريط الأخبار من BBC
+// أخبار BBC عربية
 fetch('https://api.rss2json.com/v1/api.json?rss_url=http://feeds.bbci.co.uk/arabic/rss.xml')
-  .then(res => res.json())
+  .then(response => response.json())
   .then(data => {
-    const newsItems = data.items.slice(0, 5);
+    const newsItems = data.items.slice(0, 4);
     const newsText = newsItems.map(item => `📰 ${item.title}`).join(' ⚡ ');
-    const newsEl = document.getElementById('live-news');
-    if (newsEl) newsEl.textContent = newsText;
+    document.getElementById('live-news').textContent = newsText;
   })
   .catch(() => {
-    const newsEl = document.getElementById('live-news');
-    if (newsEl) newsEl.textContent = '❌ فشل تحميل الأخبار.';
+    document.getElementById('live-news').textContent = '❌ فشل تحميل الأخبار.';
   });
 
-// الأسئلة الشائعة (فتح/غلق)
-document.querySelectorAll('.faq-item h3').forEach(header => {
-  header.addEventListener('click', () => {
-    header.parentElement.classList.toggle('open');
+// زر اللغة
+function toggleLang() {
+  const currentLang = localStorage.getItem("lang") || "ar";
+  const newLang = currentLang === "ar" ? "fr" : "ar";
+  localStorage.setItem("lang", newLang);
+  applyLang();
+  updateTime();
+  updateVisits();
+}
+
+// تطبيق الترجمة حسب اللغة
+function applyLang() {
+  const lang = localStorage.getItem("lang") || "ar";
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
+  const toggleBtn = document.querySelector(".lang-toggle");
+  if (toggleBtn) toggleBtn.textContent = lang === "ar" ? "Français" : "العربية";
+
+  const title = document.getElementById("title");
+  if (title) title.textContent = lang === "ar" ? "خدمات الورشة" : "Nos Services";
+
+  document.querySelectorAll(".t").forEach(el => {
+    const text = el.dataset[lang];
+    if (text) el.textContent = text;
   });
+}
+
+// الأسئلة الشائعة
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".faq-item h3").forEach(h3 => {
+    h3.addEventListener("click", () => {
+      const item = h3.parentElement;
+      item.classList.toggle("open");
+    });
+  });
+
+  applyLang();
+  updateTime();
+  updateVisits();
+  setInterval(updateTime, 60000);
 });
 
-// مشغل الراديو
-const radioBtn = document.getElementById('radio-btn');
-const radioPlayer = document.getElementById('radio-player');
-if (radioBtn && radioPlayer) {
-  radioBtn.addEventListener('click', () => {
-    if (radioPlayer.paused) {
-      radioPlayer.play();
-      radioBtn.textContent = '⏸️ إيقاف الراديو';
-    } else {
-      radioPlayer.pause();
-      radioBtn.textContent = '▶️ تشغيل الراديو';
-    }
-  });
+// تشغيل الراديو عند الضغط
+function playRadio() {
+  const audio = document.getElementById("quran-radio");
+  if (audio) audio.play();
 }
-
-// تغيير اللغة
-function toggleLang() {
-  const current = localStorage.getItem('lang') || 'ar';
-  const newLang = current === 'ar' ? 'fr' : 'ar';
-  localStorage.setItem('lang', newLang);
-  applyLang();
-}
-
-// تطبيق اللغة
-function applyLang() {
-  const lang = localStorage.getItem('lang') || 'ar';
-  document.documentElement.lang = lang;
-  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-
-  const langBtn = document.querySelector('.lang-toggle');
-  if (langBtn) langBtn.textContent = lang === 'ar' ? 'Français' : 'العربية';
-
-  const translatable = document.querySelectorAll('.t');
-  translatable.forEach(el => {
-    if (el.dataset[lang]) el.textContent = el.dataset[lang];
-  });
-
-  const title = document.getElementById('title');
-  if (title) title.textContent = lang === 'ar' ? 'خدمات الورشة' : 'Nos Services';
-}
-applyLang();
