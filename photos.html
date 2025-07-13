@@ -18,23 +18,6 @@
       max-width: 1100px;
       margin: auto;
     }
-    #toggle-lang-btn {
-      background-color: #1e90ff;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 700;
-      margin-bottom: 15px;
-      box-shadow: 0 2px 6px rgba(30,144,255,0.7);
-      transition: background-color 0.3s ease;
-      max-width: 220px;
-      width: 100%;
-    }
-    #toggle-lang-btn:hover {
-      background-color: #0c5ea8;
-    }
     h1 {
       margin-bottom: 25px;
       color: #1e90ff;
@@ -56,39 +39,48 @@
     .gallery img:hover {
       transform: scale(1.05);
     }
-    /* زر الرجوع */
-    .back-to-home {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-      margin-top: 15px;
-    }
-    .btn-return {
-      display: inline-block;
-      background-color: #ff6b35;
-      color: white;
-      padding: 12px 25px;
-      border-radius: 8px;
-      font-weight: 700;
-      text-decoration: none;
-      box-shadow: 0 2px 6px rgba(255,107,53,0.8);
-      transition: background-color 0.3s ease;
-      max-width: 220px;
-      width: 100%;
-      margin-top: 10px;
-      cursor: pointer;
-    }
-    .btn-return:hover {
-      background-color: #d9533f;
-      box-shadow: 0 4px 12px rgba(217,83,63,0.9);
-    }
-    /* حاوية الأزرار لتكون عمودية ومتوسطه */
+    /* أزرار تحت بعضهم ومتوسطين */
     .buttons-container {
-      max-width: 220px;
-      margin: 30px auto 0 auto;
+      max-width: 250px;
+      margin: 40px auto 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 15px;
+    }
+    #toggle-lang-btn {
+      background-color: #ff6b35;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 50px;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 0 15px #ff6b35;
+      transition: background-color 0.3s ease;
+      text-align: center;
+      min-width: 200px;
+    }
+    #toggle-lang-btn:hover {
+      background-color: #d9533f;
+      box-shadow: 0 0 20px #d9533f;
+    }
+    .btn-return {
+      background: transparent;
+      color: #ff6b35;
+      border: 3px solid #ff6b35;
+      padding: 12px 25px;
+      border-radius: 50px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      min-width: 200px;
+    }
+    .btn-return:hover {
+      background-color: #ff6b35;
+      color: white;
+      box-shadow: 0 0 20px #ff6b35;
     }
   </style>
 </head>
@@ -105,7 +97,7 @@
 
     <div class="buttons-container">
       <button id="toggle-lang-btn">تبديل اللغة</button>
-      <a href="index.html" class="btn-return">⬅️ الرجوع إلى الرئيسية</a>
+      <a href="index.html" class="btn-return">⬅️ الرجوع إلى الصفحة الرئيسية</a>
     </div>
   </div>
 
