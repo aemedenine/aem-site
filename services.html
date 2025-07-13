@@ -3,69 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>خدمات الورشة | Atelier Electronique Médenine</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>خدمات الورشة - Atelier Electronique Médenine</title>
   <style>
     body {
-      background-color: #0b1a27;
+      font-family: 'Montserrat', 'Open Sans', sans-serif;
+      background: linear-gradient(135deg, #0b1a27, #122f4a);
       color: #eee;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      padding: 0;
-      margin: 0;
-    }
-
-    header {
-      background-color: #061222;
-      padding: 20px;
+      direction: rtl;
       text-align: center;
-      color: #1e90ff;
-      font-size: 1.6rem;
-      font-weight: bold;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+      margin: 20px;
     }
-
     .container {
-      max-width: 1000px;
+      width: 90%;
+      max-width: 1100px;
       margin: auto;
-      padding: 30px 20px;
     }
-
-    .service-box {
-      background: #0a1e3d;
-      border-radius: 12px;
-      padding: 20px;
+    h1 {
       margin-bottom: 25px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-      transition: transform 0.3s ease;
-    }
-
-    .service-box:hover {
-      transform: scale(1.02);
-    }
-
-    .service-title {
       color: #1e90ff;
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 10px;
     }
-
-    .service-desc {
-      color: #ccc;
-      font-size: 1rem;
-      line-height: 1.7;
+    .services-list {
+      max-width: 900px;
+      margin: auto;
+      text-align: right;
+      direction: rtl;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      background-color: #0a1e3d;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #1e90ff;
     }
-
+    .services-list ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .services-list li {
+      margin-bottom: 15px;
+      position: relative;
+      padding-left: 25px;
+    }
+    .services-list li::before {
+      content: "✔️";
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
     /* زر الرجوع */
     .back-to-home {
-      margin: 30px 0;
+      margin: 30px auto 10px auto;
+      max-width: 900px;
       text-align: left;
-      direction: ltr; /* السهم واللينك يبدأوا من اليسار */
-      max-width: 1000px;
+      direction: ltr;
     }
-
     .btn-return {
-      display: inline-block;
       background-color: #ff6b35;
       color: white;
       padding: 12px 25px;
@@ -74,64 +65,104 @@
       text-decoration: none;
       box-shadow: 0 2px 6px rgba(255,107,53,0.8);
       transition: background-color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
     }
-
     .btn-return:hover {
       background-color: #d9533f;
       box-shadow: 0 4px 12px rgba(217,83,63,0.9);
     }
-
-    footer {
-      background-color: #061222;
-      color: #888;
-      padding: 20px 0;
+    /* زر تبديل اللغة في الأسفل */
+    .lang-toggle-container {
+      max-width: 900px;
+      margin: 20px auto 40px auto;
       text-align: center;
-      font-size: 0.9rem;
-      margin-top: 40px;
-      box-shadow: inset 0 1px 3px rgba(255,255,255,0.05);
+    }
+    #toggle-lang-btn {
+      background-color: #1e90ff;
+      color: white;
+      border: none;
+      padding: 14px 25px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(30,144,255,0.7);
+      transition: background-color 0.3s ease;
+      min-width: 150px;
+      text-align: center;
+    }
+    #toggle-lang-btn:hover {
+      background-color: #0c5ea8;
     }
   </style>
 </head>
 <body>
-  <header>
-    خدمات الورشة
-  </header>
-
   <div class="container">
+    <h1 id="page-title">خدمات الورشة</h1>
 
-    <div class="service-box">
-      <div class="service-title">🔍 تشخيص أعطال إلكترونية دقيقة</div>
-      <div class="service-desc">نستخدم معدات متطورة وتقنيات تحليل احترافية لتحديد الأعطال بدقة عالية قبل أي عملية تصليح.</div>
+    <div class="services-list" aria-label="قائمة الخدمات">
+      <ul>
+        <li>تصليح وصيانة أجهزة الكمبيوتر واللابتوب.</li>
+        <li>تشخيص وإصلاح الأعطال الإلكترونية للبطاقات الإلكترونية.</li>
+        <li>خدمة إصلاح الأجهزة المنزلية الإلكترونية (ثلاجات، غسالات، ...).</li>
+        <li>بيع و استبدال قطع الغيار الأصلية وذات الجودة العالية.</li>
+        <li>خدمة الاستشارة والدعم الفني عن بُعد.</li>
+      </ul>
     </div>
-
-    <div class="service-box">
-      <div class="service-title">🛠️ تصليح كروت إلكترونية معقدة</div>
-      <div class="service-desc">نصلّح اللوحات الإلكترونية المعقدة والمكونات الدقيقة، بما في ذلك كروت الغسالات، الثلاجات، والحواسيب.</div>
-    </div>
-
-    <div class="service-box">
-      <div class="service-title">❄️ دعم أجهزة الإنفرتر والتبريد</div>
-      <div class="service-desc">خبرة في صيانة ثلاجات الإنفرتر، مكيفات الهواء، والمضخات، مع ضمان الأداء الأمثل بعد الإصلاح.</div>
-    </div>
-
-    <div class="service-box">
-      <div class="service-title">📦 خدمة عن بُعد وتوصيل بالبريد</div>
-      <div class="service-desc">نستقبل أجهزتك عبر البريد من جميع أنحاء الجمهورية، ونُرجعها لك بعد الإصلاح في أسرع وقت ممكن.</div>
-    </div>
-
-    <div class="service-box">
-      <div class="service-title">📷 صور وفيديو أثناء الإصلاح</div>
-      <div class="service-desc">نشاركك حالة جهازك أولاً بأول، بصور وفيديوهات عبر واتساب لشفافية كاملة وراحة بالك.</div>
-    </div>
-
-    <div class="back-to-home">
-      <a href="index.html" class="btn-return">⬅️ الرجوع إلى الرئيسية</a>
-    </div>
-
   </div>
 
-  <footer>
-    📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 98192103 | ⏰ 08:00 - 18:00
-  </footer>
+  <div class="back-to-home">
+    <a href="index.html" class="btn-return">⬅️ الرجوع إلى الرئيسية</a>
+  </div>
+
+  <div class="lang-toggle-container">
+    <button id="toggle-lang-btn">تبديل اللغة</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let currentLang = localStorage.getItem('lang') || 'ar';
+
+      function applyLang() {
+        document.documentElement.lang = currentLang;
+        document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+
+        document.getElementById('toggle-lang-btn').textContent = currentLang === 'ar' ? 'تبديل اللغة' : 'Changer la langue';
+        document.getElementById('page-title').textContent = currentLang === 'ar' ? 'خدمات الورشة' : 'Services de l\'atelier';
+
+        // تحديث محتوى الخدمات
+        const servicesList = document.querySelector('.services-list ul');
+        if(currentLang === 'ar'){
+          servicesList.innerHTML = `
+            <li>تصليح وصيانة أجهزة الكمبيوتر واللابتوب.</li>
+            <li>تشخيص وإصلاح الأعطال الإلكترونية للبطاقات الإلكترونية.</li>
+            <li>خدمة إصلاح الأجهزة المنزلية الإلكترونية (ثلاجات، غسالات، ...).</li>
+            <li>بيع و استبدال قطع الغيار الأصلية وذات الجودة العالية.</li>
+            <li>خدمة الاستشارة والدعم الفني عن بُعد.</li>
+          `;
+        } else {
+          servicesList.innerHTML = `
+            <li>Réparation et maintenance des ordinateurs et portables.</li>
+            <li>Diagnostic et réparation des pannes électroniques des cartes électroniques.</li>
+            <li>Service de réparation des appareils électroménagers (réfrigérateurs, lave-linge, etc.).</li>
+            <li>Vente et remplacement de pièces d'origine et de haute qualité.</li>
+            <li>Service de conseil et support technique à distance.</li>
+          `;
+        }
+      }
+
+      function toggleLang() {
+        currentLang = currentLang === 'ar' ? 'fr' : 'ar';
+        localStorage.setItem('lang', currentLang);
+        applyLang();
+      }
+
+      document.getElementById('toggle-lang-btn').addEventListener('click', toggleLang);
+
+      applyLang();
+    });
+  </script>
 </body>
 </html>
