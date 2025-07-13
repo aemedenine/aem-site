@@ -18,23 +18,6 @@
       max-width: 1100px;
       margin: auto;
     }
-    #toggle-lang-btn {
-      background-color: #1e90ff;
-      color: white;
-      border: none;
-      padding: 8px 16px;  /* قلصت البادينغ */
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 700;
-      box-shadow: 0 2px 6px rgba(30,144,255,0.7);
-      transition: background-color 0.3s ease;
-      min-width: 110px;   /* قلصت العرض الأدنى */
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    #toggle-lang-btn:hover {
-      background-color: #0c5ea8;
-    }
     h1 {
       margin-bottom: 25px;
       color: #1e90ff;
@@ -58,7 +41,7 @@
     }
     /* زر الرجوع */
     .back-to-home {
-      margin: 30px auto;
+      margin: 30px auto 10px auto;
       max-width: 900px;
       text-align: left;
       direction: ltr;
@@ -66,7 +49,7 @@
     .btn-return {
       background-color: #ff6b35;
       color: white;
-      padding: 10px 20px;  /* قلصت البادينغ */
+      padding: 12px 25px;
       border-radius: 8px;
       font-weight: 700;
       text-decoration: none;
@@ -75,17 +58,38 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 110px;   /* قلصت العرض الأدنى */
+      min-width: 150px;
     }
     .btn-return:hover {
       background-color: #d9533f;
       box-shadow: 0 4px 12px rgba(217,83,63,0.9);
     }
+    /* زر تبديل اللغة في الأسفل */
+    .lang-toggle-container {
+      max-width: 900px;
+      margin: 20px auto 40px auto;
+      text-align: center;
+    }
+    #toggle-lang-btn {
+      background-color: #1e90ff;
+      color: white;
+      border: none;
+      padding: 14px 25px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(30,144,255,0.7);
+      transition: background-color 0.3s ease;
+      min-width: 150px;
+      text-align: center;
+    }
+    #toggle-lang-btn:hover {
+      background-color: #0c5ea8;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <button id="toggle-lang-btn">تبديل اللغة</button>
     <h1 id="page-title">صور الورشة</h1>
 
     <div class="gallery" aria-label="معرض الصور">
@@ -98,6 +102,10 @@
 
   <div class="back-to-home">
     <a href="index.html" class="btn-return">⬅️ الرجوع إلى الرئيسية</a>
+  </div>
+
+  <div class="lang-toggle-container">
+    <button id="toggle-lang-btn">تبديل اللغة</button>
   </div>
 
   <script>
