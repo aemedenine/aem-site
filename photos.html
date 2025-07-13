@@ -27,7 +27,7 @@
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 15px;
       max-width: 900px;
-      margin: auto;
+      margin: auto 0 40px 0;
     }
     .gallery img {
       width: 100%;
@@ -39,35 +39,37 @@
     .gallery img:hover {
       transform: scale(1.05);
     }
-    /* أزرار تحت بعضهم ومتوسطين */
-    .buttons-container {
-      max-width: 250px;
-      margin: 40px auto 0 auto;
+
+    /* الأزرار بشكل عمودي تحت بعض */
+    .buttons-wrapper {
+      max-width: 900px;
+      margin: 30px auto 0 auto;
       display: flex;
       flex-direction: column;
       gap: 15px;
+      align-items: center;
     }
+
     #toggle-lang-btn {
-      background-color: #ff6b35;
+      background-color: #1e90ff;
+      color: white;
       border: none;
       padding: 12px 25px;
-      border-radius: 50px;
-      color: white;
-      font-weight: 700;
+      border-radius: 8px;
       cursor: pointer;
-      box-shadow: 0 0 15px #ff6b35;
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(30,144,255,0.7);
       transition: background-color 0.3s ease;
-      text-align: center;
       min-width: 200px;
     }
     #toggle-lang-btn:hover {
-      background-color: #d9533f;
-      box-shadow: 0 0 20px #d9533f;
+      background-color: #0c5ea8;
     }
+
     .btn-return {
-      background: transparent;
-      color: #ff6b35;
-      border: 3px solid #ff6b35;
+      background: transparent; /* خلفية شفافة */
+      color: #ff6b35;           /* لون النص */
+      border: 3px solid #ff6b35; /* حدود برتقالي */
       padding: 12px 25px;
       border-radius: 50px;
       font-weight: 700;
@@ -82,6 +84,7 @@
       color: white;
       box-shadow: 0 0 20px #ff6b35;
     }
+
   </style>
 </head>
 <body>
@@ -95,9 +98,9 @@
       <img src="photo4.jpg" alt="صورة الورشة 4" />
     </div>
 
-    <div class="buttons-container">
+    <div class="buttons-wrapper">
+      <a href="index.html" class="btn-return">⬅️ الرجوع إلى الرئيسية</a>
       <button id="toggle-lang-btn">تبديل اللغة</button>
-      <a href="index.html" class="btn-return">⬅️ الرجوع إلى الصفحة الرئيسية</a>
     </div>
   </div>
 
