@@ -9,9 +9,9 @@
       font-family: 'Montserrat', 'Open Sans', sans-serif;
       background: linear-gradient(135deg, #0b1a27, #122f4a);
       color: #eee;
-      direction: rtl;
       text-align: center;
       margin: 20px;
+      direction: rtl;
     }
     .container {
       max-width: 900px;
@@ -23,17 +23,16 @@
     }
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
-      margin-bottom: 40px;
     }
-    .image-card {
-      background-color: #0f2238;
+    .card {
+      background: #0f2238;
       padding: 10px;
       border-radius: 10px;
       box-shadow: 0 0 8px #1e90ff;
     }
-    .gallery img {
+    .card img {
       width: 100%;
       border-radius: 8px;
       cursor: pointer;
@@ -50,6 +49,22 @@
       cursor: pointer;
       font-size: 1.1rem;
     }
+    .comments textarea {
+      width: 80%;
+      border-radius: 6px;
+      padding: 5px;
+      margin-top: 10px;
+    }
+    .comments button {
+      margin-top: 5px;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #ff6b35;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
     .comments ul {
       text-align: right;
       padding-right: 20px;
@@ -60,55 +75,25 @@
       font-size: 0.9rem;
       color: #ccc;
     }
-
-    .comment-form {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .comment-form textarea {
-      width: 80%;
-      border-radius: 6px;
-      padding: 5px;
-      resize: none;
-    }
-
-    .comment-form button {
-      padding: 6px 12px;
-      font-size: 1rem;
-      background-color: #1e90ff;
-      border: none;
-      color: white;
-      border-radius: 6px;
-      cursor: pointer;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.4);
-    }
-
-    .comment-form button:hover {
-      background-color: #0c7cd5;
-    }
-
-    /* نافذة منبثقة */
-    #popup {
+    .popup {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background: rgba(0,0,0,0.8);
       display: none;
       justify-content: center;
       align-items: center;
-      z-index: 999;
+      z-index: 9999;
     }
-    #popup img {
+    .popup img {
       max-width: 90%;
       max-height: 90%;
-      border-radius: 12px;
-      box-shadow: 0 0 10px #fff;
+      border-radius: 10px;
     }
 
-    /* أزرار عامة */
+    /* زر اللغة وزر الرجوع */
     button, a.btn-return {
       max-width: 220px;
       margin: 10px auto;
@@ -134,28 +119,28 @@
 <body>
   <div class="container">
     <h1 id="page-title">صور الورشة</h1>
-
     <div class="gallery" id="image-gallery">
-      <!-- الصور تُضاف ديناميكياً -->
+      <!-- الصور تظهر ديناميكيا -->
     </div>
 
     <button id="toggle-lang-btn">تبديل اللغة</button>
     <a href="index.html" class="btn-return">⬅️ الرجوع إلى الصفحة الرئيسية</a>
   </div>
 
-  <div id="popup" onclick="this.style.display='none'">
-    <img src="" alt="عرض الصورة" />
+  <!-- نافذة العرض -->
+  <div class="popup" id="popup" onclick="this.style.display='none'">
+    <img src="" id="popup-img" />
   </div>
 
   <script>
     const images = [
-      { src: "photo1.jpg" },
-      { src: "photo2.jpg" },
-      { src: "photo3.jpg" },
-      { src: "photo4.jpg" },
-      { src: "photo5.jpg" },
-      { src: "photo6.jpg" },
-      { src: "photo7.jpg" },
+      { src: "img1.jpg" },
+      { src: "img2.jpg" },
+      { src: "img3.jpg" },
+      { src: "img4.jpg" },
+      { src: "img5.jpg" },
+      { src: "img6.jpg" },
+      { src: "img7.jpg" }
     ];
 
     const texts = {
@@ -163,13 +148,13 @@
         title: "صور الورشة",
         toggle: "تبديل اللغة",
         views: "مشاهدة",
-        commentPlaceholder: "أضف تعليقًا..."
+        commentPlaceholder: "أضف تعليقًا...",
       },
       fr: {
         title: "Photos de l'atelier",
         toggle: "Changer la langue",
         views: "vue",
-        commentPlaceholder: "Ajouter un commentaire..."
+        commentPlaceholder: "Ajouter un commentaire...",
       }
     };
 
@@ -177,22 +162,36 @@
 
     function renderImages() {
       const gallery = document.getElementById('image-gallery');
-      gallery.innerHTML = '';
+      gallery.innerHTML = "";
 
       images.forEach((image, index) => {
-        const imgId = `img${index}`;
-        const viewsKey = `${imgId}-views`;
-        const reactsKey = `${imgId}-reacts`;
-        const commentsKey = `${imgId}-comments`;
+        const id = `img${index}`;
+        const viewsKey = `${id}-views`;
+        const reactsKey = `${id}-reacts`;
+        const commentsKey = `${id}-comments`;
 
         let views = parseInt(localStorage.getItem(viewsKey)) || 0;
         let reacts = JSON.parse(localStorage.getItem(reactsKey)) || { like: 0, love: 0, laugh: 0 };
         let comments = JSON.parse(localStorage.getItem(commentsKey)) || [];
 
         const card = document.createElement('div');
-        card.className = 'image-card';
-        card.innerHTML = `
-          <img src="${image.src}" onclick="openPopup(this, '${viewsKey}')">
+        card.className = 'card';
+
+        const img = document.createElement('img');
+        img.src = image.src;
+        img.alt = "photo";
+        img.onclick = () => {
+          document.getElementById('popup-img').src = image.src;
+          document.getElementById('popup').style.display = 'flex';
+          if (!img.dataset.counted) {
+            localStorage.setItem(viewsKey, ++views);
+            img.dataset.counted = "true";
+            renderImages();
+          }
+        };
+
+        card.appendChild(img);
+        card.innerHTML += `
           <div class="views">${views} ${texts[currentLang].views}</div>
           <div class="reactions">
             <button onclick="react('${reactsKey}', 'like')">👍 ${reacts.like}</button>
@@ -200,26 +199,13 @@
             <button onclick="react('${reactsKey}', 'laugh')">😏 ${reacts.laugh}</button>
           </div>
           <div class="comments">
-            <div class="comment-form">
-              <textarea placeholder="${texts[currentLang].commentPlaceholder}" onkeydown="if(event.key==='Enter'){event.preventDefault(); addComment('${commentsKey}', this)}"></textarea>
-              <button onclick="addCommentFromButton(this, '${commentsKey}')">📩</button>
-            </div>
+            <textarea placeholder="${texts[currentLang].commentPlaceholder}" id="comment-${id}"></textarea>
+            <button onclick="addComment('${commentsKey}', 'comment-${id}')">📩</button>
             <ul>${comments.map(c => `<li>${c}</li>`).join('')}</ul>
           </div>
         `;
         gallery.appendChild(card);
       });
-    }
-
-    function openPopup(img, key) {
-      const popup = document.getElementById('popup');
-      const popupImg = popup.querySelector('img');
-      popupImg.src = img.src;
-      popup.style.display = 'flex';
-
-      let views = parseInt(localStorage.getItem(key)) || 0;
-      localStorage.setItem(key, ++views);
-      renderImages();
     }
 
     function react(key, type) {
@@ -229,7 +215,8 @@
       renderImages();
     }
 
-    function addComment(key, textarea) {
+    function addComment(key, textareaId) {
+      const textarea = document.getElementById(textareaId);
       const val = textarea.value.trim();
       if (val) {
         let comments = JSON.parse(localStorage.getItem(key)) || [];
@@ -240,20 +227,11 @@
       }
     }
 
-    function addCommentFromButton(btn, key) {
-      const textarea = btn.previousElementSibling;
-      addComment(key, textarea);
-    }
-
     function applyLang() {
-      document.document
-      function applyLang() {
       document.documentElement.lang = currentLang;
       document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-
       document.getElementById('page-title').textContent = texts[currentLang].title;
       document.getElementById('toggle-lang-btn').textContent = texts[currentLang].toggle;
-
       renderImages();
     }
 
@@ -263,9 +241,7 @@
       applyLang();
     });
 
-    document.addEventListener('DOMContentLoaded', () => {
-      applyLang();
-    });
+    document.addEventListener('DOMContentLoaded', applyLang);
   </script>
 </body>
 </html>
