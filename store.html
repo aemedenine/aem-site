@@ -71,6 +71,61 @@
       font-weight: 700;
       cursor: pointer;
     }
+
+    /* مودال الشراء */
+    #purchaseModal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      z-index: 1000;
+      width: 320px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    #purchaseModal button {
+      margin: 5px;
+      padding: 10px 16px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+    }
+
+    #purchaseModal button:nth-child(4) {
+      background-color: #ff6b35;
+      color: white;
+    }
+
+    #purchaseModal button:nth-child(2),
+    #purchaseModal button:nth-child(3) {
+      background-color: #ffc107;
+      color: black;
+    }
+
+    #purchaseModal button:nth-child(2):hover,
+    #purchaseModal button:nth-child(3):hover {
+      background-color: #e0a800;
+    }
+
+    #purchaseModal button:nth-child(4):hover {
+      background-color: #d0521f;
+    }
+
+    /* خلفية التعتيم */
+    #modalOverlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+    }
   </style>
 </head>
 <body>
@@ -127,6 +182,23 @@
     </div>
   </footer>
 
+  <!-- مودال الشراء -->
+  <div id="purchaseModal">
+    <h3>عملية الشراء</h3>
+    <p id="productName">المنتج:</p>
+    <p id="productPrice">السعر:</p>
+
+    <h4>اختر طريقة الدفع:</h4>
+    <button id="payD17">الدفع عن طريق D17</button>
+    <button id="payPost">الدفع عن طريق البريد</button>
+
+    <br /><br />
+    <button id="closeModalBtn">إغلاق</button>
+  </div>
+
+  <!-- خلفية التعتيم -->
+  <div id="modalOverlay"></div>
+
   <script>
     // زر تغيير اللغة
     document.getElementById('toggle-lang-btn').addEventListener('click', () => {
@@ -134,10 +206,20 @@
       if (lang === 'ar') {
         document.documentElement.lang = 'fr';
         document.documentElement.dir = 'ltr';
-        document.querySelector('h1').textContent = 'Boutique de l\'atelier';
+        document.querySelector('h1').textContent = "Boutique de l'atelier";
         document.querySelector('.btn-return').textContent = '🏠 Accueil';
         document.getElementById('toggle-lang-btn').textContent = 'تبديل اللغة';
         document.querySelectorAll('.btn-store').forEach(btn => btn.textContent = 'Acheter');
+
+        // تعديل مودال الدفع
+        document.getElementById('purchaseModal').querySelector('h3').textContent = "Processus d'achat";
+        document.getElementById('productName').textContent = 'Produit:';
+        document.getElementById('productPrice').textContent = 'Prix:';
+        document.querySelector('h4').textContent = 'Choisissez le mode de paiement:';
+        document.getElementById('payD17').textContent = 'Paiement via D17';
+        document.getElementById('payPost').textContent = 'Paiement via la poste';
+        document.getElementById('closeModalBtn').textContent = 'Fermer';
+
       } else {
         document.documentElement.lang = 'ar';
         document.documentElement.dir = 'rtl';
@@ -145,7 +227,60 @@
         document.querySelector('.btn-return').textContent = '🏠 رجوع للرئيسية';
         document.getElementById('toggle-lang-btn').textContent = 'Changer la langue';
         document.querySelectorAll('.btn-store').forEach(btn => btn.textContent = 'شراء');
+
+        // تعديل مودال الدفع
+        document.getElementById('purchaseModal').querySelector('h3').textContent = 'عملية الشراء';
+        document.getElementById('productName').textContent = 'المنتج:';
+        document.getElementById('productPrice').textContent = 'السعر:';
+        document.querySelector('h4').textContent = 'اختر طريقة الدفع:';
+        document.getElementById('payD17').textContent = 'الدفع عن طريق D17';
+        document.getElementById('payPost').textContent = 'الدفع عن طريق البريد';
+        document.getElementById('closeModalBtn').textContent = 'إغلاق';
       }
+    });
+
+    // مودال الشراء
+    const buyButtons = document.querySelectorAll('.btn-store');
+    const modal = document.getElementById('purchaseModal');
+    const overlay = document.getElementById('modalOverlay');
+    const productNameElem = document.getElementById('productName');
+    const productPriceElem = document.getElementById('productPrice');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const payD17Btn = document.getElementById('payD17');
+    const payPostBtn = document.getElementById('payPost');
+
+    buyButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const productCard = btn.closest('.product-card');
+        const name = productCard.querySelector('h3').textContent;
+        const price = productCard.querySelector('.price').textContent;
+
+        productNameElem.textContent = (document.documentElement.lang === 'ar' ? 'المنتج: ' : 'Produit: ') + name;
+        productPriceElem.textContent = (document.documentElement.lang === 'ar' ? 'السعر: ' : 'Prix: ') + price;
+
+        modal.style.display = 'block';
+        overlay.style.display = 'block';
+      });
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+      overlay.style.display = 'none';
+    });
+
+    overlay.addEventListener('click', () => {
+      modal.style.display = 'none';
+      overlay.style.display = 'none';
+    });
+
+    payD17Btn.addEventListener('click', () => {
+      alert(document.documentElement.lang === 'ar' ? 'اخترت الدفع عن طريق D17' : "Vous avez choisi le paiement via D17");
+      // هنا ممكن تضيف عملية الدفع أو إعادة توجيه للصفحة المناسبة
+    });
+
+    payPostBtn.addEventListener('click', () => {
+      alert(document.documentElement.lang === 'ar' ? 'اخترت الدفع عن طريق البريد' : "Vous avez choisi le paiement via la poste");
+      // هنا ممكن تضيف عملية الدفع أو إعادة توجيه للصفحة المناسبة
     });
   </script>
 </body>
