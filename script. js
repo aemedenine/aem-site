@@ -153,3 +153,28 @@ document.querySelector('.btn-services').textContent = currentLang === 'ar' ? 'خ
   updateNews();
   initFAQ();
 });
+function openModal(src) {
+  const modal = document.getElementById('video-modal');
+  const modalVideo = document.getElementById('modal-video');
+  modal.style.display = 'flex';
+  modalVideo.src = src;
+  modalVideo.play();
+
+  modalVideo.onended = () => {
+    closeModal();
+  };
+
+  // إغلاق عند الضغط خارج الفيديو
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+}
+
+function closeModal() {
+  const modal = document.getElementById('video-modal');
+  const modalVideo = document.getElementById('modal-video');
+  modal.style.display = 'none';
+  modalVideo.pause();
+  modalVideo.currentTime = 0;
+  modalVideo.src = "";
+}
