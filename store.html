@@ -12,32 +12,30 @@
       margin: 0;
       padding: 0;
     }
-
     .container {
       max-width: 960px;
       margin: 0 auto;
       padding: 20px;
     }
-
     header, footer {
       background: #05203f;
       padding: 10px 0;
       text-align: center;
     }
-
+    header .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
     header img.logo {
       max-height: 80px;
-      vertical-align: middle;
       margin-left: 10px;
     }
-
     h1 {
-      display: inline-block;
-      vertical-align: middle;
+      margin-right: 10px;
       font-weight: 700;
       font-size: 1.8rem;
     }
-
     #toggle-lang-btn {
       position: fixed;
       top: 20px;
@@ -51,7 +49,6 @@
       font-weight: 700;
       cursor: pointer;
     }
-
     .btn-return {
       display: inline-block;
       margin-bottom: 30px;
@@ -61,19 +58,13 @@
       border-radius: 6px;
       font-weight: 700;
       text-decoration: none;
-      transition: background-color 0.3s ease;
     }
-    .btn-return:hover {
-      background: #e0a800;
-    }
-
     .product-grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 30px;
     }
-
     .product-card {
       background-color: #0a1e3d;
       border-radius: 12px;
@@ -81,29 +72,22 @@
       width: 280px;
       box-shadow: 0 0 10px rgba(0,0,0,0.6);
       text-align: center;
-      transition: transform 0.3s ease;
-      color: #fff;
     }
-
     .product-card:hover {
       transform: translateY(-5px);
     }
-
     .product-img {
       max-width: 100%;
-      height: auto;
       border-radius: 8px;
       margin-bottom: 15px;
       box-shadow: 0 0 6px rgba(30,144,255,0.6);
     }
-
     .price {
       font-weight: bold;
       font-size: 1.1rem;
       margin: 10px 0;
       color: #ffb347;
     }
-
     .btn-store {
       background: #ffc107;
       color: #000;
@@ -112,374 +96,176 @@
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
     }
-
-    .btn-store:hover {
-      background: #e0a800;
-    }
-
     footer p {
       margin: 0;
       font-size: 0.9rem;
     }
-
-    #purchaseModal, #d17Modal, #postModal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      color: #000;
-      padding: 20px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
-      z-index: 1050;
-      width: 320px;
-      border-radius: 8px;
-      text-align: center;
-      direction: rtl;
-    }
-
-    #purchaseModal h3,
-    #d17Modal h3,
-    #postModal h3 {
-      margin-top: 0;
-      color: #05203f;
-    }
-
-    #purchaseModal button,
-    #d17Modal button,
-    #postModal button {
-      margin: 5px 8px 5px 0;
-      padding: 10px 16px;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-      font-weight: 700;
-      transition: background-color 0.3s ease;
-    }
-
-    #purchaseModal button:nth-child(4) {
-      background-color: #ff6b35;
-      color: white;
-    }
-
-    #purchaseModal button:nth-child(2),
-    #purchaseModal button:nth-child(3),
-    #d17Modal button#submitD17,
-    #postModal button[type="submit"] {
-      background-color: #ffc107;
-      color: black;
-    }
-
-    #purchaseModal button:nth-child(2):hover,
-    #purchaseModal button:nth-child(3):hover,
-    #d17Modal button#submitD17:hover,
-    #postModal button[type="submit"]:hover {
-      background-color: #e0a800;
-    }
-
-    #purchaseModal button:nth-child(4):hover,
-    #d17Modal button#closeD17:hover,
-    #postModal button#closePost:hover {
-      background-color: #d0521f;
-    }
-
-    #modalOverlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 1040;
-    }
-
-    #postModal form {
-      text-align: right;
-      direction: rtl;
-    }
-
-    #postModal label {
-      display: block;
-      margin-top: 10px;
-      font-weight: 600;
-    }
-
-    #postModal input, #postModal textarea {
-      width: 100%;
-      padding: 8px;
-      margin-top: 4px;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container header-inner">
-      <img src="logo.png" alt="Logo" class="logo" />
-      <h1>متجر الورشة</h1>
-    </div>
-  </header>
 
-  <button id="toggle-lang-btn">Changer la langue</button>
-
-  <section class="container">
-    <a href="index.html" class="btn-return">🏠 رجوع للرئيسية</a>
-
-    <div class="product-grid">
-
-      <div class="product-card">
-        <img src="300a.webp" alt="Poste Meakida 250A" class="product-img" />
-        <h3>Poste a souder Meakida 250A</h3>
-        <p>ماكينة لحام قوية 250 أمبير</p>
-        <div class="price">د.ت 319,000</div>
-        <button class="btn-store">شراء</button>
-      </div>
-
-      <div class="product-card">
-        <img src="300a.webp" alt="Poste Meakida 300A" class="product-img" />
-        <h3>Poste a souder Meakida 300A</h3>
-        <p>أداء أفضل بـ 300 أمبير</p>
-        <div class="price">د.ت 339,000</div>
-        <button class="btn-store">شراء</button>
-      </div>
-
-      <div class="product-card">
-        <img src="ingco200a.webp" alt="Poste Ingco 200A" class="product-img" />
-        <h3>Poste a souder INGCO 200A</h3>
-        <p>ماركة مشهورة وعملية</p>
-        <div class="price">د.ت 480,000</div>
-        <button class="btn-store">شراء</button>
-      </div>
-
-    </div>
-  </section>
-
-  <footer>
-    <div class="footer-inner container">
-      <p>© 2025 Atelier Electronique Médenine – جميع الحقوق محفوظة</p>
-    </div>
-  </footer>
-
-  <div id="purchaseModal">
-    <h3>عملية الشراء</h3>
-    <p id="productName">المنتج:</p>
-    <p id="productPrice">السعر:</p>
-
-    <h4>اختر طريقة الدفع:</h4>
-    <button id="payD17">الدفع عن طريق D17</button>
-    <button id="payPost">الدفع عن طريق البريد</button>
-
-    <br /><br />
-    <button id="closeModalBtn">إغلاق</button>
+<header>
+  <div class="container header-inner">
+    <img src="logo.png" alt="Logo" class="logo" />
+    <h1>متجر الورشة</h1>
   </div>
+</header>
 
-  <div id="d17Modal">
-    <h3>الدفع عن طريق D17</h3>
-    <label for="cardNumber">رقم بطاقة الدفع:</label><br />
-    <input type="text" id="cardNumber" placeholder="أدخل رقم بطاقتك" />
-    <br /><br />
-    <button id="submitD17">إرسال</button>
-    <button id="closeD17">إغلاق</button>
+<button id="toggle-lang-btn">Changer la langue</button>
+
+<section class="container">
+  <a href="index.html" class="btn-return">🏠 رجوع للرئيسية</a>
+
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="300a.webp" alt="Poste Meakida 250A" class="product-img" />
+      <h3>Poste a souder Meakida 250A</h3>
+      <p>ماكينة لحام قوية 250 أمبير</p>
+      <div class="price">د.ت 319,000</div>
+      <button class="btn-store">شراء</button>
+    </div>
+
+    <div class="product-card">
+      <img src="300a.webp" alt="Poste Meakida 300A" class="product-img" />
+      <h3>Poste a souder Meakida 300A</h3>
+      <p>أداء أفضل بـ 300 أمبير</p>
+      <div class="price">د.ت 339,000</div>
+      <button class="btn-store">شراء</button>
+    </div>
+
+    <div class="product-card">
+      <img src="ingco200a.webp" alt="Poste Ingco 200A" class="product-img" />
+      <h3>Poste a souder INGCO 200A</h3>
+      <p>ماركة مشهورة وعملية</p>
+      <div class="price">د.ت 480,000</div>
+      <button class="btn-store">شراء</button>
+    </div>
   </div>
+</section>
 
-  <div id="postModal">
-    <h3>الدفع عن طريق البريد</h3>
-    <form id="postForm">
-      <label for="firstName">الاسم:</label>
-      <input type="text" id="firstName" name="firstName" placeholder="أدخل اسمك" required />
-
-      <label for="lastName">اللقب:</label>
-      <input type="text" id="lastName" name="lastName" placeholder="أدخل لقبك" required />
-
-      <label for="address">العنوان الكامل:</label>
-      <textarea id="address" name="address" placeholder="أدخل عنوانك بالكامل" required></textarea>
-
-      <label for="phone">رقم الهاتف:</label>
-      <input type="tel" id="phone" name="phone" placeholder="أدخل رقم هاتفك" required />
-
-      <br />
-      <button type="submit">إرسال</button>
-      <button type="button" id="closePost">إغلاق</button>
-    </form>
+<footer>
+  <div class="footer-inner container">
+    <p>© 2025 Atelier Electronique Médenine – جميع الحقوق محفوظة</p>
   </div>
+</footer>
 
-  <div id="modalOverlay"></div>
+  <!-- النوافذ -->
+<div id="modalOverlay"></div>
 
-  <script>
-    const purchaseModal = document.getElementById('purchaseModal');
-    const d17Modal = document.getElementById('d17Modal');
-    const postModal = document.getElementById('postModal');
-    const overlay = document.getElementById('modalOverlay');
+<div id="purchaseModal" class="modal">
+  <h3>عملية الشراء</h3>
+  <p id="productName">المنتج:</p>
+  <p id="productPrice">السعر:</p>
+  <h4>اختر طريقة الدفع:</h4>
+  <button id="payD17">الدفع عن طريق D17</button>
+  <button id="payPost">الدفع عن طريق البريد</button><br><br>
+  <button id="closeModalBtn">إغلاق</button>
+</div>
 
-    const buyButtons = document.querySelectorAll('.btn-store');
-    const productNameElem = document.getElementById('productName');
-    const productPriceElem = document.getElementById('productPrice');
+<div id="d17Modal" class="modal">
+  <h3>الدفع عن طريق D17</h3>
+  <label for="cardNumber">رقم بطاقة الدفع:</label><br />
+  <input type="text" id="cardNumber" placeholder="أدخل رقم بطاقتك" /><br><br>
+  <button id="submitD17">إرسال</button>
+  <button id="closeD17">إغلاق</button>
+</div>
 
-    const payD17Btn = document.getElementById('payD17');
-    const payPostBtn = document.getElementById('payPost');
-    const closePurchaseBtn = document.getElementById('closeModalBtn');
-    const closeD17Btn = document.getElementById('closeD17');
-    const submitD17Btn = document.getElementById('submitD17');
-    const closePostBtn = document.getElementById('closePost');
-    const postForm = document.getElementById('postForm');
+<div id="postModal" class="modal">
+  <h3>الدفع عن طريق البريد</h3>
+  <form id="postForm">
+    <label for="firstName">الاسم:</label>
+    <input type="text" id="firstName" required />
+    <label for="lastName">اللقب:</label>
+    <input type="text" id="lastName" required />
+    <label for="address">العنوان الكامل:</label>
+    <textarea id="address" required></textarea>
+    <label for="phone">رقم الهاتف:</label>
+    <input type="tel" id="phone" required /><br>
+    <button type="submit">إرسال</button>
+    <button type="button" id="closePost">إغلاق</button>
+  </form>
+</div>
 
-    const whatsappNumber = '21698192103'; // غيره برقمك
+<!-- سكربت -->
+<script>
+  const purchaseModal = document.getElementById('purchaseModal');
+  const d17Modal = document.getElementById('d17Modal');
+  const postModal = document.getElementById('postModal');
+  const overlay = document.getElementById('modalOverlay');
+  const buyButtons = document.querySelectorAll('.btn-store');
+  const productNameElem = document.getElementById('productName');
+  const productPriceElem = document.getElementById('productPrice');
 
-    buyButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const productCard = btn.closest('.product-card');
-        const name = productCard.querySelector('h3').textContent;
-        const price = productCard.querySelector('.price').textContent;
+  const payD17Btn = document.getElementById('payD17');
+  const payPostBtn = document.getElementById('payPost');
+  const closePurchaseBtn = document.getElementById('closeModalBtn');
+  const closeD17Btn = document.getElementById('closeD17');
+  const submitD17Btn = document.getElementById('submitD17');
+  const closePostBtn = document.getElementById('closePost');
+  const postForm = document.getElementById('postForm');
+  const whatsappNumber = '21698192103';
 
-        productNameElem.textContent = 'المنتج: ' + name;
-        productPriceElem.textContent = 'السعر: ' + price;
+  buyButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const product = btn.closest('.product-card');
+      const name = product.querySelector('h3').textContent;
+      const price = product.querySelector('.price').textContent;
 
-        purchaseModal.style.display = 'block';
-        overlay.style.display = 'block';
-      });
+      productNameElem.textContent = 'المنتج: ' + name;
+      productPriceElem.textContent = 'السعر: ' + price;
+
+      purchaseModal.style.display = 'block';
+      overlay.style.display = 'block';
     });
+  });
 
-    function closeAllModals() {
-      purchaseModal.style.display = 'none';
-      d17Modal.style.display = 'none';
-      postModal.style.display = 'none';
-      overlay.style.display = 'none';
-    }
+  function closeAll() {
+    purchaseModal.style.display = 'none';
+    d17Modal.style.display = 'none';
+    postModal.style.display = 'none';
+    overlay.style.display = 'none';
+  }
 
-    closePurchaseBtn.addEventListener('click', closeAllModals);
-    overlay.addEventListener('click', closeAllModals);
+  closePurchaseBtn.onclick = closeAll;
+  overlay.onclick = closeAll;
 
-    payD17Btn.addEventListener('click', () => {
-      purchaseModal.style.display = 'none';
-      d17Modal.style.display = 'block';
-    });
+  payD17Btn.onclick = () => {
+    purchaseModal.style.display = 'none';
+    d17Modal.style.display = 'block';
+  };
 
-    closeD17Btn.addEventListener('click', () => {
-      d17Modal.style.display = 'none';
-      closeAllModals();
-    });
+  closeD17Btn.onclick = closeAll;
 
-    submitD17Btn.addEventListener('click', () => {
-      const cardNumber = document.getElementById('cardNumber').value.trim();
-      if(cardNumber === '') {
-        alert('الرجاء إدخال رقم البطاقة');
-        return;
-      }
-      const message = encodeURIComponent(`مرحبا، أرسل لك بيانات الدفع عن طريق D17:\nرقم البطاقة: ${cardNumber}`);
-      const url = `https://wa.me/${whatsappNumber}?text=${message}`;
-      window.open(url, '_blank');
+  submitD17Btn.onclick = () => {
+    const card = document.getElementById('cardNumber').value.trim();
+    if (!card) return alert('يرجى إدخال رقم البطاقة');
+    const msg = encodeURIComponent(`دفع عن طريق D17\nرقم البطاقة: ${card}`);
+    window.open(`https://wa.me/${whatsappNumber}?text=${msg}`, '_blank');
+    closeAll();
+  };
 
-      d17Modal.style.display = 'none';
-      closeAllModals();
-    });
+  payPostBtn.onclick = () => {
+    purchaseModal.style.display = 'none';
+    postModal.style.display = 'block';
+  };
 
-    payPostBtn.addEventListener('click', () => {
-      purchaseModal.style.display = 'none';
-      postModal.style.display = 'block';
-    });
+  closePostBtn.onclick = closeAll;
 
-    closePostBtn.addEventListener('click', () => {
-      postModal.style.display = 'none';
-      closeAllModals();
-    });
+  postForm.onsubmit = e => {
+    e.preventDefault();
+    const name = postForm.firstName.value.trim();
+    const last = postForm.lastName.value.trim();
+    const address = postForm.address.value.trim();
+    const phone = postForm.phone.value.trim();
 
-    postForm.addEventListener('submit', (e) => {
-      e.preventDefault();
+    if (!name || !last || !address || !phone) return alert('الرجاء ملء جميع الخانات');
+    const msg = encodeURIComponent(`دفع بالبريد\nالاسم: ${name}\nاللقب: ${last}\nالعنوان: ${address}\nالهاتف: ${phone}`);
+    window.open(`https://wa.me/${whatsappNumber}?text=${msg}`, '_blank');
+    closeAll();
+    postForm.reset();
+  };
+</script>
 
-      const firstName = postForm.firstName.value.trim();
-      const lastName = postForm.lastName.value.trim();
-      const address = postForm.address.value.trim();
-      const phone = postForm.phone.value.trim();
-
-      if(!firstName || !lastName || !address || !phone) {
-        alert('الرجاء تعبئة جميع الحقول');
-        return;
-      }
-
-      const message = encodeURIComponent(`مرحباً، أرسل لك بيانات الدفع عن طريق البريد:\nالاسم: ${firstName}\nاللقب: ${lastName}\nالعنوان: ${address}\nرقم الهاتف: ${phone}`);
-      const url = `https://wa.me/${whatsappNumber}?text=${message}`;
-      window.open(url, '_blank');
-
-      postModal.style.display = 'none';
-      closeAllModals();
-      postForm.reset();
-    });
-
-    // زر تبديل اللغة
-    document.getElementById('toggle-lang-btn').addEventListener('click', () => {
-      const lang = document.documentElement.lang || 'ar';
-      if (lang === 'ar') {
-        document.documentElement.lang = 'fr';
-        document.documentElement.dir = 'ltr';
-        document.querySelector('h1').textContent = "Boutique de l'atelier";
-        document.querySelector('.btn-return').textContent = '🏠 Accueil';
-        document.getElementById('toggle-lang-btn').textContent = 'تبديل اللغة';
-        document.querySelectorAll('.btn-store').forEach(btn => btn.textContent = 'Acheter');
-
-        document.getElementById('purchaseModal').querySelector('h3').textContent = "Processus d'achat";
-        document.getElementById('productName').textContent = 'Produit:';
-        document.getElementById('productPrice').textContent = 'Prix:';
-        document.querySelector('#purchaseModal h4').textContent = 'Choisissez le mode de paiement:';
-        payD17Btn.textContent = 'Paiement via D17';
-        payPostBtn.textContent = 'Paiement via la poste';
-        closePurchaseBtn.textContent = 'Fermer';
-
-        d17Modal.querySelector('h3').textContent = 'Paiement via D17';
-        d17Modal.querySelector('label').textContent = 'Numéro de carte:';
-        document.getElementById('cardNumber').placeholder = 'Entrez votre numéro de carte';
-        submitD17Btn.textContent = 'Envoyer';
-        closeD17Btn.textContent = 'Fermer';
-
-        postModal.querySelector('h3').textContent = 'Paiement via la poste';
-        postModal.querySelector('label[for="firstName"]').textContent = 'Prénom:';
-        postModal.querySelector('label[for="lastName"]').textContent = 'Nom:';
-        postModal.querySelector('label[for="address"]').textContent = 'Adresse complète:';
-        postModal.querySelector('label[for="phone"]').textContent = 'Numéro de téléphone:';
-        postForm.firstName.placeholder = 'Entrez votre prénom';
-        postForm.lastName.placeholder = 'Entrez votre nom';
-        postForm.address.placeholder = 'Entrez votre adresse complète';
-        postForm.phone.placeholder = 'Entrez votre numéro de téléphone';
-        postForm.querySelector('button[type="submit"]').textContent = 'Envoyer';
-        closePostBtn.textContent = 'Fermer';
-
-      } else {
-        document.documentElement.lang = 'ar';
-        document.documentElement.dir = 'rtl';
-        document.querySelector('h1').textContent = 'متجر الورشة';
-        document.querySelector('.btn-return').textContent = '🏠 رجوع للرئيسية';
-        document.getElementById('toggle-lang-btn').textContent = 'Changer la langue';
-        document.querySelectorAll('.btn-store').forEach(btn => btn.textContent = 'شراء');
-
-        document.getElementById('purchaseModal').querySelector('h3').textContent = 'عملية الشراء';
-        document.getElementById('productName').textContent = 'المنتج:';
-        document.getElementById('productPrice').textContent = 'السعر:';
-        document.querySelector('#purchaseModal h4').textContent = 'اختر طريقة الدفع:';
-        payD17Btn.textContent = 'الدفع عن طريق D17';
-        payPostBtn.textContent = 'الدفع عن طريق البريد';
-        closePurchaseBtn.textContent = 'إغلاق';
-
-        d17Modal.querySelector('h3').textContent = 'الدفع عن طريق D17';
-        d17Modal.querySelector('label').textContent = 'رقم بطاقة الدفع:';
-        document.getElementById('cardNumber').placeholder = 'أدخل رقم بطاقتك';
-        submitD17Btn.textContent = 'إرسال';
-        closeD17Btn.textContent = '
-
-      closeD17Btn.textContent = 'إغلاق';
-
-        postModal.querySelector('h3').textContent = 'الدفع عن طريق البريد';
-        postModal.querySelector('label[for="firstName"]').textContent = 'الاسم:';
-        postModal.querySelector('label[for="lastName"]').textContent = 'اللقب:';
-        postModal.querySelector('label[for="address"]').textContent = 'العنوان الكامل:';
-        postModal.querySelector('label[for="phone"]').textContent = 'رقم الهاتف:';
-        postForm.firstName.placeholder = 'أدخل اسمك';
-        postForm.lastName.placeholder = 'أدخل لقبك';
-        postForm.address.placeholder = 'أدخل عنوانك بالكامل';
-        postForm.phone.placeholder = 'أدخل رقم هاتفك';
-        postForm.querySelector('button[type="submit"]').textContent = 'إرسال';
-        closePostBtn.textContent = 'إغلاق';
-      }
-    });
+</body>
+</html>
