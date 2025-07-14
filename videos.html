@@ -49,11 +49,25 @@
       cursor: pointer;
       font-size: 1.1rem;
     }
-    .comments textarea {
-      width: 90%;
-      border-radius: 6px;
-      padding: 5px;
+    .comment-input {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
       margin-top: 10px;
+    }
+    .comment-input input {
+      width: 75%;
+      padding: 6px;
+      border-radius: 6px;
+      border: none;
+    }
+    .comment-input button {
+      padding: 6px 10px;
+      background-color: #1e90ff;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
     }
     .comments ul {
       text-align: right;
@@ -65,8 +79,7 @@
       font-size: 0.9rem;
       color: #ccc;
     }
-
-    /* الأزرار */
+    /* الأزرار العامة */
     button, a.btn-return {
       max-width: 220px;
       margin: 10px auto;
@@ -94,7 +107,7 @@
     <h1 id="page-title">فيديوهات الورشة</h1>
 
     <div class="video-gallery" id="video-gallery">
-      <!-- الفيديوهات تدرج ديناميكياً -->
+      <!-- الفيديوهات تُدرج ديناميكياً -->
     </div>
 
     <button id="toggle-lang-btn">تبديل اللغة</button>
@@ -118,12 +131,14 @@
         toggle: "تبديل اللغة",
         views: "مشاهدة",
         commentPlaceholder: "أضف تعليقًا...",
+        send: "💬"
       },
       fr: {
         title: "Vidéos de l'atelier",
         toggle: "Changer la langue",
         views: "vue",
         commentPlaceholder: "Ajouter un commentaire...",
+        send: "💬"
       }
     };
 
@@ -152,12 +167,15 @@
           </video>
           <div class="views">${views} ${texts[currentLang].views}</div>
           <div class="reactions">
-            <button onclick="react('${reactsKey}', 'like', this)">👍 ${reacts.like}</button>
-            <button onclick="react('${reactsKey}', 'love', this)">❤️ ${reacts.love}</button>
-            <button onclick="react('${reactsKey}', 'laugh', this)">😏 ${reacts.laugh}</button>
+            <button onclick="react('${reactsKey}', 'like')">👍 ${reacts.like}</button>
+            <button onclick="react('${reactsKey}', 'love')">❤️ ${reacts.love}</button>
+            <button onclick="react('${reactsKey}', 'laugh')">😏 ${reacts.laugh}</button>
           </div>
           <div class="comments">
-            <textarea placeholder="${texts[currentLang].commentPlaceholder}" onkeydown="if(event.key==='Enter'){event.preventDefault(); addComment('${commentsKey}', this)}"></textarea>
+            <div class="comment-input">
+              <input type="text" placeholder="${texts[currentLang].commentPlaceholder}" id="${videoId}-input" />
+              <button onclick="addComment('${commentsKey}', '${videoId}-input')">${texts[currentLang].send}</button>
+            </div>
             <ul>
               ${comments.map(c => `<li>${c}</li>`).join('')}
             </ul>
@@ -176,20 +194,21 @@
       }
     }
 
-    function react(key, type, btn) {
+    function react(key, type) {
       let reacts = JSON.parse(localStorage.getItem(key)) || { like: 0, love: 0, laugh: 0 };
       reacts[type]++;
       localStorage.setItem(key, JSON.stringify(reacts));
       renderVideos(); // refresh to show updated reactions
     }
 
-    function addComment(key, textarea) {
-      const val = textarea.value.trim();
+    function addComment(key, inputId) {
+      const input = document.getElementById(inputId);
+      const val = input.value.trim();
       if (val) {
         let comments = JSON.parse(localStorage.getItem(key)) || [];
         comments.push(val);
         localStorage.setItem(key, JSON.stringify(comments));
-        textarea.value = "";
+        input.value = "";
         renderVideos(); // refresh
       }
     }
