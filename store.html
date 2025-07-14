@@ -38,7 +38,6 @@
       font-size: 1.8rem;
     }
 
-    /* زر تبديل اللغة */
     #toggle-lang-btn {
       position: fixed;
       top: 20px;
@@ -68,7 +67,6 @@
       background: #e0a800;
     }
 
-    /* المنتجات */
     .product-grid {
       display: flex;
       flex-wrap: wrap;
@@ -126,7 +124,6 @@
       font-size: 0.9rem;
     }
 
-    /* مودال الشراء */
     #purchaseModal, #d17Modal, #postModal {
       display: none;
       position: fixed;
@@ -189,7 +186,6 @@
       background-color: #d0521f;
     }
 
-    /* خلفية التعتيم */
     #modalOverlay {
       display: none;
       position: fixed;
@@ -198,7 +194,6 @@
       z-index: 1040;
     }
 
-    /* الفورم داخل مودال البريد */
     #postModal form {
       text-align: right;
       direction: rtl;
@@ -269,7 +264,6 @@
     </div>
   </footer>
 
-  <!-- مودال اختيار طريقة الدفع -->
   <div id="purchaseModal">
     <h3>عملية الشراء</h3>
     <p id="productName">المنتج:</p>
@@ -283,7 +277,6 @@
     <button id="closeModalBtn">إغلاق</button>
   </div>
 
-  <!-- مودال دفع D17 -->
   <div id="d17Modal">
     <h3>الدفع عن طريق D17</h3>
     <label for="cardNumber">رقم بطاقة الدفع:</label><br />
@@ -293,7 +286,6 @@
     <button id="closeD17">إغلاق</button>
   </div>
 
-  <!-- مودال الدفع عن طريق البريد -->
   <div id="postModal">
     <h3>الدفع عن طريق البريد</h3>
     <form id="postForm">
@@ -310,29 +302,23 @@
       <input type="tel" id="phone" name="phone" placeholder="أدخل رقم هاتفك" required />
 
       <br />
-      <button type="submit">إ
-        <br />
       <button type="submit">إرسال</button>
       <button type="button" id="closePost">إغلاق</button>
     </form>
   </div>
 
-  <!-- خلفية التعتيم -->
   <div id="modalOverlay"></div>
 
   <script>
-    // عناصر المودالات والخلفية
     const purchaseModal = document.getElementById('purchaseModal');
     const d17Modal = document.getElementById('d17Modal');
     const postModal = document.getElementById('postModal');
     const overlay = document.getElementById('modalOverlay');
 
-    // عناصر المنتج
     const buyButtons = document.querySelectorAll('.btn-store');
     const productNameElem = document.getElementById('productName');
     const productPriceElem = document.getElementById('productPrice');
 
-    // أزرار الدفع والإغلاق
     const payD17Btn = document.getElementById('payD17');
     const payPostBtn = document.getElementById('payPost');
     const closePurchaseBtn = document.getElementById('closeModalBtn');
@@ -341,7 +327,8 @@
     const closePostBtn = document.getElementById('closePost');
     const postForm = document.getElementById('postForm');
 
-    // فتح نافذة الشراء مع تفاصيل المنتج
+    const whatsappNumber = '21698192103'; // غيره برقمك
+
     buyButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const productCard = btn.closest('.product-card');
@@ -356,7 +343,6 @@
       });
     });
 
-    // دالة إغلاق جميع النوافذ والمودالات
     function closeAllModals() {
       purchaseModal.style.display = 'none';
       d17Modal.style.display = 'none';
@@ -364,47 +350,43 @@
       overlay.style.display = 'none';
     }
 
-    // إغلاق نافذة الشراء
     closePurchaseBtn.addEventListener('click', closeAllModals);
     overlay.addEventListener('click', closeAllModals);
 
-    // اختيار الدفع عن طريق D17
     payD17Btn.addEventListener('click', () => {
       purchaseModal.style.display = 'none';
       d17Modal.style.display = 'block';
     });
 
-    // إغلاق مودال D17
     closeD17Btn.addEventListener('click', () => {
       d17Modal.style.display = 'none';
       closeAllModals();
     });
 
-    // إرسال رقم بطاقة الدفع D17
     submitD17Btn.addEventListener('click', () => {
       const cardNumber = document.getElementById('cardNumber').value.trim();
       if(cardNumber === '') {
         alert('الرجاء إدخال رقم البطاقة');
         return;
       }
-      alert('تم استلام رقم البطاقة: ' + cardNumber + '\nشكراً لتعاملك معنا!');
+      const message = encodeURIComponent(`مرحبا، أرسل لك بيانات الدفع عن طريق D17:\nرقم البطاقة: ${cardNumber}`);
+      const url = `https://wa.me/${whatsappNumber}?text=${message}`;
+      window.open(url, '_blank');
+
       d17Modal.style.display = 'none';
       closeAllModals();
     });
 
-    // اختيار الدفع عن طريق البريد
     payPostBtn.addEventListener('click', () => {
       purchaseModal.style.display = 'none';
       postModal.style.display = 'block';
     });
 
-    // إغلاق مودال البريد
     closePostBtn.addEventListener('click', () => {
       postModal.style.display = 'none';
       closeAllModals();
     });
 
-    // إرسال بيانات نموذج الدفع عن طريق البريد
     postForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
@@ -418,13 +400,16 @@
         return;
       }
 
-      alert(`تم استلام بياناتك:\nالاسم: ${firstName}\nاللقب: ${lastName}\nالعنوان: ${address}\nرقم الهاتف: ${phone}\nشكراً لتعاملك معنا!`);
+      const message = encodeURIComponent(`مرحباً، أرسل لك بيانات الدفع عن طريق البريد:\nالاسم: ${firstName}\nاللقب: ${lastName}\nالعنوان: ${address}\nرقم الهاتف: ${phone}`);
+      const url = `https://wa.me/${whatsappNumber}?text=${message}`;
+      window.open(url, '_blank');
+
       postModal.style.display = 'none';
       closeAllModals();
       postForm.reset();
     });
 
-    // زر تبديل اللغة (عربي / فرنسي)
+    // زر تبديل اللغة
     document.getElementById('toggle-lang-btn').addEventListener('click', () => {
       const lang = document.documentElement.lang || 'ar';
       if (lang === 'ar') {
@@ -435,7 +420,6 @@
         document.getElementById('toggle-lang-btn').textContent = 'تبديل اللغة';
         document.querySelectorAll('.btn-store').forEach(btn => btn.textContent = 'Acheter');
 
-        // مودال الدفع
         document.getElementById('purchaseModal').querySelector('h3').textContent = "Processus d'achat";
         document.getElementById('productName').textContent = 'Produit:';
         document.getElementById('productPrice').textContent = 'Prix:';
@@ -444,14 +428,12 @@
         payPostBtn.textContent = 'Paiement via la poste';
         closePurchaseBtn.textContent = 'Fermer';
 
-        // مودال D17
         d17Modal.querySelector('h3').textContent = 'Paiement via D17';
         d17Modal.querySelector('label').textContent = 'Numéro de carte:';
         document.getElementById('cardNumber').placeholder = 'Entrez votre numéro de carte';
         submitD17Btn.textContent = 'Envoyer';
         closeD17Btn.textContent = 'Fermer';
 
-        // مودال البريد
         postModal.querySelector('h3').textContent = 'Paiement via la poste';
         postModal.querySelector('label[for="firstName"]').textContent = 'Prénom:';
         postModal.querySelector('label[for="lastName"]').textContent = 'Nom:';
@@ -472,7 +454,6 @@
         document.getElementById('toggle-lang-btn').textContent = 'Changer la langue';
         document.querySelectorAll('.btn-store').forEach(btn => btn.textContent = 'شراء');
 
-        // مودال الدفع
         document.getElementById('purchaseModal').querySelector('h3').textContent = 'عملية الشراء';
         document.getElementById('productName').textContent = 'المنتج:';
         document.getElementById('productPrice').textContent = 'السعر:';
@@ -481,27 +462,9 @@
         payPostBtn.textContent = 'الدفع عن طريق البريد';
         closePurchaseBtn.textContent = 'إغلاق';
 
-        // مودال D17
         d17Modal.querySelector('h3').textContent = 'الدفع عن طريق D17';
         d17Modal.querySelector('label').textContent = 'رقم بطاقة الدفع:';
         document.getElementById('cardNumber').placeholder = 'أدخل رقم بطاقتك';
         submitD17Btn.textContent = 'إرسال';
-        closeD17Btn.textContent = 'إغلاق';
-
-        // مودال البريد
-        postModal.querySelector('h3').textContent = 'الدفع عن طريق البريد';
-        postModal.querySelector('label[for="firstName"]').textContent = 'الاسم:';
-        postModal.querySelector('label[for="lastName"]').textContent = 'اللقب:';
-        postModal.querySelector('label[for="address"]').textContent = 'العنوان الكامل:';
-        postModal.querySelector('label[for="phone"]').textContent = 'رقم الهاتف:';
-        postForm.firstName.placeholder = 'أدخل اسمك';
-        postForm.lastName.placeholder = 'أدخل لقبك';
-        postForm.address.placeholder = 'أدخل عنوانك بالكامل';
-        postForm.phone.placeholder = 'أدخل رقم هاتفك';
-        postForm.querySelector('button[type="submit"]').textContent = 'إرسال';
-        closePostBtn.textContent = 'إغلاق';
-      }
-    });
-  </script>
-</body>
-</html>
+        closeD17Btn.textContent = '
+          
