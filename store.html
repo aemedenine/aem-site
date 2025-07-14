@@ -467,4 +467,19 @@
         document.getElementById('cardNumber').placeholder = 'أدخل رقم بطاقتك';
         submitD17Btn.textContent = 'إرسال';
         closeD17Btn.textContent = '
-          
+
+      closeD17Btn.textContent = 'إغلاق';
+
+        postModal.querySelector('h3').textContent = 'الدفع عن طريق البريد';
+        postModal.querySelector('label[for="firstName"]').textContent = 'الاسم:';
+        postModal.querySelector('label[for="lastName"]').textContent = 'اللقب:';
+        postModal.querySelector('label[for="address"]').textContent = 'العنوان الكامل:';
+        postModal.querySelector('label[for="phone"]').textContent = 'رقم الهاتف:';
+        postForm.firstName.placeholder = 'أدخل اسمك';
+        postForm.lastName.placeholder = 'أدخل لقبك';
+        postForm.address.placeholder = 'أدخل عنوانك بالكامل';
+        postForm.phone.placeholder = 'أدخل رقم هاتفك';
+        postForm.querySelector('button[type="submit"]').textContent = 'إرسال';
+        closePostBtn.textContent = 'إغلاق';
+      }
+    });
