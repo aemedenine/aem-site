@@ -5,11 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Atelier Electronique Médenine</title>
   <style>
-    /* CSS Reset */
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Montserrat', 'Open Sans', sans-serif;
       background: linear-gradient(135deg, #0b1a27, #122f4a);
@@ -18,21 +14,15 @@
       text-align: right;
       line-height: 1.6;
     }
-
     .container {
-      width: 90%;
-      max-width: 1100px;
-      margin: 0 auto;
+      width: 90%; max-width: 1100px; margin: 0 auto;
     }
-
-    /* Header */
     header {
       background-color: #061222;
       padding: 15px 0;
       box-shadow: 0 2px 6px rgba(0,0,0,0.6);
       margin-bottom: 15px;
     }
-
     .header-inner {
       display: flex;
       align-items: center;
@@ -40,14 +30,11 @@
       justify-content: flex-start;
       flex-wrap: wrap;
     }
-
     .logo {
-      width: 150px;
-      height: auto;
+      width: 150px; height: auto;
       border-radius: 10px;
       box-shadow: 0 0 8px #1e90ff;
     }
-
     header h1 {
       font-weight: 700;
       font-size: 1.8rem;
@@ -55,7 +42,6 @@
       flex-grow: 1;
     }
 
-    /* News ticker */
     .news-ticker {
       background: #ff6b35;
       color: white;
@@ -79,7 +65,6 @@
       100% { transform: translateX(-100%); }
     }
 
-    /* Info bar */
     .info-bar {
       display: flex;
       justify-content: space-between;
@@ -103,14 +88,8 @@
       color: white;
       font-weight: 700;
       cursor: pointer;
-      transition: background-color 0.3s ease;
     }
 
-    #toggle-lang-btn:hover {
-      background-color: #d9533f;
-    }
-
-    /* CTA Buttons */
     .cta-buttons {
       display: flex;
       flex-wrap: wrap;
@@ -131,26 +110,14 @@
       text-decoration: none;
       min-width: 150px;
       text-align: center;
-      transition: background-color 0.3s ease;
       box-shadow: 0 2px 6px rgba(30,144,255,0.7);
-    }.btn-services {
-  background: #28a745;
-  box-shadow: 0 2px 6px rgba(40, 167, 69, 0.7);
-}
-
-.btn-services:hover {
-  background: #218838;
-  box-shadow: 0 4px 12px rgba(33, 136, 56, 0.9);
-}
-    
-
-    .cta-buttons a:hover,
-    .cta-buttons button:hover {
-      background: #0c5ea8;
-      box-shadow: 0 4px 12px rgba(12,94,168,0.9);
     }
 
-    /* Experience Badge */
+    .btn-services {
+      background: #28a745;
+      box-shadow: 0 2px 6px rgba(40, 167, 69, 0.7);
+    }
+
     .experience-badge {
       background-color: #ff6b35;
       color: white;
@@ -164,81 +131,54 @@
       box-shadow: 0 0 15px #ff6b35;
     }
 
-    /* FAQ */
     .faq {
       max-width: 800px;
       margin: 0 auto 60px auto;
     }
-
     .faq h2 {
       color: #ff6b35;
-      font-weight: 700;
       font-size: 1.8rem;
       text-align: center;
       margin-bottom: 25px;
     }
-
     .faq-item {
       background-color: #0a1e3d;
       margin-bottom: 12px;
       border-radius: 8px;
       padding: 15px 20px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.6);
     }
-
-    .faq-item:hover {
-      background-color: #13325b;
-    }
-
     .faq-item h3 {
       font-weight: 700;
-      position: relative;
       color: #1e90ff;
+      position: relative;
     }
-
     .faq-item h3::after {
       content: "+";
       position: absolute;
       left: 20px;
       top: 0;
       font-size: 1.6rem;
-      font-weight: 700;
       color: #ff6b35;
-      transition: transform 0.3s ease;
     }
-
     .faq-item.open h3::after {
       content: "-";
-      transform: rotate(180deg);
     }
-
     .answer {
       margin-top: 12px;
-      font-weight: 400;
       color: #ddd;
       display: none;
-      line-height: 1.5;
     }
-
     .faq-item.open .answer {
       display: block;
     }
 
-    /* Footer */
     footer {
       background-color: #061222;
       color: #888;
       padding: 25px 0;
       text-align: center;
-      font-weight: 500;
       font-size: 0.9rem;
-      box-shadow: inset 0 1px 3px rgba(255,255,255,0.05);
-    }
-
-    .footer-inner p {
-      margin-bottom: 5px;
     }
 
     .social-icons {
@@ -248,12 +188,6 @@
     .social-icons a {
       margin: 0 12px;
       display: inline-block;
-      opacity: 0.75;
-      transition: opacity 0.3s ease;
-    }
-
-    .social-icons a:hover {
-      opacity: 1;
     }
 
     .social-icons img {
@@ -262,26 +196,10 @@
       filter: drop-shadow(0 0 1px rgba(0,0,0,0.8));
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
-      .header-inner {
+      .header-inner, .info-bar, .cta-buttons, .faq {
         flex-direction: column;
         text-align: center;
-        gap: 10px;
-      }
-      .info-bar {
-        flex-direction: column;
-        gap: 10px;
-      }
-      .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-      .experience-badge {
-        width: 90%;
-      }
-      .faq {
-        width: 90%;
       }
     }
   </style>
@@ -298,54 +216,38 @@
     <div class="news-text" id="live-news">تحميل الأخبار...</div>
   </div>
 
-  <main class="container main-content">
+  <main class="container">
     <section class="info-bar">
       <div id="current-time">--:--:--</div>
       <div id="visit-count">عدد زياراتك: 0</div>
-      <button id="toggle-lang-btn" class="btn-primary">تبديل اللغة</button>
+      <button id="toggle-lang-btn">تبديل اللغة</button>
     </section>
 
     <section class="cta-buttons">
-  <a href="https://wa.me/21698192103" target="_blank" class="btn-whatsapp">واتساب</a>
-  <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" class="btn-maps">موقعنا على Google Maps</a>
-  <a href="photos.html" class="btn-gallery">شاهد الصور</a>
-  <a href="videos.html" class="btn-video">شاهد الفيديو</a>
-  <a href="services.html" class="btn-services">خدمات الورشة</a>
-  <button id="radio-btn" class="btn-radio">شغّل الراديو</button>
-  <audio id="radio-stream" src="https://stream.radiojar.com/8s5u5tpdtwzuv" preload="none"></audio>
-</section>
+      <a href="https://wa.me/21698192103" target="_blank" class="btn-whatsapp">واتساب</a>
+      <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" class="btn-maps">موقعنا على Google Maps</a>
+      <a href="photos.html" class="btn-gallery">شاهد الصور</a>
+      <a href="videos.html" class="btn-video">شاهد الفيديو</a>
+      <a href="services.html" class="btn-services">خدمات الورشة</a>
+      <button id="radio-btn" class="btn-radio">شغّل الراديو</button>
+      <audio id="radio-stream" src="https://stream.radiojar.com/8s5u5tpdtwzuv" preload="none"></audio>
+    </section>
 
     <section class="experience-badge">🌼 أكثر من 10 سنوات خبرة</section>
 
-    <section class="faq">
-      <h2>الأسئلة الشائعة</h2>
-      <div class="faq-item">
-        <h3>كيف يمكنني إرسال جهاز للإصلاح؟</h3>
-        <div class="answer">يمكنك إرسال الجهاز عبر البريد إلى عنوان الورشة أو التواصل معنا لترتيب خدمة الاستلام.</div>
-      </div>
-      <div class="faq-item">
-        <h3>ما هي مدة التصليح المعتادة؟</h3>
-        <div class="answer">مدة التصليح تختلف حسب نوع العطل، لكن غالباً لا تتجاوز 3 أيام عمل.</div>
-      </div>
-      <div class="faq-item">
-        <h3>هل توفرون قطع غيار أصلية؟</h3>
-        <div class="answer">نعم، نوفر قطع غيار أصلية وذات جودة عالية لجميع الأجهزة.</div>
-      </div>
-      <div class="faq-item">
-        <h3>كيف أتابع حالة الإصلاح؟</h3>
-        <div class="answer">نقوم بإرسال صور وفيديوهات لحالة الجهاز أثناء مراحل التصليح عبر واتساب.</div>
-      </div>
+    <section class="faq" id="faq-container">
+      <!-- الأسئلة تتم تعبئتها تلقائياً -->
     </section>
   </main>
 
   <footer>
-    <div class="container footer-inner">
-      <p>📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp:98192103</p>
+    <div class="container">
+      <p>📍 مدنين – نخدمو في كامل أنحاء تونس | 📲 WhatsApp: 98192103</p>
       <p>⏰ من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
       <div class="social-icons">
-        <a href="https://www.facebook.com/AEMednine" target="_blank" rel="noopener"><img src="icons/facebook.svg" alt="Facebook" /></a>
-        <a href="https://www.instagram.com/aemedenine/" target="_blank" rel="noopener"><img src="icons/instagram.svg" alt="Instagram" /></a>
-        <a href="https://wa.me/21698192103" target="_blank" rel="noopener"><img src="icons/whatsapp.svg" alt="WhatsApp" /></a>
+        <a href="https://www.facebook.com/AEMednine" target="_blank"><img src="icons/facebook.svg" alt="Facebook" /></a>
+        <a href="https://www.instagram.com/aemedenine/" target="_blank"><img src="icons/instagram.svg" alt="Instagram" /></a>
+        <a href="https://wa.me/21698192103" target="_blank"><img src="icons/whatsapp.svg" alt="WhatsApp" /></a>
       </div>
     </div>
   </footer>
@@ -354,152 +256,92 @@
     document.addEventListener('DOMContentLoaded', () => {
       let currentLang = document.documentElement.lang.startsWith('ar') ? 'ar' : 'fr';
 
-      // تحديث الوقت
       function updateTime() {
         const now = new Date();
-        const daysAr = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-        const monthsAr = ['جانفي','فيفري','مارس','أفريل','ماي','جوان','جويلية','أوت','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-        const daysFr = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
-        const monthsFr = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-
-        let day, month;
-        if(currentLang === 'ar'){
-          day = daysAr[now.getDay()];
-          month = monthsAr[now.getMonth()];
-        } else {
-          day = daysFr[now.getDay()];
-          month = monthsFr[now.getMonth()];
-        }
+        const days = currentLang === 'ar' 
+          ? ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت']
+          : ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+        const months = currentLang === 'ar' 
+          ? ['جانفي','فيفري','مارس','أفريل','ماي','جوان','جويلية','أوت','سبتمبر','أكتوبر','نوفمبر','ديسمبر']
+          : ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
 
         const date = now.getDate();
-        const hours = now.getHours().toString().padStart(2,'0');
-        const minutes = now.getMinutes().toString().padStart(2,'0');
-        const seconds = now.getSeconds().toString().padStart(2,'0');
-
-        const timeStr = `${hours}:${minutes}:${seconds}`;
+        const day = days[now.getDay()];
+        const month = months[now.getMonth()];
+        const timeStr = now.toLocaleTimeString('fr-FR');
         const dateStr = currentLang === 'ar' 
           ? `${day}، ${date} ${month}` 
           : `${day}, ${date} ${month}`;
-
         document.getElementById('current-time').textContent = `${dateStr} - ${timeStr}`;
       }
 
-      // تحديث عداد الزيارات (localStorage)
       function updateVisits() {
         const key = 'aem-visit-count';
         let count = parseInt(localStorage.getItem(key)) || 0;
         count++;
         localStorage.setItem(key, count);
-        document.getElementById('visit-count').textContent = 
-          currentLang === 'ar' ? `عدد زياراتك: ${count}` : `Nombre de visites: ${count}`;
+        document.getElementById('visit-count').textContent = currentLang === 'ar'
+          ? `عدد زياراتك: ${count}`
+          : `Nombre de visites: ${count}`;
       }
 
-      // الأخبار الوهمية للنص المتحرك
       function updateNews() {
-        const newsAr = [
-          "📢 ورشة إلكترونيك الرحماني تفتح أبوابها لجميع 🔧 خدمات تصليح الأجهزة الإلكترونية بجودة عالية وبأسعار 🌍  التوصيل عبر البريد متوفر لكل أنحاء تونس العنوان :نهج ليبيا مدنين 📱 تواصل معنا عبر واتساب لأي استفسار." ,
-          
-        ];
-        const newsFr = [
-          "📢 Atelier Electronique Médenine ouvre ses portes pour toutes les régions.",
-          "🔧 Services de réparation électronique de haute qualité à prix compétitifs.",
-          "🌍 Livraison par courrier disponible dans toute la Tunisie.",
-          "📱 Contactez-nous via WhatsApp pour toute question."
-        ];
-
-        const news = currentLang === 'ar' ? newsAr : newsFr;
-        const ticker = document.getElementById('live-news');
-        ticker.textContent = news.join(' • ');
+        const news = currentLang === 'ar'
+          ? ["📢 ورشة إلكترونيك الرحماني تفتح أبوابها لكل الولايات", "🔧 جودة وسرعة في تصليح الأجهزة", "🌍 توصيل مضمون بالبريد", "📱 تواصل عبر واتساب لأي استفسار"]
+          : ["📢 Atelier Electronique Médenine ouvert à toutes les régions", "🔧 Réparation rapide et de qualité", "🌍 Livraison assurée", "📱 Contactez-nous sur WhatsApp"];
+        document.getElementById('live-news').textContent = news.join(' • ');
       }
 
-      // تبديل اللغة مع تحديث المحتوى
-      function toggleLanguage() {
-        if(currentLang === 'ar'){
-          document.documentElement.lang = 'fr';
-          document.documentElement.dir = 'ltr';
-          currentLang = 'fr';
-
-          document.querySelector('header h1').textContent = 'Atelier Electronique Médenine';
-          document.querySelector('.experience-badge').textContent = '🌼 Plus de 10 ans d\'expérience';
-          document.getElementById('toggle-lang-btn').textContent = 'Changer la langue';
-          document.querySelector('.btn-whatsapp').textContent = 'WhatsApp';
-          document.querySelector('.btn-maps').textContent = 'Voir sur Google Maps';
-          document.querySelector('.btn-gallery').textContent = 'Voir les photos';
-          document.querySelector('.btn-video').textContent = 'Voir les vidéos';
-          document.getElementById('radio-btn').textContent = radio.paused ? 'Écouter la radio' : 'Arrêter la radio';
-
-          // FAQ
-          const faqContainer = document.querySelector('.faq');
-          faqContainer.innerHTML = `<h2>FAQ</h2>
-          <div class="faq-item"><h3>Comment puis-je envoyer un appareil pour réparation ?</h3><div class="answer">Vous pouvez envoyer l'appareil par courrier à l'atelier ou nous contacter pour organiser la collecte.</div></div>
-          <div class="faq-item"><h3>Quel est le délai moyen de réparation ?</h3><div class="answer">Le délai dépend du type de panne, mais généralement pas plus de 3 jours ouvrables.</div></div>
-          <div class="faq-item"><h3>Fournissez-vous des pièces d'origine ?</h3><div class="answer">Oui, nous fournissons des pièces d'origine et de haute qualité pour tous les appareils.</div></div>
-          <div class="faq-item"><h3>Comment suivre l'état de la réparation ?</h3><div class="answer">Nous envoyons des photos et vidéos de l'état de l'appareil pendant la réparation via WhatsApp.</div></div>`;
-
-        } else {
-          document.documentElement.lang = 'ar';
-          document.documentElement.dir = 'rtl';
-          currentLang = 'ar';
-
-          document.querySelector('header h1').textContent = 'Atelier Electronique Médenine';
-          document.querySelector('.experience-badge').textContent = '🌼 أكثر من 10 سنوات خبرة';
-          document.getElementById('toggle-lang-btn').textContent = 'تبديل اللغة';
-          document.querySelector('.btn-whatsapp').textContent = 'واتساب';
-          document.querySelector('.btn-maps').textContent = 'موقعنا على Google Maps';
-          document.querySelector('.btn-gallery').textContent = 'شاهد الصور';
-          document.querySelector('.btn-video').textContent = 'شاهد الفيديو';
-          document.getElementById('radio-btn').textContent = radio.paused ? 'شغّل الراديو' : 'أوقف الراديو';
-
-          // FAQ
-          const faqContainer = document.querySelector('.faq');
-          faqContainer.innerHTML = `
-            <h2>الأسئلة الشائعة</h2>
-            <div class="faq-item"><h3>كيف يمكنني إرسال جهاز للإصلاح؟</h3><div class="answer">يمكنك إرسال الجهاز عبر البريد إلى عنوان الورشة أو التواصل معنا لترتيب خدمة الاستلام.</div></div>
-            <div class="faq-item"><h3>ما هي مدة التصليح المعتادة؟</h3><div class="answer">مدة التصليح تختلف حسب نوع العطل، لكن غالباً لا تتجاوز 3 أيام عمل.</div></div>
-            <div class="faq-item"><h3>هل توفرون قطع غيار أصلية؟</h3><div class="answer">نعم، نوفر قطع غيار أصلية وذات جودة عالية لجميع الأجهزة.</div></div>
-            <div class="faq-item"><h3>كيف أتابع حالة الإصلاح؟</h3><div class="answer">نقوم بإرسال صور وفيديوهات لحالة الجهاز أثناء مراحل التصليح عبر واتساب.</div></div>
-          `;
-        }
-        updateNews();
-        updateTime();
-        updateVisits();
-        initFAQ(); // إعادة تفعيل الفتح والغلق على الأسئلة
-      }
-
-      // تفعيل فتح وإغلاق الأسئلة FAQ
-      function initFAQ() {
-        const items = document.querySelectorAll('.faq-item');
-        items.forEach(item => {
-          item.onclick = () => {
-            item.classList.toggle('open');
-          };
+      function loadFAQ() {
+        const faqContainer = document.getElementById('faq-container');
+        faqContainer.innerHTML = currentLang === 'ar' ? `
+          <h2>الأسئلة الشائعة</h2>
+          <div class="faq-item"><h3>كيف يمكنني إرسال جهاز للإصلاح؟</h3><div class="answer">يمكنك إرسال الجهاز عبر البريد أو التوصيل للورشة.</div></div>
+          <div class="faq-item"><h3>ما هي مدة التصليح؟</h3><div class="answer">مدة التصليح غالباً لا تتجاوز 3 أيام عمل.</div></div>
+          <div class="faq-item"><h3>هل توفرون قطع غيار أصلية؟</h3><div class="answer">نعم، مع ضمان الجودة.</div></div>
+          <div class="faq-item"><h3>كيف أتابع حالة التصليح؟</h3><div class="answer">نقوم بإرسال صور وفيديوهات عبر واتساب.</div></div>
+        ` : `
+          <h2>FAQ</h2>
+          <div class="faq-item"><h3>Comment envoyer un appareil ?</h3><div class="answer">Vous pouvez envoyer l'appareil par courrier ou venir directement.</div></div>
+          <div class="faq-item"><h3>Délais de réparation ?</h3><div class="answer">En général, pas plus de 3 jours ouvrables.</div></div>
+          <div class="faq-item"><h3>Pièces d'origine disponibles ?</h3><div class="answer">Oui, avec garantie de qualité.</div></div>
+          <div class="faq-item"><h3>Suivi de réparation ?</h3><div class="answer">Photos et vidéos envoyées via WhatsApp.</div></div>
+        `;
+        document.querySelectorAll('.faq-item').forEach(item => {
+          item.addEventListener('click', () => item.classList.toggle('open'));
         });
       }
 
-      // تشغيل وإيقاف الراديو
-      const radio = document.getElementById('radio-stream');
-      const radioBtn = document.getElementById('radio-btn');
-      radioBtn.addEventListener('click', () => {
-        if(radio.paused){
+      function toggleLanguage() {
+        currentLang = currentLang === 'ar' ? 'fr' : 'ar';
+        document.documentElement.lang = currentLang;
+        document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+        document.getElementById('toggle-lang-btn').textContent = currentLang === 'ar' ? 'تبديل اللغة' : 'Changer la langue';
+        document.querySelector('.experience-badge').textContent = currentLang === 'ar' ? '🌼 أكثر من 10 سنوات خبرة' : '🌼 Plus de 10 ans d\'expérience';
+        updateNews();
+        updateTime();
+        updateVisits();
+        loadFAQ();
+      }
+
+      document.getElementById('toggle-lang-btn').addEventListener('click', toggleLanguage);
+
+      document.getElementById('radio-btn').addEventListener('click', () => {
+        const radio = document.getElementById('radio-stream');
+        if (radio.paused) {
           radio.play();
-          radioBtn.textContent = currentLang === 'ar' ? 'أوقف الراديو' : 'Arrêter la radio';
+          document.getElementById('radio-btn').textContent = currentLang === 'ar' ? 'أوقف الراديو' : 'Arrêter la radio';
         } else {
           radio.pause();
-          radioBtn.textContent = currentLang === 'ar' ? 'شغّل الراديو' : 'Écouter la radio';
+          document.getElementById('radio-btn').textContent = currentLang === 'ar' ? 'شغّل الراديو' : 'Écouter la radio';
         }
       });
 
-      // زر تبديل اللغة
-      document.getElementById('toggle-lang-btn').addEventListener('click', toggleLanguage);
-
-      // التحديث الدوري للوقت (كل ثانية)
-      setInterval(updateTime, 1000);
-
-      // عند تحميل الصفحة
       updateTime();
       updateVisits();
       updateNews();
-      initFAQ();
+      loadFAQ();
+      setInterval(updateTime, 1000);
     });
   </script>
 </body>
