@@ -37,8 +37,107 @@
     .gallery img:hover {
       transform: scale(1.05);
     }
-
-    /* الأزرار (زر اللغة وزر الرجوع) */
+    /* نافذة الصورة المنبثقة */
+    #popup {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0,0,0,0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+    #popup-content {
+      background-color: #122f4a;
+      border-radius: 10px;
+      max-width: 90%;
+      max-height: 90%;
+      padding: 20px;
+      color: #eee;
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    #popup-content img {
+      max-width: 100%;
+      max-height: 60vh;
+      border-radius: 8px;
+      margin: 0 auto;
+      box-shadow: 0 0 12px #1e90ff;
+    }
+    #popup-content .views,
+    #popup-content .reactions,
+    #popup-content .comments {
+      font-size: 1rem;
+    }
+    #popup-content .reactions button {
+      margin: 0 5px 5px 0;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      background-color: #ff6b35;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+    #popup-content .reactions button:hover {
+      background-color: #d9533f;
+    }
+    #popup-content .comments textarea {
+      width: 100%;
+      border-radius: 6px;
+      padding: 8px;
+      font-size: 1rem;
+      resize: vertical;
+      direction: rtl;
+      margin-bottom: 6px;
+    }
+    #popup-content .comments button.send-comment {
+      float: left;
+      background-color: #1e90ff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+    }
+    #popup-content .comments button.send-comment:hover {
+      background-color: #0c5ea8;
+    }
+    #popup-content .comments ul {
+      max-height: 150px;
+      overflow-y: auto;
+      padding-right: 15px;
+      list-style: disc;
+      text-align: right;
+      margin: 0;
+    }
+    #popup-content .comments li {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-bottom: 5px;
+      word-break: break-word;
+    }
+    #popup-close {
+      align-self: flex-start;
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+      font-size: 1.5rem;
+      color: #ff6b35;
+      font-weight: bold;
+      margin-bottom: 10px;
+      transition: color 0.3s ease;
+    }
+    #popup-close:hover {
+      color: #d9533f;
+    }
+    /* الأزرار الرئيسية */
     button, a.btn-return {
       max-width: 220px;
       margin: 10px auto;
@@ -65,43 +164,231 @@
   <div class="container">
     <h1 id="page-title">صور الورشة</h1>
 
-    <div class="gallery" aria-label="معرض الصور">
-      <img src="photo1.jpg" alt="صورة الورشة 1" />
-      <img src="photo2.jpg" alt="صورة الورشة 2" />
-      <img src="photo3.jpg" alt="صورة الورشة 3" />
-      <img src="photo7.jpg" alt="صورة الورشة 7" />
-      <img src="photo5.jpg" alt="صورة الورشة 5" />
-      <img src="photo6.jpg" alt="صورة الورشة 6" />
-      <img src="photo8.jpg" alt="صورة الورشة 8" />
-      <img src="photo9.jpg" alt="صورة الورشة 9" />
-      <img src="photo10.jpg" alt="صورة الورشة 10" />
+    <div class="gallery" id="gallery">
+      <!-- الصور تدرج ديناميكياً -->
     </div>
 
     <button id="toggle-lang-btn">تبديل اللغة</button>
     <a href="index.html" class="btn-return">⬅️ الرجوع إلى الصفحة الرئيسية</a>
   </div>
 
+  <!-- نافذة منبثقة للصورة -->
+  <div id="popup" role="dialog" aria-modal="true" aria-labelledby="popup-title" tabindex="-1">
+    <div id="popup-content">
+      <button id="popup-close" aria-label="إغلاق">×</button>
+      <img id="popup-img" src="" alt="" />
+      <div class="views"></div>
+      <div class="reactions">
+        <button data-reaction="like">👍 0</button>
+        <button data-reaction="love">❤️ 0</button>
+        <button data-reaction="laugh">😂 0</button>
+      </div>
+      <div class="comments">
+        <textarea id="comment-input" placeholder="أضف تعليقًا..."></textarea>
+        <button class="send-comment">إرسال</button>
+        <ul id="comments-list"></ul>
+      </div>
+    </div>
+  </div>
+
   <script>
+    const images = [
+      { src: "photo1.jpg", alt: "صورة الورشة 1" },
+      { src: "photo2.jpg", alt: "صورة الورشة 2" },
+      { src: "photo3.jpg", alt: "صورة الورشة 3" },
+      { src: "photo4.jpg", alt: "صورة الورشة 4" },
+      { src: "photo5.jpg", alt: "صورة الورشة 5" },
+      { src: "photo6.jpg", alt: "صورة الورشة 6" },
+      { src: "photo7.jpg", alt: "صورة الورشة 7" },
+      // أضف صور أكثر إذا تحب
+    ];
+
+    const texts = {
+      ar: {
+        title: "صور الورشة",
+        toggle: "تبديل اللغة",
+        views: "مشاهدة",
+        commentPlaceholder: "أضف تعليقًا...",
+        sendComment: "إرسال",
+        close: "إغلاق",
+      },
+      fr: {
+        title: "Photos de l'atelier",
+        toggle: "Changer la langue",
+        views: "vue",
+        commentPlaceholder: "Ajouter un commentaire...",
+        sendComment: "Envoyer",
+        close: "Fermer",
+      }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'ar';
+
+    const gallery = document.getElementById('gallery');
+    const popup = document.getElementById('popup');
+    const popupImg = document.getElementById('popup-img');
+    const viewsDiv = popup.querySelector('.views');
+    const reactionsDiv = popup.querySelector('.reactions');
+    const commentsList = document.getElementById('comments-list');
+    const commentInput = document.getElementById('comment-input');
+    const sendCommentBtn = popup.querySelector('.send-comment');
+    const popupCloseBtn = document.getElementById('popup-close');
+
+    let currentImageIndex = null;
+
+    // إنشاء معرض الصور
+    function renderGallery() {
+      gallery.innerHTML = '';
+      images.forEach((img, index) => {
+        const imgEl = document.createElement('img');
+        imgEl.src = img.src;
+        imgEl.alt = img.alt;
+        imgEl.tabIndex = 0;
+        imgEl.setAttribute('data-index', index);
+        imgEl.addEventListener('click', () => openPopup(index));
+        imgEl.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openPopup(index);
+          }
+        });
+        gallery.appendChild(imgEl);
+      });
+    }
+
+    // فتح النافذة المنبثقة
+    function openPopup(index) {
+      currentImageIndex = index;
+      const img = images[index];
+      popupImg.src = img.src;
+      popupImg.alt = img.alt;
+
+      // تحديث المشاهدات
+      incrementViews(index);
+
+      updatePopupContent();
+
+      popup.style.display = 'flex';
+      popup.focus();
+      document.body.style.overflow = 'hidden'; // منع تمرير الخلفية
+    }
+
+    // إغلاق النافذة المنبثقة
+    function closePopup() {
+      popup.style.display = 'none';
+      document.body.style.overflow = 'auto';
+      currentImageIndex = null;
+      commentInput.value = '';
+      commentsList.innerHTML = '';
+    }
+
+    // تحديث المشاهدات (تخزين وقراءة)
+    function incrementViews(index) {
+      const key = `image-${index}-views`;
+      let views = parseInt(localStorage.getItem(key)) || 0;
+      views++;
+      localStorage.setItem(key, views);
+    }
+
+    // تحديث محتوى النافذة المنبثقة
+    function updatePopupContent() {
+      const index = currentImageIndex;
+      if (index === null) return;
+
+      // تحديث المشاهدات
+      const views = localStorage.getItem(`image-${index}-views`) || 0;
+      viewsDiv.textContent = `${views} ${texts[currentLang].views}`;
+
+      // تحديث التفاعلات
+      const reactsKey = `image-${index}-reacts`;
+      let reacts = JSON.parse(localStorage.getItem(reactsKey)) || { like: 0, love: 0, laugh: 0 };
+
+      [...reactionsDiv.children].forEach(btn => {
+        const type = btn.getAttribute('data-reaction');
+        btn.textContent = `${reactionEmoji(type)} ${reacts[type]}`;
+      });
+
+      // تحديث التعليقات
+      const commentsKey = `image-${index}-comments`;
+      let comments = JSON.parse(localStorage.getItem(commentsKey)) || [];
+      commentsList.innerHTML = comments.map(c => `<li>${c}</li>`).join('');
+      commentInput.placeholder = texts[currentLang].commentPlaceholder;
+      sendCommentBtn.textContent = texts[currentLang].sendComment;
+      popupCloseBtn.setAttribute('aria-label', texts[currentLang].close);
+    }
+
+    // رمز الإيموجي لكل نوع تفاعل
+    function reactionEmoji(type) {
+      switch(type){
+        case 'like': return '👍';
+        case 'love': return '❤️';
+        case 'laugh': return '😏';
+        default: return '';
+      }
+    }
+
+    // التعامل مع التفاعل
+    reactionsDiv.addEventListener('click', e => {
+      if(e.target.tagName.toLowerCase() === 'button'){
+        const type = e.target.getAttribute('data-reaction');
+        const reactsKey = `image-${currentImageIndex}-reacts`;
+        let reacts = JSON.parse(localStorage.getItem(reactsKey)) || { like: 0, love: 0, laugh: 0 };
+        reacts[type]++;
+        localStorage.setItem(reactsKey, JSON.stringify(reacts));
+        updatePopupContent();
+      }
+    });
+
+    // إضافة تعليق جديد
+    sendCommentBtn.addEventListener('click', () => {
+      const val = commentInput.value.trim();
+      if(val === '') return;
+      const commentsKey = `image-${currentImageIndex}-comments`;
+      let comments = JSON.parse(localStorage.getItem(commentsKey)) || [];
+      comments.push(val);
+      localStorage.setItem(commentsKey, JSON.stringify(comments));
+      commentInput.value = '';
+      updatePopupContent();
+    });
+
+    // إغلاق النافذة عند الضغط على زر الإغلاق
+    popupCloseBtn
+    // إغلاق النافذة عند الضغط على زر الإغلاق
+    popupCloseBtn.addEventListener('click', closePopup);
+
+    // إغلاق النافذة عند الضغط خارج المحتوى
+    popup.addEventListener('click', (e) => {
+      if (e.target === popup) {
+        closePopup();
+      }
+    });
+
+    // إغلاق النافذة عند الضغط على زر Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && popup.style.display === 'flex') {
+        closePopup();
+      }
+    });
+
+    // تغيير اللغة وتحديث النصوص
+    function applyLanguage() {
+      document.documentElement.lang = currentLang;
+      document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+      document.getElementById('page-title').textContent = texts[currentLang].title;
+      document.getElementById('toggle-lang-btn').textContent = texts[currentLang].toggle;
+      updatePopupContent();
+    }
+
+    document.getElementById('toggle-lang-btn').addEventListener('click', () => {
+      currentLang = currentLang === 'ar' ? 'fr' : 'ar';
+      localStorage.setItem('lang', currentLang);
+      applyLanguage();
+    });
+
+    // تهيئة المعرض والنصوص عند تحميل الصفحة
     document.addEventListener('DOMContentLoaded', () => {
-      let currentLang = localStorage.getItem('lang') || 'ar';
-
-      function applyLang() {
-        document.documentElement.lang = currentLang;
-        document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-
-        document.getElementById('toggle-lang-btn').textContent = currentLang === 'ar' ? 'تبديل اللغة' : 'Changer la langue';
-        document.getElementById('page-title').textContent = currentLang === 'ar' ? 'صور الورشة' : 'Photos de l\'atelier';
-      }
-
-      function toggleLang() {
-        currentLang = currentLang === 'ar' ? 'fr' : 'ar';
-        localStorage.setItem('lang', currentLang);
-        applyLang();
-      }
-
-      document.getElementById('toggle-lang-btn').addEventListener('click', toggleLang);
-
-      applyLang();
+      renderGallery();
+      applyLanguage();
     });
   </script>
 </body>
