@@ -1,40 +1,72 @@
-<!-- downloads.html -->
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!-- download.html --><!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>تحميل البرامج - Atelier Electronique Médenine</title>
-  <link rel="stylesheet" href="downloads.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📥 تحميل البرامج</title>
+  <link rel="stylesheet" href="download/download.css">
 </head>
 <body>
   <header>
-    <h1 id="page-title">📥 تحميل البرامج</h1>
+    <h1>📥 تحميل البرامج</h1>
     <button id="lang-btn">🇫🇷 Français</button>
-  </header>
+  </header>  <main>
+    <section class="section">
+      <h2>🧰 الأدوات المساعدة</h2>
+      <div class="grid">
+        <div class="card">
+          <img src="download/icons/Chrome.png" alt="Google Chrome">
+          <h3>Google Chrome</h3>
+          <p>متصفح سريع وآمن</p>
+          <a href="https://www.google.com/chrome/" target="_blank" class="btn-download">⬇️ حمل الآن</a>
+          <span class="count" data-key="chrome">0 تحميلات</span>
+        </div><div class="card">
+      <img src="download/icons/WinRAR.png" alt="WinRAR">
+      <h3>WinRAR</h3>
+      <p>برنامج فك الضغط</p>
+      <a href="https://www.win-rar.com/download.html" target="_blank" class="btn-download">⬇️ حمل الآن</a>
+      <span class="count" data-key="winrar">0 تحميلات</span>
+    </div>
 
-  <main>
-    <!-- قسم Utilitaires -->
-    <section>
-      <h2 class="section-title" data-i18n="utils">🧰 الأدوات المساعدة</h2>
-      <div class="programs-grid" id="util-programs">
-        <!-- البرامج تضاف ديناميكيا بالـ JS -->
-      </div>
-    </section>
+    <div class="card">
+      <img src="download/icons/VLC.png" alt="VLC Player">
+      <h3>VLC Player</h3>
+      <p>مشغل فيديوهات شامل</p>
+      <a href="https://www.videolan.org/vlc/" target="_blank" class="btn-download">⬇️ حمل الآن</a>
+      <span class="count" data-key="vlc">0 تحميلات</span>
+    </div>
+  </div>
+</section>
 
-    <!-- قسم Adobe -->
-    <section>
-      <h2 class="section-title" data-i18n="adobe">🎨 مجموعة أدوبي</h2>
-      <div class="programs-grid" id="adobe-programs">
-        <!-- البرامج تضاف ديناميكيا بالـ JS -->
-      </div>
-    </section>
-  </main>
+<section class="section">
+  <h2>🎨 مجموعة أدوبي</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="download/icons/Photoshop.png" alt="Photoshop">
+      <h3>Photoshop</h3>
+      <p>برنامج تعديل الصور الشهير</p>
+      <a href="https://www.adobe.com/products/photoshop.html" target="_blank" class="btn-download">⬇️ حمل الآن</a>
+      <span class="count" data-key="photoshop">0 تحميلات</span>
+    </div>
 
-  <footer>
-    <p>Atelier Electronique Médenine © 2025</p>
-  </footer>
+    <div class="card">
+      <img src="download/icons/Illustrator.png" alt="Illustrator">
+      <h3>Illustrator</h3>
+      <p>تصميم الرسومات المتجهة</p>
+      <a href="https://www.adobe.com/products/illustrator.html" target="_blank" class="btn-download">⬇️ حمل الآن</a>
+      <span class="count" data-key="illustrator">0 تحميلات</span>
+    </div>
 
-  <script src="downloads.js"></script>
-</body>
+    <div class="card">
+      <img src="download/icons/Acrobat.png" alt="Acrobat Reader">
+      <h3>Acrobat Reader</h3>
+      <p>قراءة ملفات PDF</p>
+      <a href="https://get.adobe.com/fr/reader/" target="_blank" class="btn-download">⬇️ حمل الآن</a>
+      <span class="count" data-key="acrobat">0 تحميلات</span>
+    </div>
+  </div>
+</section>
+
+  </main>  <footer>
+    <p>Atelier Electronique Médenine &copy; 2025</p>
+  </footer>  <script src="download/download.js"></script></body>
 </html>
