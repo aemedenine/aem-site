@@ -1,40 +1,63 @@
 body {
-  font-family: 'Arial', sans-serif;
-  background: #f9f9f9;
-  color: #222;
-  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0b1a27;
+  color: #eee;
+  margin: 0;
+  padding: 0;
   direction: rtl;
-  text-align: center;
+  text-align: right;
 }
 
 h1 {
-  font-size: 2rem;
-  margin-bottom: 20px;
+  text-align: center;
+  padding: 20px;
+  background-color: #007bff;
+  color: white;
+  margin: 0;
+}
+
+#lang-btn {
+  margin: 20px auto;
+  display: block;
+  padding: 10px 20px;
+  background: #ff6b35;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .category {
-  margin-bottom: 40px;
+  margin: 30px auto;
+  max-width: 1100px;
+  padding: 0 20px;
 }
 
-h2 {
-  color: #007bff;
-  margin: 20px 0;
+.category h2 {
+  color: #1e90ff;
+  margin-bottom: 15px;
 }
 
 .programs {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 20px;
+  justify-content: center;
 }
 
 .program {
-  background: white;
-  border: 1px solid #ccc;
+  background: #122f4a;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.6);
   padding: 15px;
-  border-radius: 12px;
   width: 220px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.program:hover {
+  transform: translateY(-5px);
 }
 
 .program img {
@@ -44,23 +67,41 @@ h2 {
   margin-bottom: 10px;
 }
 
-.btn-download {
-  display: inline-block;
-  background: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  margin-top: 10px;
+.program h3 {
+  font-size: 1.1rem;
+  margin: 10px 0;
+  color: #ffcc00;
 }
 
-#lang-btn {
-  background: white;
-  border: 2px solid #007bff;
-  padding: 5px 15px;
-  border-radius: 8px;
+.program p {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+
+.btn-download {
+  background: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  text-decoration: none;
   font-weight: bold;
-  margin-bottom: 20px;
-  cursor: pointer;
+  display: inline-block;
+}
+
+footer {
+  margin-top: 50px;
+  text-align: center;
+  color: #aaa;
+  padding: 20px;
+  background-color: #061222;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .programs {
+    flex-direction: column;
+    align-items: center;
+  }
 }
