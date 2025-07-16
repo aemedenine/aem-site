@@ -1,56 +1,41 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const langBtn = document.getElementById('lang-btn');
-  let currentLang = 'ar';
+// download.js
+const langBtn = document.getElementById("lang-btn");
 
-  const translate = {
-    ar: {
-      title: '📥 تحميل البرامج',
-      categories: ['🧰 الأدوات المساعدة', '🎨 مجموعة أدوبي'],
-      downloads: 'تحميل',
-      button: '🇫🇷 Français'
-    },
-    fr: {
-      title: '📥 Télécharger les logiciels',
-      categories: ['🧰 Utilitaires', '🎨 Suite Adobe'],
-      downloads: 'téléchargement',
-      button: '🇸🇦 العربية'
-    }
-  };
+const texts = {
+  ar: {
+    title: "📥 تحميل البرامج",
+    btn: "🇫🇷 Français",
+    categories: ["🧰 الأدوات المساعدة", "🎨 مجموعة أدوبي"],
+    downloads: "تحميل"
+  },
+  fr: {
+    title: "📥 Télécharger les programmes",
+    btn: "🇸🇦 عربي",
+    categories: ["🧰 Outils Utiles", "🎨 Suite Adobe"],
+    downloads: "Télécharger"
+  }
+};
 
-  // حفظ التحميلات المحلية
-  document.querySelectorAll('.btn-download').forEach((btn, index) => {
-    btn.addEventListener('click', () => {
-      const key = `download-count-${index}`;
-      let count = parseInt(localStorage.getItem(key)) || 0;
-      count++;
-      localStorage.setItem(key, count);
-      btn.previousElementSibling.querySelector('.downloads').textContent = count;
-    });
+let currentLang = "ar";
+
+langBtn.addEventListener("click", () => {
+  currentLang = currentLang === "ar" ? "fr" : "ar";
+
+  document.getElementById("page-title").textContent = texts[currentLang].title;
+  langBtn.textContent = texts[currentLang].btn;
+
+  const sectionTitles = document.querySelectorAll(".section-title");
+  sectionTitles.forEach((title, index) => {
+    title.textContent = texts[currentLang].categories[index];
   });
 
-  // استرجاع التحميلات من localStorage
-  document.querySelectorAll('.program').forEach((el, i) => {
-    const key = `download-count-${i}`;
-    let count = parseInt(localStorage.getItem(key)) || 0;
-    el.querySelector('.downloads').textContent = count;
+  const downloadBtns = document.querySelectorAll(".btn-download");
+  downloadBtns.forEach(btn => {
+    btn.textContent = texts[currentLang].downloads;
   });
 
-  // تبديل اللغة
-  langBtn.addEventListener('click', () => {
-    currentLang = currentLang === 'ar' ? 'fr' : 'ar';
-    document.documentElement.lang = currentLang;
-    document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-
-    document.querySelector('h1').textContent = translate[currentLang].title;
-    langBtn.textContent = translate[currentLang].button;
-
-    const catTitles = document.querySelectorAll('.category h2');
-    catTitles[0].textContent = translate[currentLang].categories[0];
-    catTitles[1].textContent = translate[currentLang].categories[1];
-
-    document.querySelectorAll('.program').forEach((el) => {
-      const count = el.querySelector('.downloads').textContent;
-      el.querySelector('p').innerHTML = `<span class="downloads">${count}</span> ${translate[currentLang].downloads}`;
-    });
-  });
+  const dir = currentLang === "ar" ? "rtl" : "ltr";
+  const lang = currentLang === "ar" ? "ar" : "fr";
+  document.documentElement.setAttribute("dir", dir);
+  document.documentElement.setAttribute("lang", lang);
 });
