@@ -1,4 +1,4 @@
-/* ========== إعدادات عامة ========== */
+/* ======= إعدادات عامة ======= */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #0f1624;
@@ -9,7 +9,7 @@ body {
   text-align: right;
 }
 
-/* ========== الهيدر ========== */
+/* ======= الهيدر مع اللوقو مقوّس ======= */
 header {
   background-color: #1c2e4a;
   padding: 10px 20px;
@@ -28,6 +28,11 @@ header .header-inner .logo {
   max-height: 50px;
   width: auto;
   display: block;
+  border-radius: 50%; /* يجعل اللوقو دائري */
+  object-fit: cover;
+  overflow: hidden;
+  border: 2px solid #00d4ff; /* إطار أزرق */
+  background-color: transparent;
 }
 
 header .header-inner h1 {
@@ -37,7 +42,7 @@ header .header-inner h1 {
   user-select: none;
 }
 
-/* ========== الأخبار المتحركة (ticker) ========== */
+/* ======= الأخبار المتحركة ======= */
 .news-ticker {
   background-color: #0b1a27;
   color: #00d4ff;
@@ -50,13 +55,13 @@ header .header-inner h1 {
   overflow: hidden;
 }
 
-/* ========== المحتوى الرئيسي ========== */
+/* ======= المحتوى الرئيسي ======= */
 .container.main-content {
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* ========== شريط المعلومات ========== */
+/* ======= شريط المعلومات ======= */
 .info-bar {
   display: flex;
   justify-content: space-between;
@@ -68,7 +73,7 @@ header .header-inner h1 {
   font-size: 1rem;
 }
 
-/* ========== أزرار الدعوة للعمل (CTA) ========== */
+/* ======= أزرار الدعوة للعمل ======= */
 .cta-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -128,7 +133,7 @@ header .header-inner h1 {
   background-color: #6610f2;
 }
 
-/* ========== شارة الخبرة ========== */
+/* ======= شارة الخبرة ======= */
 .experience-badge {
   text-align: center;
   font-size: 1.2rem;
@@ -137,7 +142,7 @@ header .header-inner h1 {
   user-select: none;
 }
 
-/* ========== الأسئلة الشائعة ========== */
+/* ======= الأسئلة الشائعة ======= */
 .faq {
   max-width: 800px;
   margin: 0 auto 40px auto;
@@ -182,11 +187,11 @@ header .header-inner h1 {
 }
 
 .faq-item.open .answer {
-  max-height: 500px; /* كافي لعرض المحتوى */
+  max-height: 500px;
   margin-top: 8px;
 }
 
-/* ========== الفوتر ========== */
+/* ======= الفوتر ======= */
 footer {
   background-color: #1c2e4a;
   color: #aaa;
@@ -223,7 +228,17 @@ footer p {
   filter: invert(85%) sepia(16%) saturate(500%) hue-rotate(165deg) brightness(90%) contrast(85%);
 }
 
-/* ========== تجاوب وتصغير الشاشات ========== */
+/* ======= تعديل الصور في قسم التحميلات - إزالة الخلفية البيضاء وتقويس ======= */
+.programs .program img {
+  background-color: transparent !important;
+  border-radius: 15px;
+  box-shadow: none !important;
+  max-width: 100px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ======= تجاوب وتصغير الشاشات ======= */
 @media (max-width: 900px) {
   .info-bar {
     flex-direction: column;
