@@ -1,4 +1,3 @@
-<!-- download.html -->
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -8,32 +7,47 @@
   <link rel="stylesheet" href="download.css" />
 </head>
 <body>
+
+  <header class="header sticky-header">
+    <div class="logo">
+      <img src="../icons/logo.png" alt="Atelier Electronique Médenine" />
+    </div>
+    <div class="header-buttons">
+      <a href="../index.html" class="home-btn">🏠 الرئيسية</a>
+      <button id="lang-btn">🇫🇷 Français</button>
+    </div>
+  </header>
+
+  <div class="info-bar">
+    <span id="clock">🕒 ...</span>
+    <span id="visit-count">👁️ ... زيارة</span>
+  </div>
+
   <h1 id="page-title">📥 تحميل البرامج</h1>
-  <button id="lang-btn">🇫🇷 Français</button>
 
   <div class="category">
     <h2 class="section-title">🧰 الأدوات المساعدة</h2>
     <div class="programs">
       <div class="program">
-        <img src="aa.jpeg" alt="Chrome" />
+        <img src="../icons/Tech.jpg" alt="Chrome" />
         <h3>Google Chrome</h3>
         <p><span class="downloads">0</span> تحميل</p>
         <a href="https://www.google.com/chrome/" target="_blank" class="btn-download">تحميل</a>
       </div>
       <div class="program">
-        <img src="bb.jpeg" alt="Firefox" />
+        <img src="../icons/Ff.png" alt="Firefox" />
         <h3>Mozilla Firefox</h3>
         <p><span class="downloads">0</span> تحميل</p>
         <a href="https://www.mozilla.org/firefox/" target="_blank" class="btn-download">تحميل</a>
       </div>
       <div class="program">
-        <img src="cc.jpeg" alt="WinRAR" />
+        <img src="../icons/Ce.jpg" alt="WinRAR" />
         <h3>WinRAR</h3>
         <p><span class="downloads">0</span> تحميل</p>
         <a href="https://www.win-rar.com/start.html" target="_blank" class="btn-download">تحميل</a>
       </div>
       <div class="program">
-        <img src="dd.png" alt="Adobe Reader" />
+        <img src="../icons/Hh.png" alt="Adobe Reader" />
         <h3>Adobe Reader</h3>
         <p><span class="downloads">0</span> تحميل</p>
         <a href="https://get.adobe.com/reader/" target="_blank" class="btn-download">تحميل</a>
@@ -45,23 +59,35 @@
     <h2 class="section-title">🎨 مجموعة أدوبي</h2>
     <div class="programs">
       <div class="program">
-        <img src="ph.png" alt="Photoshop" />
+        <img src="../icons/Tt.png" alt="Photoshop" />
         <h3>Adobe Photoshop</h3>
         <p><span class="downloads">0</span> تحميل</p>
         <a href="https://www.adobe.com/products/photoshop.html" target="_blank" class="btn-download">تحميل</a>
       </div>
       <div class="program">
-        <img src="il.png" alt="Illustrator" />
+        <img src="../icons/Rt.png" alt="Illustrator" />
         <h3>Adobe Illustrator</h3>
         <p><span class="downloads">0</span> تحميل</p>
         <a href="https://www.adobe.com/products/illustrator.html" target="_blank" class="btn-download">تحميل</a>
       </div>
       <div class="program">
-        <img src="pr.png" alt="Premiere Pro" />
+        <img src="../icons/Ff.png" alt="Premiere Pro" />
         <h3>Adobe Premiere</h3>
         <p><span class="downloads">0</span> تحميل</p>
         <a href="https://www.adobe.com/products/premiere.html" target="_blank" class="btn-download">تحميل</a>
       </div>
+    </div>
+  </div>
+
+  <!-- النافذة المنبثقة -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <span class="close-btn">&times;</span>
+      <img id="popup-img" src="" alt="صورة البرنامج" />
+      <h3 id="popup-title">تحميل البرنامج</h3>
+      <p id="popup-desc">وصف البرنامج</p>
+      <p>📦 <span id="popup-count">0</span> تحميلات</p>
+      <a id="popup-link" href="#" target="_blank" class="btn-download">⬇️ تنزيل الآن</a>
     </div>
   </div>
 
