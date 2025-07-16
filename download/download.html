@@ -1,76 +1,70 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>📥 تحميل البرامج</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="download/download.css">
+  <link rel="stylesheet" href="download/download.css" />
 </head>
 <body>
-
-  <header>
+  <div class="container">
+    <button id="lang-toggle" class="lang-btn">🌐 تغيير اللغة</button>
     <h1>📥 تحميل البرامج</h1>
-    <button id="lang-toggle">🇫🇷 Français</button>
-  </header>
 
-  <main>
-    <section class="category">
-      <h2 class="cat-title" data-ar="🧰 الأدوات المساعدة" data-fr="🧰 Utilitaires" data-en="🧰 Utilities">🧰 الأدوات المساعدة</h2>
-      <div class="software-list">
-        <div class="software" data-lang="ar">
-          <h3>Google Chrome</h3>
-          <a href="https://www.google.com/chrome/" target="_blank" class="download-btn">⬇ تحميل</a>
-          <p class="downloads">عدد التحميلات: <span>0</span></p>
-        </div>
-        <div class="software" data-lang="ar">
-          <h3>WinRAR</h3>
-          <a href="https://www.win-rar.com/" target="_blank" class="download-btn">⬇ تحميل</a>
-          <p class="downloads">عدد التحميلات: <span>0</span></p>
-        </div>
-        <div class="software" data-lang="ar">
-          <h3>VLC Media Player</h3>
-          <a href="https://www.videolan.org/" target="_blank" class="download-btn">⬇ تحميل</a>
-          <p class="downloads">عدد التحميلات: <span>0</span></p>
-        </div>
-        <div class="software" data-lang="ar">
-          <h3>Microsoft Office</h3>
-          <a href="https://www.microsoft.com/ar/microsoft-365/get-started-with-office-2021" target="_blank" class="download-btn">⬇ تحميل</a>
-          <p class="downloads">عدد التحميلات: <span>0</span></p>
-        </div>
+    <h2 id="utilities-title" class="section-title">🧰 الأدوات المساعدة</h2>
+    <div class="program-list">
+      <div class="program-card" data-count="0">
+        <h3>Google Chrome</h3>
+        <a href="https://www.google.com/chrome/" target="_blank" class="download-btn">تحميل</a>
+        <p class="download-count">عدد التحميلات: 0</p>
       </div>
-    </section>
-
-    <section class="category">
-      <h2 class="cat-title" data-ar="🎨 مجموعة أدوبي" data-fr="🎨 Suite Adobe" data-en="🎨 Adobe Suite">🎨 مجموعة أدوبي</h2>
-      <div class="software-list">
-        <div class="software" data-lang="ar">
-          <h3>Adobe Photoshop</h3>
-          <a href="https://www.adobe.com/products/photoshop.html" target="_blank" class="download-btn">⬇ تحميل</a>
-          <p class="downloads">عدد التحميلات: <span>0</span></p>
-        </div>
-        <div class="software" data-lang="ar">
-          <h3>Adobe Illustrator</h3>
-          <a href="https://www.adobe.com/products/illustrator.html" target="_blank" class="download-btn">⬇ تحميل</a>
-          <p class="downloads">عدد التحميلات: <span>0</span></p>
-        </div>
-        <div class="software" data-lang="ar">
-          <h3>Adobe Premiere Pro</h3>
-          <a href="https://www.adobe.com/products/premiere.html" target="_blank" class="download-btn">⬇ تحميل</a>
-          <p class="downloads">عدد التحميلات: <span>0</span></p>
-        </div>
-        <div class="software" data-lang="ar">
-          <h3>Adobe Acrobat Reader</h3>
-          <a href="https://get.adobe.com/reader/" target="_blank" class="download-btn">⬇ تحميل</a>
-          <p class="downloads">عدد التحميلات: <span>0</span></p>
-        </div>
+      <div class="program-card" data-count="0">
+        <h3>WinRAR</h3>
+        <a href="https://www.win-rar.com/download.html" target="_blank" class="download-btn">تحميل</a>
+        <p class="download-count">عدد التحميلات: 0</p>
       </div>
-    </section>
-  </main>
+      <div class="program-card" data-count="0">
+        <h3>7-Zip</h3>
+        <a href="https://www.7-zip.org/" target="_blank" class="download-btn">تحميل</a>
+        <p class="download-count">عدد التحميلات: 0</p>
+      </div>
+      <div class="program-card" data-count="0">
+        <h3>Adobe Reader</h3>
+        <a href="https://get.adobe.com/reader/" target="_blank" class="download-btn">تحميل</a>
+        <p class="download-count">عدد التحميلات: 0</p>
+      </div>
+      <div class="program-card" data-count="0">
+        <h3>Microsoft Office 2019</h3>
+        <a href="https://www.microsoft.com/en-us/microsoft-365/get-started-with-office-2019" target="_blank" class="download-btn">تحميل</a>
+        <p class="download-count">عدد التحميلات: 0</p>
+      </div>
+    </div>
 
-  <footer>
-    <p>Atelier Electronique Médenine © 2025</p>
-  </footer>
+    <h2 id="adobe-title" class="section-title">🎨 برامج أدوبي</h2>
+    <div class="program-list">
+      <div class="program-card" data-count="0">
+        <h3>Adobe Photoshop</h3>
+        <a href="https://www.adobe.com/products/photoshop.html" target="_blank" class="download-btn">تحميل</a>
+        <p class="download-count">عدد التحميلات: 0</p>
+      </div>
+      <div class="program-card" data-count="0">
+        <h3>Adobe Illustrator</h3>
+        <a href="https://www.adobe.com/products/illustrator.html" target="_blank" class="download-btn">تحميل</a>
+        <p class="download-count">عدد التحميلات: 0</p>
+      </div>
+      <div class="program-card" data-count="0">
+        <h3>Adobe Premiere Pro</h3>
+        <a href="https://www.adobe.com/products/premiere.html" target="_blank" class="download-btn">تحميل</a>
+        <p class="download-count">عدد التحميلات: 0</p>
+      </div>
+      <div class="program-card" data-count="0">
+        <h3>Adobe After Effects</h3>
+        <a href="https://www.adobe.com/products/aftereffects.html" target="_blank" class="download-btn">تحميل</a>
+        <p class="download-count">عدد التحميلات: 0</p>
+      </div>
+    </div>
+  </div>
 
-  <script src="download/download.js" defer></script>
+  <script src="download/download.js"></script>
 </body>
 </html>
