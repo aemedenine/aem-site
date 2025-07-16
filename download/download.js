@@ -1,61 +1,37 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const langBtn = document.getElementById("lang-toggle");
-  let currentLang = "ar";
+document.querySelectorAll('.btn-download').forEach((btn, index) => {
+  const countSpan = btn.parentElement.querySelector('.downloads');
+  let count = localStorage.getItem(`download_${index}`) || 0;
+  countSpan.textContent = count;
 
-  const content = {
-    ar: {
-      title: "📥 تحميل البرامج",
-      utilities: "🧰 الأدوات المساعدة",
-      adobe: "🎨 برامج أدوبي",
-      downloads: "عدد التحميلات: ",
-      downloadText: "تحميل"
-    },
-    fr: {
-      title: "📥 Téléchargement des logiciels",
-      utilities: "🧰 Utilitaires",
-      adobe: "🎨 Suite Adobe",
-      downloads: "Nombre de téléchargements : ",
-      downloadText: "Télécharger"
-    },
-    en: {
-      title: "📥 Software Downloads",
-      utilities: "🧰 Utilities",
-      adobe: "🎨 Adobe Suite",
-      downloads: "Downloads: ",
-      downloadText: "Download"
-    }
-  };
+  btn.addEventListener('click', () => {
+    count++;
+    localStorage.setItem(`download_${index}`, count);
+    countSpan.textContent = count;
+  });
+});
 
-  function updateLang() {
-    const lang = currentLang;
-    document.querySelector("h1").textContent = content[lang].title;
-    document.getElementById("utilities-title").textContent = content[lang].utilities;
-    document.getElementById("adobe-title").textContent = content[lang].adobe;
-
-    document.querySelectorAll(".program-card").forEach((card) => {
-      const count = card.getAttribute("data-count") || "0";
-      card.querySelector(".download-count").textContent =
-        content[lang].downloads + count;
-      card.querySelector(".download-btn").textContent = content[lang].downloadText;
-    });
+document.getElementById('lang-btn').addEventListener('click', () => {
+  const current = document.documentElement.lang;
+  if (current === 'ar') {
+    document.documentElement.lang = 'fr';
+    document.documentElement.dir = 'ltr';
+    document.querySelector('h1').textContent = '📥 Téléchargement';
+    document.getElementById('lang-btn').textContent = '🇬🇧 English';
+    document.querySelectorAll('h2')[0].textContent = '🧰 Utilitaires';
+    document.querySelectorAll('h2')[1].textContent = '🎨 Suite Adobe';
+  } else if (current === 'fr') {
+    document.documentElement.lang = 'en';
+    document.documentElement.dir = 'ltr';
+    document.querySelector('h1').textContent = '📥 Software Downloads';
+    document.getElementById('lang-btn').textContent = '🇸🇦 عربي';
+    document.querySelectorAll('h2')[0].textContent = '🧰 Utilities';
+    document.querySelectorAll('h2')[1].textContent = '🎨 Adobe Suite';
+  } else {
+    document.documentElement.lang = 'ar';
+    document.documentElement.dir = 'rtl';
+    document.querySelector('h1').textContent = '📥 تحميل البرامج';
+    document.getElementById('lang-btn').textContent = '🇫🇷 Français';
+    document.querySelectorAll('h2')[0].textContent = '🧰 الأدوات المساعدة';
+    document.querySelectorAll('h2')[1].textContent = '🎨 مجموعة أدوبي';
   }
-
-  langBtn.addEventListener("click", () => {
-    currentLang = currentLang === "ar" ? "fr" : currentLang === "fr" ? "en" : "ar";
-    updateLang();
-  });
-
-  // تحديث عدّاد التحميلات (محليًا فقط)
-  document.querySelectorAll(".download-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const parent = btn.closest(".program-card");
-      let count = parseInt(parent.getAttribute("data-count")) || 0;
-      count++;
-      parent.setAttribute("data-count", count);
-      parent.querySelector(".download-count").textContent =
-        content[currentLang].downloads + count;
-    });
-  });
-
-  updateLang();
 });
