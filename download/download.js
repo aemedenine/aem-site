@@ -1,41 +1,73 @@
-// download.js
-const langBtn = document.getElementById("lang-btn");
+// الوقت المباشر
+function updateClock() {
+  const now = new Date();
+  const timeString = now.toLocaleTimeString("ar-TN", { hour12: false });
+  document.getElementById("clock").textContent = `🕒 ${timeString}`;
+}
+setInterval(updateClock, 1000);
+updateClock();
 
-const texts = {
-  ar: {
-    title: "📥 تحميل البرامج",
-    btn: "🇫🇷 Français",
-    categories: ["🧰 الأدوات المساعدة", "🎨 مجموعة أدوبي"],
-    downloads: "تحميل"
-  },
-  fr: {
-    title: "📥 Télécharger les programmes",
-    btn: "🇸🇦 عربي",
-    categories: ["🧰 Outils Utiles", "🎨 Suite Adobe"],
-    downloads: "Télécharger"
-  }
+// عدد الزيارات
+let visits = localStorage.getItem("download_visits") || 0;
+visits++;
+localStorage.setItem("download_visits", visits);
+document.getElementById("visit-count").textContent = `👁️ ${visits} زيارة`;
+
+// POPUP LOGIC مع صورة ووصف وعداد
+const popup = document.getElementById("popup");
+const popupTitle = document.getElementById("popup-title");
+const popupLink = document.getElementById("popup-link");
+const popupImg = document.getElementById("popup-img");
+const popupDesc = document.getElementById("popup-desc");
+const popupCount = document.getElementById("popup-count");
+const closeBtn = document.querySelector(".close-btn");
+
+// أوصاف البرامج
+const programDescriptions = {
+  "Google Chrome": "متصفح سريع وآمن لتصفح الإنترنت.",
+  "Mozilla Firefox": "متصفح مفتوح المصدر بميزات حماية متقدمة.",
+  "WinRAR": "أداة ضغط واستخراج الملفات بسهولة.",
+  "Adobe Reader": "لقراءة ملفات PDF باحترافية.",
+  "Adobe Photoshop": "برنامج تصميم الصور الأشهر.",
+  "Adobe Illustrator": "تصميم الرسومات المتجهة والفيكتور.",
+  "Adobe Premiere": "تحرير الفيديوهات بشكل احترافي."
 };
 
-let currentLang = "ar";
+// عند الضغط على أي زر تحميل
+document.querySelectorAll(".btn-download").forEach(button => {
+  button.addEventListener("click", (e) => {
+    e.preventDefault();
+    const programCard = button.closest(".program");
+    const title = programCard.querySelector("h3").textContent;
+    const link = button.href;
+    const img = programCard.querySelector("img").src;
+    const desc = programDescriptions[title] || "برنامج مميز من اختيارك.";
 
-langBtn.addEventListener("click", () => {
-  currentLang = currentLang === "ar" ? "fr" : "ar";
+    // تحميلات لكل برنامج
+    const key = `downloads_${title}`;
+    let count = localStorage.getItem(key) || 0;
+    count++;
+    localStorage.setItem(key, count);
 
-  document.getElementById("page-title").textContent = texts[currentLang].title;
-  langBtn.textContent = texts[currentLang].btn;
+    // تحديث محتوى النافذة
+    popupTitle.textContent = `📥 ${title}`;
+    popupLink.href = link;
+    popupImg.src = img;
+    popupDesc.textContent = desc;
+    popupCount.textContent = count;
 
-  const sectionTitles = document.querySelectorAll(".section-title");
-  sectionTitles.forEach((title, index) => {
-    title.textContent = texts[currentLang].categories[index];
+    popup.style.display = "block";
   });
+});
 
-  const downloadBtns = document.querySelectorAll(".btn-download");
-  downloadBtns.forEach(btn => {
-    btn.textContent = texts[currentLang].downloads;
-  });
+// إغلاق النافذة
+closeBtn.addEventListener("click", () => {
+  popup.style.display = "none";
+});
 
-  const dir = currentLang === "ar" ? "rtl" : "ltr";
-  const lang = currentLang === "ar" ? "ar" : "fr";
-  document.documentElement.setAttribute("dir", dir);
-  document.documentElement.setAttribute("lang", lang);
+// الضغط خارج النافذة
+window.addEventListener("click", (e) => {
+  if (e.target === popup) {
+    popup.style.display = "none";
+  }
 });
